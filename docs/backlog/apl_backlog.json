@@ -20,7 +20,7 @@
     "terraform",
     "kubernetes"
    ],
-   "description": "## Goal\nReproducible, auto-scaling AWS EKS platform provisioned 100% from Terraform, with blue/green CI/CD and Datadog tracing from day one.\n\n## Definition of Done\nA fresh AWS account can be brought to a running staging environment in under 60 minutes from `terraform apply` with zero manual console steps.\n\n## Scope\n- 11 tickets, 65 story points\n- Sprints S1–S6 (Phase 0)\n- Component: Platform"
+   "description": "## Goal\nReproducible, auto-scaling AWS EKS platform provisioned 100% from Terraform, with blue/green CI/CD and Datadog tracing from day one.\n\n## Definition of Done\nA fresh AWS account can be brought to a running staging environment in under 60 minutes from `terraform apply` with zero manual console steps.\n\n## Scope\n- 15 tickets, 83 story points\n- Sprints S1–S6 (Phase 0)\n- Component: Platform"
   },
   {
    "id": "E02",
@@ -34,7 +34,7 @@
     "compliance",
     "auth"
    ],
-   "description": "## Goal\nCentralised identity (students, parents, teachers, school admins), encryption everywhere, and compliance with Tunisian Law 2004-63 (INPDP) plus GDPR-equivalent controls for minors' data.\n\n## Definition of Done\nExternal penetration test passes with no High/Critical findings; data-protection impact assessment signed off before first pilot school.\n\n## Scope\n- 10 tickets, 60 story points\n- Sprints S2–S15 (Phase 0)\n- Component: Security"
+   "description": "## Goal\nCentralised identity (students, parents, teachers, school admins), encryption everywhere, and compliance with Tunisian Law 2004-63 (INPDP) plus GDPR-equivalent controls for minors' data.\n\n## Definition of Done\nExternal penetration test passes with no High/Critical findings; data-protection impact assessment signed off before first pilot school.\n\n## Scope\n- 11 tickets, 65 story points\n- Sprints S2–S15 (Phase 0)\n- Component: Security"
   },
   {
    "id": "E03",
@@ -48,7 +48,7 @@
     "telemetry",
     "snowflake"
    ],
-   "description": "## Goal\nEvery learner micro-interaction (slider drag, hover, hesitation, confidence, answer) is captured as a schema-versioned Kafka event and lands in Snowflake within 5 minutes and in Redis within 200 ms.\n\n## Definition of Done\nSustained 50k events/sec with p99 end-to-end lag < 5 min to warehouse; zero schema-breaking deploys thanks to the registry.\n\n## Scope\n- 10 tickets, 68 story points\n- Sprints S3–S9 (Phase 1)\n- Component: Data"
+   "description": "## Goal\nEvery learner micro-interaction (slider drag, hover, hesitation, confidence, answer) is captured as a schema-versioned Kafka event and lands in Snowflake within 5 minutes and in Redis within 200 ms.\n\n## Definition of Done\nSustained 50k events/sec with p99 end-to-end lag < 5 min to warehouse; zero schema-breaking deploys thanks to the registry.\n\n## Scope\n- 12 tickets, 76 story points\n- Sprints S3–S9 (Phase 1)\n- Component: Data"
   },
   {
    "id": "E04",
@@ -63,7 +63,7 @@
     "item-bank",
     "multi-subject"
    ],
-   "description": "## Goal\nA subject-agnostic content system: knowledge-component graphs, a tagged and calibrated item bank, a textbook RAG corpus and a teacher authoring workflow, where every object carries a first-class `subject` and `track` (Bac section). Physics is the first subject loaded here; the other four load through E13 on the same tooling.\n\n## Definition of Done\nTooling supports any subject with zero code changes; Physics track published with ≥ 400 KCs and ≥ 6,000 tagged items, each with ≥ 1 KC tag and pedagogical review.\n\n## Scope\n- 9 tickets, 81 story points\n- Sprints S3–S11 (Phase 1)\n- Component: Curriculum"
+   "description": "## Goal\nA subject-agnostic content system: knowledge-component graphs, a tagged and calibrated item bank, a textbook RAG corpus and a teacher authoring workflow, where every object carries a first-class `subject` and `track` (Bac section). Physics is the first subject loaded here; the other four load through E13 on the same tooling.\n\n## Definition of Done\nTooling supports any subject with zero code changes; Physics track published with ≥ 400 KCs and ≥ 6,000 tagged items, each with ≥ 1 KC tag and pedagogical review.\n\n## Scope\n- 11 tickets, 89 story points\n- Sprints S3–S19 (Phase 1)\n- Component: Curriculum"
   },
   {
    "id": "E05",
@@ -78,7 +78,7 @@
     "pytorch",
     "kubeflow"
    ],
-   "description": "## Goal\nSelf-hosted SAINT+ model (pyKT) predicting per-concept failure probability, with IRT cold-start fallback, weekly automated retraining and sub-50 ms online inference.\n\n## Definition of Done\nAUC ≥ 0.80 on held-out Tunisian cohort data; p99 inference latency ≤ 50 ms at 2,000 RPS; weekly retrain runs unattended with automatic rollback on metric regression.\n\n## Scope\n- 10 tickets, 84 story points\n- Sprints S6–S10 (Phase 2)\n- Component: ML"
+   "description": "## Goal\nSelf-hosted SAINT+ model (pyKT) predicting per-concept failure probability, with IRT cold-start fallback, weekly automated retraining and sub-50 ms online inference.\n\n## Definition of Done\nAUC ≥ 0.80 on held-out Tunisian cohort data; p99 inference latency ≤ 50 ms at 2,000 RPS; weekly retrain runs unattended with automatic rollback on metric regression.\n\n## Scope\n- 11 tickets, 89 story points\n- Sprints S5–S10 (Phase 2)\n- Component: ML"
   },
   {
    "id": "E06",
@@ -92,7 +92,7 @@
     "recommendation",
     "mastery"
    ],
-   "description": "## Goal\nPer-click decision engine that turns DKT predictions + the knowledge graph into the next item, next hint level, or next concept, with spaced-repetition scheduling and exam-date awareness.\n\n## Definition of Done\nRouting decision returned in ≤ 80 ms p99 end-to-end; A/B framework shows measurable learning-gain lift vs. fixed-sequence control.\n\n## Scope\n- 8 tickets, 57 story points\n- Sprints S7–S13 (Phase 2)\n- Component: ML"
+   "description": "## Goal\nPer-click decision engine that turns DKT predictions + the knowledge graph into the next item, next hint level, or next concept, with spaced-repetition scheduling and exam-date awareness.\n\n## Definition of Done\nRouting decision returned in ≤ 80 ms p99 end-to-end; A/B framework shows measurable learning-gain lift vs. fixed-sequence control.\n\n## Scope\n- 9 tickets, 65 story points\n- Sprints S7–S13 (Phase 2)\n- Component: ML"
   },
   {
    "id": "E07",
@@ -107,7 +107,7 @@
     "guardrails",
     "pgvector"
    ],
-   "description": "## Goal\nLiteLLM proxy fronting OpenAI / Anthropic / local models with semantic caching, curriculum-grounded RAG over pgvector, and an LLM-as-a-Judge harness with pluggable per-subject verifiers (symbolic for maths/physics/technique, rubric-based for éco/gestion) that blocks hallucinated content before it reaches a student.\n\n## Definition of Done\nJudge blocks ≥ 95% of seeded formula hallucinations with ≤ 3% false-block rate; semantic cache hit rate ≥ 35%; per-student daily LLM cost capped and enforced.\n\n## Scope\n- 10 tickets, 77 story points\n- Sprints S6–S11 (Phase 2)\n- Component: LLM"
+   "description": "## Goal\nLiteLLM proxy fronting OpenAI / Anthropic / local models with semantic caching, curriculum-grounded RAG over pgvector, and an LLM-as-a-Judge harness with pluggable per-subject verifiers (symbolic for maths/physics/technique, rubric-based for éco/gestion) that blocks hallucinated content before it reaches a student.\n\n## Definition of Done\nJudge blocks ≥ 95% of seeded formula hallucinations with ≤ 3% false-block rate; semantic cache hit rate ≥ 35%; per-student daily LLM cost capped and enforced.\n\n## Scope\n- 11 tickets, 85 story points\n- Sprints S6–S11 (Phase 2)\n- Component: LLM"
   },
   {
    "id": "E08",
@@ -137,7 +137,7 @@
     "webgl",
     "pwa"
    ],
-   "description": "## Goal\nA per-subject widget package system on React Three Fiber, with the physics package (mechanics, circuits, optics, waves) built first, an offline-first PWA that survives outages mid-assessment, and real-time peer trivia battles.\n\n## Definition of Done\nLighthouse performance ≥ 85 on a mid-range Android device over 3G; a 20-minute assessment completes with the network cut for 5 minutes and syncs losslessly.\n\n## Scope\n- 11 tickets, 114 story points\n- Sprints S4–S12 (Phase 3)\n- Component: Frontend"
+   "description": "## Goal\nA per-subject widget package system on React Three Fiber, with the physics package (mechanics, circuits, optics, waves) built first, an offline-first PWA that survives outages mid-assessment, and real-time peer trivia battles.\n\n## Definition of Done\nLighthouse performance ≥ 85 on a mid-range Android device over 3G; a 20-minute assessment completes with the network cut for 5 minutes and syncs losslessly.\n\n## Scope\n- 12 tickets, 122 story points\n- Sprints S4–S12 (Phase 3)\n- Component: Frontend"
   },
   {
    "id": "E10",
@@ -166,7 +166,7 @@
     "stripe",
     "b2b"
    ],
-   "description": "## Goal\nStrict PostgreSQL RLS tenant isolation, a teacher dashboard with cohort anomaly detection and intervention alerts, a parent portal, and seat-based Stripe billing for schools.\n\n## Definition of Done\nCross-tenant data access is impossible by construction (verified by automated RLS test suite); a school can be onboarded and billed with zero engineering involvement.\n\n## Scope\n- 9 tickets, 79 story points\n- Sprints S6–S16 (Phase 4)\n- Component: Backend"
+   "description": "## Goal\nStrict PostgreSQL RLS tenant isolation, a teacher dashboard with cohort anomaly detection and intervention alerts, a parent portal, and seat-based Stripe billing for schools.\n\n## Definition of Done\nCross-tenant data access is impossible by construction (verified by automated RLS test suite); a school can be onboarded and billed with zero engineering involvement.\n\n## Scope\n- 14 tickets, 100 story points\n- Sprints S6–S16 (Phase 4)\n- Component: Backend"
   },
   {
    "id": "E12",
@@ -181,7 +181,7 @@
     "dr",
     "launch"
    ],
-   "description": "## Goal\nProve the system survives Bac-eve traffic: load tests at 50k concurrent users, chaos experiments, DR drills, SLOs with alerting, and a launch war-room runbook.\n\n## Definition of Done\n50k-concurrent load test passes all SLOs; RPO ≤ 15 min, RTO ≤ 1 h demonstrated in a drill; on-call rotation and runbooks signed off.\n\n## Scope\n- 10 tickets, 81 story points\n- Sprints S6–S18 (Phase 4)\n- Component: QA"
+   "description": "## Goal\nProve the system survives Bac-eve traffic: load tests at 50k concurrent users, chaos experiments, DR drills, SLOs with alerting, and a launch war-room runbook.\n\n## Definition of Done\n50k-concurrent load test passes all SLOs; RPO ≤ 15 min, RTO ≤ 1 h demonstrated in a drill; on-call rotation and runbooks signed off.\n\n## Scope\n- 11 tickets, 83 story points\n- Sprints S1–S18 (Phase 4)\n- Component: QA"
   },
   {
    "id": "E13",
@@ -237,7 +237,7 @@
     "android",
     "app-store"
    ],
-   "description": "## Goal\nNative learner apps on iOS and Android that pass App Store and Google Play review on the first submission.\n\n## Definition of Done\nBoth apps approved in the stores; Sign in with Apple, in-app account deletion and In-App Purchase verified by the review checklist; privacy labels match the DPIA.\n\n## Scope\n- 12 tickets, 78 story points\n- Sprints S6–S16 (Phase 3 — Product Surfaces)\n- Component: Mobile"
+   "description": "## Goal\nNative learner apps on iOS and Android that pass App Store and Google Play review on the first submission.\n\n## Definition of Done\nBoth apps approved in the stores; Sign in with Apple, in-app account deletion and In-App Purchase verified by the review checklist; privacy labels match the DPIA.\n\n## Scope\n- 14 tickets, 88 story points\n- Sprints S6–S16 (Phase 3 — Product Surfaces)\n- Component: Mobile"
   },
   {
    "id": "E17",
@@ -251,7 +251,7 @@
     "design-system",
     "screens"
    ],
-   "description": "## Goal\nThe learner screens of the design canvas, built on the Cyanotype design system in code, so the adaptive engine is visible and usable.\n\n## Definition of Done\nScreens 01–07 and the settings area shipped in FR and AR; Storybook covers every Cyanotype component; usability rounds show students complete the core journey unaided.\n\n## Scope\n- 11 tickets, 68 story points\n- Sprints S4–S12 (Phase 3 — Product Surfaces)\n- Component: Frontend"
+   "description": "## Goal\nThe learner screens of the design canvas, built on the Cyanotype design system in code, so the adaptive engine is visible and usable.\n\n## Definition of Done\nScreens 01–07 and the settings area shipped in FR and AR; Storybook covers every Cyanotype component; usability rounds show students complete the core journey unaided.\n\n## Scope\n- 13 tickets, 74 story points\n- Sprints S3–S12 (Phase 3 — Product Surfaces)\n- Component: Frontend"
   },
   {
    "id": "E18",
@@ -293,7 +293,7 @@
     "back-office",
     "legal"
    ],
-   "description": "## Goal\nRun the service day to day: admin console, feature flags, moderation, help center, support desk, status page and the legal documents.\n\n## Definition of Done\nSupport desk and help center live before the pilot; legal documents published and signed off by counsel; feature flags used for every staged rollout.\n\n## Scope\n- 8 tickets, 36 story points\n- Sprints S7–S16 (Phase 4 — B2B & Hardening)\n- Component: Support"
+   "description": "## Goal\nRun the service day to day: admin console, feature flags, moderation, help center, support desk, status page and the legal documents.\n\n## Definition of Done\nSupport desk and help center live before the pilot; legal documents published and signed off by counsel; feature flags used for every staged rollout.\n\n## Scope\n- 11 tickets, 45 story points\n- Sprints S7–S16 (Phase 4 — B2B & Hardening)\n- Component: Support"
   }
  ],
  "issues": [
@@ -316,7 +316,7 @@
     "apl-t001"
    ],
    "blocked_by": [],
-   "description": "Create the `infra/` Terraform repository: S3 + DynamoDB remote state with locking, `dev`/`staging`/`prod` workspaces, module layout (network, eks, data, observability), pre-commit with tflint + checkov, and Terraform Cloud/Atlantis plan-on-PR.\n\n**Acceptance criteria**\n\n- `terraform plan` runs on every PR and posts the diff as a comment\n- checkov policy pack blocks public S3 buckets, open security groups and unencrypted volumes\n- State is encrypted at rest and locked; a second concurrent apply is rejected\n\n**Context**\n\n- Backlog ID: T001\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 1\n- Team: Platform / DevOps\n- Blocks: T002, T006"
+   "description": "Create the `infra/` Terraform repository: S3 + DynamoDB remote state with locking, `dev`/`staging`/`prod` workspaces, module layout (network, eks, data, observability), pre-commit with tflint + checkov, and Terraform Cloud/Atlantis plan-on-PR.\n\n**Acceptance criteria**\n\n- `terraform plan` runs on every PR and posts the diff as a comment\n- checkov policy pack blocks public S3 buckets, open security groups and unencrypted volumes\n- State is encrypted at rest and locked; a second concurrent apply is rejected\n\n**Context**\n\n- Backlog ID: T001\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 1\n- Team: Platform / DevOps\n- Blocks: T002, T006, T212, T217"
   },
   {
    "id": "T002",
@@ -339,7 +339,7 @@
    "blocked_by": [
     "T001"
    ],
-   "description": "Three-AZ VPC in eu-west-3 (Paris — closest region to Tunisia with full service coverage), public/private/isolated subnet tiers, NAT gateways per AZ, VPC endpoints for S3, ECR, Secrets Manager and CloudWatch to avoid NAT egress cost.\n\n**Acceptance criteria**\n\n- All data-plane subnets have no route to an Internet Gateway\n- Flow logs enabled and shipped to the logging account\n- Network module reused unchanged across dev/staging/prod\n\n**Context**\n\n- Backlog ID: T002\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 1\n- Team: Platform / DevOps\n- Blocked by: T001 (Bootstrap Terraform mono-repo with remote state, workspaces and policy checks)\n- Blocks: T003, T021"
+   "description": "Three-AZ VPC in eu-west-3 (Paris — closest region to Tunisia with full service coverage), public/private/isolated subnet tiers, NAT gateways per AZ, VPC endpoints for S3, ECR, Secrets Manager and CloudWatch to avoid NAT egress cost.\n\n**Acceptance criteria**\n\n- All data-plane subnets have no route to an Internet Gateway\n- Flow logs enabled and shipped to the logging account\n- Network module reused unchanged across dev/staging/prod\n\n**Context**\n\n- Backlog ID: T002\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 1\n- Team: Platform / DevOps\n- Blocked by: T001 (Bootstrap Terraform mono-repo with remote state, workspaces and policy checks)\n- Blocks: T003, T021, T211"
   },
   {
    "id": "T003",
@@ -363,7 +363,7 @@
    "blocked_by": [
     "T002"
    ],
-   "description": "EKS 1.31+ via Terraform: system node group (on-demand), general workload pool (Karpenter, spot-first with on-demand fallback), and a tainted GPU pool (g5 family) for TorchServe and local LLM inference. IRSA for pod identity, EBS/EFS CSI drivers, cluster autoscaler replaced by Karpenter.\n\n**Acceptance criteria**\n\n- Cluster passes `kube-bench` CIS benchmark with no failures\n- Karpenter scales a 500-pod synthetic load from 0 to ready in < 4 minutes\n- GPU pool only schedules pods carrying the `nvidia.com/gpu` toleration\n\n**Context**\n\n- Backlog ID: T003\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 2\n- Team: Platform / DevOps\n- Blocked by: T002 (Provision multi-AZ VPC, subnets, NAT and VPC endpoints via Terraform)\n- Blocks: T004, T005, T007, T011, T012, T015, T045, T059, T060, T106"
+   "description": "EKS 1.31+ via Terraform: system node group (on-demand), general workload pool (Karpenter, spot-first with on-demand fallback), and a tainted GPU pool (g5 family) for TorchServe and local LLM inference. IRSA for pod identity, EBS/EFS CSI drivers, cluster autoscaler replaced by Karpenter.\n\n**Acceptance criteria**\n\n- Cluster passes `kube-bench` CIS benchmark with no failures\n- Karpenter scales a 500-pod synthetic load from 0 to ready in < 4 minutes\n- GPU pool only schedules pods carrying the `nvidia.com/gpu` toleration\n\n**Context**\n\n- Backlog ID: T003\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 2\n- Team: Platform / DevOps\n- Blocked by: T002 (Provision multi-AZ VPC, subnets, NAT and VPC endpoints via Terraform)\n- Blocks: T004, T005, T007, T011, T012, T015, T045, T059, T060, T106, T218"
   },
   {
    "id": "T004",
@@ -387,7 +387,7 @@
    "blocked_by": [
     "T003"
    ],
-   "description": "ArgoCD app-of-apps pattern; every microservice has a Helm chart with values overlays for dev/staging/prod; image tags promoted by commit, not by hand. Sealed Secrets or External Secrets Operator for secret injection from AWS Secrets Manager.\n\n**Acceptance criteria**\n\n- A merge to `main` of a chart change reconciles to staging within 2 minutes\n- No secret value exists in Git in plaintext (checked by gitleaks in CI)\n- ArgoCD sync drift alerts route to #platform-alerts\n\n**Context**\n\n- Backlog ID: T004\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 2\n- Team: Platform / DevOps\n- Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool)\n- Blocks: T008, T010, T016, T202"
+   "description": "ArgoCD app-of-apps pattern; every microservice has a Helm chart with values overlays for dev/staging/prod; image tags promoted by commit, not by hand. Sealed Secrets or External Secrets Operator for secret injection from AWS Secrets Manager.\n\n**Acceptance criteria**\n\n- A merge to `main` of a chart change reconciles to staging within 2 minutes\n- No secret value exists in Git in plaintext (checked by gitleaks in CI)\n- ArgoCD sync drift alerts route to #platform-alerts\n\n**Context**\n\n- Backlog ID: T004\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 2\n- Team: Platform / DevOps\n- Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool)\n- Blocks: T008, T010, T016, T202, T213"
   },
   {
    "id": "T005",
@@ -408,9 +408,10 @@
     "apl-t005"
    ],
    "blocked_by": [
-    "T003"
+    "T003",
+    "T212"
    ],
-   "description": "Kong (OSS or Konnect) as ingress: JWT plugin validating tokens from the identity provider, rate-limiting plugin keyed by user and tenant, request-size limits, and per-route canary weights for blue/green cutover.\n\n**Acceptance criteria**\n\n- Unauthenticated calls to any `/api/v1/*` route return 401 at the gateway, never reaching a service\n- Rate limit of 60 req/min/user on tutor endpoints enforced and observable in Datadog\n- Canary weight can be shifted 0→100% without a redeploy\n\n**Context**\n\n- Backlog ID: T005\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 3\n- Team: Platform / DevOps\n- Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool)\n- Blocks: T010, T019, T025"
+   "description": "Kong (OSS or Konnect) as ingress: JWT plugin validating tokens from the identity provider, rate-limiting plugin keyed by user and tenant, request-size limits, and per-route canary weights for blue/green cutover.\n\n**Acceptance criteria**\n\n- Unauthenticated calls to any `/api/v1/*` route return 401 at the gateway, never reaching a service\n- Rate limit of 60 req/min/user on tutor endpoints enforced and observable in Datadog\n- Canary weight can be shifted 0→100% without a redeploy\n\n**Context**\n\n- Backlog ID: T005\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 3\n- Team: Platform / DevOps\n- Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool), T212 (Domains, DNS and certificates: Route 53 zones, ACM certificates, SES sending domain with SPF, DKIM and DMARC)\n- Blocks: T010, T019, T025"
   },
   {
    "id": "T006",
@@ -434,7 +435,7 @@
    "blocked_by": [
     "T001"
    ],
-   "description": "Reusable workflow per language (TypeScript, Python): lint, type-check, unit tests with coverage gates (≥ 80% backend, ≥ 70% frontend), Pact contract tests, Trivy image scan, Syft SBOM, signed images with cosign. Caches keyed on lockfiles.\n\n**Acceptance criteria**\n\n- A PR cannot merge with a failing check or a Critical CVE in the image\n- Median CI run for a backend service < 8 minutes\n- Every image pushed to ECR is signed and has an attached SBOM\n\n**Context**\n\n- Backlog ID: T006\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 2\n- Team: Platform / DevOps\n- Blocked by: T001 (Bootstrap Terraform mono-repo with remote state, workspaces and policy checks)\n- Blocks: T009, T103, T149"
+   "description": "Reusable workflow per language (TypeScript, Python): lint, type-check, unit tests with coverage gates (≥ 80% backend, ≥ 70% frontend), Pact contract tests, Trivy image scan, Syft SBOM, signed images with cosign. Caches keyed on lockfiles.\n\n**Acceptance criteria**\n\n- A PR cannot merge with a failing check or a Critical CVE in the image\n- Median CI run for a backend service < 8 minutes\n- Every image pushed to ECR is signed and has an attached SBOM\n\n**Context**\n\n- Backlog ID: T006\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 2\n- Team: Platform / DevOps\n- Blocked by: T001 (Bootstrap Terraform mono-repo with remote state, workspaces and policy checks)\n- Blocks: T009, T103, T149, T214, T215"
   },
   {
    "id": "T007",
@@ -573,9 +574,10 @@
     "apl-t012"
    ],
    "blocked_by": [
-    "T003"
+    "T003",
+    "T211"
    ],
-   "description": "Keycloak on EKS (HA, Postgres-backed) as the single OIDC issuer. Roles: student, parent, teacher, school_admin, platform_admin. Social login (Google) for students, email+password with Arabic/French UI, phone OTP for parents. Short-lived access tokens (15 min) and rotating refresh tokens.\n\n**Acceptance criteria**\n\n- Kong validates Keycloak-issued JWTs including `tenant_id` and `roles` claims\n- Password policy ≥ 12 chars, breached-password check via HIBP k-anonymity\n- Login page renders correctly RTL in Arabic\n\n**Context**\n\n- Backlog ID: T012\n- Epic: E02 Identity, Security & Compliance\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 2\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool)\n- Blocks: T013, T014, T076, T094, T134, T163, T166, T209"
+   "description": "Keycloak on EKS (HA, Postgres-backed) as the single OIDC issuer. Roles: student, parent, teacher, school_admin, platform_admin. Social login (Google) for students, email+password with Arabic/French UI, phone OTP for parents. Short-lived access tokens (15 min) and rotating refresh tokens.\n\n**Acceptance criteria**\n\n- Kong validates Keycloak-issued JWTs including `tenant_id` and `roles` claims\n- Password policy ≥ 12 chars, breached-password check via HIBP k-anonymity\n- Login page renders correctly RTL in Arabic\n\n**Context**\n\n- Backlog ID: T012\n- Epic: E02 Identity, Security & Compliance\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 2\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool), T211 (Provision Aurora PostgreSQL with pgvector via Terraform: Multi-AZ, RDS Proxy, backups and schema-migration tooling)\n- Blocks: T013, T014, T076, T094, T134, T163, T166, T209, T218"
   },
   {
    "id": "T013",
@@ -693,7 +695,7 @@
    "blocked_by": [
     "T013"
    ],
-   "description": "Document data flows, lawful basis, retention, minors' data handling, cross-border transfer (AWS Paris) and the telemetry profiling risk (DKT constitutes automated profiling of minors). Prepare the INPDP processing declaration. Legal counsel review.\n\n**Acceptance criteria**\n\n- DPIA signed by DPO and CTO\n- Retention schedule implemented in code (see data lifecycle story)\n- Telemetry profiling is disclosed in the privacy notice in Arabic and French\n\n**Addendum changes (v2)**\n\n- DPIA covers accommodation data, dictation audio and send-time profiling (E14, E15)\n\n**Context**\n\n- Backlog ID: T017\n- Epic: E02 Identity, Security & Compliance\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 5\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T013 (As a parent, I give verifiable consent before my under-18 child's account is activated)\n- Blocks: T018, T151, T169, T207"
+   "description": "Document data flows, lawful basis, retention, minors' data handling, cross-border transfer (AWS Paris) and the telemetry profiling risk (DKT constitutes automated profiling of minors). Prepare the INPDP processing declaration. Legal counsel review.\n\n**Acceptance criteria**\n\n- DPIA signed by DPO and CTO\n- Retention schedule implemented in code (see data lifecycle story)\n- Telemetry profiling is disclosed in the privacy notice in Arabic and French\n\n**Addendum changes (v2)**\n\n- DPIA covers accommodation data, dictation audio and send-time profiling (E14, E15)\n\n**Context**\n\n- Backlog ID: T017\n- Epic: E02 Identity, Security & Compliance\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 5\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T013 (As a parent, I give verifiable consent before my under-18 child's account is activated)\n- Blocks: T018, T151, T169, T207, T216, T222, T236"
   },
   {
    "id": "T018",
@@ -762,9 +764,10 @@
    ],
    "blocked_by": [
     "T014",
-    "T019"
+    "T019",
+    "T215"
    ],
-   "description": "Engage an external firm for a grey-box test of the web app, APIs, multi-tenancy boundaries and the LLM tutor (prompt-injection, data exfiltration via RAG). Two-week remediation window; re-test.\n\n**Acceptance criteria**\n\n- Zero Critical/High findings open at re-test\n- Prompt-injection attempts cannot extract other students' data or system prompts\n- Findings tracked as Jira Bugs linked to this task\n\n**Context**\n\n- Backlog ID: T020\n- Epic: E02 Identity, Security & Compliance\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 15\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T014 (Implement attribute-based authorisation middleware shared by all Node.js services), T019 (Deploy AWS WAF + Shield, bot protection and abuse rate limiting on public endpoints)\n- Blocks: T110"
+   "description": "Engage an external firm for a grey-box test of the web app, APIs, multi-tenancy boundaries and the LLM tutor (prompt-injection, data exfiltration via RAG). Two-week remediation window; re-test.\n\n**Acceptance criteria**\n\n- Zero Critical/High findings open at re-test\n- Prompt-injection attempts cannot extract other students' data or system prompts\n- Findings tracked as Jira Bugs linked to this task\n\n**Context**\n\n- Backlog ID: T020\n- Epic: E02 Identity, Security & Compliance\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 15\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T014 (Implement attribute-based authorisation middleware shared by all Node.js services), T019 (Deploy AWS WAF + Shield, bot protection and abuse rate limiting on public endpoints), T215 (Threat model of the platform and the AI tutor; static analysis, secret scanning and automated dependency updates in CI)\n- Blocks: T110"
   },
   {
    "id": "T021",
@@ -834,7 +837,7 @@
    "blocked_by": [
     "T021"
    ],
-   "description": "Event catalogue co-designed with ML: `item.presented`, `item.interaction` (slider_move, drag, hover_enter/exit, focus, keystroke_burst), `item.hesitation` (idle > 3 s after presentation), `item.answered` (response, correct, latency_ms, confidence_1_5, attempts), `hint.requested`, `hint.shown`, `tutor.message`, `session.start/end`. Each carries `student_id`, `tenant_id`, `item_id`, `kc_ids[]`, `client_ts`, `server_ts`, `session_id`, `device`, `app_version`.\n\n**Acceptance criteria**\n\n- Schemas versioned in the registry with backward compatibility enforced\n- Every event has a documented owner, producer and consumers in the data catalogue\n- ML team signs off that the schema contains everything SAINT+ features need\n\n**Addendum changes (v2)**\n\n- Events carry time_multiplier, assistive_mode, input_modality and focus_session_id; new focus.*, notification.* and tts.played events\n\n**Context**\n\n- Backlog ID: T023\n- Epic: E03 Event-Driven Telemetry & Data Warehouse\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 3\n- Team: Data Engineering\n- Blocked by: T021 (Provision Apache Kafka (MSK) cluster with Schema Registry and topic conventions)\n- Blocks: T024, T025, T033, T191"
+   "description": "Event catalogue co-designed with ML: `item.presented`, `item.interaction` (slider_move, drag, hover_enter/exit, focus, keystroke_burst), `item.hesitation` (idle > 3 s after presentation), `item.answered` (response, correct, latency_ms, confidence_1_5, attempts), `hint.requested`, `hint.shown`, `tutor.message`, `session.start/end`. Each carries `student_id`, `tenant_id`, `item_id`, `kc_ids[]`, `client_ts`, `server_ts`, `session_id`, `device`, `app_version`.\n\n**Acceptance criteria**\n\n- Schemas versioned in the registry with backward compatibility enforced\n- Every event has a documented owner, producer and consumers in the data catalogue\n- ML team signs off that the schema contains everything SAINT+ features need\n\n**Addendum changes (v2)**\n\n- Events carry time_multiplier, assistive_mode, input_modality and focus_session_id; new focus.*, notification.* and tts.played events\n\n**Context**\n\n- Backlog ID: T023\n- Epic: E03 Event-Driven Telemetry & Data Warehouse\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 3\n- Team: Data Engineering\n- Blocked by: T021 (Provision Apache Kafka (MSK) cluster with Schema Registry and topic conventions)\n- Blocks: T024, T025, T033, T191, T219"
   },
   {
    "id": "T024",
@@ -879,9 +882,10 @@
    ],
    "blocked_by": [
     "T023",
-    "T005"
+    "T005",
+    "T214"
    ],
-   "description": "Node.js (Fastify) ingestion edge behind Kong: validates JWT, enforces schema, enriches with server timestamp and geo, produces to Kafka with idempotent producer. Returns 202 immediately; applies 429 with Retry-After when Kafka lag exceeds threshold.\n\n**Acceptance criteria**\n\n- Sustains 50k events/s on 6 pods with p99 < 30 ms\n- Invalid events are routed to a dead-letter topic with the validation error\n- Backpressure test: Kafka paused for 60 s → clients receive 429, no OOM\n\n**Context**\n\n- Backlog ID: T025\n- Epic: E03 Event-Driven Telemetry & Data Warehouse\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 4\n- Team: Data Engineering\n- Blocked by: T023 (Define the learner interaction event taxonomy and Avro/Protobuf schemas), T005 (Deploy Kong API Gateway with rate limiting, JWT validation and per-tenant quotas)\n- Blocks: T104"
+   "description": "Node.js (Fastify) ingestion edge behind Kong: validates JWT, enforces schema, enriches with server timestamp and geo, produces to Kafka with idempotent producer. Returns 202 immediately; applies 429 with Retry-After when Kafka lag exceeds threshold.\n\n**Acceptance criteria**\n\n- Sustains 50k events/s on 6 pods with p99 < 30 ms\n- Invalid events are routed to a dead-letter topic with the validation error\n- Backpressure test: Kafka paused for 60 s → clients receive 429, no OOM\n\n**Context**\n\n- Backlog ID: T025\n- Epic: E03 Event-Driven Telemetry & Data Warehouse\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 4\n- Team: Data Engineering\n- Blocked by: T023 (Define the learner interaction event taxonomy and Avro/Protobuf schemas), T005 (Deploy Kong API Gateway with rate limiting, JWT validation and per-tenant quotas), T214 (Backend service template and API contract: service skeleton, OpenAPI 3.1 specs, versioning and deprecation policy)\n- Blocks: T104"
   },
   {
    "id": "T026",
@@ -925,9 +929,10 @@
     "apl-t027"
    ],
    "blocked_by": [
-    "T021"
+    "T021",
+    "T217"
    ],
-   "description": "Snowflake Kafka connector (Snowpipe Streaming) for all `learner.*` topics into a RAW schema; Iceberg tables on S3 as a cost-efficient cold copy; connector tasks scaled by partition count; DLQ monitoring.\n\n**Acceptance criteria**\n\n- p99 event-to-queryable latency in Snowflake < 5 minutes\n- Row counts reconcile with Kafka offsets daily (automated check)\n- Connector failure pages data-eng on-call within 5 minutes\n\n**Context**\n\n- Backlog ID: T027\n- Epic: E03 Event-Driven Telemetry & Data Warehouse\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 5\n- Team: Data Engineering\n- Blocked by: T021 (Provision Apache Kafka (MSK) cluster with Schema Registry and topic conventions)\n- Blocks: T028, T031"
+   "description": "Snowflake Kafka connector (Snowpipe Streaming) for all `learner.*` topics into a RAW schema; Iceberg tables on S3 as a cost-efficient cold copy; connector tasks scaled by partition count; DLQ monitoring.\n\n**Acceptance criteria**\n\n- p99 event-to-queryable latency in Snowflake < 5 minutes\n- Row counts reconcile with Kafka offsets daily (automated check)\n- Connector failure pages data-eng on-call within 5 minutes\n\n**Context**\n\n- Backlog ID: T027\n- Epic: E03 Event-Driven Telemetry & Data Warehouse\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 5\n- Team: Data Engineering\n- Blocked by: T021 (Provision Apache Kafka (MSK) cluster with Schema Registry and topic conventions), T217 (Provision Snowflake with Terraform: databases, warehouses, role-based access, PII masking policies and cost monitors)\n- Blocks: T028, T031"
   },
   {
    "id": "T028",
@@ -1017,9 +1022,10 @@
     "apl-t031"
    ],
    "blocked_by": [
-    "T027"
+    "T027",
+    "T218"
    ],
-   "description": "CLI + Airflow DAG to replay a topic time-range into a target consumer group or to re-sink into Snowflake after a bug fix; dry-run mode; rate-limited.\n\n**Acceptance criteria**\n\n- Replay of 24 h of events completes in < 2 h without impacting live consumers\n- Backfill is idempotent (re-running produces identical warehouse state)\n- Runbook documented\n\n**Context**\n\n- Backlog ID: T031\n- Epic: E03 Event-Driven Telemetry & Data Warehouse\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 9\n- Team: Data Engineering\n- Blocked by: T027 (Configure Kafka Connect sinks to Snowflake with exactly-once semantics)"
+   "description": "CLI + Airflow DAG to replay a topic time-range into a target consumer group or to re-sink into Snowflake after a bug fix; dry-run mode; rate-limited.\n\n**Acceptance criteria**\n\n- Replay of 24 h of events completes in < 2 h without impacting live consumers\n- Backfill is idempotent (re-running produces identical warehouse state)\n- Runbook documented\n\n**Context**\n\n- Backlog ID: T031\n- Epic: E03 Event-Driven Telemetry & Data Warehouse\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 9\n- Team: Data Engineering\n- Blocked by: T027 (Configure Kafka Connect sinks to Snowflake with exactly-once semantics), T218 (Deploy the ML platform services: Airflow (Amazon MWAA) for data jobs and the MLflow tracking server and model registry)"
   },
   {
    "id": "T032",
@@ -1039,8 +1045,10 @@
     "team-product-curriculum",
     "apl-t032"
    ],
-   "blocked_by": [],
-   "description": "Graph of concepts for the official Tunisian Bac physics programme by section (Sciences expérimentales, Mathématiques, Sciences techniques): nodes = KCs (e.g. `mech.newton2`, `elec.rlc.resonance`), edges = prerequisite / related / sub-concept, attributes = chapter, exam weight, difficulty prior. Stored in Postgres (ltree + edge table) with a cached in-memory graph in the routing service.\n\n**Acceptance criteria**\n\n- Schema supports multiple programme tracks sharing KCs\n- Cycle detection rejects circular prerequisites on write\n- Graph export to JSON used by routing service and tutor RAG\n\n**Context**\n\n- Backlog ID: T032\n- Epic: E04 Curriculum Knowledge Graph & Content Pipeline (multi-subject)\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 3\n- Team: Product + Curriculum\n- Blocks: T033, T034, T036"
+   "blocked_by": [
+    "T211"
+   ],
+   "description": "Graph of concepts for the official Tunisian Bac physics programme by section (Sciences expérimentales, Mathématiques, Sciences techniques): nodes = KCs (e.g. `mech.newton2`, `elec.rlc.resonance`), edges = prerequisite / related / sub-concept, attributes = chapter, exam weight, difficulty prior. Stored in Postgres (ltree + edge table) with a cached in-memory graph in the routing service.\n\n**Acceptance criteria**\n\n- Schema supports multiple programme tracks sharing KCs\n- Cycle detection rejects circular prerequisites on write\n- Graph export to JSON used by routing service and tutor RAG\n\n**Context**\n\n- Backlog ID: T032\n- Epic: E04 Curriculum Knowledge Graph & Content Pipeline (multi-subject)\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 3\n- Team: Product + Curriculum\n- Blocked by: T211 (Provision Aurora PostgreSQL with pgvector via Terraform: Multi-AZ, RDS Proxy, backups and schema-migration tooling)\n- Blocks: T033, T034, T036"
   },
   {
    "id": "T033",
@@ -1135,7 +1143,7 @@
    "blocked_by": [
     "T032"
    ],
-   "description": "Item types: MCQ, numeric with tolerance, multi-step derivation, interactive widget (links to R3F component + parameter space), drag-to-order. Fields: KC tags with weights, IRT a/b/c priors, solution steps, distractor rationales (used by the tutor), Arabic/French variants, media refs, source (past exam year or authored).\n\n**Acceptance criteria**\n\n- Item JSON schema published and validated at write time\n- Interactive items declare their parameter ranges so randomised variants are generated\n- Bilingual fields are mandatory for publish\n\n**Context**\n\n- Backlog ID: T036\n- Epic: E04 Curriculum Knowledge Graph & Content Pipeline (multi-subject)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 4\n- Team: Product + Curriculum\n- Blocked by: T032 (Design the knowledge-component (KC) graph schema and store)\n- Blocks: T037, T071, T137, T144"
+   "description": "Item types: MCQ, numeric with tolerance, multi-step derivation, interactive widget (links to R3F component + parameter space), drag-to-order. Fields: KC tags with weights, IRT a/b/c priors, solution steps, distractor rationales (used by the tutor), Arabic/French variants, media refs, source (past exam year or authored).\n\n**Acceptance criteria**\n\n- Item JSON schema published and validated at write time\n- Interactive items declare their parameter ranges so randomised variants are generated\n- Bilingual fields are mandatory for publish\n\n**Context**\n\n- Backlog ID: T036\n- Epic: E04 Curriculum Knowledge Graph & Content Pipeline (multi-subject)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 4\n- Team: Product + Curriculum\n- Blocked by: T032 (Design the knowledge-component (KC) graph schema and store)\n- Blocks: T037, T071, T137, T144, T220, T221, T235"
   },
   {
    "id": "T037",
@@ -1181,9 +1189,10 @@
    ],
    "blocked_by": [
     "T037",
-    "T035"
+    "T035",
+    "T235"
    ],
-   "description": "Content sprint: digitise and tag past Bac physics papers (all sections), author new items per KC to reach ≥ 12 items per KC with a difficulty spread, and translate. Includes a quality rubric and double-tagging on a 10% sample to measure inter-rater agreement.\n\n**Acceptance criteria**\n\n- ≥ 6,000 published items; no KC has fewer than 8 items\n- Inter-rater KC tagging agreement (Cohen's κ) ≥ 0.75 on the sample\n- All past-exam items carry year + section provenance\n\n**Context**\n\n- Backlog ID: T038\n- Epic: E04 Curriculum Knowledge Graph & Content Pipeline (multi-subject)\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 8\n- Team: Product + Curriculum\n- Blocked by: T037 (As a teacher-author, I create, preview and submit items for review in the authoring tool), T035 (Populate the Physics KC graph for all Bac tracks (first subject))\n- Blocks: T044, T068, T184"
+   "description": "Content sprint: digitise and tag past Bac physics papers (all sections), author new items per KC to reach ≥ 12 items per KC with a difficulty spread, and translate. Includes a quality rubric and double-tagging on a 10% sample to measure inter-rater agreement.\n\n**Acceptance criteria**\n\n- ≥ 6,000 published items; no KC has fewer than 8 items\n- Inter-rater KC tagging agreement (Cohen's κ) ≥ 0.75 on the sample\n- All past-exam items carry year + section provenance\n\n**Context**\n\n- Backlog ID: T038\n- Epic: E04 Curriculum Knowledge Graph & Content Pipeline (multi-subject)\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 8\n- Team: Product + Curriculum\n- Blocked by: T037 (As a teacher-author, I create, preview and submit items for review in the authoring tool), T035 (Populate the Physics KC graph for all Bac tracks (first subject)), T235 (Content production operations: author and reviewer pool, contracts and rights, throughput tracking, translation vendors)\n- Blocks: T044, T068, T184"
   },
   {
    "id": "T039",
@@ -1252,9 +1261,10 @@
     "apl-t041"
    ],
    "blocked_by": [
-    "T040"
+    "T040",
+    "T218"
    ],
-   "description": "Vendor pyKT as a pinned dependency; write the Snowflake → pyKT sequence adapter (`ml_training_sequences` → question/KC/response/elapsed-time tensors); Hydra configs; MLflow experiment tracking; deterministic seeds; unit tests on the adapter.\n\n**Acceptance criteria**\n\n- `make train MODEL=saint_plus` runs end-to-end on a 10k-sequence sample in CI (CPU)\n- Every run logs params, metrics, data snapshot hash and model artifact to MLflow\n- Adapter handles multi-KC items and interactive-item partial credit\n\n**Context**\n\n- Backlog ID: T041\n- Epic: E05 Deep Knowledge Tracing Core\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 6\n- Team: ML Engineering (Python / PyTorch)\n- Blocked by: T040 (Benchmark SAINT, SAINT+, SAKT and AKT on public datasets and our pilot data)\n- Blocks: T042, T043"
+   "description": "Vendor pyKT as a pinned dependency; write the Snowflake → pyKT sequence adapter (`ml_training_sequences` → question/KC/response/elapsed-time tensors); Hydra configs; MLflow experiment tracking; deterministic seeds; unit tests on the adapter.\n\n**Acceptance criteria**\n\n- `make train MODEL=saint_plus` runs end-to-end on a 10k-sequence sample in CI (CPU)\n- Every run logs params, metrics, data snapshot hash and model artifact to MLflow\n- Adapter handles multi-KC items and interactive-item partial credit\n\n**Context**\n\n- Backlog ID: T041\n- Epic: E05 Deep Knowledge Tracing Core\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 6\n- Team: ML Engineering (Python / PyTorch)\n- Blocked by: T040 (Benchmark SAINT, SAINT+, SAKT and AKT on public datasets and our pilot data), T218 (Deploy the ML platform services: Airflow (Amazon MWAA) for data jobs and the MLflow tracking server and model registry)\n- Blocks: T042, T043"
   },
   {
    "id": "T042",
@@ -1348,9 +1358,10 @@
    ],
    "blocked_by": [
     "T042",
-    "T003"
+    "T003",
+    "T218"
    ],
-   "description": "Kubeflow Pipelines (or Argo Workflows + KFP SDK) in the `ml` namespace with GPU node affinity. Pipeline: snapshot Snowflake mart → validate data → train SAINT+ → evaluate vs. champion → register in MLflow → (if better) package for TorchServe → canary deploy. Triggered by cron Sunday 02:00 Africa/Tunis; Airflow owns the data snapshot step.\n\n**Acceptance criteria**\n\n- Pipeline runs unattended end-to-end in staging for 3 consecutive weeks\n- GPU nodes scale from 0 at 01:55 and back to 0 after completion\n- Pipeline failure pages ML on-call with the failing step and logs\n\n**Context**\n\n- Backlog ID: T045\n- Epic: E05 Deep Knowledge Tracing Core\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 8\n- Team: ML Engineering (Python / PyTorch)\n- Blocked by: T042 (Implement production SAINT+ model with elapsed-time and lag-time embeddings), T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool)\n- Blocks: T047"
+   "description": "Kubeflow Pipelines (or Argo Workflows + KFP SDK) in the `ml` namespace with GPU node affinity. Pipeline: snapshot Snowflake mart → validate data → train SAINT+ → evaluate vs. champion → register in MLflow → (if better) package for TorchServe → canary deploy. Triggered by cron Sunday 02:00 Africa/Tunis; Airflow owns the data snapshot step.\n\n**Acceptance criteria**\n\n- Pipeline runs unattended end-to-end in staging for 3 consecutive weeks\n- GPU nodes scale from 0 at 01:55 and back to 0 after completion\n- Pipeline failure pages ML on-call with the failing step and logs\n\n**Context**\n\n- Backlog ID: T045\n- Epic: E05 Deep Knowledge Tracing Core\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 8\n- Team: ML Engineering (Python / PyTorch)\n- Blocked by: T042 (Implement production SAINT+ model with elapsed-time and lag-time embeddings), T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool), T218 (Deploy the ML platform services: Airflow (Amazon MWAA) for data jobs and the MLflow tracking server and model registry)\n- Blocks: T047"
   },
   {
    "id": "T046",
@@ -1657,9 +1668,10 @@
     "apl-t058"
    ],
    "blocked_by": [
-    "T052"
+    "T052",
+    "T225"
    ],
-   "description": "Teacher assignments become hard constraints on the candidate set for the assignment window; the router still chooses order and difficulty within the constraint.\n\n**Acceptance criteria**\n\n- Assigned items appear first in the student's queue until completed\n- Router explains the constraint in the decision event\n- Teacher sees completion status per student\n\n**Context**\n\n- Backlog ID: T058\n- Epic: E06 Adaptive Routing & Recommendation Service\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 13\n- Team: ML Engineering (Python / PyTorch)\n- Personas: teacher\n- Blocked by: T052 (Build the routing microservice (Node.js) with cached graph, TorchServe client and policy engine)"
+   "description": "Teacher assignments become hard constraints on the candidate set for the assignment window; the router still chooses order and difficulty within the constraint.\n\n**Acceptance criteria**\n\n- Assigned items appear first in the student's queue until completed\n- Router explains the constraint in the decision event\n- Teacher sees completion status per student\n\n**Context**\n\n- Backlog ID: T058\n- Epic: E06 Adaptive Routing & Recommendation Service\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 13\n- Team: ML Engineering (Python / PyTorch)\n- Personas: teacher\n- Blocked by: T052 (Build the routing microservice (Node.js) with cached graph, TorchServe client and policy engine), T225 (As a teacher, I create an assignment (chapter, item set or past paper) with a due date and follow completion)"
   },
   {
    "id": "T059",
@@ -1728,9 +1740,10 @@
    ],
    "blocked_by": [
     "T039",
-    "T059"
+    "T059",
+    "T211"
    ],
-   "description": "pgvector (HNSW) + BM25 hybrid retrieval, filtered by KC tags from the current item and student language; reranking with a small cross-encoder; prompt assembly with citations (chapter + page); retrieval evaluation harness with the 200-question set.\n\n**Acceptance criteria**\n\n- Precision@5 ≥ 0.85 on the evaluation set\n- Every tutor message that states a formula carries a textbook citation\n- Retrieval p99 < 120 ms\n\n**Context**\n\n- Backlog ID: T061\n- Epic: E07 Multi-Model LLM Gateway & Guardrails\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 7\n- Team: LLM / Applied AI\n- Blocked by: T039 (Ingest official textbooks into the RAG corpus with chapter/KC-aware chunking), T059 (Deploy LiteLLM proxy with provider routing, fallbacks, budgets and key management)\n- Blocks: T062"
+   "description": "pgvector (HNSW) + BM25 hybrid retrieval, filtered by KC tags from the current item and student language; reranking with a small cross-encoder; prompt assembly with citations (chapter + page); retrieval evaluation harness with the 200-question set.\n\n**Acceptance criteria**\n\n- Precision@5 ≥ 0.85 on the evaluation set\n- Every tutor message that states a formula carries a textbook citation\n- Retrieval p99 < 120 ms\n\n**Context**\n\n- Backlog ID: T061\n- Epic: E07 Multi-Model LLM Gateway & Guardrails\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 7\n- Team: LLM / Applied AI\n- Blocked by: T039 (Ingest official textbooks into the RAG corpus with chapter/KC-aware chunking), T059 (Deploy LiteLLM proxy with provider routing, fallbacks, budgets and key management), T211 (Provision Aurora PostgreSQL with pgvector via Terraform: Multi-AZ, RDS Proxy, backups and schema-migration tooling)\n- Blocks: T062"
   },
   {
    "id": "T062",
@@ -1755,7 +1768,7 @@
     "T060",
     "T061"
    ],
-   "description": "Synchronous judge in the tutor path: (1) extract formulas/claims from the candidate hint, (2) verify against retrieved textbook chunks and a symbolic checker (SymPy) for dimensional analysis and algebraic equivalence, (3) local LLM judge scores correctness, curriculum alignment, and 'does not reveal the answer'. Block + regenerate on fail (max 2 retries), then fall back to a template hint. LangSmith/Phoenix traces for every decision.\n\n**Acceptance criteria**\n\n- Seeded hallucination suite (300 cases) blocked ≥ 95%, false-block ≤ 3%\n- Judge adds ≤ 500 ms p95 to tutor latency\n- Every block is logged with reason and surfaced in the eval dashboard\n\n**Context**\n\n- Backlog ID: T062\n- Epic: E07 Multi-Model LLM Gateway & Guardrails\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 8\n- Team: LLM / Applied AI\n- Blocked by: T060 (Serve a local open-weights model on vLLM for the judge and low-cost paths), T061 (Build the curriculum RAG pipeline over pgvector with KC-filtered hybrid retrieval)\n- Blocks: T063, T064, T065, T066, T070"
+   "description": "Synchronous judge in the tutor path: (1) extract formulas/claims from the candidate hint, (2) verify against retrieved textbook chunks and a symbolic checker (SymPy) for dimensional analysis and algebraic equivalence, (3) local LLM judge scores correctness, curriculum alignment, and 'does not reveal the answer'. Block + regenerate on fail (max 2 retries), then fall back to a template hint. LangSmith/Phoenix traces for every decision.\n\n**Acceptance criteria**\n\n- Seeded hallucination suite (300 cases) blocked ≥ 95%, false-block ≤ 3%\n- Judge adds ≤ 500 ms p95 to tutor latency\n- Every block is logged with reason and surfaced in the eval dashboard\n\n**Context**\n\n- Backlog ID: T062\n- Epic: E07 Multi-Model LLM Gateway & Guardrails\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 8\n- Team: LLM / Applied AI\n- Blocked by: T060 (Serve a local open-weights model on vLLM for the judge and low-cost paths), T061 (Build the curriculum RAG pipeline over pgvector with KC-filtered hybrid retrieval)\n- Blocks: T063, T064, T065, T066, T070, T223"
   },
   {
    "id": "T063",
@@ -2089,7 +2102,7 @@
    "blocked_by": [
     "T012"
    ],
-   "description": "Monorepo (Turborepo) with `apps/web`, `packages/ui`, `packages/telemetry`, `packages/physics`. Server components for shells, client islands for widgets; next-intl with RTL layout switching; Keycloak PKCE flow; Storybook for the design system; bundle budget enforced in CI.\n\n**Acceptance criteria**\n\n- Initial JS ≤ 180 KB gz on the learning route\n- Switching ar ↔ fr flips layout direction with no layout shift\n- Storybook deployed per PR\n\n**Addendum changes (v2)**\n\n- jsx-a11y lint, high-contrast tokens, user-scalable text, reduced motion, CSS logical properties for RTL; Cyanotype tokens from T174\n\n**Context**\n\n- Backlog ID: T076\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 4\n- Team: Frontend (Next.js / R3F)\n- Blocked by: T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms)\n- Blocks: T077, T083, T084, T086, T102, T133, T135, T137, T162, T174"
+   "description": "Monorepo (Turborepo) with `apps/web`, `packages/ui`, `packages/telemetry`, `packages/physics`. Server components for shells, client islands for widgets; next-intl with RTL layout switching; Keycloak PKCE flow; Storybook for the design system; bundle budget enforced in CI.\n\n**Acceptance criteria**\n\n- Initial JS ≤ 180 KB gz on the learning route\n- Switching ar ↔ fr flips layout direction with no layout shift\n- Storybook deployed per PR\n\n**Addendum changes (v2)**\n\n- jsx-a11y lint, high-contrast tokens, user-scalable text, reduced motion, CSS logical properties for RTL; Cyanotype tokens from T174\n\n**Context**\n\n- Backlog ID: T076\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 4\n- Team: Frontend (Next.js / R3F)\n- Blocked by: T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms)\n- Blocks: T077, T083, T084, T086, T102, T133, T135, T137, T162, T174, T220, T224, T232"
   },
   {
    "id": "T077",
@@ -2333,9 +2346,10 @@
    ],
    "blocked_by": [
     "T076",
-    "T007"
+    "T007",
+    "T213"
    ],
-   "description": "Lighthouse CI per PR with budgets; Datadog RUM with Core Web Vitals by device class and region (Tunis vs. interior governorates); error tracking with source maps.\n\n**Acceptance criteria**\n\n- PR fails if LCP budget on learning route exceeds 2.5 s (throttled)\n- RUM dashboard segments by governorate and connection type\n- Source-mapped stack traces for 100% of prod JS errors\n\n**Context**\n\n- Backlog ID: T086\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 6\n- Team: Frontend (Next.js / R3F)\n- Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration), T007 (Roll out Datadog APM, distributed tracing, log pipeline and memory-leak watchdogs)"
+   "description": "Lighthouse CI per PR with budgets; Datadog RUM with Core Web Vitals by device class and region (Tunis vs. interior governorates); error tracking with source maps.\n\n**Acceptance criteria**\n\n- PR fails if LCP budget on learning route exceeds 2.5 s (throttled)\n- RUM dashboard segments by governorate and connection type\n- Source-mapped stack traces for 100% of prod JS errors\n\n**Context**\n\n- Backlog ID: T086\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 6\n- Team: Frontend (Next.js / R3F)\n- Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration), T007 (Roll out Datadog APM, distributed tracing, log pipeline and memory-leak watchdogs), T213 (CDN and media store: CloudFront for the web app and media, S3 media buckets with image resizing and cache rules)"
   },
   {
    "id": "T087",
@@ -2405,9 +2419,10 @@
     "apl-t089"
    ],
    "blocked_by": [
-    "T026"
+    "T026",
+    "T212"
    ],
-   "description": "Notification microservice consuming engagement events; providers: FCM web push, SMS via local Tunisian gateway (e.g., Tunisie Telecom API or aggregator), email via SES; quiet hours 22:00–07:00 Africa/Tunis; template management in Arabic/French.\n\n**Acceptance criteria**\n\n- No notification sent during quiet hours (automated test)\n- SMS delivery rate ≥ 95% with Tunisian operators in pilot\n- Unsubscribe link honoured within 1 minute\n\n**Addendum changes (v2)**\n\n- Becomes the delivery layer under the Notification Orchestrator (T152); no direct sends\n\n**Context**\n\n- Backlog ID: T089\n- Epic: E10 Learner Engagement & Gamification\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 11\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T026 (Deploy Redis Cluster (ElastiCache) and the real-time aggregation consumer)\n- Blocks: T090, T152"
+   "description": "Notification microservice consuming engagement events; providers: FCM web push, SMS via local Tunisian gateway (e.g., Tunisie Telecom API or aggregator), email via SES; quiet hours 22:00–07:00 Africa/Tunis; template management in Arabic/French.\n\n**Acceptance criteria**\n\n- No notification sent during quiet hours (automated test)\n- SMS delivery rate ≥ 95% with Tunisian operators in pilot\n- Unsubscribe link honoured within 1 minute\n\n**Addendum changes (v2)**\n\n- Becomes the delivery layer under the Notification Orchestrator (T152); no direct sends\n\n**Context**\n\n- Backlog ID: T089\n- Epic: E10 Learner Engagement & Gamification\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 11\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T026 (Deploy Redis Cluster (ElastiCache) and the real-time aggregation consumer), T212 (Domains, DNS and certificates: Route 53 zones, ACM certificates, SES sending domain with SPF, DKIM and DMARC)\n- Blocks: T090, T152"
   },
   {
    "id": "T090",
@@ -2476,9 +2491,10 @@
     "apl-t092"
    ],
    "blocked_by": [
-    "T014"
+    "T014",
+    "T211"
    ],
-   "description": "Every tenant-scoped table gets `tenant_id` + RLS policies; app sets `SET LOCAL app.tenant_id` per transaction from the JWT; service roles cannot bypass RLS; shared tables (items, KC graph) are read-only to tenants; migration tooling validates policies exist on every new table.\n\n**Acceptance criteria**\n\n- Automated test suite attempts 200 cross-tenant reads/writes via every service and all fail\n- A new table without RLS fails the migration CI check\n- RLS adds < 5% query latency on the top-20 queries\n\n**Context**\n\n- Backlog ID: T092\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 6\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T014 (Implement attribute-based authorisation middleware shared by all Node.js services)\n- Blocks: T093, T094, T095, T201"
+   "description": "Every tenant-scoped table gets `tenant_id` + RLS policies; app sets `SET LOCAL app.tenant_id` per transaction from the JWT; service roles cannot bypass RLS; shared tables (items, KC graph) are read-only to tenants; migration tooling validates policies exist on every new table.\n\n**Acceptance criteria**\n\n- Automated test suite attempts 200 cross-tenant reads/writes via every service and all fail\n- A new table without RLS fails the migration CI check\n- RLS adds < 5% query latency on the top-20 queries\n\n**Context**\n\n- Backlog ID: T092\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 6\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T014 (Implement attribute-based authorisation middleware shared by all Node.js services), T211 (Provision Aurora PostgreSQL with pgvector via Terraform: Multi-AZ, RDS Proxy, backups and schema-migration tooling)\n- Blocks: T093, T094, T095, T201, T224"
   },
   {
    "id": "T093",
@@ -2503,7 +2519,7 @@
     "T092",
     "T013"
    ],
-   "description": "Admin console: create tenant, invite school admin, bulk-import students/classes from CSV (with validation and consent-status tracking), custom subdomain, branding.\n\n**Acceptance criteria**\n\n- CSV import of 1,500 students completes with a per-row error report\n- Students receive activation + parent-consent flow automatically\n- Tenant deletion fully purges tenant data (verified by audit script)\n\n**Context**\n\n- Backlog ID: T093\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 12\n- Team: Backend (Node.js / TypeScript)\n- Personas: platform-admin\n- Blocked by: T092 (Implement PostgreSQL Row-Level Security multi-tenancy with a tenant-context connection layer), T013 (As a parent, I give verifiable consent before my under-18 child's account is activated)\n- Blocks: T098, T108, T153"
+   "description": "Admin console: create tenant, invite school admin, bulk-import students/classes from CSV (with validation and consent-status tracking), custom subdomain, branding.\n\n**Acceptance criteria**\n\n- CSV import of 1,500 students completes with a per-row error report\n- Students receive activation + parent-consent flow automatically\n- Tenant deletion fully purges tenant data (verified by audit script)\n\n**Context**\n\n- Backlog ID: T093\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 12\n- Team: Backend (Node.js / TypeScript)\n- Personas: platform-admin\n- Blocked by: T092 (Implement PostgreSQL Row-Level Security multi-tenancy with a tenant-context connection layer), T013 (As a parent, I give verifiable consent before my under-18 child's account is activated)\n- Blocks: T098, T108, T153, T228"
   },
   {
    "id": "T094",
@@ -2554,7 +2570,7 @@
     "T026",
     "T092"
    ],
-   "description": "Dashboard: KC × student heatmap from mastery API, live 'struggling now' feed from Kafka, trend per chapter, assignment completion; alerts when a student's mastery drops or disengages for 5 days; export to PDF.\n\n**Acceptance criteria**\n\n- Heatmap for a 40-student class loads < 2 s\n- Intervention alert fires within 10 minutes of the trigger condition\n- Teacher can act on an alert (message, assign remediation) in-app\n\n**Addendum changes (v2)**\n\n- Shows only accommodations the student shares; accessible table view of the heatmap\n\n**Context**\n\n- Backlog ID: T095\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 13\n- Team: Backend (Node.js / TypeScript)\n- Personas: teacher\n- Blocked by: T049 (Expose per-KC mastery estimates and attention-based explanations via an internal API), T026 (Deploy Redis Cluster (ElastiCache) and the real-time aggregation consumer), T092 (Implement PostgreSQL Row-Level Security multi-tenancy with a tenant-context connection layer)\n- Blocks: T096, T100, T146, T188, T208"
+   "description": "Dashboard: KC × student heatmap from mastery API, live 'struggling now' feed from Kafka, trend per chapter, assignment completion; alerts when a student's mastery drops or disengages for 5 days; export to PDF.\n\n**Acceptance criteria**\n\n- Heatmap for a 40-student class loads < 2 s\n- Intervention alert fires within 10 minutes of the trigger condition\n- Teacher can act on an alert (message, assign remediation) in-app\n\n**Addendum changes (v2)**\n\n- Shows only accommodations the student shares; accessible table view of the heatmap\n\n**Context**\n\n- Backlog ID: T095\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 13\n- Team: Backend (Node.js / TypeScript)\n- Personas: teacher\n- Blocked by: T049 (Expose per-KC mastery estimates and attention-based explanations via an internal API), T026 (Deploy Redis Cluster (ElastiCache) and the real-time aggregation consumer), T092 (Implement PostgreSQL Row-Level Security multi-tenancy with a tenant-context connection layer)\n- Blocks: T096, T100, T146, T188, T208, T226"
   },
   {
    "id": "T096",
@@ -2624,7 +2640,7 @@
    "blocked_by": [
     "T093"
    ],
-   "description": "Stripe Billing: products for school seat packs and B2C family plans, usage reporting of active seats, proration on seat changes, Tunisian VAT handling, invoices in French, webhook processing with idempotency, dunning emails, grace period before read-only mode.\n\n**Acceptance criteria**\n\n- Seat count change mid-term produces a correct prorated invoice (tested against Stripe test clocks)\n- Webhook replay does not double-apply\n- Tenant enters read-only mode 14 days after failed payment with warnings at 3 and 7 days\n\n**Context**\n\n- Backlog ID: T098\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 15\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T093 (As a platform admin, I onboard a school in 10 minutes: tenant, admins, classes, CSV student import)\n- Blocks: T099, T168, T195"
+   "description": "Stripe Billing: products for school seat packs and B2C family plans, usage reporting of active seats, proration on seat changes, Tunisian VAT handling, invoices in French, webhook processing with idempotency, dunning emails, grace period before read-only mode.\n\n**Acceptance criteria**\n\n- Seat count change mid-term produces a correct prorated invoice (tested against Stripe test clocks)\n- Webhook replay does not double-apply\n- Tenant enters read-only mode 14 days after failed payment with warnings at 3 and 7 days\n\n**Context**\n\n- Backlog ID: T098\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 15\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T093 (As a platform admin, I onboard a school in 10 minutes: tenant, admins, classes, CSV student import)\n- Blocks: T099, T168, T195, T228"
   },
   {
    "id": "T099",
@@ -2715,9 +2731,11 @@
    ],
    "blocked_by": [
     "T010",
-    "T076"
+    "T076",
+    "T219",
+    "T232"
    ],
-   "description": "Journeys: signup + consent, placement test, routed session with widget interaction, tutor hint ladder, offline/online assessment, battle, teacher dashboard, billing. Runs on preview envs per PR (smoke subset) and nightly (full) on real mobile device cloud.\n\n**Acceptance criteria**\n\n- Full suite < 25 minutes, flake rate < 2%\n- Smoke subset blocks merge\n- Runs on Chrome, Safari iOS and Android WebView\n\n**Addendum changes (v2)**\n\n- Adds keyboard-only and screen-reader smoke flows in both languages\n\n**Context**\n\n- Backlog ID: T102\n- Epic: E12 Observability, Quality & Release Readiness\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 8\n- Team: QA / SDET\n- Blocked by: T010 (Provision ephemeral preview environments per pull request), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)"
+   "description": "Journeys: signup + consent, placement test, routed session with widget interaction, tutor hint ladder, offline/online assessment, battle, teacher dashboard, billing. Runs on preview envs per PR (smoke subset) and nightly (full) on real mobile device cloud.\n\n**Acceptance criteria**\n\n- Full suite < 25 minutes, flake rate < 2%\n- Smoke subset blocks merge\n- Runs on Chrome, Safari iOS and Android WebView\n\n**Addendum changes (v2)**\n\n- Adds keyboard-only and screen-reader smoke flows in both languages\n\n**Context**\n\n- Backlog ID: T102\n- Epic: E12 Observability, Quality & Release Readiness\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 8\n- Team: QA / SDET\n- Blocked by: T010 (Provision ephemeral preview environments per pull request), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration), T219 (Synthetic learner data generator for development, preview environments, tests and load tests), T232 (UI string localisation workflow: message catalogs, translation management, native-speaker review, pseudo-localisation and RTL checks in CI)"
   },
   {
    "id": "T103",
@@ -2765,9 +2783,10 @@
     "T101",
     "T052",
     "T084",
-    "T025"
+    "T025",
+    "T219"
    ],
-   "description": "k6 scenarios modelled on pilot traffic shapes (evening peak, exam eve), including widgets, tutor, routing and battles; executed against a prod-sized staging; Karpenter scaling, Kafka lag, TorchServe and Redis observed; capacity report and tuning.\n\n**Acceptance criteria**\n\n- All SLOs met for 60 minutes at target load\n- Auto-scaling reaches steady state < 5 minutes after the ramp\n- Capacity model documents headroom and cost at 100k concurrent\n\n**Addendum changes (v2)**\n\n- Includes read-aloud streaming and notification fan-out in the Bac-eve load\n\n**Context**\n\n- Backlog ID: T104\n- Epic: E12 Observability, Quality & Release Readiness\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 14\n- Team: QA / SDET\n- Blocked by: T101 (Define SLOs and error budgets per service and wire burn-rate alerting), T052 (Build the routing microservice (Node.js) with cached graph, TorchServe client and policy engine), T084 (As a student, I challenge a peer to a real-time 5-question physics battle), T025 (Build the telemetry ingestion service (HTTP → Kafka) with validation and backpressure)\n- Blocks: T105, T109, T199"
+   "description": "k6 scenarios modelled on pilot traffic shapes (evening peak, exam eve), including widgets, tutor, routing and battles; executed against a prod-sized staging; Karpenter scaling, Kafka lag, TorchServe and Redis observed; capacity report and tuning.\n\n**Acceptance criteria**\n\n- All SLOs met for 60 minutes at target load\n- Auto-scaling reaches steady state < 5 minutes after the ramp\n- Capacity model documents headroom and cost at 100k concurrent\n\n**Addendum changes (v2)**\n\n- Includes read-aloud streaming and notification fan-out in the Bac-eve load\n\n**Context**\n\n- Backlog ID: T104\n- Epic: E12 Observability, Quality & Release Readiness\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 14\n- Team: QA / SDET\n- Blocked by: T101 (Define SLOs and error budgets per service and wire burn-rate alerting), T052 (Build the routing microservice (Node.js) with cached graph, TorchServe client and policy engine), T084 (As a student, I challenge a peer to a real-time 5-question physics battle), T025 (Build the telemetry ingestion service (HTTP → Kafka) with validation and backpressure), T219 (Synthetic learner data generator for development, preview environments, tests and load tests)\n- Blocks: T105, T109, T199"
   },
   {
    "id": "T105",
@@ -2837,7 +2856,7 @@
    "blocked_by": [
     "T101"
    ],
-   "description": "Runbooks for top-20 alerts; PagerDuty rotation across backend/platform/ML; incident severity matrix; postmortem template; status page.\n\n**Acceptance criteria**\n\n- Every paging alert links to a runbook\n- Two tabletop incident exercises completed\n- Public status page live\n\n**Context**\n\n- Backlog ID: T107\n- Epic: E12 Observability, Quality & Release Readiness\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 16\n- Team: QA / SDET\n- Blocked by: T101 (Define SLOs and error budgets per service and wire burn-rate alerting)\n- Blocks: T109, T206"
+   "description": "Runbooks for top-20 alerts; PagerDuty rotation across backend/platform/ML; incident severity matrix; postmortem template; status page.\n\n**Acceptance criteria**\n\n- Every paging alert links to a runbook\n- Two tabletop incident exercises completed\n- Public status page live\n\n**Context**\n\n- Backlog ID: T107\n- Epic: E12 Observability, Quality & Release Readiness\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 16\n- Team: QA / SDET\n- Blocked by: T101 (Define SLOs and error budgets per service and wire burn-rate alerting)\n- Blocks: T109, T206, T216"
   },
   {
    "id": "T108",
@@ -2861,9 +2880,11 @@
     "T052",
     "T069",
     "T079",
-    "T093"
+    "T093",
+    "T223",
+    "T236"
    ],
-   "description": "Pilot plan, success metrics (learning gain, retention, CSAT, SLOs), feedback loops with teachers, weekly triage; exit criteria to open launch.\n\n**Acceptance criteria**\n\n- Pilot exit criteria met or explicit go/no-go decision documented\n- All Sev-1/2 pilot bugs closed\n- Teacher and student CSAT ≥ 4.0\n\n**Context**\n\n- Backlog ID: T108\n- Epic: E12 Observability, Quality & Release Readiness\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 12\n- Team: QA / SDET\n- Blocked by: T052 (Build the routing microservice (Node.js) with cached graph, TorchServe client and policy engine), T069 (As a student, I chat with a streaming tutor beside the item, in Arabic or French, with LaTeX rendering), T079 (As a student, I explore mechanics sandboxes: projectile motion, inclined plane, pendulum, collisions — with draggable vectors), T093 (As a platform admin, I onboard a school in 10 minutes: tenant, admins, classes, CSV student import)\n- Blocks: T110, T130, T200"
+   "description": "Pilot plan, success metrics (learning gain, retention, CSAT, SLOs), feedback loops with teachers, weekly triage; exit criteria to open launch.\n\n**Acceptance criteria**\n\n- Pilot exit criteria met or explicit go/no-go decision documented\n- All Sev-1/2 pilot bugs closed\n- Teacher and student CSAT ≥ 4.0\n\n**Addendum changes (v2)**\n\n- The pilot starts only once the tutor safeguarding layer (T223) and the vendor DPAs (T236) are in place\n\n**Context**\n\n- Backlog ID: T108\n- Epic: E12 Observability, Quality & Release Readiness\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 12\n- Team: QA / SDET\n- Blocked by: T052 (Build the routing microservice (Node.js) with cached graph, TorchServe client and policy engine), T069 (As a student, I chat with a streaming tutor beside the item, in Arabic or French, with LaTeX rendering), T079 (As a student, I explore mechanics sandboxes: projectile motion, inclined plane, pendulum, collisions — with draggable vectors), T093 (As a platform admin, I onboard a school in 10 minutes: tenant, admins, classes, CSV student import), T223 (Safeguarding and content-safety layer in the tutor: detect distress, abuse and off-topic requests; respond safely and escalate), T236 (Vendor and sub-processor agreements: DPAs with LLM providers (zero data retention, no training), AWS, Snowflake, Datadog; public sub-processor list)\n- Blocks: T110, T130, T200"
   },
   {
    "id": "T109",
@@ -2913,9 +2934,10 @@
     "T109",
     "T150",
     "T207",
-    "T169"
+    "T169",
+    "T216"
    ],
-   "description": "Final security review, DPIA sign-off check, go-live checklist, phased rollout by governorate, daily hypercare standups, success metrics dashboard.\n\n**Acceptance criteria**\n\n- Go-live checklist 100% complete and signed\n- No Sev-1 open at day 30\n- Hypercare report delivered to leadership\n\n**Addendum changes (v2)**\n\n- Go-live also requires the accessibility gate (T150), legal documents (T207) and store compliance (T169)\n\n**Context**\n\n- Backlog ID: T110\n- Epic: E12 Observability, Quality & Release Readiness\n- Phase: Phase 5 — Launch\n- Target sprint: APL Sprint 18\n- Team: QA / SDET\n- Blocked by: T108 (Run the closed pilot with 3 schools (≈ 2,000 students) and triage findings), T020 (Commission third-party penetration test and remediate findings), T106 (Implement backups and disaster recovery: cross-region replication, RPO 15 min / RTO 1 h, quarterly drill), T109 (Prepare the exam-season war room: freeze window, scaling pre-warm, comms plan), T150 (Co-design and audits with students with disabilities, through Tunisian disability associations; publish the accessibility statement), T207 (Legal documents: terms of service, privacy policy, cookie policy, school data-processing agreement, content licensing register), T169 (Privacy manifest, App Store privacy labels, Play Data safety form, age rating, review of the minors' consent flow)\n- Blocks: T131"
+   "description": "Final security review, DPIA sign-off check, go-live checklist, phased rollout by governorate, daily hypercare standups, success metrics dashboard.\n\n**Acceptance criteria**\n\n- Go-live checklist 100% complete and signed\n- No Sev-1 open at day 30\n- Hypercare report delivered to leadership\n\n**Addendum changes (v2)**\n\n- Go-live also requires the accessibility gate (T150), legal documents (T207), store compliance (T169) and the data breach response plan (T216)\n\n**Context**\n\n- Backlog ID: T110\n- Epic: E12 Observability, Quality & Release Readiness\n- Phase: Phase 5 — Launch\n- Target sprint: APL Sprint 18\n- Team: QA / SDET\n- Blocked by: T108 (Run the closed pilot with 3 schools (≈ 2,000 students) and triage findings), T020 (Commission third-party penetration test and remediate findings), T106 (Implement backups and disaster recovery: cross-region replication, RPO 15 min / RTO 1 h, quarterly drill), T109 (Prepare the exam-season war room: freeze window, scaling pre-warm, comms plan), T150 (Co-design and audits with students with disabilities, through Tunisian disability associations; publish the accessibility statement), T207 (Legal documents: terms of service, privacy policy, cookie policy, school data-processing agreement, content licensing register), T169 (Privacy manifest, App Store privacy labels, Play Data safety form, age rating, review of the minors' consent flow), T216 (Data breach response plan: triage, INPDP notification, communication to schools and parents, yearly drill)\n- Blocks: T131, T233"
   },
   {
    "id": "T111",
@@ -2963,9 +2985,10 @@
    ],
    "blocked_by": [
     "T111",
-    "T037"
+    "T037",
+    "T235"
    ],
-   "description": "Digitise and tag past Bac Mathématiques papers, author new items to reach ≥ 8 items per KC with a difficulty spread, bilingual where the programme is bilingual; double-tag a 10% sample.\n\n**Acceptance criteria**\n\n- ≥ 5000 published items; no KC with fewer than 8\n- Inter-rater tagging agreement κ ≥ 0.75 on the sample\n- Provenance (year, track) on every past-exam item\n\n**Context**\n\n- Backlog ID: T112\n- Epic: E13 Subject Expansion: Maths, Sciences, Technique, Économie & Gestion\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 11\n- Team: Product + Curriculum\n- Blocked by: T111 (Mathématiques: encode the KC graph for all relevant Bac tracks), T037 (As a teacher-author, I create, preview and submit items for review in the authoring tool)\n- Blocks: T128, T129, T130"
+   "description": "Digitise and tag past Bac Mathématiques papers, author new items to reach ≥ 8 items per KC with a difficulty spread, bilingual where the programme is bilingual; double-tag a 10% sample.\n\n**Acceptance criteria**\n\n- ≥ 5000 published items; no KC with fewer than 8\n- Inter-rater tagging agreement κ ≥ 0.75 on the sample\n- Provenance (year, track) on every past-exam item\n\n**Context**\n\n- Backlog ID: T112\n- Epic: E13 Subject Expansion: Maths, Sciences, Technique, Économie & Gestion\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 11\n- Team: Product + Curriculum\n- Blocked by: T111 (Mathématiques: encode the KC graph for all relevant Bac tracks), T037 (As a teacher-author, I create, preview and submit items for review in the authoring tool), T235 (Content production operations: author and reviewer pool, contracts and rights, throughput tracking, translation vendors)\n- Blocks: T128, T129, T130"
   },
   {
    "id": "T113",
@@ -3528,9 +3551,10 @@
    ],
    "blocked_by": [
     "T012",
-    "T015"
+    "T015",
+    "T214"
    ],
-   "description": "Build the Learner Comfort Profile service: versioned preferences (fonts, spacing, text size, theme, read-aloud, motion) and accommodation flags (time multiplier, assistive modes), exposed through an API, synced across devices and cached for offline use.\n\n**Acceptance criteria**\n\n- The profile reaches a new device within 5 seconds of sign-in and applies before first paint\n- Accommodation flags live in a separate schema under their own KMS key; every read is audited\n- A teacher token cannot read a flag the student has not shared (automated test)\n\n**Context**\n\n- Backlog ID: T134\n- Epic: E14 Inclusive Learning & Accessibility\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 5\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms), T015 (Encryption at rest and in transit: KMS CMKs, TLS everywhere, field-level encryption for PII)\n- Blocks: T135, T145, T148"
+   "description": "Build the Learner Comfort Profile service: versioned preferences (fonts, spacing, text size, theme, read-aloud, motion) and accommodation flags (time multiplier, assistive modes), exposed through an API, synced across devices and cached for offline use.\n\n**Acceptance criteria**\n\n- The profile reaches a new device within 5 seconds of sign-in and applies before first paint\n- Accommodation flags live in a separate schema under their own KMS key; every read is audited\n- A teacher token cannot read a flag the student has not shared (automated test)\n\n**Context**\n\n- Backlog ID: T134\n- Epic: E14 Inclusive Learning & Accessibility\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 5\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms), T015 (Encryption at rest and in transit: KMS CMKs, TLS everywhere, field-level encryption for PII), T214 (Backend service template and API contract: service skeleton, OpenAPI 3.1 specs, versioning and deprecation policy)\n- Blocks: T135, T145, T148"
   },
   {
    "id": "T135",
@@ -3829,7 +3853,7 @@
     "T095",
     "T145"
    ],
-   "description": "Teachers see the accommodations each student chose to share and can assign accessible versions of sets.\n\n**Acceptance criteria**\n\n- Unshared accommodations are never visible (automated test)\n- Assigned sets respect each student's multiplier and modes\n- Every view of accommodations is written to the audit log\n\n**Context**\n\n- Backlog ID: T146\n- Epic: E14 Inclusive Learning & Accessibility\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 13\n- Team: Frontend (Next.js / R3F)\n- Personas: teacher\n- Blocked by: T095 (As a teacher, I see real-time mastery heatmaps for my cohort and get intervention alerts), T145 (As a student with an official accommodation, my time multiplier applies to timed items, duels and the mock Bac)"
+   "description": "Teachers see the accommodations each student chose to share and can assign accessible versions of sets.\n\n**Acceptance criteria**\n\n- Unshared accommodations are never visible (automated test)\n- Assigned sets respect each student's multiplier and modes\n- Every view of accommodations is written to the audit log\n\n**Context**\n\n- Backlog ID: T146\n- Epic: E14 Inclusive Learning & Accessibility\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 13\n- Team: Frontend (Next.js / R3F)\n- Personas: teacher\n- Blocked by: T095 (As a teacher, I see real-time mastery heatmaps for my cohort and get intervention alerts), T145 (As a student with an official accommodation, my time multiplier applies to timed items, duels and the mock Bac)\n- Blocks: T226"
   },
   {
    "id": "T147",
@@ -3974,7 +3998,7 @@
    "blocked_by": [
     "T089"
    ],
-   "description": "One Notification Orchestrator above the delivery layer (T089): priority classes (essential, useful, optional), per-user daily budget, quiet hours, class timetable, Focus state, de-duplication and digests.\n\n**Acceptance criteria**\n\n- No service can call the delivery layer (T089) directly; network policy enforces it\n- A message due during quiet hours, class hours or Focus is deferred to the next digest, never dropped silently\n- The daily budget holds under replay and retries (idempotency keys)\n\n**Context**\n\n- Backlog ID: T152\n- Epic: E15 Focus Mode & Smart Notifications\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 11\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T089 (Build the notification service: push (web/FCM), SMS, email with quiet hours and per-tenant templates)\n- Blocks: T153, T154, T156, T157, T158, T160, T161, T196, T210"
+   "description": "One Notification Orchestrator above the delivery layer (T089): priority classes (essential, useful, optional), per-user daily budget, quiet hours, class timetable, Focus state, de-duplication and digests.\n\n**Acceptance criteria**\n\n- No service can call the delivery layer (T089) directly; network policy enforces it\n- A message due during quiet hours, class hours or Focus is deferred to the next digest, never dropped silently\n- The daily budget holds under replay and retries (idempotency keys)\n\n**Context**\n\n- Backlog ID: T152\n- Epic: E15 Focus Mode & Smart Notifications\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 11\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T089 (Build the notification service: push (web/FCM), SMS, email with quiet hours and per-tenant templates)\n- Blocks: T153, T154, T156, T157, T158, T160, T161, T196, T210, T225, T227, T229"
   },
   {
    "id": "T153",
@@ -4240,7 +4264,7 @@
     "T162",
     "T012"
    ],
-   "description": "iOS learner app shell in SwiftUI: Keycloak sign-in, navigation, Cyanotype tokens with Dynamic Type, and an offline store that syncs answers.\n\n**Acceptance criteria**\n\n- Sign-in through Keycloak OIDC with PKCE\n- Cyanotype tokens and Dynamic Type applied on every screen\n- The offline store syncs answers when the device is back online\n\n**Context**\n\n- Backlog ID: T163\n- Epic: E16 Native Apps & Store Compliance\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 8\n- Team: Mobile (iOS / Android)\n- Blocked by: T162 (Confirm native learner apps versus PWA and the code-sharing strategy; write the ADR), T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms)\n- Blocks: T165, T166, T171, T172, T173"
+   "description": "iOS learner app shell in SwiftUI: Keycloak sign-in, navigation, Cyanotype tokens with Dynamic Type, and an offline store that syncs answers.\n\n**Acceptance criteria**\n\n- Sign-in through Keycloak OIDC with PKCE\n- Cyanotype tokens and Dynamic Type applied on every screen\n- The offline store syncs answers when the device is back online\n\n**Context**\n\n- Backlog ID: T163\n- Epic: E16 Native Apps & Store Compliance\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 8\n- Team: Mobile (iOS / Android)\n- Blocked by: T162 (Confirm native learner apps versus PWA and the code-sharing strategy; write the ADR), T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms)\n- Blocks: T165, T166, T171, T172, T173, T229, T230"
   },
   {
    "id": "T164",
@@ -4263,7 +4287,7 @@
    "blocked_by": [
     "T162"
    ],
-   "description": "Android learner app shell in Kotlin and Jetpack Compose: sign-in, navigation, Cyanotype tokens with font scaling, and an offline store.\n\n**Acceptance criteria**\n\n- Sign-in, tokens and font scaling at parity with iOS\n- Runs smoothly on 2 GB RAM Android devices\n- Offline sync at parity with iOS\n\n**Context**\n\n- Backlog ID: T164\n- Epic: E16 Native Apps & Store Compliance\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 9\n- Team: Mobile (iOS / Android)\n- Blocked by: T162 (Confirm native learner apps versus PWA and the code-sharing strategy; write the ADR)\n- Blocks: T173"
+   "description": "Android learner app shell in Kotlin and Jetpack Compose: sign-in, navigation, Cyanotype tokens with font scaling, and an offline store.\n\n**Acceptance criteria**\n\n- Sign-in, tokens and font scaling at parity with iOS\n- Runs smoothly on 2 GB RAM Android devices\n- Offline sync at parity with iOS\n\n**Context**\n\n- Backlog ID: T164\n- Epic: E16 Native Apps & Store Compliance\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 9\n- Team: Mobile (iOS / Android)\n- Blocked by: T162 (Confirm native learner apps versus PWA and the code-sharing strategy; write the ADR)\n- Blocks: T173, T229, T230"
   },
   {
    "id": "T165",
@@ -4482,9 +4506,11 @@
    ],
    "blocked_by": [
     "T163",
-    "T164"
+    "T164",
+    "T229",
+    "T230"
    ],
-   "description": "Store release pipeline: automated builds to TestFlight and Play internal testing with fastlane, a store review checklist, and staged rollout gated on crash rate.\n\n**Acceptance criteria**\n\n- Automated builds reach TestFlight and Play internal testing on each release branch\n- The store review checklist is completed before every submission\n- Staged rollout with a crash-rate gate\n\n**Context**\n\n- Backlog ID: T173\n- Epic: E16 Native Apps & Store Compliance\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 16\n- Team: Mobile (iOS / Android)\n- Blocked by: T163 (iOS learner app shell (SwiftUI): Keycloak sign-in, navigation, Cyanotype tokens, offline store), T164 (Android learner app shell (Kotlin, Compose): sign-in, navigation, tokens, offline store)\n- Blocks: T197"
+   "description": "Store release pipeline: automated builds to TestFlight and Play internal testing with fastlane, a store review checklist, and staged rollout gated on crash rate.\n\n**Acceptance criteria**\n\n- Automated builds reach TestFlight and Play internal testing on each release branch\n- The store review checklist is completed before every submission\n- Staged rollout with a crash-rate gate\n\n**Context**\n\n- Backlog ID: T173\n- Epic: E16 Native Apps & Store Compliance\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 16\n- Team: Mobile (iOS / Android)\n- Blocked by: T163 (iOS learner app shell (SwiftUI): Keycloak sign-in, navigation, Cyanotype tokens, offline store), T164 (Android learner app shell (Kotlin, Compose): sign-in, navigation, tokens, offline store), T229 (Native push notifications (APNs, FCM) and universal links / app links with in-app deep-link routing), T230 (Mobile quality: crash reporting, app performance monitoring and native UI tests on a device farm)\n- Blocks: T197"
   },
   {
    "id": "T174",
@@ -4505,9 +4531,10 @@
     "apl-t174"
    ],
    "blocked_by": [
-    "T076"
+    "T076",
+    "T231"
    ],
-   "description": "Implement the Cyanotype design system from the design canvas (board 00): tokens for colour, type, spacing and states; components (buttons, chips, concept-state nodes, hint ladder, confidence scale, Bac countdown ruler); Storybook; RTL through CSS logical properties.\n\n**Acceptance criteria**\n\n- Tokens published as a package used by web and native apps\n- Every component documented in Storybook in FR and AR\n- Visual regression tests cover every component\n\n**Context**\n\n- Backlog ID: T174\n- Epic: E17 Learner Experience & Cyanotype Design System\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 4\n- Team: Frontend (Next.js / R3F)\n- Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)\n- Blocks: T133, T193, T204, T209"
+   "description": "Implement the Cyanotype design system from the design canvas (board 00): tokens for colour, type, spacing and states; components (buttons, chips, concept-state nodes, hint ladder, confidence scale, Bac countdown ruler); Storybook; RTL through CSS logical properties.\n\n**Acceptance criteria**\n\n- Tokens published as a package used by web and native apps\n- Every component documented in Storybook in FR and AR\n- Visual regression tests cover every component\n\n**Context**\n\n- Backlog ID: T174\n- Epic: E17 Learner Experience & Cyanotype Design System\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 4\n- Team: Frontend (Next.js / R3F)\n- Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration), T231 (Brand identity: logo, eight-point star mark, app icon, illustration style and brand guidelines in FR and AR)\n- Blocks: T133, T193, T204, T209"
   },
   {
    "id": "T175",
@@ -4530,9 +4557,11 @@
    ],
    "blocked_by": [
     "T013",
-    "T043"
+    "T043",
+    "T220",
+    "T221"
    ],
-   "description": "Onboarding flow from screen 01: choose the Bac section, capture a parent's phone for consent, then take the 12-question adaptive placement test (T043).\n\n**Acceptance criteria**\n\n- The section choice drives subjects and chapters\n- Under-18 accounts wait for parental consent before any content\n- The 12-item placement returns a first estimate per chapter\n\n**Context**\n\n- Backlog ID: T175\n- Epic: E17 Learner Experience & Cyanotype Design System\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 8\n- Team: Frontend (Next.js / R3F)\n- Personas: student\n- Blocked by: T013 (As a parent, I give verifiable consent before my under-18 child's account is activated), T043 (Implement IRT cold-start estimator and blended handoff to SAINT+)"
+   "description": "Onboarding flow from screen 01: choose the Bac section, capture a parent's phone for consent, then take the 12-question adaptive placement test (T043).\n\n**Acceptance criteria**\n\n- The section choice drives subjects and chapters\n- Under-18 accounts wait for parental consent before any content\n- The 12-item placement returns a first estimate per chapter\n\n**Context**\n\n- Backlog ID: T175\n- Epic: E17 Learner Experience & Cyanotype Design System\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 8\n- Team: Frontend (Next.js / R3F)\n- Personas: student\n- Blocked by: T013 (As a parent, I give verifiable consent before my under-18 child's account is activated), T043 (Implement IRT cold-start estimator and blended handoff to SAINT+), T220 (Item player: render and capture every item type (MCQ, numeric with units, multi-step derivation, ordering, interactive widget) on web and in the native bridge), T221 (Answer evaluation service: server-side grading of every item type with numeric tolerance, units, symbolic equivalence and partial credit)"
   },
   {
    "id": "T176",
@@ -4606,9 +4635,11 @@
    ],
    "blocked_by": [
     "T069",
-    "T079"
+    "T079",
+    "T220",
+    "T221"
    ],
-   "description": "The Lab from screen 04: item, simulation, confidence scale 1–5 and the Socratic tutor panel with its hint ladder, in one responsive view.\n\n**Acceptance criteria**\n\n- Item, simulation, confidence scale and tutor panel in one responsive view\n- Confidence 1–5 is captured before submission\n- Works offline (T083) and right to left\n\n**Context**\n\n- Backlog ID: T178\n- Epic: E17 Learner Experience & Cyanotype Design System\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 10\n- Team: Frontend (Next.js / R3F)\n- Personas: student\n- Blocked by: T069 (As a student, I chat with a streaming tutor beside the item, in Arabic or French, with LaTeX rendering), T079 (As a student, I explore mechanics sandboxes: projectile motion, inclined plane, pendulum, collisions — with draggable vectors)\n- Blocks: T183"
+   "description": "The Lab from screen 04: item, simulation, confidence scale 1–5 and the Socratic tutor panel with its hint ladder, in one responsive view.\n\n**Acceptance criteria**\n\n- Item, simulation, confidence scale and tutor panel in one responsive view\n- Confidence 1–5 is captured before submission\n- Works offline (T083) and right to left\n\n**Context**\n\n- Backlog ID: T178\n- Epic: E17 Learner Experience & Cyanotype Design System\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 10\n- Team: Frontend (Next.js / R3F)\n- Personas: student\n- Blocked by: T069 (As a student, I chat with a streaming tutor beside the item, in Arabic or French, with LaTeX rendering), T079 (As a student, I explore mechanics sandboxes: projectile motion, inclined plane, pendulum, collisions — with draggable vectors), T220 (Item player: render and capture every item type (MCQ, numeric with units, multi-step derivation, ordering, interactive widget) on web and in the native bridge), T221 (Answer evaluation service: server-side grading of every item type with numeric tolerance, units, symbolic equivalence and partial credit)\n- Blocks: T183"
   },
   {
    "id": "T179",
@@ -4778,9 +4809,10 @@
    ],
    "blocked_by": [
     "T083",
-    "T145"
+    "T145",
+    "T220"
    ],
-   "description": "Mock Bac (Bac blanc) mode: a full paper in the official structure and timing per section and subject, resilient to connection loss, with the attested time multiplier applied.\n\n**Acceptance criteria**\n\n- Official timing and structure per section and subject\n- Survives a 5-minute connection loss without losing answers\n- The attested time multiplier applies\n\n**Context**\n\n- Backlog ID: T185\n- Epic: E18 Bac Simulation, Annales & Grade Prediction\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 14\n- Team: Frontend (Next.js / R3F)\n- Personas: student\n- Blocked by: T083 (As a student, I complete an assessment during a 5-minute internet outage and nothing is lost), T145 (As a student with an official accommodation, my time multiplier applies to timed items, duels and the mock Bac)"
+   "description": "Mock Bac (Bac blanc) mode: a full paper in the official structure and timing per section and subject, resilient to connection loss, with the attested time multiplier applied.\n\n**Acceptance criteria**\n\n- Official timing and structure per section and subject\n- Survives a 5-minute connection loss without losing answers\n- The attested time multiplier applies\n- Tutor, hints and the concept map are switched off during a graded mock Bac\n\n**Context**\n\n- Backlog ID: T185\n- Epic: E18 Bac Simulation, Annales & Grade Prediction\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 14\n- Team: Frontend (Next.js / R3F)\n- Personas: student\n- Blocked by: T083 (As a student, I complete an assessment during a 5-minute internet outage and nothing is lost), T145 (As a student with an official accommodation, my time multiplier applies to timed items, duels and the mock Bac), T220 (Item player: render and capture every item type (MCQ, numeric with units, multi-step derivation, ordering, interactive widget) on web and in the native bridge)"
   },
   {
    "id": "T186",
@@ -4802,9 +4834,10 @@
     "apl-t186"
    ],
    "blocked_by": [
-    "T063"
+    "T063",
+    "T221"
    ],
-   "description": "Grade mock Bac papers automatically: numeric and symbolic answers through the verifiers (T063), open answers through rubric scoring, with teacher override and a score report per exercise.\n\n**Acceptance criteria**\n\n- Numeric and symbolic answers graded automatically by the verifiers\n- Open answers scored by rubric, with teacher override\n- A score report per exercise within 1 minute of submission\n\n**Context**\n\n- Backlog ID: T186\n- Epic: E18 Bac Simulation, Annales & Grade Prediction\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 14\n- Team: LLM / Applied AI\n- Blocked by: T063 (Refactor the judge into a verifier plug-in interface with symbolic and rubric implementations)\n- Blocks: T187, T188"
+   "description": "Grade mock Bac papers automatically: numeric and symbolic answers through the verifiers (T063), open answers through rubric scoring, with teacher override and a score report per exercise.\n\n**Acceptance criteria**\n\n- Numeric and symbolic answers graded automatically by the verifiers\n- Open answers scored by rubric, with teacher override\n- A score report per exercise within 1 minute of submission\n\n**Context**\n\n- Backlog ID: T186\n- Epic: E18 Bac Simulation, Annales & Grade Prediction\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 14\n- Team: LLM / Applied AI\n- Blocked by: T063 (Refactor the judge into a verifier plug-in interface with symbolic and rubric implementations), T221 (Answer evaluation service: server-side grading of every item type with numeric tolerance, units, symbolic equivalence and partial credit)\n- Blocks: T187, T188"
   },
   {
    "id": "T187",
@@ -4851,9 +4884,10 @@
    ],
    "blocked_by": [
     "T095",
-    "T186"
+    "T186",
+    "T225"
    ],
-   "description": "Teachers schedule a mock Bac for a class, then see the score distribution and an error analysis per question, linked to misconceptions.\n\n**Acceptance criteria**\n\n- A teacher schedules a mock Bac for a class in one step\n- Distribution and per-question error analysis appear after grading\n- Accommodations are respected per student\n\n**Context**\n\n- Backlog ID: T188\n- Epic: E18 Bac Simulation, Annales & Grade Prediction\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 15\n- Team: Frontend (Next.js / R3F)\n- Personas: teacher\n- Blocked by: T095 (As a teacher, I see real-time mastery heatmaps for my cohort and get intervention alerts), T186 (Auto-grading of mock Bac papers: symbolic verifiers for maths and physics, rubric scoring for open answers with teacher override)"
+   "description": "Teachers schedule a mock Bac for a class, then see the score distribution and an error analysis per question, linked to misconceptions.\n\n**Acceptance criteria**\n\n- A teacher schedules a mock Bac for a class in one step\n- Distribution and per-question error analysis appear after grading\n- Accommodations are respected per student\n\n**Context**\n\n- Backlog ID: T188\n- Epic: E18 Bac Simulation, Annales & Grade Prediction\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 15\n- Team: Frontend (Next.js / R3F)\n- Personas: teacher\n- Blocked by: T095 (As a teacher, I see real-time mastery heatmaps for my cohort and get intervention alerts), T186 (Auto-grading of mock Bac papers: symbolic verifiers for maths and physics, rubric scoring for open answers with teacher override), T225 (As a teacher, I create an assignment (chapter, item set or past paper) with a due date and follow completion)"
   },
   {
    "id": "T189",
@@ -4971,9 +5005,10 @@
     "apl-t193"
    ],
    "blocked_by": [
-    "T174"
+    "T174",
+    "T231"
    ],
-   "description": "Bilingual marketing site in FR and AR built with the Cyanotype design system: product pages, pricing, school demo request, SEO, no tracking before consent.\n\n**Acceptance criteria**\n\n- Site in FR and AR with RTL; Lighthouse SEO and accessibility scores of at least 95\n- Pricing and school demo request forms\n- No tracking before consent\n\n**Context**\n\n- Backlog ID: T193\n- Epic: E19 Product Analytics, Growth & Go-to-Market\n- Phase: Phase 5 — Launch\n- Target sprint: APL Sprint 13\n- Team: Growth & Marketing\n- Personas: visitor\n- Blocked by: T174 (Cyanotype design system in code: tokens, components (buttons, chips, concept states, hint ladder, confidence scale), Storybook, RTL)"
+   "description": "Bilingual marketing site in FR and AR built with the Cyanotype design system: product pages, pricing, school demo request, SEO, no tracking before consent.\n\n**Acceptance criteria**\n\n- Site in FR and AR with RTL; Lighthouse SEO and accessibility scores of at least 95\n- Pricing and school demo request forms\n- No tracking before consent\n\n**Context**\n\n- Backlog ID: T193\n- Epic: E19 Product Analytics, Growth & Go-to-Market\n- Phase: Phase 5 — Launch\n- Target sprint: APL Sprint 13\n- Team: Growth & Marketing\n- Personas: visitor\n- Blocked by: T174 (Cyanotype design system in code: tokens, components (buttons, chips, concept states, hint ladder, confidence scale), Storybook, RTL), T231 (Brand identity: logo, eight-point star mark, app icon, illustration style and brand guidelines in FR and AR)"
   },
   {
    "id": "T194",
@@ -5065,9 +5100,10 @@
     "apl-t197"
    ],
    "blocked_by": [
-    "T173"
+    "T173",
+    "T231"
    ],
-   "description": "Store listings for both apps: screenshots, previews and keywords in FR, AR and EN, plus a ratings-prompt policy.\n\n**Acceptance criteria**\n\n- Listings in FR, AR and EN with screenshots and previews\n- Ratings prompt only after positive moments, at most once per 90 days\n- Listings reviewed against store guidelines\n\n**Context**\n\n- Backlog ID: T197\n- Epic: E19 Product Analytics, Growth & Go-to-Market\n- Phase: Phase 5 — Launch\n- Target sprint: APL Sprint 17\n- Team: Growth & Marketing\n- Blocked by: T173 (Store release pipeline: TestFlight and Play internal testing, fastlane, review checklist, staged rollout)"
+   "description": "Store listings for both apps: screenshots, previews and keywords in FR, AR and EN, plus a ratings-prompt policy.\n\n**Acceptance criteria**\n\n- Listings in FR, AR and EN with screenshots and previews\n- Ratings prompt only after positive moments, at most once per 90 days\n- Listings reviewed against store guidelines\n\n**Context**\n\n- Backlog ID: T197\n- Epic: E19 Product Analytics, Growth & Go-to-Market\n- Phase: Phase 5 — Launch\n- Target sprint: APL Sprint 17\n- Team: Growth & Marketing\n- Blocked by: T173 (Store release pipeline: TestFlight and Play internal testing, fastlane, review checklist, staged rollout), T231 (Brand identity: logo, eight-point star mark, app icon, illustration style and brand guidelines in FR and AR)"
   },
   {
    "id": "T198",
@@ -5300,9 +5336,10 @@
     "apl-t207"
    ],
    "blocked_by": [
-    "T017"
+    "T017",
+    "T236"
    ],
-   "description": "Legal documents in FR and AR: terms of service, privacy policy, cookie policy, the school data-processing agreement template, and a register of content licences (official manuals, past papers).\n\n**Acceptance criteria**\n\n- Terms, privacy policy and cookie policy published in FR and AR\n- School DPA template approved by counsel\n- Content licensing register maintained (CNP manuals, past papers)\n\n**Context**\n\n- Backlog ID: T207\n- Epic: E20 Support, Back-office & Legal\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 10\n- Team: Legal / DPO\n- Blocked by: T017 (Produce the Data Protection Impact Assessment and INPDP declaration file)\n- Blocks: T110"
+   "description": "Legal documents in FR and AR: terms of service, privacy policy, cookie policy, the school data-processing agreement template, and a register of content licences (official manuals, past papers).\n\n**Acceptance criteria**\n\n- Terms, privacy policy and cookie policy published in FR and AR\n- School DPA template approved by counsel\n- Content licensing register maintained (CNP manuals, past papers)\n\n**Context**\n\n- Backlog ID: T207\n- Epic: E20 Support, Back-office & Legal\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 10\n- Team: Legal / DPO\n- Blocked by: T017 (Produce the Data Protection Impact Assessment and INPDP declaration file), T236 (Vendor and sub-processor agreements: DPAs with LLM providers (zero data retention, no training), AWS, Snowflake, Datadog; public sub-processor list)\n- Blocks: T110"
   },
   {
    "id": "T208",
@@ -5375,6 +5412,637 @@
     "T152"
    ],
    "description": "In-app notification inbox on web and native apps: read state, deep links to the right screen, filters by category.\n\n**Acceptance criteria**\n\n- The inbox mirrors every delivered notification across devices\n- Deep links open the right screen on web and native apps\n- The inbox is fully usable with a screen reader\n\n**Context**\n\n- Backlog ID: T210\n- Epic: E15 Focus Mode & Smart Notifications\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 13\n- Team: Frontend (Next.js / R3F)\n- Personas: student\n- Blocked by: T152 (Notification Orchestrator: single gateway, priority classes, daily budget, quiet hours, de-duplication and digests (above T089))"
+  },
+  {
+   "id": "T211",
+   "jira_key": "KK-231",
+   "type": "Task",
+   "epic": "E01",
+   "summary": "Provision Aurora PostgreSQL with pgvector via Terraform: Multi-AZ, RDS Proxy, backups and schema-migration tooling",
+   "priority": "Highest",
+   "points": 5,
+   "sprint": "APL Sprint 2",
+   "component": "Platform",
+   "team": "Platform / DevOps",
+   "phase": "Phase 0 — Foundations",
+   "labels": [
+    "postgres",
+    "pgvector",
+    "terraform",
+    "team-platform-devops",
+    "apl-t211"
+   ],
+   "blocked_by": [
+    "T002"
+   ],
+   "description": "The platform's main relational store: Aurora PostgreSQL (Multi-AZ) with the pgvector extension, RDS Proxy for connection pooling from EKS, IAM authentication, point-in-time recovery, and a schema-migration tool run from CI (one migration history per service, reviewed in pull requests). Keycloak, the knowledge graph, the item bank, tenancy (RLS) and the RAG corpus all live here.\n\n**Acceptance criteria**\n\n- `terraform apply` creates the cluster in dev, staging and prod, encrypted under the environment's KMS key\n- Services connect only through RDS Proxy with IAM authentication; no static database passwords in pods\n- A migration merged to main runs automatically in staging; a failed migration blocks the deploy and rolls back\n\n**Context**\n\n- Backlog ID: T211\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 2\n- Team: Platform / DevOps\n- Blocked by: T002 (Provision multi-AZ VPC, subnets, NAT and VPC endpoints via Terraform)\n- Blocks: T012, T032, T061, T092"
+  },
+  {
+   "id": "T212",
+   "jira_key": "KK-232",
+   "type": "Task",
+   "epic": "E01",
+   "summary": "Domains, DNS and certificates: Route 53 zones, ACM certificates, SES sending domain with SPF, DKIM and DMARC",
+   "priority": "Highest",
+   "points": 3,
+   "sprint": "APL Sprint 2",
+   "component": "Platform",
+   "team": "Platform / DevOps",
+   "phase": "Phase 0 — Foundations",
+   "labels": [
+    "dns",
+    "tls",
+    "email",
+    "team-platform-devops",
+    "apl-t212"
+   ],
+   "blocked_by": [
+    "T001"
+   ],
+   "description": "Register and delegate the product domains (app, api, admin, status, marketing, previews), manage the zones in Route 53 through Terraform, issue ACM certificates with automatic renewal, and set up the SES sending domain so consent, password and summary emails reach inboxes.\n\n**Acceptance criteria**\n\n- Every public hostname resolves through Terraform-managed records and serves a valid ACM certificate\n- SPF, DKIM and DMARC pass for the sending domain (DMARC at quarantine, then reject)\n- Certificate expiry and DMARC failure reports alert the platform channel\n\n**Context**\n\n- Backlog ID: T212\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 2\n- Team: Platform / DevOps\n- Blocked by: T001 (Bootstrap Terraform mono-repo with remote state, workspaces and policy checks)\n- Blocks: T005, T089, T213"
+  },
+  {
+   "id": "T213",
+   "jira_key": "KK-233",
+   "type": "Task",
+   "epic": "E01",
+   "summary": "CDN and media store: CloudFront for the web app and media, S3 media buckets with image resizing and cache rules",
+   "priority": "High",
+   "points": 5,
+   "sprint": "APL Sprint 5",
+   "component": "Platform",
+   "team": "Platform / DevOps",
+   "phase": "Phase 1 — Data Plane",
+   "labels": [
+    "cdn",
+    "media",
+    "performance",
+    "team-platform-devops",
+    "apl-t213"
+   ],
+   "blocked_by": [
+    "T004",
+    "T212"
+   ],
+   "description": "Serve the Next.js static assets, simulation bundles and item media (figures, diagrams, past-paper scans) through CloudFront, with private S3 media buckets and signed URLs for licensed content, on-the-fly image resizing to modern formats, and cache-busting on deploy.\n\n**Acceptance criteria**\n\n- Static assets and media are served from CloudFront with a cache hit ratio of at least 90 % after warm-up\n- Licensed content (past-paper scans, manual extracts) is only reachable through signed, expiring URLs\n- Images are delivered at the device's width in WebP or AVIF, cutting median image weight by at least 50 %\n\n**Context**\n\n- Backlog ID: T213\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 5\n- Team: Platform / DevOps\n- Blocked by: T004 (Set up ArgoCD GitOps with Helm charts and per-environment overlays), T212 (Domains, DNS and certificates: Route 53 zones, ACM certificates, SES sending domain with SPF, DKIM and DMARC)\n- Blocks: T086"
+  },
+  {
+   "id": "T214",
+   "jira_key": "KK-234",
+   "type": "Task",
+   "epic": "E01",
+   "summary": "Backend service template and API contract: service skeleton, OpenAPI 3.1 specs, versioning and deprecation policy",
+   "priority": "Highest",
+   "points": 5,
+   "sprint": "APL Sprint 3",
+   "component": "Backend",
+   "team": "Backend (Node.js / TypeScript)",
+   "phase": "Phase 0 — Foundations",
+   "labels": [
+    "api",
+    "openapi",
+    "service-template",
+    "team-backend",
+    "apl-t214"
+   ],
+   "blocked_by": [
+    "T006"
+   ],
+   "description": "A golden-path template for every Node.js service (Fastify, health and readiness probes, OpenTelemetry, structured logs, configuration, the shared authz package, graceful shutdown, Helm chart) and an API contract practice: every public endpoint is described in OpenAPI 3.1, published in a developer portal and versioned under /api/v1, with a written deprecation policy for web and native clients.\n\n**Acceptance criteria**\n\n- A new service created from the template deploys to a preview environment with traces, logs and probes working, without manual changes\n- CI fails when an endpoint is added or changed without its OpenAPI description\n- The deprecation policy keeps an API version alive for at least 6 months after the native apps stop using it, with a forced-update screen for older apps\n\n**Context**\n\n- Backlog ID: T214\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 3\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T006 (Build GitHub Actions CI pipeline: lint, unit, contract, container scan, SBOM)\n- Blocks: T025, T134, T221"
+  },
+  {
+   "id": "T215",
+   "jira_key": "KK-235",
+   "type": "Task",
+   "epic": "E02",
+   "summary": "Threat model of the platform and the AI tutor; static analysis, secret scanning and automated dependency updates in CI",
+   "priority": "Highest",
+   "points": 5,
+   "sprint": "APL Sprint 4",
+   "component": "Backend",
+   "team": "Backend (Node.js / TypeScript)",
+   "phase": "Phase 1 — Data Plane",
+   "labels": [
+    "security",
+    "threat-model",
+    "sast",
+    "team-backend",
+    "apl-t215"
+   ],
+   "blocked_by": [
+    "T006"
+   ],
+   "description": "Run a STRIDE threat model covering identity, tenancy, telemetry, the LLM tutor (prompt injection, data leakage) and minors' data, and turn the findings into tickets. Add CodeQL or Semgrep static analysis and Renovate dependency updates to the CI pipeline, with a patch-time target for critical vulnerabilities.\n\n**Acceptance criteria**\n\n- Threat model reviewed by the CTO and the DPO; every high risk has a mitigation ticket in Jira\n- A pull request introducing a high-severity static-analysis finding cannot merge\n- Critical dependency vulnerabilities are patched within 7 days, tracked on a dashboard\n\n**Context**\n\n- Backlog ID: T215\n- Epic: E02 Identity, Security & Compliance\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 4\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T006 (Build GitHub Actions CI pipeline: lint, unit, contract, container scan, SBOM)\n- Blocks: T020"
+  },
+  {
+   "id": "T216",
+   "jira_key": "KK-236",
+   "type": "Task",
+   "epic": "E20",
+   "summary": "Data breach response plan: triage, INPDP notification, communication to schools and parents, yearly drill",
+   "priority": "High",
+   "points": 3,
+   "sprint": "APL Sprint 16",
+   "component": "Legal",
+   "team": "Legal / DPO",
+   "phase": "Phase 4 — B2B & Hardening",
+   "labels": [
+    "legal",
+    "privacy",
+    "incident",
+    "team-legal-dpo",
+    "apl-t216"
+   ],
+   "blocked_by": [
+    "T107",
+    "T017"
+   ],
+   "description": "A written plan for personal-data incidents, linked to the incident process (T107): severity triage, evidence preservation, notification of the INPDP and of school customers within the required time, plain-language messages to parents and students in FR and AR, and a yearly tabletop drill.\n\n**Acceptance criteria**\n\n- Plan approved by counsel and the DPO, with notification templates in FR and AR\n- A tabletop drill goes from detection to draft notification in under 24 hours\n- School data-processing agreements reference the plan and its notification times\n\n**Context**\n\n- Backlog ID: T216\n- Epic: E20 Support, Back-office & Legal\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 16\n- Team: Legal / DPO\n- Blocked by: T107 (Write operational runbooks, on-call rotation and incident process), T017 (Produce the Data Protection Impact Assessment and INPDP declaration file)\n- Blocks: T110"
+  },
+  {
+   "id": "T217",
+   "jira_key": "KK-237",
+   "type": "Task",
+   "epic": "E03",
+   "summary": "Provision Snowflake with Terraform: databases, warehouses, role-based access, PII masking policies and cost monitors",
+   "priority": "Highest",
+   "points": 5,
+   "sprint": "APL Sprint 4",
+   "component": "Data",
+   "team": "Data Engineering",
+   "phase": "Phase 1 — Data Plane",
+   "labels": [
+    "snowflake",
+    "terraform",
+    "privacy",
+    "team-data-engineering",
+    "apl-t217"
+   ],
+   "blocked_by": [
+    "T001"
+   ],
+   "description": "Snowflake set up as code: RAW, STAGING and MARTS databases per environment, separate auto-suspending warehouses for ingestion, dbt, ML training and BI, a role hierarchy by team, masking policies on student identifiers and accommodation data, and resource monitors that cap monthly credits.\n\n**Acceptance criteria**\n\n- All Snowflake objects are created and changed through Terraform pull requests\n- BI and analyst roles see masked student identifiers; only the ML training role sees pseudonymous IDs; no role sees names\n- Resource monitors alert at 80 % of the monthly budget and suspend non-production warehouses at 100 %\n\n**Context**\n\n- Backlog ID: T217\n- Epic: E03 Event-Driven Telemetry & Data Warehouse\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 4\n- Team: Data Engineering\n- Blocked by: T001 (Bootstrap Terraform mono-repo with remote state, workspaces and policy checks)\n- Blocks: T027, T218"
+  },
+  {
+   "id": "T218",
+   "jira_key": "KK-238",
+   "type": "Task",
+   "epic": "E05",
+   "summary": "Deploy the ML platform services: Airflow (Amazon MWAA) for data jobs and the MLflow tracking server and model registry",
+   "priority": "Highest",
+   "points": 5,
+   "sprint": "APL Sprint 5",
+   "component": "ML",
+   "team": "ML Engineering (Python / PyTorch)",
+   "phase": "Phase 1 — Data Plane",
+   "labels": [
+    "mlflow",
+    "airflow",
+    "mlops",
+    "team-ml-engineering",
+    "apl-t218"
+   ],
+   "blocked_by": [
+    "T003",
+    "T012",
+    "T217"
+   ],
+   "description": "The services the training pipeline relies on: Amazon MWAA for scheduled data jobs (training snapshots, backfills, nightly review queues), and MLflow with a Postgres backend and an S3 artifact store for experiments and for the model registry used by the promotion gate (T047).\n\n**Acceptance criteria**\n\n- Sign-in to MLflow and Airflow goes through Keycloak; only ML and data roles can register or promote a model\n- A test DAG reads from Snowflake and writes a snapshot to S3 on schedule in staging\n- Every registered model version links to its training run, data snapshot hash and evaluation report\n\n**Context**\n\n- Backlog ID: T218\n- Epic: E05 Deep Knowledge Tracing Core\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 5\n- Team: ML Engineering (Python / PyTorch)\n- Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool), T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms), T217 (Provision Snowflake with Terraform: databases, warehouses, role-based access, PII masking policies and cost monitors)\n- Blocks: T031, T041, T045"
+  },
+  {
+   "id": "T219",
+   "jira_key": "KK-239",
+   "type": "Task",
+   "epic": "E03",
+   "summary": "Synthetic learner data generator for development, preview environments, tests and load tests",
+   "priority": "High",
+   "points": 3,
+   "sprint": "APL Sprint 5",
+   "component": "Data",
+   "team": "Data Engineering",
+   "phase": "Phase 1 — Data Plane",
+   "labels": [
+    "test-data",
+    "privacy",
+    "testing",
+    "team-data-engineering",
+    "apl-t219"
+   ],
+   "blocked_by": [
+    "T023"
+   ],
+   "description": "Generate realistic but fake students, classes, interaction sequences and tutor conversations, driven by an IRT-based simulated learner, so no environment outside production ever needs real student data. Used to seed preview environments, end-to-end tests, model pipeline tests and the Bac-eve load test.\n\n**Acceptance criteria**\n\n- One command seeds a preview environment with 3 schools, 2,000 students and 6 months of interactions\n- Generated sequences match the accuracy and latency distributions set by the ML team (checked by a test)\n- A CI check rejects any fixture that looks like a real national ID, phone number or school email address\n\n**Context**\n\n- Backlog ID: T219\n- Epic: E03 Event-Driven Telemetry & Data Warehouse\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 5\n- Team: Data Engineering\n- Blocked by: T023 (Define the learner interaction event taxonomy and Avro/Protobuf schemas)\n- Blocks: T102, T104"
+  },
+  {
+   "id": "T220",
+   "jira_key": "KK-240",
+   "type": "Task",
+   "epic": "E09",
+   "summary": "Item player: render and capture every item type (MCQ, numeric with units, multi-step derivation, ordering, interactive widget) on web and in the native bridge",
+   "priority": "Highest",
+   "points": 8,
+   "sprint": "APL Sprint 6",
+   "component": "Frontend",
+   "team": "Frontend (Next.js / R3F)",
+   "phase": "Phase 1 — Data Plane",
+   "labels": [
+    "item-player",
+    "frontend",
+    "team-frontend",
+    "apl-t220"
+   ],
+   "blocked_by": [
+    "T036",
+    "T076"
+   ],
+   "description": "One item player used by the Lab, the placement test, annales and the mock Bac: it renders each item type from the item model (T036) in FR and AR, captures answers with the maths keypad and unit picker, shows feedback, emits telemetry, and runs inside the native apps through the widget bridge.\n\n**Acceptance criteria**\n\n- Every item type in the item model renders and accepts an answer in FR and AR, right to left included\n- The player works with keyboard and screen readers (ordering items included) and passes the accessibility gate (T149)\n- The same item renders identically in the authoring preview, the web app and the native apps (visual snapshot tests)\n\n**Context**\n\n- Backlog ID: T220\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 6\n- Team: Frontend (Next.js / R3F)\n- Blocked by: T036 (Define the item (question) data model: types, KC tags, difficulty, distractor rationale, media), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)\n- Blocks: T175, T178, T185"
+  },
+  {
+   "id": "T221",
+   "jira_key": "KK-241",
+   "type": "Task",
+   "epic": "E06",
+   "summary": "Answer evaluation service: server-side grading of every item type with numeric tolerance, units, symbolic equivalence and partial credit",
+   "priority": "Highest",
+   "points": 8,
+   "sprint": "APL Sprint 7",
+   "component": "Backend",
+   "team": "Backend (Node.js / TypeScript)",
+   "phase": "Phase 2 — Intelligence",
+   "labels": [
+    "grading",
+    "assessment",
+    "backend",
+    "team-backend",
+    "apl-t221"
+   ],
+   "blocked_by": [
+    "T036",
+    "T214"
+   ],
+   "description": "The single place where answers are judged: numeric answers with tolerance and unit conversion, algebraic answers checked for symbolic equivalence (SymPy), multi-step derivations with partial credit per step, and widget answers through each widget's scoring hook. Its result (correct, partial score, misconception code) is the event that feeds knowledge tracing, routing and gamification.\n\n**Acceptance criteria**\n\n- Results match curriculum-team answer keys on a 1,000-answer test set with at most 0.5 % disagreement\n- Clients never receive the answer key before submission; grading runs only on the server\n- Evaluation p99 is under 100 ms and each result emits an item.answered event with score and misconception code\n\n**Context**\n\n- Backlog ID: T221\n- Epic: E06 Adaptive Routing & Recommendation Service\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 7\n- Team: Backend (Node.js / TypeScript)\n- Blocked by: T036 (Define the item (question) data model: types, KC tags, difficulty, distractor rationale, media), T214 (Backend service template and API contract: service skeleton, OpenAPI 3.1 specs, versioning and deprecation policy)\n- Blocks: T175, T178, T186"
+  },
+  {
+   "id": "T222",
+   "jira_key": "KK-242",
+   "type": "Task",
+   "epic": "E20",
+   "summary": "Child safeguarding policy: designated safeguarding lead, escalation protocol for distress or abuse signals, helplines, record keeping",
+   "priority": "Highest",
+   "points": 3,
+   "sprint": "APL Sprint 7",
+   "component": "Legal",
+   "team": "Legal / DPO",
+   "phase": "Phase 4 — B2B & Hardening",
+   "labels": [
+    "safeguarding",
+    "minors",
+    "legal",
+    "team-legal-dpo",
+    "apl-t222"
+   ],
+   "blocked_by": [
+    "T017"
+   ],
+   "description": "Most Kuizi users are minors talking to an AI tutor. Write the safeguarding policy with schools and child-protection advisers: a designated safeguarding lead, what counts as a concern (self-harm, abuse, bullying, distress), who is told and how fast (school contact, parent, emergency services), which Tunisian helplines to show, and how records are kept under Law 2004-63.\n\n**Acceptance criteria**\n\n- Policy approved by counsel, the DPO and a child-protection adviser, in FR and AR\n- Escalation contacts are collected during every school onboarding (T093) before students are activated\n- Support and moderation staff complete safeguarding training before the pilot\n\n**Context**\n\n- Backlog ID: T222\n- Epic: E20 Support, Back-office & Legal\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 7\n- Team: Legal / DPO\n- Blocked by: T017 (Produce the Data Protection Impact Assessment and INPDP declaration file)\n- Blocks: T223"
+  },
+  {
+   "id": "T223",
+   "jira_key": "KK-243",
+   "type": "Task",
+   "epic": "E07",
+   "summary": "Safeguarding and content-safety layer in the tutor: detect distress, abuse and off-topic requests; respond safely and escalate",
+   "priority": "Highest",
+   "points": 8,
+   "sprint": "APL Sprint 10",
+   "component": "LLM",
+   "team": "LLM / Applied AI",
+   "phase": "Phase 2 — Intelligence",
+   "labels": [
+    "safeguarding",
+    "guardrails",
+    "minors",
+    "team-llm-applied-ai",
+    "apl-t223"
+   ],
+   "blocked_by": [
+    "T062",
+    "T222"
+   ],
+   "description": "A classifier on every student message and tutor reply (local model; French, Arabic and Tunisian Arabic) that flags distress or self-harm signals, abuse, sexual content and requests outside the curriculum. Flagged conversations get a safe, scripted reply with helpline information, off-topic requests are declined politely, and concerns follow the safeguarding protocol (T222).\n\n**Acceptance criteria**\n\n- On a 500-message labelled safety set (FR, AR, Tunisian Arabic), distress signals are caught with recall of at least 95 %\n- Every high-severity flag reaches the designated safeguarding lead within 15 minutes, with the conversation excerpt\n- Off-topic requests get a polite refusal and a route back to the lesson; the judge never lets an unsafe reply through\n\n**Context**\n\n- Backlog ID: T223\n- Epic: E07 Multi-Model LLM Gateway & Guardrails\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 10\n- Team: LLM / Applied AI\n- Blocked by: T062 (Implement the LLM-as-a-Judge harness that intercepts tutor output before delivery), T222 (Child safeguarding policy: designated safeguarding lead, escalation protocol for distress or abuse signals, helplines, record keeping)\n- Blocks: T108"
+  },
+  {
+   "id": "T224",
+   "jira_key": "KK-244",
+   "type": "Story",
+   "epic": "E11",
+   "summary": "As a teacher, I create classes, invite students with a join code or link, and manage my roster",
+   "priority": "High",
+   "points": 5,
+   "sprint": "APL Sprint 10",
+   "component": "Frontend",
+   "team": "Frontend (Next.js / R3F)",
+   "phase": "Phase 2 — Intelligence",
+   "labels": [
+    "teacher",
+    "classes",
+    "persona-teacher",
+    "team-frontend",
+    "apl-t224"
+   ],
+   "blocked_by": [
+    "T092",
+    "T076"
+   ],
+   "description": "Teacher class management: create a class per subject and section, share a join code or link, approve join requests, move or remove students, and see who has not activated yet. Students under 18 still go through parental consent (T013) before joining.\n\n**Acceptance criteria**\n\n- A student joins a class with a 6-character code in under 30 seconds on mobile\n- A teacher only sees classes of their own school (tenant isolation test)\n- Removing a student from a class keeps the student's learning history but hides it from that teacher\n\n**Context**\n\n- Backlog ID: T224\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 10\n- Team: Frontend (Next.js / R3F)\n- Personas: teacher\n- Blocked by: T092 (Implement PostgreSQL Row-Level Security multi-tenancy with a tenant-context connection layer), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)\n- Blocks: T225, T227"
+  },
+  {
+   "id": "T225",
+   "jira_key": "KK-245",
+   "type": "Story",
+   "epic": "E11",
+   "summary": "As a teacher, I create an assignment (chapter, item set or past paper) with a due date and follow completion",
+   "priority": "High",
+   "points": 5,
+   "sprint": "APL Sprint 13",
+   "component": "Frontend",
+   "team": "Frontend (Next.js / R3F)",
+   "phase": "Phase 3 — Product Surfaces",
+   "labels": [
+    "teacher",
+    "assignments",
+    "persona-teacher",
+    "team-frontend",
+    "apl-t225"
+   ],
+   "blocked_by": [
+    "T224",
+    "T152"
+   ],
+   "description": "Assignment builder in the teacher space: pick a chapter, a set of items or a past paper, choose the class or students, set the due date and whether hints are allowed, then follow completion and scores per student. The router treats the assignment as a constraint (T058).\n\n**Acceptance criteria**\n\n- A teacher creates and publishes an assignment to a class in under 2 minutes\n- Students see the assignment in Today with its due date and get one reminder through the Notification Orchestrator\n- Completion and average score per student update within 1 minute of each submission\n\n**Context**\n\n- Backlog ID: T225\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 13\n- Team: Frontend (Next.js / R3F)\n- Personas: teacher\n- Blocked by: T224 (As a teacher, I create classes, invite students with a join code or link, and manage my roster), T152 (Notification Orchestrator: single gateway, priority classes, daily budget, quiet hours, de-duplication and digests (above T089))\n- Blocks: T058, T188"
+  },
+  {
+   "id": "T226",
+   "jira_key": "KK-246",
+   "type": "Story",
+   "epic": "E11",
+   "summary": "As a teacher, I open a student's profile: mastery by chapter, recent activity, shared accommodations and private notes",
+   "priority": "Medium",
+   "points": 3,
+   "sprint": "APL Sprint 14",
+   "component": "Frontend",
+   "team": "Frontend (Next.js / R3F)",
+   "phase": "Phase 3 — Product Surfaces",
+   "labels": [
+    "teacher",
+    "privacy",
+    "persona-teacher",
+    "team-frontend",
+    "apl-t226"
+   ],
+   "blocked_by": [
+    "T095",
+    "T146"
+   ],
+   "description": "A student page for teachers, reached from the heatmap and alerts: mastery by chapter with explanations (T049), recent sessions, assignments, the accommodations the student shares, and private teacher notes. Every opening is written to the audit log (T022).\n\n**Acceptance criteria**\n\n- The page loads in under 2 seconds and shows only data from the teacher's own classes\n- Accommodations appear only when the student shares them\n- Each view is audited with teacher, student and time\n\n**Context**\n\n- Backlog ID: T226\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 14\n- Team: Frontend (Next.js / R3F)\n- Personas: teacher\n- Blocked by: T095 (As a teacher, I see real-time mastery heatmaps for my cohort and get intervention alerts), T146 (As a teacher, I see and apply the accommodations a student chooses to share, and assign accessible versions of sets)"
+  },
+  {
+   "id": "T227",
+   "jira_key": "KK-247",
+   "type": "Story",
+   "epic": "E11",
+   "summary": "As a teacher, I send short announcements to a class or its parents, delivered through the Notification Orchestrator",
+   "priority": "Medium",
+   "points": 3,
+   "sprint": "APL Sprint 15",
+   "component": "Backend",
+   "team": "Backend (Node.js / TypeScript)",
+   "phase": "Phase 4 — B2B & Hardening",
+   "labels": [
+    "teacher",
+    "notifications",
+    "persona-teacher",
+    "team-backend",
+    "apl-t227"
+   ],
+   "blocked_by": [
+    "T152",
+    "T224"
+   ],
+   "description": "One-way announcements (no chat) from a teacher to a class, a group of students or their parents, in FR or AR: text plus a link to an assignment or chapter, delivered in-app and through the channels each person allows, under quiet hours and budgets.\n\n**Acceptance criteria**\n\n- Announcements respect quiet hours, class hours and Focus like any other message\n- Students and parents cannot reply, so the feature never becomes private messaging between adults and minors\n- Every announcement is kept in the audit log and visible to the school admin\n\n**Context**\n\n- Backlog ID: T227\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 15\n- Team: Backend (Node.js / TypeScript)\n- Personas: teacher\n- Blocked by: T152 (Notification Orchestrator: single gateway, priority classes, daily budget, quiet hours, de-duplication and digests (above T089)), T224 (As a teacher, I create classes, invite students with a join code or link, and manage my roster)"
+  },
+  {
+   "id": "T228",
+   "jira_key": "KK-248",
+   "type": "Story",
+   "epic": "E11",
+   "summary": "As a school admin, I manage teachers, classes and seat allocation for my school",
+   "priority": "Medium",
+   "points": 5,
+   "sprint": "APL Sprint 16",
+   "component": "Frontend",
+   "team": "Frontend (Next.js / R3F)",
+   "phase": "Phase 4 — B2B & Hardening",
+   "labels": [
+    "school-admin",
+    "seats",
+    "persona-school-admin",
+    "team-frontend",
+    "apl-t228"
+   ],
+   "blocked_by": [
+    "T093",
+    "T098"
+   ],
+   "description": "The school admin space: invite and remove teachers, create classes and assign teachers, allocate licensed seats to students, follow seat use against the contract, and roll classes over at the end of the school year.\n\n**Acceptance criteria**\n\n- A school admin invites a teacher by email and the teacher is active within 5 minutes\n- Seat allocation never exceeds the licence; the admin sees a warning at 90 % use\n- End-of-year rollover archives classes and keeps students' histories\n\n**Context**\n\n- Backlog ID: T228\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 16\n- Team: Frontend (Next.js / R3F)\n- Personas: school-admin\n- Blocked by: T093 (As a platform admin, I onboard a school in 10 minutes: tenant, admins, classes, CSV student import), T098 (Build seat-based B2B subscription billing with Stripe (annual school licences, proration, invoices))"
+  },
+  {
+   "id": "T229",
+   "jira_key": "KK-249",
+   "type": "Task",
+   "epic": "E16",
+   "summary": "Native push notifications (APNs, FCM) and universal links / app links with in-app deep-link routing",
+   "priority": "High",
+   "points": 5,
+   "sprint": "APL Sprint 13",
+   "component": "Mobile",
+   "team": "Mobile (iOS / Android)",
+   "phase": "Phase 3 — Product Surfaces",
+   "labels": [
+    "push",
+    "deep-links",
+    "mobile",
+    "team-mobile",
+    "apl-t229"
+   ],
+   "blocked_by": [
+    "T163",
+    "T164",
+    "T152"
+   ],
+   "description": "Register devices for push on iOS (APNs) and Android (FCM) through the Notification Orchestrator, with notification categories mapped to OS channels; set up universal links and Android app links so emails, SMS and the inbox open the right screen in the app, falling back to the web.\n\n**Acceptance criteria**\n\n- A notification sent through the Orchestrator reaches iOS and Android devices in the right category\n- Links from email, SMS and the inbox open the matching screen in the app, or the web when the app is not installed\n- Expired or unregistered device tokens are cleaned up automatically\n\n**Context**\n\n- Backlog ID: T229\n- Epic: E16 Native Apps & Store Compliance\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 13\n- Team: Mobile (iOS / Android)\n- Blocked by: T163 (iOS learner app shell (SwiftUI): Keycloak sign-in, navigation, Cyanotype tokens, offline store), T164 (Android learner app shell (Kotlin, Compose): sign-in, navigation, tokens, offline store), T152 (Notification Orchestrator: single gateway, priority classes, daily budget, quiet hours, de-duplication and digests (above T089))\n- Blocks: T173"
+  },
+  {
+   "id": "T230",
+   "jira_key": "KK-250",
+   "type": "Task",
+   "epic": "E16",
+   "summary": "Mobile quality: crash reporting, app performance monitoring and native UI tests on a device farm",
+   "priority": "High",
+   "points": 5,
+   "sprint": "APL Sprint 10",
+   "component": "Mobile",
+   "team": "Mobile (iOS / Android)",
+   "phase": "Phase 3 — Product Surfaces",
+   "labels": [
+    "mobile",
+    "monitoring",
+    "testing",
+    "team-mobile",
+    "apl-t230"
+   ],
+   "blocked_by": [
+    "T163",
+    "T164"
+   ],
+   "description": "Crash and ANR reporting with symbolicated stacks, app start and screen-render metrics in Datadog, and automated UI tests (XCUITest, Espresso) for the core journey on a device farm that includes low-end Android phones and iPads.\n\n**Acceptance criteria**\n\n- Crash-free sessions are tracked per release, with an alert below 99.5 %\n- Core-journey UI tests run on every release branch on at least 8 device models\n- App cold start stays under 2 seconds on a 2 GB RAM Android device\n\n**Context**\n\n- Backlog ID: T230\n- Epic: E16 Native Apps & Store Compliance\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 10\n- Team: Mobile (iOS / Android)\n- Blocked by: T163 (iOS learner app shell (SwiftUI): Keycloak sign-in, navigation, Cyanotype tokens, offline store), T164 (Android learner app shell (Kotlin, Compose): sign-in, navigation, tokens, offline store)\n- Blocks: T173"
+  },
+  {
+   "id": "T231",
+   "jira_key": "KK-251",
+   "type": "Task",
+   "epic": "E17",
+   "summary": "Brand identity: logo, eight-point star mark, app icon, illustration style and brand guidelines in FR and AR",
+   "priority": "High",
+   "points": 3,
+   "sprint": "APL Sprint 3",
+   "component": "Design",
+   "team": "Design / UX",
+   "phase": "Phase 3 — Product Surfaces",
+   "labels": [
+    "brand",
+    "design",
+    "team-design-ux",
+    "apl-t231"
+   ],
+   "blocked_by": [],
+   "description": "Turn the Cyanotype direction into a brand: logotype in Latin and Arabic script, the eight-point star mark, app icons for iOS and Android, illustration rules, and a short brand guide used by the design system, the marketing site and the store listings.\n\n**Acceptance criteria**\n\n- Logo and app icon delivered in every required size and legible on light and dark backgrounds\n- The Arabic logotype is reviewed by a native Arabic type designer\n- Trademark availability of the name and mark checked before the guide is final\n\n**Context**\n\n- Backlog ID: T231\n- Epic: E17 Learner Experience & Cyanotype Design System\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 3\n- Team: Design / UX\n- Blocks: T174, T193, T197"
+  },
+  {
+   "id": "T232",
+   "jira_key": "KK-252",
+   "type": "Task",
+   "epic": "E17",
+   "summary": "UI string localisation workflow: message catalogs, translation management, native-speaker review, pseudo-localisation and RTL checks in CI",
+   "priority": "High",
+   "points": 3,
+   "sprint": "APL Sprint 5",
+   "component": "Frontend",
+   "team": "Frontend (Next.js / R3F)",
+   "phase": "Phase 3 — Product Surfaces",
+   "labels": [
+    "i18n",
+    "localisation",
+    "arabic",
+    "team-frontend",
+    "apl-t232"
+   ],
+   "blocked_by": [
+    "T076"
+   ],
+   "description": "All interface text in FR and AR comes from ICU message catalogs managed in a translation tool; new strings go to Tunisian translators for review; CI runs pseudo-localisation and RTL checks so hard-coded text, clipped strings and broken plurals are caught before merge. Shared by the web and native apps.\n\n**Acceptance criteria**\n\n- CI fails on hard-coded user-facing text in web and native code\n- Every release ships with 100 % of strings translated and reviewed in FR and AR\n- Arabic plural forms are handled through ICU rules, with test cases for 0, 1, 2, 3–10 and 11+\n\n**Context**\n\n- Backlog ID: T232\n- Epic: E17 Learner Experience & Cyanotype Design System\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 5\n- Team: Frontend (Next.js / R3F)\n- Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)\n- Blocks: T102"
+  },
+  {
+   "id": "T233",
+   "jira_key": "KK-253",
+   "type": "Task",
+   "epic": "E04",
+   "summary": "Annual Bac session update and curriculum change process: new papers within two weeks, recalibration, programme changes",
+   "priority": "High",
+   "points": 5,
+   "sprint": "APL Sprint 19",
+   "component": "Curriculum",
+   "team": "Product + Curriculum",
+   "phase": "Phase 6 — Subject Expansion",
+   "labels": [
+    "content",
+    "curriculum",
+    "operations",
+    "team-product-curriculum",
+    "apl-t233"
+   ],
+   "blocked_by": [
+    "T110"
+   ],
+   "description": "Keep Kuizi current after go-live: each July, digitise and tag the new Bac papers and official corrections within two weeks of publication, recalibrate the affected items, refresh exam weights, and run a documented process for ministry programme changes (new KC graph version, retired items, migration of mastery estimates).\n\n**Acceptance criteria**\n\n- The 2027 Bac papers for every live subject are in Kuizi within 14 days of their official release\n- Exam weights per knowledge component are recomputed with the new session and reviewed by subject leads\n- A programme-change dry run moves students to a new KC graph version without losing mastery history\n\n**Context**\n\n- Backlog ID: T233\n- Epic: E04 Curriculum Knowledge Graph & Content Pipeline (multi-subject)\n- Phase: Phase 6 — Subject Expansion\n- Target sprint: APL Sprint 19\n- Team: Product + Curriculum\n- Blocked by: T110 (Production go-live (Physics + Maths) and 30-day hypercare)"
+  },
+  {
+   "id": "T234",
+   "jira_key": "KK-254",
+   "type": "Task",
+   "epic": "E12",
+   "summary": "Ways of working: Definition of Ready and Done, branching and review rules, ADR process, onboarding guide",
+   "priority": "High",
+   "points": 2,
+   "sprint": "APL Sprint 1",
+   "component": "QA",
+   "team": "QA / SDET",
+   "phase": "Phase 0 — Foundations",
+   "labels": [
+    "process",
+    "agile",
+    "team-qa-sdet",
+    "apl-t234"
+   ],
+   "blocked_by": [],
+   "description": "Agree how the teams work from sprint 1: Definition of Ready (acceptance criteria, design and dependencies clear) and Done (tests, accessibility gate, docs, Jira updated), branch and review rules, the ADR process, sprint ceremonies, and an onboarding guide for new engineers.\n\n**Acceptance criteria**\n\n- Definition of Ready and Done published in the repository and linked from the Jira board\n- A new engineer ships a small change to staging within 2 days using the onboarding guide\n- Every team lead signs off the working agreement in sprint 1\n\n**Context**\n\n- Backlog ID: T234\n- Epic: E12 Observability, Quality & Release Readiness\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 1\n- Team: QA / SDET"
+  },
+  {
+   "id": "T235",
+   "jira_key": "KK-255",
+   "type": "Task",
+   "epic": "E04",
+   "summary": "Content production operations: author and reviewer pool, contracts and rights, throughput tracking, translation vendors",
+   "priority": "Highest",
+   "points": 3,
+   "sprint": "APL Sprint 4",
+   "component": "Curriculum",
+   "team": "Product + Curriculum",
+   "phase": "Phase 1 — Data Plane",
+   "labels": [
+    "content",
+    "operations",
+    "team-product-curriculum",
+    "apl-t235"
+   ],
+   "blocked_by": [
+    "T036"
+   ],
+   "description": "The item banks need about 24,000 items in two languages. Set up the production line: recruit and contract teacher-authors and reviewers per subject (with copyright assignment), payment per accepted item, FR↔AR translation vendors, and a weekly throughput dashboard against the content plan.\n\n**Acceptance criteria**\n\n- Author contracts assign item copyright to Kuizi and are signed before any paid work\n- A weekly dashboard shows items authored, reviewed and published per subject against the plan\n- Each subject has at least 2 reviewers who are not the item's author\n\n**Context**\n\n- Backlog ID: T235\n- Epic: E04 Curriculum Knowledge Graph & Content Pipeline (multi-subject)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 4\n- Team: Product + Curriculum\n- Blocked by: T036 (Define the item (question) data model: types, KC tags, difficulty, distractor rationale, media)\n- Blocks: T038, T112"
+  },
+  {
+   "id": "T236",
+   "jira_key": "KK-256",
+   "type": "Task",
+   "epic": "E20",
+   "summary": "Vendor and sub-processor agreements: DPAs with LLM providers (zero data retention, no training), AWS, Snowflake, Datadog; public sub-processor list",
+   "priority": "Highest",
+   "points": 3,
+   "sprint": "APL Sprint 7",
+   "component": "Legal",
+   "team": "Legal / DPO",
+   "phase": "Phase 4 — B2B & Hardening",
+   "labels": [
+    "legal",
+    "privacy",
+    "vendors",
+    "team-legal-dpo",
+    "apl-t236"
+   ],
+   "blocked_by": [
+    "T017"
+   ],
+   "description": "Student messages and telemetry pass through third parties. Sign data-processing agreements with every sub-processor, with zero data retention and no training on Kuizi data for LLM providers, check cross-border transfer terms, and publish the sub-processor list referenced by the privacy policy and the school DPA.\n\n**Acceptance criteria**\n\n- No student data reaches a provider without a signed DPA (checked against the LiteLLM provider list)\n- LLM provider agreements guarantee zero retention and no training on Kuizi data\n- The sub-processor list is public and schools are told 30 days before any change\n\n**Context**\n\n- Backlog ID: T236\n- Epic: E20 Support, Back-office & Legal\n- Phase: Phase 4 — B2B & Hardening\n- Target sprint: APL Sprint 7\n- Team: Legal / DPO\n- Blocked by: T017 (Produce the Data Protection Impact Assessment and INPDP declaration file)\n- Blocks: T108, T207"
   }
  ]
 }

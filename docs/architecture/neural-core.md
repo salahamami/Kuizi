@@ -6,7 +6,7 @@ The Neural Core is the knowledge-tracing engine at the centre of Kuizi: it turns
 
 ## How it works, in four stages
 
-1. **Granular telemetry.** Every answer (correct or not), hesitation and hover time, slider move in a simulation, and confidence rating (1–5) is sent as an event (T023–T026).
+1. **Granular telemetry.** Every answer (correct or not), hesitation and hover time, slider move in a simulation, and confidence rating (1–5) is sent as an event (T023–T026); the answer evaluation service decides right, wrong or partial (T221).
 2. **Separated self-attention transformer (SAINT+).** An exercise encoder reads the sequence of items and concepts; a response decoder reads the answers, timings, hints and confidence. Separated attention lets the model weigh a mistake made weeks ago on a prerequisite (T040–T042). New students start from an IRT estimate after a 12-question placement test (T043).
 3. **Real-time mastery prediction.** TorchServe returns the probability of failure per concept in under 50 ms; attention weights explain which past answers drive the prediction (T046, T048, T049).
 4. **Knowledge-graph routing and Socratic remediation.** The router walks the prerequisite graph (a directed acyclic graph per subject) to choose the next item or a 1-minute remediation, pre-computed so the student never waits (T052, T053, T056, T070, T071).
@@ -15,7 +15,7 @@ The Neural Core is the knowledge-tracing engine at the centre of Kuizi: it turns
 
 | Neural Core element | Tickets |
 | --- | --- |
-| Granular student telemetry: correctness, hesitation and hover time, tactile slider moves, confidence 1–5 | T023, T024, T025, T026 |
+| Granular student telemetry: correctness, hesitation and hover time, tactile slider moves, confidence 1–5 | T023, T024, T025, T026, T221 |
 | Separated self-attention transformer: exercise encoder and response decoder (SAINT+) | T040, T041, T042 |
 | Cold start before enough history | T043 |
 | Dynamic cognitive embeddings and real-time mastery prediction | T046, T048, T049 |

@@ -12,7 +12,7 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 | Rules for every contributor and AI session | [`CLAUDE.md`](CLAUDE.md) |
 | Documentation map | [`docs/README.md`](docs/README.md) |
 | Product overview, personas, screens, advanced concepts | [`docs/product/overview.md`](docs/product/overview.md) |
-| Full backlog (20 epics, 210 tickets, 1,496 points) | [`docs/backlog/APL_Full_Backlog.md`](docs/backlog/APL_Full_Backlog.md) |
+| Full backlog (20 epics, 236 tickets, 1,612 points) | [`docs/backlog/APL_Full_Backlog.md`](docs/backlog/APL_Full_Backlog.md) |
 | Jira import file and sync procedure | [`docs/backlog/README.md`](docs/backlog/README.md) |
 | Architecture and decisions | [`docs/architecture/`](docs/architecture/overview.md) |
 | Neural Core (knowledge-tracing engine) | [`docs/architecture/neural-core.md`](docs/architecture/neural-core.md) |
@@ -23,7 +23,7 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 
 ## Project tracking
 
-Jira project `KK` ([board](https://kuizi.atlassian.net/jira/software/projects/KK/boards/37)) mirrors the backlog in this repository: 20 epics (KK-1 to KK-20), 210 tickets (KK-21 to KK-230) and 351 "blocks" links. The repository is the source of truth. [`docs/backlog/jira_keys.csv`](docs/backlog/jira_keys.csv) maps each backlog ID to its Jira key, and [`docs/backlog/README.md`](docs/backlog/README.md) describes the sync.
+Jira project `KK` ([board](https://kuizi.atlassian.net/jira/software/projects/KK/boards/37)) mirrors the backlog in this repository: 20 epics (KK-1 to KK-20), 236 tickets (KK-21 to KK-256) and 426 "blocks" links. The repository is the source of truth. [`docs/backlog/jira_keys.csv`](docs/backlog/jira_keys.csv) maps each backlog ID to its Jira key, and [`docs/backlog/README.md`](docs/backlog/README.md) describes the sync.
 
 ## Status
 

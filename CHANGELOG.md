@@ -2,6 +2,27 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
+## 2026-10-16 — Gap review: what the final version still needed
+
+The backlog was checked against what a production app for minors needs end to end. 26 tickets were added (T211–T236, 116 points), bringing it to 236 tickets, 1,612 points and 426 dependency links. Every sprint stays at or below 134 points.
+
+### Added
+- Foundations nobody had ticketed: Aurora PostgreSQL with pgvector (T211), domains, certificates and email sending (T212), CDN and media store (T213), backend service template and API versioning (T214), Snowflake provisioning with PII masking (T217), Airflow and MLflow (T218), synthetic test data (T219).
+- Core learning loop: one item player for every item type (T220) and a server-side answer evaluation service (T221) that feeds knowledge tracing.
+- Child safety: a safeguarding policy with a designated lead (T222) and a tutor safety layer that detects distress, abuse and off-topic requests (T223).
+- Security and legal: threat model, static analysis and dependency updates (T215), data breach response plan (T216), DPAs with LLM providers and other sub-processors (T236).
+- Teachers and schools: classes and join codes (T224), assignments (T225), student profile page (T226), class announcements (T227), school admin management of teachers, classes and seats (T228).
+- Mobile: native push and deep links (T229), crash reporting, performance monitoring and device-farm UI tests (T230).
+- Brand identity (T231), UI string localisation workflow (T232), ways of working (T234), content production operations (T235), and the yearly Bac session update after go-live (T233).
+
+### Changed
+- T185 mock Bac: tutor, hints and the concept map are switched off during a graded paper.
+- T108 pilot now waits for T223 and T236; T110 go-live also needs T216.
+- Generator: new tickets in the original epics take their phase from their sprint, with the full phase name.
+
+### Jira sync
+- Created KK-231 to KK-256, added 75 "Blocks" links, and updated the descriptions of 49 tickets and 13 epics (dependency lines, criteria, scope counts). Jira shows 236 tickets.
+
 ## 2026-10-16 — Backlog v2 and project foundation
 
 ### Added

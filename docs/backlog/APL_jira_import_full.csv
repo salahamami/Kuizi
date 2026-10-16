@@ -6,7 +6,7 @@ h3. Definition of Done
 A fresh AWS account can be brought to a running staging environment in under 60 minutes from `terraform apply` with zero manual console steps.
 
 h3. Scope
-* 11 tickets, 65 story points
+* 15 tickets, 83 story points
 * Sprints S1–S6 (Phase 0)
 * Component: Platform",Highest,,Platform Foundations: Infrastructure & DevOps,,,Platform,,Phase 0,,infra,terraform,kubernetes,,,,,,,,,,,
 E02,Epic,"Identity, Security & Compliance","h3. Goal
@@ -16,7 +16,7 @@ h3. Definition of Done
 External penetration test passes with no High/Critical findings; data-protection impact assessment signed off before first pilot school.
 
 h3. Scope
-* 10 tickets, 60 story points
+* 11 tickets, 65 story points
 * Sprints S2–S15 (Phase 0)
 * Component: Security",Highest,,"Identity, Security & Compliance",,,Security,,Phase 0,,security,compliance,auth,,,,,,,,,,,
 E03,Epic,Event-Driven Telemetry & Data Warehouse,"h3. Goal
@@ -26,7 +26,7 @@ h3. Definition of Done
 Sustained 50k events/sec with p99 end-to-end lag < 5 min to warehouse; zero schema-breaking deploys thanks to the registry.
 
 h3. Scope
-* 10 tickets, 68 story points
+* 12 tickets, 76 story points
 * Sprints S3–S9 (Phase 1)
 * Component: Data",Highest,,Event-Driven Telemetry & Data Warehouse,,,Data,,Phase 1,,kafka,telemetry,snowflake,,,,,,,,,,,
 E04,Epic,Curriculum Knowledge Graph & Content Pipeline (multi-subject),"h3. Goal
@@ -36,8 +36,8 @@ h3. Definition of Done
 Tooling supports any subject with zero code changes; Physics track published with ≥ 400 KCs and ≥ 6,000 tagged items, each with ≥ 1 KC tag and pedagogical review.
 
 h3. Scope
-* 9 tickets, 81 story points
-* Sprints S3–S11 (Phase 1)
+* 11 tickets, 89 story points
+* Sprints S3–S19 (Phase 1)
 * Component: Curriculum",High,,Curriculum Knowledge Graph & Content Pipeline (multi-subject),,,Curriculum,,Phase 1,,knowledge-graph,content,item-bank,multi-subject,,,,,,,,,,
 E05,Epic,Deep Knowledge Tracing Core,"h3. Goal
 Self-hosted SAINT+ model (pyKT) predicting per-concept failure probability, with IRT cold-start fallback, weekly automated retraining and sub-50 ms online inference.
@@ -46,8 +46,8 @@ h3. Definition of Done
 AUC ≥ 0.80 on held-out Tunisian cohort data; p99 inference latency ≤ 50 ms at 2,000 RPS; weekly retrain runs unattended with automatic rollback on metric regression.
 
 h3. Scope
-* 10 tickets, 84 story points
-* Sprints S6–S10 (Phase 2)
+* 11 tickets, 89 story points
+* Sprints S5–S10 (Phase 2)
 * Component: ML",Highest,,Deep Knowledge Tracing Core,,,ML,,Phase 2,,pykt,saint,pytorch,kubeflow,,,,,,,,,,
 E06,Epic,Adaptive Routing & Recommendation Service,"h3. Goal
 Per-click decision engine that turns DKT predictions + the knowledge graph into the next item, next hint level, or next concept, with spaced-repetition scheduling and exam-date awareness.
@@ -56,7 +56,7 @@ h3. Definition of Done
 Routing decision returned in ≤ 80 ms p99 end-to-end; A/B framework shows measurable learning-gain lift vs. fixed-sequence control.
 
 h3. Scope
-* 8 tickets, 57 story points
+* 9 tickets, 65 story points
 * Sprints S7–S13 (Phase 2)
 * Component: ML",Highest,,Adaptive Routing & Recommendation Service,,,ML,,Phase 2,,routing,recommendation,mastery,,,,,,,,,,,
 E07,Epic,Multi-Model LLM Gateway & Guardrails,"h3. Goal
@@ -66,7 +66,7 @@ h3. Definition of Done
 Judge blocks ≥ 95% of seeded formula hallucinations with ≤ 3% false-block rate; semantic cache hit rate ≥ 35%; per-student daily LLM cost capped and enforced.
 
 h3. Scope
-* 10 tickets, 77 story points
+* 11 tickets, 85 story points
 * Sprints S6–S11 (Phase 2)
 * Component: LLM",Highest,,Multi-Model LLM Gateway & Guardrails,,,LLM,,Phase 2,,litellm,rag,guardrails,pgvector,,,,,,,,,,
 E08,Epic,Socratic AI Tutor Experience,"h3. Goal
@@ -86,7 +86,7 @@ h3. Definition of Done
 Lighthouse performance ≥ 85 on a mid-range Android device over 3G; a 20-minute assessment completes with the network cut for 5 minutes and syncs losslessly.
 
 h3. Scope
-* 11 tickets, 114 story points
+* 12 tickets, 122 story points
 * Sprints S4–S12 (Phase 3)
 * Component: Frontend",Highest,,Interactive Learning Frontend (Next.js / WebGL),,,Frontend,,Phase 3,,nextjs,react-three-fiber,webgl,pwa,,,,,,,,,,
 E10,Epic,Learner Engagement & Gamification,"h3. Goal
@@ -106,7 +106,7 @@ h3. Definition of Done
 Cross-tenant data access is impossible by construction (verified by automated RLS test suite); a school can be onboarded and billed with zero engineering involvement.
 
 h3. Scope
-* 9 tickets, 79 story points
+* 14 tickets, 100 story points
 * Sprints S6–S16 (Phase 4)
 * Component: Backend",High,,Institution & Parent B2B Portals (Multi-Tenancy),,,Backend,,Phase 4,,multi-tenant,rls,stripe,b2b,,,,,,,,,,
 E12,Epic,"Observability, Quality & Release Readiness","h3. Goal
@@ -116,8 +116,8 @@ h3. Definition of Done
 50k-concurrent load test passes all SLOs; RPO ≤ 15 min, RTO ≤ 1 h demonstrated in a drill; on-call rotation and runbooks signed off.
 
 h3. Scope
-* 10 tickets, 81 story points
-* Sprints S6–S18 (Phase 4)
+* 11 tickets, 83 story points
+* Sprints S1–S18 (Phase 4)
 * Component: QA",High,,"Observability, Quality & Release Readiness",,,QA,,Phase 4,,observability,load-test,dr,launch,,,,,,,,,,
 E13,Epic,"Subject Expansion: Maths, Sciences, Technique, Économie & Gestion","h3. Goal
 Load four more subjects onto the same engine: a KC graph, item bank, textbook corpus, glossary and misconception taxonomy per subject, plus the subject-specific widget packages and verifiers. Content tracks run in parallel from S9 under one subject lead each; Maths ships with the physics go-live, the rest in two waves after.
@@ -156,7 +156,7 @@ h3. Definition of Done
 Both apps approved in the stores; Sign in with Apple, in-app account deletion and In-App Purchase verified by the review checklist; privacy labels match the DPIA.
 
 h3. Scope
-* 12 tickets, 78 story points
+* 14 tickets, 88 story points
 * Sprints S6–S16 (Phase 3 — Product Surfaces)
 * Component: Mobile",High,,Native Apps & Store Compliance,,,Mobile,,Phase 3 — Product Surfaces,,mobile,ios,android,app-store,,,,,,,,,,
 E17,Epic,Learner Experience & Cyanotype Design System,"h3. Goal
@@ -166,8 +166,8 @@ h3. Definition of Done
 Screens 01–07 and the settings area shipped in FR and AR; Storybook covers every Cyanotype component; usability rounds show students complete the core journey unaided.
 
 h3. Scope
-* 11 tickets, 68 story points
-* Sprints S4–S12 (Phase 3 — Product Surfaces)
+* 13 tickets, 74 story points
+* Sprints S3–S12 (Phase 3 — Product Surfaces)
 * Component: Frontend",High,,Learner Experience & Cyanotype Design System,,,Frontend,,Phase 3 — Product Surfaces,,ux,design-system,screens,,,,,,,,,,,
 E18,Epic,"Bac Simulation, Annales & Grade Prediction","h3. Goal
 Students train on real Bac papers under real conditions and see a calibrated, honest estimate of their grade per subject.
@@ -196,7 +196,7 @@ h3. Definition of Done
 Support desk and help center live before the pilot; legal documents published and signed off by counsel; feature flags used for every staged rollout.
 
 h3. Scope
-* 8 tickets, 36 story points
+* 11 tickets, 45 story points
 * Sprints S7–S16 (Phase 4 — B2B & Hardening)
 * Component: Support",High,,"Support, Back-office & Legal",,,Support,,Phase 4 — B2B & Hardening,,support,back-office,legal,,,,,,,,,,,
 T001,Task,"Bootstrap Terraform mono-repo with remote state, workspaces and policy checks","h3. Description
@@ -212,7 +212,7 @@ h3. Context
 * Phase: Phase 0 — Foundations
 * Target sprint: APL Sprint 1
 * Team: Platform / DevOps
-* Blocks: T002, T006",Highest,5,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 1,Phase 0 — Foundations,Platform / DevOps,terraform,iac,team-platform-devops,,,,,,,,,,,
+* Blocks: T002, T006, T212, T217",Highest,5,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 1,Phase 0 — Foundations,Platform / DevOps,terraform,iac,team-platform-devops,,,,,,,,,,,
 T002,Task,"Provision multi-AZ VPC, subnets, NAT and VPC endpoints via Terraform","h3. Description
 Three-AZ VPC in eu-west-3 (Paris — closest region to Tunisia with full service coverage), public/private/isolated subnet tiers, NAT gateways per AZ, VPC endpoints for S3, ECR, Secrets Manager and CloudWatch to avoid NAT egress cost.
 
@@ -227,7 +227,7 @@ h3. Context
 * Target sprint: APL Sprint 1
 * Team: Platform / DevOps
 * Blocked by: T001 (Bootstrap Terraform mono-repo with remote state, workspaces and policy checks)
-* Blocks: T003, T021",Highest,5,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 1,Phase 0 — Foundations,Platform / DevOps,terraform,network,team-platform-devops,,,,T001,,,,,,,
+* Blocks: T003, T021, T211",Highest,5,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 1,Phase 0 — Foundations,Platform / DevOps,terraform,network,team-platform-devops,,,,T001,,,,,,,
 T003,Task,"Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool","h3. Description
 EKS 1.31+ via Terraform: system node group (on-demand), general workload pool (Karpenter, spot-first with on-demand fallback), and a tainted GPU pool (g5 family) for TorchServe and local LLM inference. IRSA for pod identity, EBS/EFS CSI drivers, cluster autoscaler replaced by Karpenter.
 
@@ -242,7 +242,7 @@ h3. Context
 * Target sprint: APL Sprint 2
 * Team: Platform / DevOps
 * Blocked by: T002 (Provision multi-AZ VPC, subnets, NAT and VPC endpoints via Terraform)
-* Blocks: T004, T005, T007, T011, T012, T015, T045, T059, T060, T106",Highest,8,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 2,Phase 0 — Foundations,Platform / DevOps,eks,kubernetes,karpenter,team-platform-devops,,,T002,,,,,,,
+* Blocks: T004, T005, T007, T011, T012, T015, T045, T059, T060, T106, T218",Highest,8,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 2,Phase 0 — Foundations,Platform / DevOps,eks,kubernetes,karpenter,team-platform-devops,,,T002,,,,,,,
 T004,Task,Set up ArgoCD GitOps with Helm charts and per-environment overlays,"h3. Description
 ArgoCD app-of-apps pattern; every microservice has a Helm chart with values overlays for dev/staging/prod; image tags promoted by commit, not by hand. Sealed Secrets or External Secrets Operator for secret injection from AWS Secrets Manager.
 
@@ -257,7 +257,7 @@ h3. Context
 * Target sprint: APL Sprint 2
 * Team: Platform / DevOps
 * Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool)
-* Blocks: T008, T010, T016, T202",Highest,5,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 2,Phase 0 — Foundations,Platform / DevOps,argocd,gitops,helm,team-platform-devops,,,T003,,,,,,,
+* Blocks: T008, T010, T016, T202, T213",Highest,5,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 2,Phase 0 — Foundations,Platform / DevOps,argocd,gitops,helm,team-platform-devops,,,T003,,,,,,,
 T005,Task,"Deploy Kong API Gateway with rate limiting, JWT validation and per-tenant quotas","h3. Description
 Kong (OSS or Konnect) as ingress: JWT plugin validating tokens from the identity provider, rate-limiting plugin keyed by user and tenant, request-size limits, and per-route canary weights for blue/green cutover.
 
@@ -271,8 +271,8 @@ h3. Context
 * Phase: Phase 0 — Foundations
 * Target sprint: APL Sprint 3
 * Team: Platform / DevOps
-* Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool)
-* Blocks: T010, T019, T025",Highest,5,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 3,Phase 0 — Foundations,Platform / DevOps,kong,api-gateway,team-platform-devops,,,,T003,,,,,,,
+* Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool), T212 (Domains, DNS and certificates: Route 53 zones, ACM certificates, SES sending domain with SPF, DKIM and DMARC)
+* Blocks: T010, T019, T025",Highest,5,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 3,Phase 0 — Foundations,Platform / DevOps,kong,api-gateway,team-platform-devops,,,,T003,T212,,,,,,
 T006,Task,"Build GitHub Actions CI pipeline: lint, unit, contract, container scan, SBOM","h3. Description
 Reusable workflow per language (TypeScript, Python): lint, type-check, unit tests with coverage gates (≥ 80% backend, ≥ 70% frontend), Pact contract tests, Trivy image scan, Syft SBOM, signed images with cosign. Caches keyed on lockfiles.
 
@@ -287,7 +287,7 @@ h3. Context
 * Target sprint: APL Sprint 2
 * Team: Platform / DevOps
 * Blocked by: T001 (Bootstrap Terraform mono-repo with remote state, workspaces and policy checks)
-* Blocks: T009, T103, T149",Highest,8,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 2,Phase 0 — Foundations,Platform / DevOps,ci,github-actions,security,team-platform-devops,,,T001,,,,,,,
+* Blocks: T009, T103, T149, T214, T215",Highest,8,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 2,Phase 0 — Foundations,Platform / DevOps,ci,github-actions,security,team-platform-devops,,,T001,,,,,,,
 T007,Task,"Roll out Datadog APM, distributed tracing, log pipeline and memory-leak watchdogs","h3. Description
 Datadog agent as DaemonSet; OpenTelemetry SDKs in Node.js and Python services with W3C trace context propagated through Kong and Kafka headers; log pipelines with PII scrubbing; monitors for RSS growth > 20%/hour per pod (memory leak detector).
 
@@ -373,8 +373,8 @@ h3. Context
 * Phase: Phase 0 — Foundations
 * Target sprint: APL Sprint 2
 * Team: Backend (Node.js / TypeScript)
-* Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool)
-* Blocks: T013, T014, T076, T094, T134, T163, T166, T209",Highest,8,,"Identity, Security & Compliance",E02,Security,APL Sprint 2,Phase 0 — Foundations,Backend (Node.js / TypeScript),keycloak,oidc,auth,team-backend,,,T003,,,,,,,
+* Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool), T211 (Provision Aurora PostgreSQL with pgvector via Terraform: Multi-AZ, RDS Proxy, backups and schema-migration tooling)
+* Blocks: T013, T014, T076, T094, T134, T163, T166, T209, T218",Highest,8,,"Identity, Security & Compliance",E02,Security,APL Sprint 2,Phase 0 — Foundations,Backend (Node.js / TypeScript),keycloak,oidc,auth,team-backend,,,T003,T211,,,,,,
 T013,Story,"As a parent, I give verifiable consent before my under-18 child's account is activated","h3. Description
 Minors (the majority of Bac students are 17–19) require guardian consent under Tunisian Law 2004-63 and the INPDP's guidance. Implement a consent flow: student signs up → parent phone/email captured → OTP + consent screen → account activates. Consent record is immutable and exportable.
 
@@ -456,7 +456,7 @@ h3. Context
 * Target sprint: APL Sprint 5
 * Team: Backend (Node.js / TypeScript)
 * Blocked by: T013 (As a parent, I give verifiable consent before my under-18 child's account is activated)
-* Blocks: T018, T151, T169, T207",High,5,,"Identity, Security & Compliance",E02,Security,APL Sprint 5,Phase 1 — Data Plane,Backend (Node.js / TypeScript),compliance,dpia,inpdp,team-backend,,,T013,,,,,,,
+* Blocks: T018, T151, T169, T207, T216, T222, T236",High,5,,"Identity, Security & Compliance",E02,Security,APL Sprint 5,Phase 1 — Data Plane,Backend (Node.js / TypeScript),compliance,dpia,inpdp,team-backend,,,T013,,,,,,,
 T018,Task,"Implement data lifecycle: retention, right-to-erasure and export pipelines","h3. Description
 Scheduled jobs that purge raw telemetry > 24 months, pseudonymise inactive accounts > 12 months, and fulfil erasure requests across Postgres, Snowflake, Redis, Kafka (tombstones) and pgvector within 30 days. Self-service data export (JSON) for students and parents.
 
@@ -500,8 +500,8 @@ h3. Context
 * Phase: Phase 4 — B2B & Hardening
 * Target sprint: APL Sprint 15
 * Team: Backend (Node.js / TypeScript)
-* Blocked by: T014 (Implement attribute-based authorisation middleware shared by all Node.js services), T019 (Deploy AWS WAF + Shield, bot protection and abuse rate limiting on public endpoints)
-* Blocks: T110",High,8,,"Identity, Security & Compliance",E02,Security,APL Sprint 15,Phase 4 — B2B & Hardening,Backend (Node.js / TypeScript),pentest,security,team-backend,,,,T014,T019,,,,,,
+* Blocked by: T014 (Implement attribute-based authorisation middleware shared by all Node.js services), T019 (Deploy AWS WAF + Shield, bot protection and abuse rate limiting on public endpoints), T215 (Threat model of the platform and the AI tutor; static analysis, secret scanning and automated dependency updates in CI)
+* Blocks: T110",High,8,,"Identity, Security & Compliance",E02,Security,APL Sprint 15,Phase 4 — B2B & Hardening,Backend (Node.js / TypeScript),pentest,security,team-backend,,,,T014,T019,T215,,,,,
 T021,Task,Provision Apache Kafka (MSK) cluster with Schema Registry and topic conventions,"h3. Description
 Amazon MSK (3 brokers across AZs, KRaft), Confluent/Apicurio Schema Registry, topic naming `<domain>.<entity>.<event>.v<n>`, partitioning by `student_id` for ordering, 7-day retention on raw topics, compacted topics for state. Terraform-managed ACLs per service.
 
@@ -549,7 +549,7 @@ h3. Context
 * Target sprint: APL Sprint 3
 * Team: Data Engineering
 * Blocked by: T021 (Provision Apache Kafka (MSK) cluster with Schema Registry and topic conventions)
-* Blocks: T024, T025, T033, T191",Highest,5,,Event-Driven Telemetry & Data Warehouse,E03,Data,APL Sprint 3,Phase 0 — Foundations,Data Engineering,schema,events,avro,team-data-engineering,,,T021,,,,,,,
+* Blocks: T024, T025, T033, T191, T219",Highest,5,,Event-Driven Telemetry & Data Warehouse,E03,Data,APL Sprint 3,Phase 0 — Foundations,Data Engineering,schema,events,avro,team-data-engineering,,,T021,,,,,,,
 T024,Task,"Build the Next.js telemetry SDK: batching, offline buffering, hesitation and time-to-first-click","h3. Description
 `@apl/telemetry` client: captures DOM/R3F interactions with requestIdleCallback, computes time-to-first-click and hesitation windows client-side, batches events (≤ 50 or 2 s), persists unsent batches in IndexedDB, replays on reconnect with idempotency keys, respects Do-Not-Track for non-essential events.
 
@@ -581,8 +581,8 @@ h3. Context
 * Phase: Phase 1 — Data Plane
 * Target sprint: APL Sprint 4
 * Team: Data Engineering
-* Blocked by: T023 (Define the learner interaction event taxonomy and Avro/Protobuf schemas), T005 (Deploy Kong API Gateway with rate limiting, JWT validation and per-tenant quotas)
-* Blocks: T104",Highest,8,,Event-Driven Telemetry & Data Warehouse,E03,Data,APL Sprint 4,Phase 1 — Data Plane,Data Engineering,ingestion,fastify,team-data-engineering,,,,T023,T005,,,,,,
+* Blocked by: T023 (Define the learner interaction event taxonomy and Avro/Protobuf schemas), T005 (Deploy Kong API Gateway with rate limiting, JWT validation and per-tenant quotas), T214 (Backend service template and API contract: service skeleton, OpenAPI 3.1 specs, versioning and deprecation policy)
+* Blocks: T104",Highest,8,,Event-Driven Telemetry & Data Warehouse,E03,Data,APL Sprint 4,Phase 1 — Data Plane,Data Engineering,ingestion,fastify,team-data-engineering,,,,T023,T005,T214,,,,,
 T026,Task,Deploy Redis Cluster (ElastiCache) and the real-time aggregation consumer,"h3. Description
 ElastiCache Redis 7 cluster mode; Kafka Streams / Flink-lite consumer in Node.js that maintains per-student session state, streaks, XP and sorted-set leaderboards with TTLs; exposes a read API for the UI.
 
@@ -611,8 +611,8 @@ h3. Context
 * Phase: Phase 1 — Data Plane
 * Target sprint: APL Sprint 5
 * Team: Data Engineering
-* Blocked by: T021 (Provision Apache Kafka (MSK) cluster with Schema Registry and topic conventions)
-* Blocks: T028, T031",Highest,5,,Event-Driven Telemetry & Data Warehouse,E03,Data,APL Sprint 5,Phase 1 — Data Plane,Data Engineering,kafka-connect,snowflake,team-data-engineering,,,,T021,,,,,,,
+* Blocked by: T021 (Provision Apache Kafka (MSK) cluster with Schema Registry and topic conventions), T217 (Provision Snowflake with Terraform: databases, warehouses, role-based access, PII masking policies and cost monitors)
+* Blocks: T028, T031",Highest,5,,Event-Driven Telemetry & Data Warehouse,E03,Data,APL Sprint 5,Phase 1 — Data Plane,Data Engineering,kafka-connect,snowflake,team-data-engineering,,,,T021,T217,,,,,,
 T028,Task,Model the learning-analytics warehouse in dbt (staging → marts) with tests,"h3. Description
 dbt project: staging models per event type, `fct_interactions`, `fct_attempts`, `dim_student`, `dim_item`, `dim_kc`, and the `ml_training_sequences` mart consumed by pyKT (one row per student-attempt with KC tags, latency, correctness, ordered). Schema and freshness tests; docs site.
 
@@ -670,7 +670,7 @@ h3. Context
 * Phase: Phase 2 — Intelligence
 * Target sprint: APL Sprint 9
 * Team: Data Engineering
-* Blocked by: T027 (Configure Kafka Connect sinks to Snowflake with exactly-once semantics)",Medium,5,,Event-Driven Telemetry & Data Warehouse,E03,Data,APL Sprint 9,Phase 2 — Intelligence,Data Engineering,replay,ops,team-data-engineering,,,,T027,,,,,,,
+* Blocked by: T027 (Configure Kafka Connect sinks to Snowflake with exactly-once semantics), T218 (Deploy the ML platform services: Airflow (Amazon MWAA) for data jobs and the MLflow tracking server and model registry)",Medium,5,,Event-Driven Telemetry & Data Warehouse,E03,Data,APL Sprint 9,Phase 2 — Intelligence,Data Engineering,replay,ops,team-data-engineering,,,,T027,T218,,,,,,
 T032,Task,Design the knowledge-component (KC) graph schema and store,"h3. Description
 Graph of concepts for the official Tunisian Bac physics programme by section (Sciences expérimentales, Mathématiques, Sciences techniques): nodes = KCs (e.g. `mech.newton2`, `elec.rlc.resonance`), edges = prerequisite / related / sub-concept, attributes = chapter, exam weight, difficulty prior. Stored in Postgres (ltree + edge table) with a cached in-memory graph in the routing service.
 
@@ -684,7 +684,8 @@ h3. Context
 * Phase: Phase 0 — Foundations
 * Target sprint: APL Sprint 3
 * Team: Product + Curriculum
-* Blocks: T033, T034, T036",High,5,,Curriculum Knowledge Graph & Content Pipeline (multi-subject),E04,Curriculum,APL Sprint 3,Phase 0 — Foundations,Product + Curriculum,knowledge-graph,curriculum,team-product-curriculum,,,,,,,,,,,
+* Blocked by: T211 (Provision Aurora PostgreSQL with pgvector via Terraform: Multi-AZ, RDS Proxy, backups and schema-migration tooling)
+* Blocks: T033, T034, T036",High,5,,Curriculum Knowledge Graph & Content Pipeline (multi-subject),E04,Curriculum,APL Sprint 3,Phase 0 — Foundations,Product + Curriculum,knowledge-graph,curriculum,team-product-curriculum,,,,T211,,,,,,,
 T033,Task,"Make `subject` and `track` first-class across the KC graph, item bank, routing, mastery API and telemetry","h3. Description
 Add `subject_id` (physics, maths, sciences, technique, eco_gestion) and `track_id` (Bac section) to KCs, items, textbook chunks, routing decisions, mastery records, telemetry events and dashboard queries. Enrolment maps each student to a track and the subjects it contains; tenants can enable subjects independently. Shared engine, partitioned content.
 
@@ -745,7 +746,7 @@ h3. Context
 * Target sprint: APL Sprint 4
 * Team: Product + Curriculum
 * Blocked by: T032 (Design the knowledge-component (KC) graph schema and store)
-* Blocks: T037, T071, T137, T144",High,5,,Curriculum Knowledge Graph & Content Pipeline (multi-subject),E04,Curriculum,APL Sprint 4,Phase 1 — Data Plane,Product + Curriculum,item-bank,schema,team-product-curriculum,,,,T032,,,,,,,
+* Blocks: T037, T071, T137, T144, T220, T221, T235",High,5,,Curriculum Knowledge Graph & Content Pipeline (multi-subject),E04,Curriculum,APL Sprint 4,Phase 1 — Data Plane,Product + Curriculum,item-bank,schema,team-product-curriculum,,,,T032,,,,,,,
 T037,Story,"As a teacher-author, I create, preview and submit items for review in the authoring tool","h3. Description
 Authoring UI with live preview (including interactive widgets), LaTeX math input, KC tag picker from the graph, difficulty estimate, and a review queue with comments. Bulk import from DOCX/CSV for legacy item sets.
 
@@ -775,8 +776,8 @@ h3. Context
 * Phase: Phase 2 — Intelligence
 * Target sprint: APL Sprint 8
 * Team: Product + Curriculum
-* Blocked by: T037 (As a teacher-author, I create, preview and submit items for review in the authoring tool), T035 (Populate the Physics KC graph for all Bac tracks (first subject))
-* Blocks: T044, T068, T184",High,13,,Curriculum Knowledge Graph & Content Pipeline (multi-subject),E04,Curriculum,APL Sprint 8,Phase 2 — Intelligence,Product + Curriculum,content,item-bank,team-product-curriculum,,,,T037,T035,,,,,,
+* Blocked by: T037 (As a teacher-author, I create, preview and submit items for review in the authoring tool), T035 (Populate the Physics KC graph for all Bac tracks (first subject)), T235 (Content production operations: author and reviewer pool, contracts and rights, throughput tracking, translation vendors)
+* Blocks: T044, T068, T184",High,13,,Curriculum Knowledge Graph & Content Pipeline (multi-subject),E04,Curriculum,APL Sprint 8,Phase 2 — Intelligence,Product + Curriculum,content,item-bank,team-product-curriculum,,,,T037,T035,T235,,,,,
 T039,Task,Ingest official textbooks into the RAG corpus with chapter/KC-aware chunking,"h3. Description
 OCR + layout extraction of the official physics manuals (Arabic and French editions), equation preservation (MathPix or Nougat), chunking by section with KC tags, embeddings (multilingual model) into pgvector with metadata filters. Licensing confirmed with CNP.
 
@@ -820,8 +821,8 @@ h3. Context
 * Phase: Phase 1 — Data Plane
 * Target sprint: APL Sprint 6
 * Team: ML Engineering (Python / PyTorch)
-* Blocked by: T040 (Benchmark SAINT, SAINT+, SAKT and AKT on public datasets and our pilot data)
-* Blocks: T042, T043",Highest,8,,Deep Knowledge Tracing Core,E05,ML,APL Sprint 6,Phase 1 — Data Plane,ML Engineering (Python / PyTorch),pykt,mlflow,team-ml-engineering,,,,T040,,,,,,,
+* Blocked by: T040 (Benchmark SAINT, SAINT+, SAKT and AKT on public datasets and our pilot data), T218 (Deploy the ML platform services: Airflow (Amazon MWAA) for data jobs and the MLflow tracking server and model registry)
+* Blocks: T042, T043",Highest,8,,Deep Knowledge Tracing Core,E05,ML,APL Sprint 6,Phase 1 — Data Plane,ML Engineering (Python / PyTorch),pykt,mlflow,team-ml-engineering,,,,T040,T218,,,,,,
 T042,Task,Implement production SAINT+ model with elapsed-time and lag-time embeddings,"h3. Description
 SAINT+ encoder–decoder: encoder over exercise sequence (item + KC embeddings + position), decoder over response sequence (correctness, elapsed time bucket, lag time bucket, hint usage, confidence). Separated self-attention per the SAINT architecture; causal masking; max sequence 512 with sliding window; mixed-precision training.
 
@@ -883,8 +884,8 @@ h3. Context
 * Phase: Phase 2 — Intelligence
 * Target sprint: APL Sprint 8
 * Team: ML Engineering (Python / PyTorch)
-* Blocked by: T042 (Implement production SAINT+ model with elapsed-time and lag-time embeddings), T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool)
-* Blocks: T047",Highest,13,,Deep Knowledge Tracing Core,E05,ML,APL Sprint 8,Phase 2 — Intelligence,ML Engineering (Python / PyTorch),kubeflow,retraining,mlops,team-ml-engineering,,,T042,T003,,,,,,
+* Blocked by: T042 (Implement production SAINT+ model with elapsed-time and lag-time embeddings), T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool), T218 (Deploy the ML platform services: Airflow (Amazon MWAA) for data jobs and the MLflow tracking server and model registry)
+* Blocks: T047",Highest,13,,Deep Knowledge Tracing Core,E05,ML,APL Sprint 8,Phase 2 — Intelligence,ML Engineering (Python / PyTorch),kubeflow,retraining,mlops,team-ml-engineering,,,T042,T003,T218,,,,,
 T046,Task,"Deploy TorchServe inference service with batching, warm pools and model versioning","h3. Description
 TorchServe on the GPU pool (plus a CPU fallback deployment) serving SAINT+ via gRPC; dynamic batching (max batch 64, 5 ms wait); model store on S3; blue/green model version swap via management API; Datadog metrics for latency, batch size, GPU utilisation.
 
@@ -1086,7 +1087,7 @@ h3. Context
 * Target sprint: APL Sprint 13
 * Team: ML Engineering (Python / PyTorch)
 * Personas: teacher
-* Blocked by: T052 (Build the routing microservice (Node.js) with cached graph, TorchServe client and policy engine)",Medium,5,,Adaptive Routing & Recommendation Service,E06,ML,APL Sprint 13,Phase 3 — Product Surfaces,ML Engineering (Python / PyTorch),routing,teacher,persona-teacher,team-ml-engineering,,,T052,,,,,,,
+* Blocked by: T052 (Build the routing microservice (Node.js) with cached graph, TorchServe client and policy engine), T225 (As a teacher, I create an assignment (chapter, item set or past paper) with a due date and follow completion)",Medium,5,,Adaptive Routing & Recommendation Service,E06,ML,APL Sprint 13,Phase 3 — Product Surfaces,ML Engineering (Python / PyTorch),routing,teacher,persona-teacher,team-ml-engineering,,,T052,T225,,,,,,
 T059,Task,"Deploy LiteLLM proxy with provider routing, fallbacks, budgets and key management","h3. Description
 LiteLLM in the `llm` namespace fronting OpenAI, Anthropic and a local vLLM endpoint (Qwen/Llama class on the GPU pool); routing rules by task (tutor → frontier model, judge → local, summarise → cheap); automatic fallback on 5xx/timeout; per-tenant and per-student daily budgets; virtual keys per service.
 
@@ -1130,8 +1131,8 @@ h3. Context
 * Phase: Phase 2 — Intelligence
 * Target sprint: APL Sprint 7
 * Team: LLM / Applied AI
-* Blocked by: T039 (Ingest official textbooks into the RAG corpus with chapter/KC-aware chunking), T059 (Deploy LiteLLM proxy with provider routing, fallbacks, budgets and key management)
-* Blocks: T062",Highest,8,,Multi-Model LLM Gateway & Guardrails,E07,LLM,APL Sprint 7,Phase 2 — Intelligence,LLM / Applied AI,rag,pgvector,team-llm-applied-ai,,,,T039,T059,,,,,,
+* Blocked by: T039 (Ingest official textbooks into the RAG corpus with chapter/KC-aware chunking), T059 (Deploy LiteLLM proxy with provider routing, fallbacks, budgets and key management), T211 (Provision Aurora PostgreSQL with pgvector via Terraform: Multi-AZ, RDS Proxy, backups and schema-migration tooling)
+* Blocks: T062",Highest,8,,Multi-Model LLM Gateway & Guardrails,E07,LLM,APL Sprint 7,Phase 2 — Intelligence,LLM / Applied AI,rag,pgvector,team-llm-applied-ai,,,,T039,T059,T211,,,,,
 T062,Task,Implement the LLM-as-a-Judge harness that intercepts tutor output before delivery,"h3. Description
 Synchronous judge in the tutor path: (1) extract formulas/claims from the candidate hint, (2) verify against retrieved textbook chunks and a symbolic checker (SymPy) for dimensional analysis and algebraic equivalence, (3) local LLM judge scores correctness, curriculum alignment, and 'does not reveal the answer'. Block + regenerate on fail (max 2 retries), then fall back to a template hint. LangSmith/Phoenix traces for every decision.
 
@@ -1146,7 +1147,7 @@ h3. Context
 * Target sprint: APL Sprint 8
 * Team: LLM / Applied AI
 * Blocked by: T060 (Serve a local open-weights model on vLLM for the judge and low-cost paths), T061 (Build the curriculum RAG pipeline over pgvector with KC-filtered hybrid retrieval)
-* Blocks: T063, T064, T065, T066, T070",Highest,13,,Multi-Model LLM Gateway & Guardrails,E07,LLM,APL Sprint 8,Phase 2 — Intelligence,LLM / Applied AI,guardrails,llm-judge,langsmith,team-llm-applied-ai,,,T060,T061,,,,,,
+* Blocks: T063, T064, T065, T066, T070, T223",Highest,13,,Multi-Model LLM Gateway & Guardrails,E07,LLM,APL Sprint 8,Phase 2 — Intelligence,LLM / Applied AI,guardrails,llm-judge,langsmith,team-llm-applied-ai,,,T060,T061,,,,,,
 T063,Task,Refactor the judge into a verifier plug-in interface with symbolic and rubric implementations,"h3. Description
 Define a `Verifier` interface (input: candidate message + retrieved chunks + item metadata; output: pass/fail + reasons). Implementations: `SymbolicVerifier` (SymPy algebra, units, numeric tolerance) for physics/maths/technique, and `RubricVerifier` (local LLM scoring against curriculum rubric + fact check vs. textbook) for éco/gestion and descriptive sciences content. Verifier selected by `subject_id`; results logged per verifier.
 
@@ -1366,7 +1367,7 @@ h3. Context
 * Target sprint: APL Sprint 4
 * Team: Frontend (Next.js / R3F)
 * Blocked by: T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms)
-* Blocks: T077, T083, T084, T086, T102, T133, T135, T137, T162, T174",Highest,13,,Interactive Learning Frontend (Next.js / WebGL),E09,Frontend,APL Sprint 4,Phase 1 — Data Plane,Frontend (Next.js / R3F),nextjs,design-system,i18n,team-frontend,,,T012,,,,,,,
+* Blocks: T077, T083, T084, T086, T102, T133, T135, T137, T162, T174, T220, T224, T232",Highest,13,,Interactive Learning Frontend (Next.js / WebGL),E09,Frontend,APL Sprint 4,Phase 1 — Data Plane,Frontend (Next.js / R3F),nextjs,design-system,i18n,team-frontend,,,T012,,,,,,,
 T077,Task,"Build the React Three Fiber physics canvas core: scene, camera rigs, units, touch controls, performance tiers","h3. Description
 `@apl/physics` package: shared scene wrapper, SI unit helpers, deterministic fixed-step integrator (Rapier WASM for rigid bodies), touch/pointer gesture layer, three performance tiers detected from GPU benchmark (shadows/particles toggled), WebGL context-loss recovery.
 
@@ -1533,7 +1534,7 @@ h3. Context
 * Phase: Phase 1 — Data Plane
 * Target sprint: APL Sprint 6
 * Team: Frontend (Next.js / R3F)
-* Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration), T007 (Roll out Datadog APM, distributed tracing, log pipeline and memory-leak watchdogs)",High,5,,Interactive Learning Frontend (Next.js / WebGL),E09,Frontend,APL Sprint 6,Phase 1 — Data Plane,Frontend (Next.js / R3F),performance,rum,team-frontend,,,,T076,T007,,,,,,
+* Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration), T007 (Roll out Datadog APM, distributed tracing, log pipeline and memory-leak watchdogs), T213 (CDN and media store: CloudFront for the web app and media, S3 media buckets with image resizing and cache rules)",High,5,,Interactive Learning Frontend (Next.js / WebGL),E09,Frontend,APL Sprint 6,Phase 1 — Data Plane,Frontend (Next.js / R3F),performance,rum,team-frontend,,,,T076,T007,T213,,,,,
 T087,Story,"As a student, I see my streak, XP and daily goal update instantly after each answer","h3. Description
 Streak/XP rules engine on the Redis consumer; UI badges; streak-freeze item earned by mastery (not purchase); daily goal adapts to days-to-exam.
 
@@ -1588,8 +1589,8 @@ h3. Context
 * Phase: Phase 2 — Intelligence
 * Target sprint: APL Sprint 11
 * Team: Backend (Node.js / TypeScript)
-* Blocked by: T026 (Deploy Redis Cluster (ElastiCache) and the real-time aggregation consumer)
-* Blocks: T090, T152",Medium,8,,Learner Engagement & Gamification,E10,Backend,APL Sprint 11,Phase 2 — Intelligence,Backend (Node.js / TypeScript),notifications,sms,push,team-backend,,,T026,,,,,,,
+* Blocked by: T026 (Deploy Redis Cluster (ElastiCache) and the real-time aggregation consumer), T212 (Domains, DNS and certificates: Route 53 zones, ACM certificates, SES sending domain with SPF, DKIM and DMARC)
+* Blocks: T090, T152",Medium,8,,Learner Engagement & Gamification,E10,Backend,APL Sprint 11,Phase 2 — Intelligence,Backend (Node.js / TypeScript),notifications,sms,push,team-backend,,,T026,T212,,,,,,
 T090,Story,"As a student at risk of dropping off, I receive a personalised nudge with a 10-minute plan","h3. Description
 Churn-risk heuristic (later a model) on engagement features; nudge content generated through the gateway and judged; A/B tested against no-nudge.
 
@@ -1633,8 +1634,8 @@ h3. Context
 * Phase: Phase 1 — Data Plane
 * Target sprint: APL Sprint 6
 * Team: Backend (Node.js / TypeScript)
-* Blocked by: T014 (Implement attribute-based authorisation middleware shared by all Node.js services)
-* Blocks: T093, T094, T095, T201",Highest,13,,Institution & Parent B2B Portals (Multi-Tenancy),E11,Backend,APL Sprint 6,Phase 1 — Data Plane,Backend (Node.js / TypeScript),multi-tenant,rls,postgres,team-backend,,,T014,,,,,,,
+* Blocked by: T014 (Implement attribute-based authorisation middleware shared by all Node.js services), T211 (Provision Aurora PostgreSQL with pgvector via Terraform: Multi-AZ, RDS Proxy, backups and schema-migration tooling)
+* Blocks: T093, T094, T095, T201, T224",Highest,13,,Institution & Parent B2B Portals (Multi-Tenancy),E11,Backend,APL Sprint 6,Phase 1 — Data Plane,Backend (Node.js / TypeScript),multi-tenant,rls,postgres,team-backend,,,T014,T211,,,,,,
 T093,Story,"As a platform admin, I onboard a school in 10 minutes: tenant, admins, classes, CSV student import","h3. Description
 Admin console: create tenant, invite school admin, bulk-import students/classes from CSV (with validation and consent-status tracking), custom subdomain, branding.
 
@@ -1650,7 +1651,7 @@ h3. Context
 * Team: Backend (Node.js / TypeScript)
 * Personas: platform-admin
 * Blocked by: T092 (Implement PostgreSQL Row-Level Security multi-tenancy with a tenant-context connection layer), T013 (As a parent, I give verifiable consent before my under-18 child's account is activated)
-* Blocks: T098, T108, T153",High,8,,Institution & Parent B2B Portals (Multi-Tenancy),E11,Backend,APL Sprint 12,Phase 3 — Product Surfaces,Backend (Node.js / TypeScript),onboarding,admin,persona-platform-admin,team-backend,,,T092,T013,,,,,,
+* Blocks: T098, T108, T153, T228",High,8,,Institution & Parent B2B Portals (Multi-Tenancy),E11,Backend,APL Sprint 12,Phase 3 — Product Surfaces,Backend (Node.js / TypeScript),onboarding,admin,persona-platform-admin,team-backend,,,T092,T013,,,,,,
 T094,Story,"As a school, I sign in with our Microsoft 365 / Google Workspace SSO","h3. Description
 Keycloak identity brokering per tenant (SAML/OIDC), just-in-time provisioning with role mapping, SCIM for roster sync where available.
 
@@ -1684,7 +1685,7 @@ h3. Context
 * Team: Backend (Node.js / TypeScript)
 * Personas: teacher
 * Blocked by: T049 (Expose per-KC mastery estimates and attention-based explanations via an internal API), T026 (Deploy Redis Cluster (ElastiCache) and the real-time aggregation consumer), T092 (Implement PostgreSQL Row-Level Security multi-tenancy with a tenant-context connection layer)
-* Blocks: T096, T100, T146, T188, T208",High,13,,Institution & Parent B2B Portals (Multi-Tenancy),E11,Backend,APL Sprint 13,Phase 3 — Product Surfaces,Backend (Node.js / TypeScript),teacher-dashboard,analytics,persona-teacher,team-backend,,,T049,T026,T092,,,,,
+* Blocks: T096, T100, T146, T188, T208, T226",High,13,,Institution & Parent B2B Portals (Multi-Tenancy),E11,Backend,APL Sprint 13,Phase 3 — Product Surfaces,Backend (Node.js / TypeScript),teacher-dashboard,analytics,persona-teacher,team-backend,,,T049,T026,T092,,,,,
 T096,Task,"Build cohort anomaly detection: sudden drops, cheating patterns, disengagement","h3. Description
 Streaming detectors: accuracy drop vs. own baseline, impossibly fast correct answers (cheating), copy-paste bursts, answer-pattern similarity across students in the same session (collusion), 5-day inactivity. Alerts to teacher dashboard with explanation.
 
@@ -1732,7 +1733,7 @@ h3. Context
 * Target sprint: APL Sprint 15
 * Team: Backend (Node.js / TypeScript)
 * Blocked by: T093 (As a platform admin, I onboard a school in 10 minutes: tenant, admins, classes, CSV student import)
-* Blocks: T099, T168, T195",High,13,,Institution & Parent B2B Portals (Multi-Tenancy),E11,Backend,APL Sprint 15,Phase 4 — B2B & Hardening,Backend (Node.js / TypeScript),stripe,billing,team-backend,,,,T093,,,,,,,
+* Blocks: T099, T168, T195, T228",High,13,,Institution & Parent B2B Portals (Multi-Tenancy),E11,Backend,APL Sprint 15,Phase 4 — B2B & Hardening,Backend (Node.js / TypeScript),stripe,billing,team-backend,,,,T093,,,,,,,
 T099,Spike,"Evaluate local payment rails for B2C (Flouci, D17, ClicToPay, bank transfer) alongside Stripe","h3. Description
 Stripe card coverage is limited for Tunisian consumers. Evaluate local PSP integration options, compliance and reconciliation; recommend an approach for family plans.
 
@@ -1794,7 +1795,7 @@ h3. Context
 * Phase: Phase 2 — Intelligence
 * Target sprint: APL Sprint 8
 * Team: QA / SDET
-* Blocked by: T010 (Provision ephemeral preview environments per pull request), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)",High,13,,"Observability, Quality & Release Readiness",E12,QA,APL Sprint 8,Phase 2 — Intelligence,QA / SDET,playwright,e2e,team-qa-sdet,,,,T010,T076,,,,,,
+* Blocked by: T010 (Provision ephemeral preview environments per pull request), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration), T219 (Synthetic learner data generator for development, preview environments, tests and load tests), T232 (UI string localisation workflow: message catalogs, translation management, native-speaker review, pseudo-localisation and RTL checks in CI)",High,13,,"Observability, Quality & Release Readiness",E12,QA,APL Sprint 8,Phase 2 — Intelligence,QA / SDET,playwright,e2e,team-qa-sdet,,,,T010,T076,T219,T232,,,,
 T103,Task,"Implement consumer-driven contract tests (Pact) between frontend, gateway and microservices","h3. Description
 Pact broker; contracts for every public API and Kafka event schema (via Schema Registry compatibility checks); can-I-deploy gate in CI.
 
@@ -1825,8 +1826,8 @@ h3. Context
 * Phase: Phase 3 — Product Surfaces
 * Target sprint: APL Sprint 14
 * Team: QA / SDET
-* Blocked by: T101 (Define SLOs and error budgets per service and wire burn-rate alerting), T052 (Build the routing microservice (Node.js) with cached graph, TorchServe client and policy engine), T084 (As a student, I challenge a peer to a real-time 5-question physics battle), T025 (Build the telemetry ingestion service (HTTP → Kafka) with validation and backpressure)
-* Blocks: T105, T109, T199",Highest,13,,"Observability, Quality & Release Readiness",E12,QA,APL Sprint 14,Phase 3 — Product Surfaces,QA / SDET,load-test,k6,capacity,team-qa-sdet,,,T101,T052,T084,T025,,,,
+* Blocked by: T101 (Define SLOs and error budgets per service and wire burn-rate alerting), T052 (Build the routing microservice (Node.js) with cached graph, TorchServe client and policy engine), T084 (As a student, I challenge a peer to a real-time 5-question physics battle), T025 (Build the telemetry ingestion service (HTTP → Kafka) with validation and backpressure), T219 (Synthetic learner data generator for development, preview environments, tests and load tests)
+* Blocks: T105, T109, T199",Highest,13,,"Observability, Quality & Release Readiness",E12,QA,APL Sprint 14,Phase 3 — Product Surfaces,QA / SDET,load-test,k6,capacity,team-qa-sdet,,,T101,T052,T084,T025,T219,,,
 T105,Task,"Run chaos experiments: AZ loss, Kafka broker loss, TorchServe outage, LLM provider outage, Redis failover","h3. Description
 Litmus/AWS FIS experiments in staging with hypotheses and abort conditions; verify graceful degradation paths (IRT fallback, template hints, read-only mode).
 
@@ -1870,7 +1871,7 @@ h3. Context
 * Target sprint: APL Sprint 16
 * Team: QA / SDET
 * Blocked by: T101 (Define SLOs and error budgets per service and wire burn-rate alerting)
-* Blocks: T109, T206",High,5,,"Observability, Quality & Release Readiness",E12,QA,APL Sprint 16,Phase 4 — B2B & Hardening,QA / SDET,runbooks,on-call,team-qa-sdet,,,,T101,,,,,,,
+* Blocks: T109, T206, T216",High,5,,"Observability, Quality & Release Readiness",E12,QA,APL Sprint 16,Phase 4 — B2B & Hardening,QA / SDET,runbooks,on-call,team-qa-sdet,,,,T101,,,,,,,
 T108,Task,"Run the closed pilot with 3 schools (≈ 2,000 students) and triage findings","h3. Description
 Pilot plan, success metrics (learning gain, retention, CSAT, SLOs), feedback loops with teachers, weekly triage; exit criteria to open launch.
 
@@ -1879,13 +1880,16 @@ h3. Acceptance Criteria
 * All Sev-1/2 pilot bugs closed
 * Teacher and student CSAT ≥ 4.0
 
+h3. Addendum changes (v2)
+* The pilot starts only once the tutor safeguarding layer (T223) and the vendor DPAs (T236) are in place
+
 h3. Context
 * Epic: Observability, Quality & Release Readiness
 * Phase: Phase 3 — Product Surfaces
 * Target sprint: APL Sprint 12
 * Team: QA / SDET
-* Blocked by: T052 (Build the routing microservice (Node.js) with cached graph, TorchServe client and policy engine), T069 (As a student, I chat with a streaming tutor beside the item, in Arabic or French, with LaTeX rendering), T079 (As a student, I explore mechanics sandboxes: projectile motion, inclined plane, pendulum, collisions — with draggable vectors), T093 (As a platform admin, I onboard a school in 10 minutes: tenant, admins, classes, CSV student import)
-* Blocks: T110, T130, T200",Highest,8,,"Observability, Quality & Release Readiness",E12,QA,APL Sprint 12,Phase 3 — Product Surfaces,QA / SDET,pilot,launch,team-qa-sdet,,,,T052,T069,T079,T093,,,,
+* Blocked by: T052 (Build the routing microservice (Node.js) with cached graph, TorchServe client and policy engine), T069 (As a student, I chat with a streaming tutor beside the item, in Arabic or French, with LaTeX rendering), T079 (As a student, I explore mechanics sandboxes: projectile motion, inclined plane, pendulum, collisions — with draggable vectors), T093 (As a platform admin, I onboard a school in 10 minutes: tenant, admins, classes, CSV student import), T223 (Safeguarding and content-safety layer in the tutor: detect distress, abuse and off-topic requests; respond safely and escalate), T236 (Vendor and sub-processor agreements: DPAs with LLM providers (zero data retention, no training), AWS, Snowflake, Datadog; public sub-processor list)
+* Blocks: T110, T130, T200",Highest,8,,"Observability, Quality & Release Readiness",E12,QA,APL Sprint 12,Phase 3 — Product Surfaces,QA / SDET,pilot,launch,team-qa-sdet,,,,T052,T069,T079,T093,T223,T236,,
 T109,Task,"Prepare the exam-season war room: freeze window, scaling pre-warm, comms plan","h3. Description
 Change freeze 2 weeks before Bac; pre-scaled node pools and Redis; LLM budget uplift; on-call doubled; status comms templates in Arabic/French; daily readiness checklist.
 
@@ -1910,15 +1914,15 @@ h3. Acceptance Criteria
 * Hypercare report delivered to leadership
 
 h3. Addendum changes (v2)
-* Go-live also requires the accessibility gate (T150), legal documents (T207) and store compliance (T169)
+* Go-live also requires the accessibility gate (T150), legal documents (T207), store compliance (T169) and the data breach response plan (T216)
 
 h3. Context
 * Epic: Observability, Quality & Release Readiness
 * Phase: Phase 5 — Launch
 * Target sprint: APL Sprint 18
 * Team: QA / SDET
-* Blocked by: T108 (Run the closed pilot with 3 schools (≈ 2,000 students) and triage findings), T020 (Commission third-party penetration test and remediate findings), T106 (Implement backups and disaster recovery: cross-region replication, RPO 15 min / RTO 1 h, quarterly drill), T109 (Prepare the exam-season war room: freeze window, scaling pre-warm, comms plan), T150 (Co-design and audits with students with disabilities, through Tunisian disability associations; publish the accessibility statement), T207 (Legal documents: terms of service, privacy policy, cookie policy, school data-processing agreement, content licensing register), T169 (Privacy manifest, App Store privacy labels, Play Data safety form, age rating, review of the minors' consent flow)
-* Blocks: T131",Highest,5,,"Observability, Quality & Release Readiness",E12,QA,APL Sprint 18,Phase 5 — Launch,QA / SDET,launch,team-qa-sdet,,,,,T108,T020,T106,T109,T150,T207,T169,
+* Blocked by: T108 (Run the closed pilot with 3 schools (≈ 2,000 students) and triage findings), T020 (Commission third-party penetration test and remediate findings), T106 (Implement backups and disaster recovery: cross-region replication, RPO 15 min / RTO 1 h, quarterly drill), T109 (Prepare the exam-season war room: freeze window, scaling pre-warm, comms plan), T150 (Co-design and audits with students with disabilities, through Tunisian disability associations; publish the accessibility statement), T207 (Legal documents: terms of service, privacy policy, cookie policy, school data-processing agreement, content licensing register), T169 (Privacy manifest, App Store privacy labels, Play Data safety form, age rating, review of the minors' consent flow), T216 (Data breach response plan: triage, INPDP notification, communication to schools and parents, yearly drill)
+* Blocks: T131, T233",Highest,5,,"Observability, Quality & Release Readiness",E12,QA,APL Sprint 18,Phase 5 — Launch,QA / SDET,launch,team-qa-sdet,,,,,T108,T020,T106,T109,T150,T207,T169,T216
 T111,Task,Mathématiques: encode the KC graph for all relevant Bac tracks,"h3. Description
 Subject lead encodes the official Mathématiques programme as knowledge components with prerequisite edges, chapter mapping and exam weight per track, cross-checked against 10 years of Bac papers.
 
@@ -1947,8 +1951,8 @@ h3. Context
 * Phase: Phase 2 — Intelligence
 * Target sprint: APL Sprint 11
 * Team: Product + Curriculum
-* Blocked by: T111 (Mathématiques: encode the KC graph for all relevant Bac tracks), T037 (As a teacher-author, I create, preview and submit items for review in the authoring tool)
-* Blocks: T128, T129, T130",High,13,,"Subject Expansion: Maths, Sciences, Technique, Économie & Gestion",E13,Curriculum,APL Sprint 11,Phase 2 — Intelligence,Product + Curriculum,content,maths,item-bank,team-product-curriculum,,,T111,T037,,,,,,
+* Blocked by: T111 (Mathématiques: encode the KC graph for all relevant Bac tracks), T037 (As a teacher-author, I create, preview and submit items for review in the authoring tool), T235 (Content production operations: author and reviewer pool, contracts and rights, throughput tracking, translation vendors)
+* Blocks: T128, T129, T130",High,13,,"Subject Expansion: Maths, Sciences, Technique, Économie & Gestion",E13,Curriculum,APL Sprint 11,Phase 2 — Intelligence,Product + Curriculum,content,maths,item-bank,team-product-curriculum,,,T111,T037,T235,,,,,
 T113,Task,Mathématiques: ingest official textbooks into the RAG corpus and build glossary + misconception taxonomy,"h3. Description
 OCR/layout extraction of the official Mathématiques manuals with KC-aware chunking into pgvector; Arabic/French glossary of all KC names; misconception taxonomy from past-paper examiner reports.
 
@@ -2279,8 +2283,8 @@ h3. Context
 * Phase: Phase 3 — Product Surfaces
 * Target sprint: APL Sprint 5
 * Team: Backend (Node.js / TypeScript)
-* Blocked by: T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms), T015 (Encryption at rest and in transit: KMS CMKs, TLS everywhere, field-level encryption for PII)
-* Blocks: T135, T145, T148",Highest,8,,Inclusive Learning & Accessibility,E14,Backend,APL Sprint 5,Phase 3 — Product Surfaces,Backend (Node.js / TypeScript),comfort-profile,accessibility,privacy,team-backend,,,T012,T015,,,,,,
+* Blocked by: T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms), T015 (Encryption at rest and in transit: KMS CMKs, TLS everywhere, field-level encryption for PII), T214 (Backend service template and API contract: service skeleton, OpenAPI 3.1 specs, versioning and deprecation policy)
+* Blocks: T135, T145, T148",Highest,8,,Inclusive Learning & Accessibility,E14,Backend,APL Sprint 5,Phase 3 — Product Surfaces,Backend (Node.js / TypeScript),comfort-profile,accessibility,privacy,team-backend,,,T012,T015,T214,,,,,
 T135,Story,"As a student, I set my comfort profile at onboarding or any time, with combinable presets","h3. Description
 Optional onboarding step and a settings page with presets (low vision, screen reader, dyslexia, attention, motor, hearing, calm) that combine, plus fine-grained toggles. The profile follows OS settings by default.
 
@@ -2461,7 +2465,8 @@ h3. Context
 * Target sprint: APL Sprint 13
 * Team: Frontend (Next.js / R3F)
 * Personas: teacher
-* Blocked by: T095 (As a teacher, I see real-time mastery heatmaps for my cohort and get intervention alerts), T145 (As a student with an official accommodation, my time multiplier applies to timed items, duels and the mock Bac)",High,5,,Inclusive Learning & Accessibility,E14,Frontend,APL Sprint 13,Phase 3 — Product Surfaces,Frontend (Next.js / R3F),accommodations,teacher,persona-teacher,team-frontend,,,T095,T145,,,,,,
+* Blocked by: T095 (As a teacher, I see real-time mastery heatmaps for my cohort and get intervention alerts), T145 (As a student with an official accommodation, my time multiplier applies to timed items, duels and the mock Bac)
+* Blocks: T226",High,5,,Inclusive Learning & Accessibility,E14,Frontend,APL Sprint 13,Phase 3 — Product Surfaces,Frontend (Next.js / R3F),accommodations,teacher,persona-teacher,team-frontend,,,T095,T145,,,,,,
 T147,Task,Captions and transcripts for all audio and the tutor's voice; visual and haptic alternatives to sounds,"h3. Description
 Captions and transcripts for every audio and video asset and for the tutor's voice; visual and haptic alternatives for every sound cue.
 
@@ -2547,7 +2552,7 @@ h3. Context
 * Target sprint: APL Sprint 11
 * Team: Backend (Node.js / TypeScript)
 * Blocked by: T089 (Build the notification service: push (web/FCM), SMS, email with quiet hours and per-tenant templates)
-* Blocks: T153, T154, T156, T157, T158, T160, T161, T196, T210",High,8,,Focus Mode & Smart Notifications,E15,Backend,APL Sprint 11,Phase 3 — Product Surfaces,Backend (Node.js / TypeScript),notifications,orchestrator,team-backend,,,,T089,,,,,,,
+* Blocks: T153, T154, T156, T157, T158, T160, T161, T196, T210, T225, T227, T229",High,8,,Focus Mode & Smart Notifications,E15,Backend,APL Sprint 11,Phase 3 — Product Surfaces,Backend (Node.js / TypeScript),notifications,orchestrator,team-backend,,,,T089,,,,,,,
 T153,Task,"Import school timetables and calendars per tenant (class hours, holidays, mock Bac, Bac); no sends during class","h3. Description
 Import school timetables and calendars per tenant (class hours, holidays, mock Bac and Bac dates) so the Orchestrator never sends during class.
 
@@ -2711,7 +2716,7 @@ h3. Context
 * Target sprint: APL Sprint 8
 * Team: Mobile (iOS / Android)
 * Blocked by: T162 (Confirm native learner apps versus PWA and the code-sharing strategy; write the ADR), T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms)
-* Blocks: T165, T166, T171, T172, T173",High,13,,Native Apps & Store Compliance,E16,Mobile,APL Sprint 8,Phase 3 — Product Surfaces,Mobile (iOS / Android),ios,swiftui,team-mobile,,,,T162,T012,,,,,,
+* Blocks: T165, T166, T171, T172, T173, T229, T230",High,13,,Native Apps & Store Compliance,E16,Mobile,APL Sprint 8,Phase 3 — Product Surfaces,Mobile (iOS / Android),ios,swiftui,team-mobile,,,,T162,T012,,,,,,
 T164,Task,"Android learner app shell (Kotlin, Compose): sign-in, navigation, tokens, offline store","h3. Description
 Android learner app shell in Kotlin and Jetpack Compose: sign-in, navigation, Cyanotype tokens with font scaling, and an offline store.
 
@@ -2726,7 +2731,7 @@ h3. Context
 * Target sprint: APL Sprint 9
 * Team: Mobile (iOS / Android)
 * Blocked by: T162 (Confirm native learner apps versus PWA and the code-sharing strategy; write the ADR)
-* Blocks: T173",High,13,,Native Apps & Store Compliance,E16,Mobile,APL Sprint 9,Phase 3 — Product Surfaces,Mobile (iOS / Android),android,kotlin,team-mobile,,,,T162,,,,,,,
+* Blocks: T173, T229, T230",High,13,,Native Apps & Store Compliance,E16,Mobile,APL Sprint 9,Phase 3 — Product Surfaces,Mobile (iOS / Android),android,kotlin,team-mobile,,,,T162,,,,,,,
 T165,Task,"Embed simulations and items in the native apps through a bridge to the widget package, with telemetry passthrough","h3. Description
 Embed the simulations and items in the native apps through a bridge to the widget package (T078), passing telemetry through unchanged and exposing the accessibility tree.
 
@@ -2857,8 +2862,8 @@ h3. Context
 * Phase: Phase 3 — Product Surfaces
 * Target sprint: APL Sprint 16
 * Team: Mobile (iOS / Android)
-* Blocked by: T163 (iOS learner app shell (SwiftUI): Keycloak sign-in, navigation, Cyanotype tokens, offline store), T164 (Android learner app shell (Kotlin, Compose): sign-in, navigation, tokens, offline store)
-* Blocks: T197",High,5,,Native Apps & Store Compliance,E16,Mobile,APL Sprint 16,Phase 3 — Product Surfaces,Mobile (iOS / Android),release,app-store,team-mobile,,,,T163,T164,,,,,,
+* Blocked by: T163 (iOS learner app shell (SwiftUI): Keycloak sign-in, navigation, Cyanotype tokens, offline store), T164 (Android learner app shell (Kotlin, Compose): sign-in, navigation, tokens, offline store), T229 (Native push notifications (APNs, FCM) and universal links / app links with in-app deep-link routing), T230 (Mobile quality: crash reporting, app performance monitoring and native UI tests on a device farm)
+* Blocks: T197",High,5,,Native Apps & Store Compliance,E16,Mobile,APL Sprint 16,Phase 3 — Product Surfaces,Mobile (iOS / Android),release,app-store,team-mobile,,,,T163,T164,T229,T230,,,,
 T174,Task,"Cyanotype design system in code: tokens, components (buttons, chips, concept states, hint ladder, confidence scale), Storybook, RTL","h3. Description
 Implement the Cyanotype design system from the design canvas (board 00): tokens for colour, type, spacing and states; components (buttons, chips, concept-state nodes, hint ladder, confidence scale, Bac countdown ruler); Storybook; RTL through CSS logical properties.
 
@@ -2872,8 +2877,8 @@ h3. Context
 * Phase: Phase 3 — Product Surfaces
 * Target sprint: APL Sprint 4
 * Team: Frontend (Next.js / R3F)
-* Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)
-* Blocks: T133, T193, T204, T209",Highest,8,,Learner Experience & Cyanotype Design System,E17,Frontend,APL Sprint 4,Phase 3 — Product Surfaces,Frontend (Next.js / R3F),design-system,cyanotype,team-frontend,,,,T076,,,,,,,
+* Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration), T231 (Brand identity: logo, eight-point star mark, app icon, illustration style and brand guidelines in FR and AR)
+* Blocks: T133, T193, T204, T209",Highest,8,,Learner Experience & Cyanotype Design System,E17,Frontend,APL Sprint 4,Phase 3 — Product Surfaces,Frontend (Next.js / R3F),design-system,cyanotype,team-frontend,,,,T076,T231,,,,,,
 T175,Story,"As a new student, I choose my Bac section, get parental consent and take the 12-question placement test (screen 01)","h3. Description
 Onboarding flow from screen 01: choose the Bac section, capture a parent's phone for consent, then take the 12-question adaptive placement test (T043).
 
@@ -2888,7 +2893,7 @@ h3. Context
 * Target sprint: APL Sprint 8
 * Team: Frontend (Next.js / R3F)
 * Personas: student
-* Blocked by: T013 (As a parent, I give verifiable consent before my under-18 child's account is activated), T043 (Implement IRT cold-start estimator and blended handoff to SAINT+)",High,5,,Learner Experience & Cyanotype Design System,E17,Frontend,APL Sprint 8,Phase 3 — Product Surfaces,Frontend (Next.js / R3F),onboarding,screens,persona-student,team-frontend,,,T013,T043,,,,,,
+* Blocked by: T013 (As a parent, I give verifiable consent before my under-18 child's account is activated), T043 (Implement IRT cold-start estimator and blended handoff to SAINT+), T220 (Item player: render and capture every item type (MCQ, numeric with units, multi-step derivation, ordering, interactive widget) on web and in the native bridge), T221 (Answer evaluation service: server-side grading of every item type with numeric tolerance, units, symbolic equivalence and partial credit)",High,5,,Learner Experience & Cyanotype Design System,E17,Frontend,APL Sprint 8,Phase 3 — Product Surfaces,Frontend (Next.js / R3F),onboarding,screens,persona-student,team-frontend,,,T013,T043,T220,T221,,,,
 T176,Story,"As a student, I see Today: daily plan, Bac countdown, at-risk concepts and pending duels (screen 02)","h3. Description
 Today screen from screen 02: daily plan split by coefficient and weakness with a reason per block, Bac countdown ruler, estimated grade, at-risk concepts with failure probability, pending duels.
 
@@ -2935,8 +2940,8 @@ h3. Context
 * Target sprint: APL Sprint 10
 * Team: Frontend (Next.js / R3F)
 * Personas: student
-* Blocked by: T069 (As a student, I chat with a streaming tutor beside the item, in Arabic or French, with LaTeX rendering), T079 (As a student, I explore mechanics sandboxes: projectile motion, inclined plane, pendulum, collisions — with draggable vectors)
-* Blocks: T183",Highest,8,,Learner Experience & Cyanotype Design System,E17,Frontend,APL Sprint 10,Phase 3 — Product Surfaces,Frontend (Next.js / R3F),lab,screens,persona-student,team-frontend,,,T069,T079,,,,,,
+* Blocked by: T069 (As a student, I chat with a streaming tutor beside the item, in Arabic or French, with LaTeX rendering), T079 (As a student, I explore mechanics sandboxes: projectile motion, inclined plane, pendulum, collisions — with draggable vectors), T220 (Item player: render and capture every item type (MCQ, numeric with units, multi-step derivation, ordering, interactive widget) on web and in the native bridge), T221 (Answer evaluation service: server-side grading of every item type with numeric tolerance, units, symbolic equivalence and partial credit)
+* Blocks: T183",Highest,8,,Learner Experience & Cyanotype Design System,E17,Frontend,APL Sprint 10,Phase 3 — Product Surfaces,Frontend (Next.js / R3F),lab,screens,persona-student,team-frontend,,,T069,T079,T220,T221,,,,
 T179,Story,"As a student who answers wrong, I see the diagnosed misconception and start a 1-minute micro-remediation (screen 05)","h3. Description
 Diagnosis screen 05: the named misconception (T071) with a visual comparison, and a 1-minute micro-remediation path that returns to the item.
 
@@ -3033,6 +3038,7 @@ h3. Acceptance Criteria
 * Official timing and structure per section and subject
 * Survives a 5-minute connection loss without losing answers
 * The attested time multiplier applies
+* Tutor, hints and the concept map are switched off during a graded mock Bac
 
 h3. Context
 * Epic: Bac Simulation, Annales & Grade Prediction
@@ -3040,7 +3046,7 @@ h3. Context
 * Target sprint: APL Sprint 14
 * Team: Frontend (Next.js / R3F)
 * Personas: student
-* Blocked by: T083 (As a student, I complete an assessment during a 5-minute internet outage and nothing is lost), T145 (As a student with an official accommodation, my time multiplier applies to timed items, duels and the mock Bac)",High,8,,"Bac Simulation, Annales & Grade Prediction",E18,Frontend,APL Sprint 14,Phase 4 — B2B & Hardening,Frontend (Next.js / R3F),mock-bac,exam,persona-student,team-frontend,,,T083,T145,,,,,,
+* Blocked by: T083 (As a student, I complete an assessment during a 5-minute internet outage and nothing is lost), T145 (As a student with an official accommodation, my time multiplier applies to timed items, duels and the mock Bac), T220 (Item player: render and capture every item type (MCQ, numeric with units, multi-step derivation, ordering, interactive widget) on web and in the native bridge)",High,8,,"Bac Simulation, Annales & Grade Prediction",E18,Frontend,APL Sprint 14,Phase 4 — B2B & Hardening,Frontend (Next.js / R3F),mock-bac,exam,persona-student,team-frontend,,,T083,T145,T220,,,,,
 T186,Task,"Auto-grading of mock Bac papers: symbolic verifiers for maths and physics, rubric scoring for open answers with teacher override","h3. Description
 Grade mock Bac papers automatically: numeric and symbolic answers through the verifiers (T063), open answers through rubric scoring, with teacher override and a score report per exercise.
 
@@ -3054,8 +3060,8 @@ h3. Context
 * Phase: Phase 4 — B2B & Hardening
 * Target sprint: APL Sprint 14
 * Team: LLM / Applied AI
-* Blocked by: T063 (Refactor the judge into a verifier plug-in interface with symbolic and rubric implementations)
-* Blocks: T187, T188",High,8,,"Bac Simulation, Annales & Grade Prediction",E18,LLM,APL Sprint 14,Phase 4 — B2B & Hardening,LLM / Applied AI,grading,exam,judge,team-llm-applied-ai,,,T063,,,,,,,
+* Blocked by: T063 (Refactor the judge into a verifier plug-in interface with symbolic and rubric implementations), T221 (Answer evaluation service: server-side grading of every item type with numeric tolerance, units, symbolic equivalence and partial credit)
+* Blocks: T187, T188",High,8,,"Bac Simulation, Annales & Grade Prediction",E18,LLM,APL Sprint 14,Phase 4 — B2B & Hardening,LLM / Applied AI,grading,exam,judge,team-llm-applied-ai,,,T063,T221,,,,,,
 T187,Task,"Bac grade estimate per subject from mastery, coefficients and mock-Bac results, with an uncertainty band","h3. Description
 Estimate the Bac grade per subject from per-concept mastery (T049), exam weights and mock-Bac results, calibrated per section and always shown with an uncertainty band.
 
@@ -3084,7 +3090,7 @@ h3. Context
 * Target sprint: APL Sprint 15
 * Team: Frontend (Next.js / R3F)
 * Personas: teacher
-* Blocked by: T095 (As a teacher, I see real-time mastery heatmaps for my cohort and get intervention alerts), T186 (Auto-grading of mock Bac papers: symbolic verifiers for maths and physics, rubric scoring for open answers with teacher override)",Medium,5,,"Bac Simulation, Annales & Grade Prediction",E18,Frontend,APL Sprint 15,Phase 4 — B2B & Hardening,Frontend (Next.js / R3F),mock-bac,teacher,persona-teacher,team-frontend,,,T095,T186,,,,,,
+* Blocked by: T095 (As a teacher, I see real-time mastery heatmaps for my cohort and get intervention alerts), T186 (Auto-grading of mock Bac papers: symbolic verifiers for maths and physics, rubric scoring for open answers with teacher override), T225 (As a teacher, I create an assignment (chapter, item set or past paper) with a due date and follow completion)",Medium,5,,"Bac Simulation, Annales & Grade Prediction",E18,Frontend,APL Sprint 15,Phase 4 — B2B & Hardening,Frontend (Next.js / R3F),mock-bac,teacher,persona-teacher,team-frontend,,,T095,T186,T225,,,,,
 T189,Story,"As a student, I export a printable revision sheet for a chapter built from my weak concepts (PDF, FR/AR)","h3. Description
 Printable revision sheet per chapter, built from the student's weak concepts, exported as an accessible PDF in FR or AR.
 
@@ -3157,7 +3163,7 @@ h3. Context
 * Target sprint: APL Sprint 13
 * Team: Growth & Marketing
 * Personas: visitor
-* Blocked by: T174 (Cyanotype design system in code: tokens, components (buttons, chips, concept states, hint ladder, confidence scale), Storybook, RTL)",High,8,,"Product Analytics, Growth & Go-to-Market",E19,Growth,APL Sprint 13,Phase 5 — Launch,Growth & Marketing,website,seo,growth,persona-visitor,team-growth-marketing,,T174,,,,,,,
+* Blocked by: T174 (Cyanotype design system in code: tokens, components (buttons, chips, concept states, hint ladder, confidence scale), Storybook, RTL), T231 (Brand identity: logo, eight-point star mark, app icon, illustration style and brand guidelines in FR and AR)",High,8,,"Product Analytics, Growth & Go-to-Market",E19,Growth,APL Sprint 13,Phase 5 — Launch,Growth & Marketing,website,seo,growth,persona-visitor,team-growth-marketing,,T174,T231,,,,,,
 T194,Task,"B2C web checkout with the payment rail chosen in T099 (Flouci, D17 or ClicToPay): subscriptions, invoices, refunds","h3. Description
 B2C web checkout using the local payment rail chosen in T099 (Flouci, D17 or ClicToPay) plus cards: subscriptions, renewals, invoices and refunds.
 
@@ -3213,7 +3219,7 @@ h3. Context
 * Phase: Phase 5 — Launch
 * Target sprint: APL Sprint 17
 * Team: Growth & Marketing
-* Blocked by: T173 (Store release pipeline: TestFlight and Play internal testing, fastlane, review checklist, staged rollout)",Medium,3,,"Product Analytics, Growth & Go-to-Market",E19,Growth,APL Sprint 17,Phase 5 — Launch,Growth & Marketing,aso,app-store,growth,team-growth-marketing,,,T173,,,,,,,
+* Blocked by: T173 (Store release pipeline: TestFlight and Play internal testing, fastlane, review checklist, staged rollout), T231 (Brand identity: logo, eight-point star mark, app icon, illustration style and brand guidelines in FR and AR)",Medium,3,,"Product Analytics, Growth & Go-to-Market",E19,Growth,APL Sprint 17,Phase 5 — Launch,Growth & Marketing,aso,app-store,growth,team-growth-marketing,,,T173,T231,,,,,,
 T198,Story,"As a student or parent, I give in-app feedback and an NPS score; responses route to product and support","h3. Description
 In-app feedback and a quarterly NPS survey for students and parents, routed to product and support with app version and screen.
 
@@ -3355,8 +3361,8 @@ h3. Context
 * Phase: Phase 4 — B2B & Hardening
 * Target sprint: APL Sprint 10
 * Team: Legal / DPO
-* Blocked by: T017 (Produce the Data Protection Impact Assessment and INPDP declaration file)
-* Blocks: T110",Highest,5,,"Support, Back-office & Legal",E20,Legal,APL Sprint 10,Phase 4 — B2B & Hardening,Legal / DPO,legal,compliance,team-legal-dpo,,,,T017,,,,,,,
+* Blocked by: T017 (Produce the Data Protection Impact Assessment and INPDP declaration file), T236 (Vendor and sub-processor agreements: DPAs with LLM providers (zero data retention, no training), AWS, Snowflake, Datadog; public sub-processor list)
+* Blocks: T110",Highest,5,,"Support, Back-office & Legal",E20,Legal,APL Sprint 10,Phase 4 — B2B & Hardening,Legal / DPO,legal,compliance,team-legal-dpo,,,,T017,T236,,,,,,
 T208,Task,"Teacher and school-admin training kit: written guides, live onboarding sessions, certification badge","h3. Description
 Training kit for teachers and school admins: written step-by-step guides, live onboarding sessions and a certification badge.
 
@@ -3401,3 +3407,391 @@ h3. Context
 * Team: Frontend (Next.js / R3F)
 * Personas: student
 * Blocked by: T152 (Notification Orchestrator: single gateway, priority classes, daily budget, quiet hours, de-duplication and digests (above T089))",Medium,3,,Focus Mode & Smart Notifications,E15,Frontend,APL Sprint 13,Phase 3 — Product Surfaces,Frontend (Next.js / R3F),notifications,inbox,persona-student,team-frontend,,,T152,,,,,,,
+T211,Task,"Provision Aurora PostgreSQL with pgvector via Terraform: Multi-AZ, RDS Proxy, backups and schema-migration tooling","h3. Description
+The platform's main relational store: Aurora PostgreSQL (Multi-AZ) with the pgvector extension, RDS Proxy for connection pooling from EKS, IAM authentication, point-in-time recovery, and a schema-migration tool run from CI (one migration history per service, reviewed in pull requests). Keycloak, the knowledge graph, the item bank, tenancy (RLS) and the RAG corpus all live here.
+
+h3. Acceptance Criteria
+* `terraform apply` creates the cluster in dev, staging and prod, encrypted under the environment's KMS key
+* Services connect only through RDS Proxy with IAM authentication; no static database passwords in pods
+* A migration merged to main runs automatically in staging; a failed migration blocks the deploy and rolls back
+
+h3. Context
+* Epic: Platform Foundations: Infrastructure & DevOps
+* Phase: Phase 0 — Foundations
+* Target sprint: APL Sprint 2
+* Team: Platform / DevOps
+* Blocked by: T002 (Provision multi-AZ VPC, subnets, NAT and VPC endpoints via Terraform)
+* Blocks: T012, T032, T061, T092",Highest,5,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 2,Phase 0 — Foundations,Platform / DevOps,postgres,pgvector,terraform,team-platform-devops,,,T002,,,,,,,
+T212,Task,"Domains, DNS and certificates: Route 53 zones, ACM certificates, SES sending domain with SPF, DKIM and DMARC","h3. Description
+Register and delegate the product domains (app, api, admin, status, marketing, previews), manage the zones in Route 53 through Terraform, issue ACM certificates with automatic renewal, and set up the SES sending domain so consent, password and summary emails reach inboxes.
+
+h3. Acceptance Criteria
+* Every public hostname resolves through Terraform-managed records and serves a valid ACM certificate
+* SPF, DKIM and DMARC pass for the sending domain (DMARC at quarantine, then reject)
+* Certificate expiry and DMARC failure reports alert the platform channel
+
+h3. Context
+* Epic: Platform Foundations: Infrastructure & DevOps
+* Phase: Phase 0 — Foundations
+* Target sprint: APL Sprint 2
+* Team: Platform / DevOps
+* Blocked by: T001 (Bootstrap Terraform mono-repo with remote state, workspaces and policy checks)
+* Blocks: T005, T089, T213",Highest,3,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 2,Phase 0 — Foundations,Platform / DevOps,dns,tls,email,team-platform-devops,,,T001,,,,,,,
+T213,Task,"CDN and media store: CloudFront for the web app and media, S3 media buckets with image resizing and cache rules","h3. Description
+Serve the Next.js static assets, simulation bundles and item media (figures, diagrams, past-paper scans) through CloudFront, with private S3 media buckets and signed URLs for licensed content, on-the-fly image resizing to modern formats, and cache-busting on deploy.
+
+h3. Acceptance Criteria
+* Static assets and media are served from CloudFront with a cache hit ratio of at least 90 % after warm-up
+* Licensed content (past-paper scans, manual extracts) is only reachable through signed, expiring URLs
+* Images are delivered at the device's width in WebP or AVIF, cutting median image weight by at least 50 %
+
+h3. Context
+* Epic: Platform Foundations: Infrastructure & DevOps
+* Phase: Phase 1 — Data Plane
+* Target sprint: APL Sprint 5
+* Team: Platform / DevOps
+* Blocked by: T004 (Set up ArgoCD GitOps with Helm charts and per-environment overlays), T212 (Domains, DNS and certificates: Route 53 zones, ACM certificates, SES sending domain with SPF, DKIM and DMARC)
+* Blocks: T086",High,5,,Platform Foundations: Infrastructure & DevOps,E01,Platform,APL Sprint 5,Phase 1 — Data Plane,Platform / DevOps,cdn,media,performance,team-platform-devops,,,T004,T212,,,,,,
+T214,Task,"Backend service template and API contract: service skeleton, OpenAPI 3.1 specs, versioning and deprecation policy","h3. Description
+A golden-path template for every Node.js service (Fastify, health and readiness probes, OpenTelemetry, structured logs, configuration, the shared authz package, graceful shutdown, Helm chart) and an API contract practice: every public endpoint is described in OpenAPI 3.1, published in a developer portal and versioned under /api/v1, with a written deprecation policy for web and native clients.
+
+h3. Acceptance Criteria
+* A new service created from the template deploys to a preview environment with traces, logs and probes working, without manual changes
+* CI fails when an endpoint is added or changed without its OpenAPI description
+* The deprecation policy keeps an API version alive for at least 6 months after the native apps stop using it, with a forced-update screen for older apps
+
+h3. Context
+* Epic: Platform Foundations: Infrastructure & DevOps
+* Phase: Phase 0 — Foundations
+* Target sprint: APL Sprint 3
+* Team: Backend (Node.js / TypeScript)
+* Blocked by: T006 (Build GitHub Actions CI pipeline: lint, unit, contract, container scan, SBOM)
+* Blocks: T025, T134, T221",Highest,5,,Platform Foundations: Infrastructure & DevOps,E01,Backend,APL Sprint 3,Phase 0 — Foundations,Backend (Node.js / TypeScript),api,openapi,service-template,team-backend,,,T006,,,,,,,
+T215,Task,"Threat model of the platform and the AI tutor; static analysis, secret scanning and automated dependency updates in CI","h3. Description
+Run a STRIDE threat model covering identity, tenancy, telemetry, the LLM tutor (prompt injection, data leakage) and minors' data, and turn the findings into tickets. Add CodeQL or Semgrep static analysis and Renovate dependency updates to the CI pipeline, with a patch-time target for critical vulnerabilities.
+
+h3. Acceptance Criteria
+* Threat model reviewed by the CTO and the DPO; every high risk has a mitigation ticket in Jira
+* A pull request introducing a high-severity static-analysis finding cannot merge
+* Critical dependency vulnerabilities are patched within 7 days, tracked on a dashboard
+
+h3. Context
+* Epic: Identity, Security & Compliance
+* Phase: Phase 1 — Data Plane
+* Target sprint: APL Sprint 4
+* Team: Backend (Node.js / TypeScript)
+* Blocked by: T006 (Build GitHub Actions CI pipeline: lint, unit, contract, container scan, SBOM)
+* Blocks: T020",Highest,5,,"Identity, Security & Compliance",E02,Backend,APL Sprint 4,Phase 1 — Data Plane,Backend (Node.js / TypeScript),security,threat-model,sast,team-backend,,,T006,,,,,,,
+T216,Task,"Data breach response plan: triage, INPDP notification, communication to schools and parents, yearly drill","h3. Description
+A written plan for personal-data incidents, linked to the incident process (T107): severity triage, evidence preservation, notification of the INPDP and of school customers within the required time, plain-language messages to parents and students in FR and AR, and a yearly tabletop drill.
+
+h3. Acceptance Criteria
+* Plan approved by counsel and the DPO, with notification templates in FR and AR
+* A tabletop drill goes from detection to draft notification in under 24 hours
+* School data-processing agreements reference the plan and its notification times
+
+h3. Context
+* Epic: Support, Back-office & Legal
+* Phase: Phase 4 — B2B & Hardening
+* Target sprint: APL Sprint 16
+* Team: Legal / DPO
+* Blocked by: T107 (Write operational runbooks, on-call rotation and incident process), T017 (Produce the Data Protection Impact Assessment and INPDP declaration file)
+* Blocks: T110",High,3,,"Support, Back-office & Legal",E20,Legal,APL Sprint 16,Phase 4 — B2B & Hardening,Legal / DPO,legal,privacy,incident,team-legal-dpo,,,T107,T017,,,,,,
+T217,Task,"Provision Snowflake with Terraform: databases, warehouses, role-based access, PII masking policies and cost monitors","h3. Description
+Snowflake set up as code: RAW, STAGING and MARTS databases per environment, separate auto-suspending warehouses for ingestion, dbt, ML training and BI, a role hierarchy by team, masking policies on student identifiers and accommodation data, and resource monitors that cap monthly credits.
+
+h3. Acceptance Criteria
+* All Snowflake objects are created and changed through Terraform pull requests
+* BI and analyst roles see masked student identifiers; only the ML training role sees pseudonymous IDs; no role sees names
+* Resource monitors alert at 80 % of the monthly budget and suspend non-production warehouses at 100 %
+
+h3. Context
+* Epic: Event-Driven Telemetry & Data Warehouse
+* Phase: Phase 1 — Data Plane
+* Target sprint: APL Sprint 4
+* Team: Data Engineering
+* Blocked by: T001 (Bootstrap Terraform mono-repo with remote state, workspaces and policy checks)
+* Blocks: T027, T218",Highest,5,,Event-Driven Telemetry & Data Warehouse,E03,Data,APL Sprint 4,Phase 1 — Data Plane,Data Engineering,snowflake,terraform,privacy,team-data-engineering,,,T001,,,,,,,
+T218,Task,Deploy the ML platform services: Airflow (Amazon MWAA) for data jobs and the MLflow tracking server and model registry,"h3. Description
+The services the training pipeline relies on: Amazon MWAA for scheduled data jobs (training snapshots, backfills, nightly review queues), and MLflow with a Postgres backend and an S3 artifact store for experiments and for the model registry used by the promotion gate (T047).
+
+h3. Acceptance Criteria
+* Sign-in to MLflow and Airflow goes through Keycloak; only ML and data roles can register or promote a model
+* A test DAG reads from Snowflake and writes a snapshot to S3 on schedule in staging
+* Every registered model version links to its training run, data snapshot hash and evaluation report
+
+h3. Context
+* Epic: Deep Knowledge Tracing Core
+* Phase: Phase 1 — Data Plane
+* Target sprint: APL Sprint 5
+* Team: ML Engineering (Python / PyTorch)
+* Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool), T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms), T217 (Provision Snowflake with Terraform: databases, warehouses, role-based access, PII masking policies and cost monitors)
+* Blocks: T031, T041, T045",Highest,5,,Deep Knowledge Tracing Core,E05,ML,APL Sprint 5,Phase 1 — Data Plane,ML Engineering (Python / PyTorch),mlflow,airflow,mlops,team-ml-engineering,,,T003,T012,T217,,,,,
+T219,Task,"Synthetic learner data generator for development, preview environments, tests and load tests","h3. Description
+Generate realistic but fake students, classes, interaction sequences and tutor conversations, driven by an IRT-based simulated learner, so no environment outside production ever needs real student data. Used to seed preview environments, end-to-end tests, model pipeline tests and the Bac-eve load test.
+
+h3. Acceptance Criteria
+* One command seeds a preview environment with 3 schools, 2,000 students and 6 months of interactions
+* Generated sequences match the accuracy and latency distributions set by the ML team (checked by a test)
+* A CI check rejects any fixture that looks like a real national ID, phone number or school email address
+
+h3. Context
+* Epic: Event-Driven Telemetry & Data Warehouse
+* Phase: Phase 1 — Data Plane
+* Target sprint: APL Sprint 5
+* Team: Data Engineering
+* Blocked by: T023 (Define the learner interaction event taxonomy and Avro/Protobuf schemas)
+* Blocks: T102, T104",High,3,,Event-Driven Telemetry & Data Warehouse,E03,Data,APL Sprint 5,Phase 1 — Data Plane,Data Engineering,test-data,privacy,testing,team-data-engineering,,,T023,,,,,,,
+T220,Task,"Item player: render and capture every item type (MCQ, numeric with units, multi-step derivation, ordering, interactive widget) on web and in the native bridge","h3. Description
+One item player used by the Lab, the placement test, annales and the mock Bac: it renders each item type from the item model (T036) in FR and AR, captures answers with the maths keypad and unit picker, shows feedback, emits telemetry, and runs inside the native apps through the widget bridge.
+
+h3. Acceptance Criteria
+* Every item type in the item model renders and accepts an answer in FR and AR, right to left included
+* The player works with keyboard and screen readers (ordering items included) and passes the accessibility gate (T149)
+* The same item renders identically in the authoring preview, the web app and the native apps (visual snapshot tests)
+
+h3. Context
+* Epic: Interactive Learning Frontend (Next.js / WebGL)
+* Phase: Phase 1 — Data Plane
+* Target sprint: APL Sprint 6
+* Team: Frontend (Next.js / R3F)
+* Blocked by: T036 (Define the item (question) data model: types, KC tags, difficulty, distractor rationale, media), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)
+* Blocks: T175, T178, T185",Highest,8,,Interactive Learning Frontend (Next.js / WebGL),E09,Frontend,APL Sprint 6,Phase 1 — Data Plane,Frontend (Next.js / R3F),item-player,frontend,team-frontend,,,,T036,T076,,,,,,
+T221,Task,"Answer evaluation service: server-side grading of every item type with numeric tolerance, units, symbolic equivalence and partial credit","h3. Description
+The single place where answers are judged: numeric answers with tolerance and unit conversion, algebraic answers checked for symbolic equivalence (SymPy), multi-step derivations with partial credit per step, and widget answers through each widget's scoring hook. Its result (correct, partial score, misconception code) is the event that feeds knowledge tracing, routing and gamification.
+
+h3. Acceptance Criteria
+* Results match curriculum-team answer keys on a 1,000-answer test set with at most 0.5 % disagreement
+* Clients never receive the answer key before submission; grading runs only on the server
+* Evaluation p99 is under 100 ms and each result emits an item.answered event with score and misconception code
+
+h3. Context
+* Epic: Adaptive Routing & Recommendation Service
+* Phase: Phase 2 — Intelligence
+* Target sprint: APL Sprint 7
+* Team: Backend (Node.js / TypeScript)
+* Blocked by: T036 (Define the item (question) data model: types, KC tags, difficulty, distractor rationale, media), T214 (Backend service template and API contract: service skeleton, OpenAPI 3.1 specs, versioning and deprecation policy)
+* Blocks: T175, T178, T186",Highest,8,,Adaptive Routing & Recommendation Service,E06,Backend,APL Sprint 7,Phase 2 — Intelligence,Backend (Node.js / TypeScript),grading,assessment,backend,team-backend,,,T036,T214,,,,,,
+T222,Task,"Child safeguarding policy: designated safeguarding lead, escalation protocol for distress or abuse signals, helplines, record keeping","h3. Description
+Most Kuizi users are minors talking to an AI tutor. Write the safeguarding policy with schools and child-protection advisers: a designated safeguarding lead, what counts as a concern (self-harm, abuse, bullying, distress), who is told and how fast (school contact, parent, emergency services), which Tunisian helplines to show, and how records are kept under Law 2004-63.
+
+h3. Acceptance Criteria
+* Policy approved by counsel, the DPO and a child-protection adviser, in FR and AR
+* Escalation contacts are collected during every school onboarding (T093) before students are activated
+* Support and moderation staff complete safeguarding training before the pilot
+
+h3. Context
+* Epic: Support, Back-office & Legal
+* Phase: Phase 4 — B2B & Hardening
+* Target sprint: APL Sprint 7
+* Team: Legal / DPO
+* Blocked by: T017 (Produce the Data Protection Impact Assessment and INPDP declaration file)
+* Blocks: T223",Highest,3,,"Support, Back-office & Legal",E20,Legal,APL Sprint 7,Phase 4 — B2B & Hardening,Legal / DPO,safeguarding,minors,legal,team-legal-dpo,,,T017,,,,,,,
+T223,Task,"Safeguarding and content-safety layer in the tutor: detect distress, abuse and off-topic requests; respond safely and escalate","h3. Description
+A classifier on every student message and tutor reply (local model; French, Arabic and Tunisian Arabic) that flags distress or self-harm signals, abuse, sexual content and requests outside the curriculum. Flagged conversations get a safe, scripted reply with helpline information, off-topic requests are declined politely, and concerns follow the safeguarding protocol (T222).
+
+h3. Acceptance Criteria
+* On a 500-message labelled safety set (FR, AR, Tunisian Arabic), distress signals are caught with recall of at least 95 %
+* Every high-severity flag reaches the designated safeguarding lead within 15 minutes, with the conversation excerpt
+* Off-topic requests get a polite refusal and a route back to the lesson; the judge never lets an unsafe reply through
+
+h3. Context
+* Epic: Multi-Model LLM Gateway & Guardrails
+* Phase: Phase 2 — Intelligence
+* Target sprint: APL Sprint 10
+* Team: LLM / Applied AI
+* Blocked by: T062 (Implement the LLM-as-a-Judge harness that intercepts tutor output before delivery), T222 (Child safeguarding policy: designated safeguarding lead, escalation protocol for distress or abuse signals, helplines, record keeping)
+* Blocks: T108",Highest,8,,Multi-Model LLM Gateway & Guardrails,E07,LLM,APL Sprint 10,Phase 2 — Intelligence,LLM / Applied AI,safeguarding,guardrails,minors,team-llm-applied-ai,,,T062,T222,,,,,,
+T224,Story,"As a teacher, I create classes, invite students with a join code or link, and manage my roster","h3. Description
+Teacher class management: create a class per subject and section, share a join code or link, approve join requests, move or remove students, and see who has not activated yet. Students under 18 still go through parental consent (T013) before joining.
+
+h3. Acceptance Criteria
+* A student joins a class with a 6-character code in under 30 seconds on mobile
+* A teacher only sees classes of their own school (tenant isolation test)
+* Removing a student from a class keeps the student's learning history but hides it from that teacher
+
+h3. Context
+* Epic: Institution & Parent B2B Portals (Multi-Tenancy)
+* Phase: Phase 2 — Intelligence
+* Target sprint: APL Sprint 10
+* Team: Frontend (Next.js / R3F)
+* Personas: teacher
+* Blocked by: T092 (Implement PostgreSQL Row-Level Security multi-tenancy with a tenant-context connection layer), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)
+* Blocks: T225, T227",High,5,,Institution & Parent B2B Portals (Multi-Tenancy),E11,Frontend,APL Sprint 10,Phase 2 — Intelligence,Frontend (Next.js / R3F),teacher,classes,persona-teacher,team-frontend,,,T092,T076,,,,,,
+T225,Story,"As a teacher, I create an assignment (chapter, item set or past paper) with a due date and follow completion","h3. Description
+Assignment builder in the teacher space: pick a chapter, a set of items or a past paper, choose the class or students, set the due date and whether hints are allowed, then follow completion and scores per student. The router treats the assignment as a constraint (T058).
+
+h3. Acceptance Criteria
+* A teacher creates and publishes an assignment to a class in under 2 minutes
+* Students see the assignment in Today with its due date and get one reminder through the Notification Orchestrator
+* Completion and average score per student update within 1 minute of each submission
+
+h3. Context
+* Epic: Institution & Parent B2B Portals (Multi-Tenancy)
+* Phase: Phase 3 — Product Surfaces
+* Target sprint: APL Sprint 13
+* Team: Frontend (Next.js / R3F)
+* Personas: teacher
+* Blocked by: T224 (As a teacher, I create classes, invite students with a join code or link, and manage my roster), T152 (Notification Orchestrator: single gateway, priority classes, daily budget, quiet hours, de-duplication and digests (above T089))
+* Blocks: T058, T188",High,5,,Institution & Parent B2B Portals (Multi-Tenancy),E11,Frontend,APL Sprint 13,Phase 3 — Product Surfaces,Frontend (Next.js / R3F),teacher,assignments,persona-teacher,team-frontend,,,T224,T152,,,,,,
+T226,Story,"As a teacher, I open a student's profile: mastery by chapter, recent activity, shared accommodations and private notes","h3. Description
+A student page for teachers, reached from the heatmap and alerts: mastery by chapter with explanations (T049), recent sessions, assignments, the accommodations the student shares, and private teacher notes. Every opening is written to the audit log (T022).
+
+h3. Acceptance Criteria
+* The page loads in under 2 seconds and shows only data from the teacher's own classes
+* Accommodations appear only when the student shares them
+* Each view is audited with teacher, student and time
+
+h3. Context
+* Epic: Institution & Parent B2B Portals (Multi-Tenancy)
+* Phase: Phase 3 — Product Surfaces
+* Target sprint: APL Sprint 14
+* Team: Frontend (Next.js / R3F)
+* Personas: teacher
+* Blocked by: T095 (As a teacher, I see real-time mastery heatmaps for my cohort and get intervention alerts), T146 (As a teacher, I see and apply the accommodations a student chooses to share, and assign accessible versions of sets)",Medium,3,,Institution & Parent B2B Portals (Multi-Tenancy),E11,Frontend,APL Sprint 14,Phase 3 — Product Surfaces,Frontend (Next.js / R3F),teacher,privacy,persona-teacher,team-frontend,,,T095,T146,,,,,,
+T227,Story,"As a teacher, I send short announcements to a class or its parents, delivered through the Notification Orchestrator","h3. Description
+One-way announcements (no chat) from a teacher to a class, a group of students or their parents, in FR or AR: text plus a link to an assignment or chapter, delivered in-app and through the channels each person allows, under quiet hours and budgets.
+
+h3. Acceptance Criteria
+* Announcements respect quiet hours, class hours and Focus like any other message
+* Students and parents cannot reply, so the feature never becomes private messaging between adults and minors
+* Every announcement is kept in the audit log and visible to the school admin
+
+h3. Context
+* Epic: Institution & Parent B2B Portals (Multi-Tenancy)
+* Phase: Phase 4 — B2B & Hardening
+* Target sprint: APL Sprint 15
+* Team: Backend (Node.js / TypeScript)
+* Personas: teacher
+* Blocked by: T152 (Notification Orchestrator: single gateway, priority classes, daily budget, quiet hours, de-duplication and digests (above T089)), T224 (As a teacher, I create classes, invite students with a join code or link, and manage my roster)",Medium,3,,Institution & Parent B2B Portals (Multi-Tenancy),E11,Backend,APL Sprint 15,Phase 4 — B2B & Hardening,Backend (Node.js / TypeScript),teacher,notifications,persona-teacher,team-backend,,,T152,T224,,,,,,
+T228,Story,"As a school admin, I manage teachers, classes and seat allocation for my school","h3. Description
+The school admin space: invite and remove teachers, create classes and assign teachers, allocate licensed seats to students, follow seat use against the contract, and roll classes over at the end of the school year.
+
+h3. Acceptance Criteria
+* A school admin invites a teacher by email and the teacher is active within 5 minutes
+* Seat allocation never exceeds the licence; the admin sees a warning at 90 % use
+* End-of-year rollover archives classes and keeps students' histories
+
+h3. Context
+* Epic: Institution & Parent B2B Portals (Multi-Tenancy)
+* Phase: Phase 4 — B2B & Hardening
+* Target sprint: APL Sprint 16
+* Team: Frontend (Next.js / R3F)
+* Personas: school-admin
+* Blocked by: T093 (As a platform admin, I onboard a school in 10 minutes: tenant, admins, classes, CSV student import), T098 (Build seat-based B2B subscription billing with Stripe (annual school licences, proration, invoices))",Medium,5,,Institution & Parent B2B Portals (Multi-Tenancy),E11,Frontend,APL Sprint 16,Phase 4 — B2B & Hardening,Frontend (Next.js / R3F),school-admin,seats,persona-school-admin,team-frontend,,,T093,T098,,,,,,
+T229,Task,"Native push notifications (APNs, FCM) and universal links / app links with in-app deep-link routing","h3. Description
+Register devices for push on iOS (APNs) and Android (FCM) through the Notification Orchestrator, with notification categories mapped to OS channels; set up universal links and Android app links so emails, SMS and the inbox open the right screen in the app, falling back to the web.
+
+h3. Acceptance Criteria
+* A notification sent through the Orchestrator reaches iOS and Android devices in the right category
+* Links from email, SMS and the inbox open the matching screen in the app, or the web when the app is not installed
+* Expired or unregistered device tokens are cleaned up automatically
+
+h3. Context
+* Epic: Native Apps & Store Compliance
+* Phase: Phase 3 — Product Surfaces
+* Target sprint: APL Sprint 13
+* Team: Mobile (iOS / Android)
+* Blocked by: T163 (iOS learner app shell (SwiftUI): Keycloak sign-in, navigation, Cyanotype tokens, offline store), T164 (Android learner app shell (Kotlin, Compose): sign-in, navigation, tokens, offline store), T152 (Notification Orchestrator: single gateway, priority classes, daily budget, quiet hours, de-duplication and digests (above T089))
+* Blocks: T173",High,5,,Native Apps & Store Compliance,E16,Mobile,APL Sprint 13,Phase 3 — Product Surfaces,Mobile (iOS / Android),push,deep-links,mobile,team-mobile,,,T163,T164,T152,,,,,
+T230,Task,"Mobile quality: crash reporting, app performance monitoring and native UI tests on a device farm","h3. Description
+Crash and ANR reporting with symbolicated stacks, app start and screen-render metrics in Datadog, and automated UI tests (XCUITest, Espresso) for the core journey on a device farm that includes low-end Android phones and iPads.
+
+h3. Acceptance Criteria
+* Crash-free sessions are tracked per release, with an alert below 99.5 %
+* Core-journey UI tests run on every release branch on at least 8 device models
+* App cold start stays under 2 seconds on a 2 GB RAM Android device
+
+h3. Context
+* Epic: Native Apps & Store Compliance
+* Phase: Phase 3 — Product Surfaces
+* Target sprint: APL Sprint 10
+* Team: Mobile (iOS / Android)
+* Blocked by: T163 (iOS learner app shell (SwiftUI): Keycloak sign-in, navigation, Cyanotype tokens, offline store), T164 (Android learner app shell (Kotlin, Compose): sign-in, navigation, tokens, offline store)
+* Blocks: T173",High,5,,Native Apps & Store Compliance,E16,Mobile,APL Sprint 10,Phase 3 — Product Surfaces,Mobile (iOS / Android),mobile,monitoring,testing,team-mobile,,,T163,T164,,,,,,
+T231,Task,"Brand identity: logo, eight-point star mark, app icon, illustration style and brand guidelines in FR and AR","h3. Description
+Turn the Cyanotype direction into a brand: logotype in Latin and Arabic script, the eight-point star mark, app icons for iOS and Android, illustration rules, and a short brand guide used by the design system, the marketing site and the store listings.
+
+h3. Acceptance Criteria
+* Logo and app icon delivered in every required size and legible on light and dark backgrounds
+* The Arabic logotype is reviewed by a native Arabic type designer
+* Trademark availability of the name and mark checked before the guide is final
+
+h3. Context
+* Epic: Learner Experience & Cyanotype Design System
+* Phase: Phase 3 — Product Surfaces
+* Target sprint: APL Sprint 3
+* Team: Design / UX
+* Blocks: T174, T193, T197",High,3,,Learner Experience & Cyanotype Design System,E17,Design,APL Sprint 3,Phase 3 — Product Surfaces,Design / UX,brand,design,team-design-ux,,,,,,,,,,,
+T232,Task,"UI string localisation workflow: message catalogs, translation management, native-speaker review, pseudo-localisation and RTL checks in CI","h3. Description
+All interface text in FR and AR comes from ICU message catalogs managed in a translation tool; new strings go to Tunisian translators for review; CI runs pseudo-localisation and RTL checks so hard-coded text, clipped strings and broken plurals are caught before merge. Shared by the web and native apps.
+
+h3. Acceptance Criteria
+* CI fails on hard-coded user-facing text in web and native code
+* Every release ships with 100 % of strings translated and reviewed in FR and AR
+* Arabic plural forms are handled through ICU rules, with test cases for 0, 1, 2, 3–10 and 11+
+
+h3. Context
+* Epic: Learner Experience & Cyanotype Design System
+* Phase: Phase 3 — Product Surfaces
+* Target sprint: APL Sprint 5
+* Team: Frontend (Next.js / R3F)
+* Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)
+* Blocks: T102",High,3,,Learner Experience & Cyanotype Design System,E17,Frontend,APL Sprint 5,Phase 3 — Product Surfaces,Frontend (Next.js / R3F),i18n,localisation,arabic,team-frontend,,,T076,,,,,,,
+T233,Task,"Annual Bac session update and curriculum change process: new papers within two weeks, recalibration, programme changes","h3. Description
+Keep Kuizi current after go-live: each July, digitise and tag the new Bac papers and official corrections within two weeks of publication, recalibrate the affected items, refresh exam weights, and run a documented process for ministry programme changes (new KC graph version, retired items, migration of mastery estimates).
+
+h3. Acceptance Criteria
+* The 2027 Bac papers for every live subject are in Kuizi within 14 days of their official release
+* Exam weights per knowledge component are recomputed with the new session and reviewed by subject leads
+* A programme-change dry run moves students to a new KC graph version without losing mastery history
+
+h3. Context
+* Epic: Curriculum Knowledge Graph & Content Pipeline (multi-subject)
+* Phase: Phase 6 — Subject Expansion
+* Target sprint: APL Sprint 19
+* Team: Product + Curriculum
+* Blocked by: T110 (Production go-live (Physics + Maths) and 30-day hypercare)",High,5,,Curriculum Knowledge Graph & Content Pipeline (multi-subject),E04,Curriculum,APL Sprint 19,Phase 6 — Subject Expansion,Product + Curriculum,content,curriculum,operations,team-product-curriculum,,,T110,,,,,,,
+T234,Task,"Ways of working: Definition of Ready and Done, branching and review rules, ADR process, onboarding guide","h3. Description
+Agree how the teams work from sprint 1: Definition of Ready (acceptance criteria, design and dependencies clear) and Done (tests, accessibility gate, docs, Jira updated), branch and review rules, the ADR process, sprint ceremonies, and an onboarding guide for new engineers.
+
+h3. Acceptance Criteria
+* Definition of Ready and Done published in the repository and linked from the Jira board
+* A new engineer ships a small change to staging within 2 days using the onboarding guide
+* Every team lead signs off the working agreement in sprint 1
+
+h3. Context
+* Epic: Observability, Quality & Release Readiness
+* Phase: Phase 0 — Foundations
+* Target sprint: APL Sprint 1
+* Team: QA / SDET",High,2,,"Observability, Quality & Release Readiness",E12,QA,APL Sprint 1,Phase 0 — Foundations,QA / SDET,process,agile,team-qa-sdet,,,,,,,,,,,
+T235,Task,"Content production operations: author and reviewer pool, contracts and rights, throughput tracking, translation vendors","h3. Description
+The item banks need about 24,000 items in two languages. Set up the production line: recruit and contract teacher-authors and reviewers per subject (with copyright assignment), payment per accepted item, FR↔AR translation vendors, and a weekly throughput dashboard against the content plan.
+
+h3. Acceptance Criteria
+* Author contracts assign item copyright to Kuizi and are signed before any paid work
+* A weekly dashboard shows items authored, reviewed and published per subject against the plan
+* Each subject has at least 2 reviewers who are not the item's author
+
+h3. Context
+* Epic: Curriculum Knowledge Graph & Content Pipeline (multi-subject)
+* Phase: Phase 1 — Data Plane
+* Target sprint: APL Sprint 4
+* Team: Product + Curriculum
+* Blocked by: T036 (Define the item (question) data model: types, KC tags, difficulty, distractor rationale, media)
+* Blocks: T038, T112",Highest,3,,Curriculum Knowledge Graph & Content Pipeline (multi-subject),E04,Curriculum,APL Sprint 4,Phase 1 — Data Plane,Product + Curriculum,content,operations,team-product-curriculum,,,,T036,,,,,,,
+T236,Task,"Vendor and sub-processor agreements: DPAs with LLM providers (zero data retention, no training), AWS, Snowflake, Datadog; public sub-processor list","h3. Description
+Student messages and telemetry pass through third parties. Sign data-processing agreements with every sub-processor, with zero data retention and no training on Kuizi data for LLM providers, check cross-border transfer terms, and publish the sub-processor list referenced by the privacy policy and the school DPA.
+
+h3. Acceptance Criteria
+* No student data reaches a provider without a signed DPA (checked against the LiteLLM provider list)
+* LLM provider agreements guarantee zero retention and no training on Kuizi data
+* The sub-processor list is public and schools are told 30 days before any change
+
+h3. Context
+* Epic: Support, Back-office & Legal
+* Phase: Phase 4 — B2B & Hardening
+* Target sprint: APL Sprint 7
+* Team: Legal / DPO
+* Blocked by: T017 (Produce the Data Protection Impact Assessment and INPDP declaration file)
+* Blocks: T108, T207",Highest,3,,"Support, Back-office & Legal",E20,Legal,APL Sprint 7,Phase 4 — B2B & Hardening,Legal / DPO,legal,privacy,vendors,team-legal-dpo,,,T017,,,,,,,

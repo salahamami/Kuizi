@@ -7,10 +7,10 @@ The repository is the source of truth for the backlog. Jira project **`KK`** (te
 | File | Role | Edit? |
 | --- | --- | --- |
 | `source/APL_Production_Backlog_v1.md`, `.docx`, `source/APL_jira_import_v1.csv` | v1 backlog as received (13 epics, 132 tickets, 1,041 points) | Never |
-| `../../tools/backlog/additions.py` | Everything added or changed after v1: epics E14–E20, tickets T133–T210, changes to v1 tickets, team list, Neural Core mapping | Yes, this is where changes go |
+| `../../tools/backlog/additions.py` | Everything added or changed after v1: epics E14–E20, tickets T133–T236, changes to v1 tickets, team list, Neural Core mapping | Yes, this is where changes go |
 | `../../tools/backlog/build_backlog.py` | Generator | Only to change output formats |
 | `jira_keys.csv` | Backlog ID → Jira key (`E05,KK-5`, `T103,KK-134`) | Yes, add a row whenever an issue is created in Jira |
-| `APL_Full_Backlog.md` | Full readable backlog v2 (20 epics, 210 tickets, 1,496 points), with Jira keys | Generated |
+| `APL_Full_Backlog.md` | Full readable backlog v2 (20 epics, 236 tickets, 1,612 points), with Jira keys | Generated |
 | `APL_jira_import_full.csv` | Jira CSV import file, same columns as v1 plus team and persona labels | Generated |
 | `apl_backlog.json` | Input for the API sync (Markdown descriptions, labels, links, Jira keys) | Generated |
 
@@ -27,8 +27,9 @@ The script fails if a ticket ID is duplicated, a dependency points to an unknown
 Loaded on 2026-10-16 through the Atlassian connector:
 
 - 20 epics, KK-1 to KK-20, in backlog order (E05 is KK-5).
-- 210 tickets, KK-21 to KK-230, each a child of its epic. Keys follow `20 + ticket number`, except T104–T114 (KK-123 to KK-133) and T103 (KK-134). `jira_keys.csv` has every key.
-- 351 "Blocks" links reproduce every *Blocked by* in the backlog.
+- 236 tickets, KK-21 to KK-256, each a child of its epic. Keys follow `20 + ticket number`, except T104–T114 (KK-123 to KK-133) and T103 (KK-134). `jira_keys.csv` has every key.
+- 426 "Blocks" links reproduce every *Blocked by* in the backlog.
+- The gap review of the same day added T211–T236 (KK-231 to KK-256): foundations, safeguarding, teacher and school-admin tools, mobile quality and content operations.
 - The Neural Core infographic sits in a comment on KK-5.
 
 Still to do in Jira (the connector cannot do these):

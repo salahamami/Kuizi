@@ -116,12 +116,18 @@ def build():
         by_id[tid]["blocked"] += [b for b in extra if b not in by_id[tid]["blocked"]]
 
     epic_by_id = {e["id"]: e for e in epics}
+    # In v1 epics a ticket's phase follows its sprint; new tickets in those epics do the same.
+    # v2 epics keep one phase for all their tickets.
+    sprint_phase = {s: Counter(t["fix_version"] for t in tickets if t["sprint"] == s).most_common(1)[0][0]
+                    for s in {t["sprint"] for t in tickets}}
+    v1_epics = {e["id"] for e in epics}
     for e in A.EPICS:
         e = dict(e, source="v2")
         epics.append(e)
         epic_by_id[e["id"]] = e
     for t in A.TICKETS:
-        t = dict(t, component=A.TEAM_COMPONENT[t["team"]], fix_version=epic_by_id[t["epic"]]["phase"],
+        phase = sprint_phase[t["sprint"]] if t["epic"] in v1_epics else epic_by_id[t["epic"]]["phase"]
+        t = dict(t, component=A.TEAM_COMPONENT[t["team"]], fix_version=phase,
                  changes=[], source="v2")
         tickets.append(t)
         by_id[t["id"]] = t

@@ -24,4 +24,4 @@
 | --- | --- |
 | Design canvas (Cyanotype screens, clickable) | https://claude.ai/artifact/QQuDDhSGx24T1LW3Kn43wi |
 | Accessibility, Focus & notifications addendum (commentable) | https://claude.ai/code/artifact/dc047f9e-1e84-4f5f-a3df-382fa67369cc |
-| Jira project `APL` | https://kuizi.atlassian.net |
+| Jira project `KK` (board 37) | https://kuizi.atlassian.net/jira/software/projects/KK/boards/37 |

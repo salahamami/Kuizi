@@ -2,6 +2,7 @@
  "project": {
   "key": "APL",
   "name": "Kuizi",
+  "jira_project": "KK",
   "sprint_length_days": 14,
   "first_sprint_start": "2026-11-02",
   "sprints": 20
@@ -9,6 +10,7 @@
  "epics": [
   {
    "id": "E01",
+   "jira_key": "KK-1",
    "summary": "Platform Foundations: Infrastructure & DevOps",
    "priority": "Highest",
    "phase": "Phase 0",
@@ -22,6 +24,7 @@
   },
   {
    "id": "E02",
+   "jira_key": "KK-2",
    "summary": "Identity, Security & Compliance",
    "priority": "Highest",
    "phase": "Phase 0",
@@ -35,6 +38,7 @@
   },
   {
    "id": "E03",
+   "jira_key": "KK-3",
    "summary": "Event-Driven Telemetry & Data Warehouse",
    "priority": "Highest",
    "phase": "Phase 1",
@@ -48,6 +52,7 @@
   },
   {
    "id": "E04",
+   "jira_key": "KK-4",
    "summary": "Curriculum Knowledge Graph & Content Pipeline (multi-subject)",
    "priority": "High",
    "phase": "Phase 1",
@@ -62,6 +67,7 @@
   },
   {
    "id": "E05",
+   "jira_key": "KK-5",
    "summary": "Deep Knowledge Tracing Core",
    "priority": "Highest",
    "phase": "Phase 2",
@@ -76,6 +82,7 @@
   },
   {
    "id": "E06",
+   "jira_key": "KK-6",
    "summary": "Adaptive Routing & Recommendation Service",
    "priority": "Highest",
    "phase": "Phase 2",
@@ -89,6 +96,7 @@
   },
   {
    "id": "E07",
+   "jira_key": "KK-7",
    "summary": "Multi-Model LLM Gateway & Guardrails",
    "priority": "Highest",
    "phase": "Phase 2",
@@ -103,6 +111,7 @@
   },
   {
    "id": "E08",
+   "jira_key": "KK-8",
    "summary": "Socratic AI Tutor Experience",
    "priority": "High",
    "phase": "Phase 3",
@@ -117,6 +126,7 @@
   },
   {
    "id": "E09",
+   "jira_key": "KK-9",
    "summary": "Interactive Learning Frontend (Next.js / WebGL)",
    "priority": "Highest",
    "phase": "Phase 3",
@@ -131,6 +141,7 @@
   },
   {
    "id": "E10",
+   "jira_key": "KK-10",
    "summary": "Learner Engagement & Gamification",
    "priority": "Medium",
    "phase": "Phase 3",
@@ -144,6 +155,7 @@
   },
   {
    "id": "E11",
+   "jira_key": "KK-11",
    "summary": "Institution & Parent B2B Portals (Multi-Tenancy)",
    "priority": "High",
    "phase": "Phase 4",
@@ -158,6 +170,7 @@
   },
   {
    "id": "E12",
+   "jira_key": "KK-12",
    "summary": "Observability, Quality & Release Readiness",
    "priority": "High",
    "phase": "Phase 4",
@@ -172,6 +185,7 @@
   },
   {
    "id": "E13",
+   "jira_key": "KK-13",
    "summary": "Subject Expansion: Maths, Sciences, Technique, Économie & Gestion",
    "priority": "High",
    "phase": "Phase 6",
@@ -185,6 +199,7 @@
   },
   {
    "id": "E14",
+   "jira_key": "KK-14",
    "summary": "Inclusive Learning & Accessibility",
    "priority": "Highest",
    "phase": "Phase 3 — Product Surfaces",
@@ -198,6 +213,7 @@
   },
   {
    "id": "E15",
+   "jira_key": "KK-15",
    "summary": "Focus Mode & Smart Notifications",
    "priority": "High",
    "phase": "Phase 3 — Product Surfaces",
@@ -210,6 +226,7 @@
   },
   {
    "id": "E16",
+   "jira_key": "KK-16",
    "summary": "Native Apps & Store Compliance",
    "priority": "High",
    "phase": "Phase 3 — Product Surfaces",
@@ -224,6 +241,7 @@
   },
   {
    "id": "E17",
+   "jira_key": "KK-17",
    "summary": "Learner Experience & Cyanotype Design System",
    "priority": "High",
    "phase": "Phase 3 — Product Surfaces",
@@ -237,6 +255,7 @@
   },
   {
    "id": "E18",
+   "jira_key": "KK-18",
    "summary": "Bac Simulation, Annales & Grade Prediction",
    "priority": "High",
    "phase": "Phase 4 — B2B & Hardening",
@@ -250,6 +269,7 @@
   },
   {
    "id": "E19",
+   "jira_key": "KK-19",
    "summary": "Product Analytics, Growth & Go-to-Market",
    "priority": "High",
    "phase": "Phase 5 — Launch",
@@ -263,6 +283,7 @@
   },
   {
    "id": "E20",
+   "jira_key": "KK-20",
    "summary": "Support, Back-office & Legal",
    "priority": "High",
    "phase": "Phase 4 — B2B & Hardening",
@@ -278,6 +299,7 @@
  "issues": [
   {
    "id": "T001",
+   "jira_key": "KK-21",
    "type": "Task",
    "epic": "E01",
    "summary": "Bootstrap Terraform mono-repo with remote state, workspaces and policy checks",
@@ -298,6 +320,7 @@
   },
   {
    "id": "T002",
+   "jira_key": "KK-22",
    "type": "Task",
    "epic": "E01",
    "summary": "Provision multi-AZ VPC, subnets, NAT and VPC endpoints via Terraform",
@@ -320,6 +343,7 @@
   },
   {
    "id": "T003",
+   "jira_key": "KK-23",
    "type": "Task",
    "epic": "E01",
    "summary": "Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool",
@@ -343,6 +367,7 @@
   },
   {
    "id": "T004",
+   "jira_key": "KK-24",
    "type": "Task",
    "epic": "E01",
    "summary": "Set up ArgoCD GitOps with Helm charts and per-environment overlays",
@@ -366,6 +391,7 @@
   },
   {
    "id": "T005",
+   "jira_key": "KK-25",
    "type": "Task",
    "epic": "E01",
    "summary": "Deploy Kong API Gateway with rate limiting, JWT validation and per-tenant quotas",
@@ -388,6 +414,7 @@
   },
   {
    "id": "T006",
+   "jira_key": "KK-26",
    "type": "Task",
    "epic": "E01",
    "summary": "Build GitHub Actions CI pipeline: lint, unit, contract, container scan, SBOM",
@@ -411,6 +438,7 @@
   },
   {
    "id": "T007",
+   "jira_key": "KK-27",
    "type": "Task",
    "epic": "E01",
    "summary": "Roll out Datadog APM, distributed tracing, log pipeline and memory-leak watchdogs",
@@ -434,6 +462,7 @@
   },
   {
    "id": "T008",
+   "jira_key": "KK-28",
    "type": "Task",
    "epic": "E01",
    "summary": "Implement zero-downtime blue/green deployments with automated rollback",
@@ -457,6 +486,7 @@
   },
   {
    "id": "T009",
+   "jira_key": "KK-29",
    "type": "Task",
    "epic": "E01",
    "summary": "Stand up n8n agentic automation for release notes, flaky-test triage and incident paging",
@@ -479,6 +509,7 @@
   },
   {
    "id": "T010",
+   "jira_key": "KK-30",
    "type": "Task",
    "epic": "E01",
    "summary": "Provision ephemeral preview environments per pull request",
@@ -502,6 +533,7 @@
   },
   {
    "id": "T011",
+   "jira_key": "KK-31",
    "type": "Task",
    "epic": "E01",
    "summary": "Implement FinOps guardrails: tagging policy, budgets, Kubecost and spot strategy",
@@ -523,6 +555,7 @@
   },
   {
    "id": "T012",
+   "jira_key": "KK-32",
    "type": "Task",
    "epic": "E02",
    "summary": "Deploy Keycloak identity provider with student / parent / teacher / school-admin realms",
@@ -546,6 +579,7 @@
   },
   {
    "id": "T013",
+   "jira_key": "KK-33",
    "type": "Story",
    "epic": "E02",
    "summary": "As a parent, I give verifiable consent before my under-18 child's account is activated",
@@ -570,6 +604,7 @@
   },
   {
    "id": "T014",
+   "jira_key": "KK-34",
    "type": "Task",
    "epic": "E02",
    "summary": "Implement attribute-based authorisation middleware shared by all Node.js services",
@@ -592,6 +627,7 @@
   },
   {
    "id": "T015",
+   "jira_key": "KK-35",
    "type": "Task",
    "epic": "E02",
    "summary": "Encryption at rest and in transit: KMS CMKs, TLS everywhere, field-level encryption for PII",
@@ -615,6 +651,7 @@
   },
   {
    "id": "T016",
+   "jira_key": "KK-36",
    "type": "Task",
    "epic": "E02",
    "summary": "Centralise secrets in AWS Secrets Manager with automatic rotation",
@@ -636,6 +673,7 @@
   },
   {
    "id": "T017",
+   "jira_key": "KK-37",
    "type": "Task",
    "epic": "E02",
    "summary": "Produce the Data Protection Impact Assessment and INPDP declaration file",
@@ -659,6 +697,7 @@
   },
   {
    "id": "T018",
+   "jira_key": "KK-38",
    "type": "Task",
    "epic": "E02",
    "summary": "Implement data lifecycle: retention, right-to-erasure and export pipelines",
@@ -682,6 +721,7 @@
   },
   {
    "id": "T019",
+   "jira_key": "KK-39",
    "type": "Task",
    "epic": "E02",
    "summary": "Deploy AWS WAF + Shield, bot protection and abuse rate limiting on public endpoints",
@@ -704,6 +744,7 @@
   },
   {
    "id": "T020",
+   "jira_key": "KK-40",
    "type": "Task",
    "epic": "E02",
    "summary": "Commission third-party penetration test and remediate findings",
@@ -727,6 +768,7 @@
   },
   {
    "id": "T021",
+   "jira_key": "KK-41",
    "type": "Task",
    "epic": "E03",
    "summary": "Provision Apache Kafka (MSK) cluster with Schema Registry and topic conventions",
@@ -750,6 +792,7 @@
   },
   {
    "id": "T022",
+   "jira_key": "KK-42",
    "type": "Task",
    "epic": "E02",
    "summary": "Build immutable audit log for admin actions and data access",
@@ -771,6 +814,7 @@
   },
   {
    "id": "T023",
+   "jira_key": "KK-43",
    "type": "Task",
    "epic": "E03",
    "summary": "Define the learner interaction event taxonomy and Avro/Protobuf schemas",
@@ -794,6 +838,7 @@
   },
   {
    "id": "T024",
+   "jira_key": "KK-44",
    "type": "Task",
    "epic": "E03",
    "summary": "Build the Next.js telemetry SDK: batching, offline buffering, hesitation and time-to-first-click",
@@ -816,6 +861,7 @@
   },
   {
    "id": "T025",
+   "jira_key": "KK-45",
    "type": "Task",
    "epic": "E03",
    "summary": "Build the telemetry ingestion service (HTTP → Kafka) with validation and backpressure",
@@ -839,6 +885,7 @@
   },
   {
    "id": "T026",
+   "jira_key": "KK-46",
    "type": "Task",
    "epic": "E03",
    "summary": "Deploy Redis Cluster (ElastiCache) and the real-time aggregation consumer",
@@ -861,6 +908,7 @@
   },
   {
    "id": "T027",
+   "jira_key": "KK-47",
    "type": "Task",
    "epic": "E03",
    "summary": "Configure Kafka Connect sinks to Snowflake with exactly-once semantics",
@@ -883,6 +931,7 @@
   },
   {
    "id": "T028",
+   "jira_key": "KK-48",
    "type": "Task",
    "epic": "E03",
    "summary": "Model the learning-analytics warehouse in dbt (staging → marts) with tests",
@@ -905,6 +954,7 @@
   },
   {
    "id": "T029",
+   "jira_key": "KK-49",
    "type": "Task",
    "epic": "E03",
    "summary": "Implement data-quality monitoring and anomaly alerts on telemetry volume and shape",
@@ -926,6 +976,7 @@
   },
   {
    "id": "T030",
+   "jira_key": "KK-50",
    "type": "Task",
    "epic": "E03",
    "summary": "Stand up the online/offline feature store for student state",
@@ -949,6 +1000,7 @@
   },
   {
    "id": "T031",
+   "jira_key": "KK-51",
    "type": "Task",
    "epic": "E03",
    "summary": "Build event replay and backfill tooling for reprocessing historical telemetry",
@@ -971,6 +1023,7 @@
   },
   {
    "id": "T032",
+   "jira_key": "KK-52",
    "type": "Task",
    "epic": "E04",
    "summary": "Design the knowledge-component (KC) graph schema and store",
@@ -991,6 +1044,7 @@
   },
   {
    "id": "T033",
+   "jira_key": "KK-53",
    "type": "Task",
    "epic": "E04",
    "summary": "Make `subject` and `track` first-class across the KC graph, item bank, routing, mastery API and telemetry",
@@ -1014,6 +1068,7 @@
   },
   {
    "id": "T034",
+   "jira_key": "KK-54",
    "type": "Story",
    "epic": "E04",
    "summary": "As a curriculum lead, I author and version the KC graph in a web editor with review workflow",
@@ -1038,6 +1093,7 @@
   },
   {
    "id": "T035",
+   "jira_key": "KK-55",
    "type": "Task",
    "epic": "E04",
    "summary": "Populate the Physics KC graph for all Bac tracks (first subject)",
@@ -1060,6 +1116,7 @@
   },
   {
    "id": "T036",
+   "jira_key": "KK-56",
    "type": "Task",
    "epic": "E04",
    "summary": "Define the item (question) data model: types, KC tags, difficulty, distractor rationale, media",
@@ -1082,6 +1139,7 @@
   },
   {
    "id": "T037",
+   "jira_key": "KK-57",
    "type": "Story",
    "epic": "E04",
    "summary": "As a teacher-author, I create, preview and submit items for review in the authoring tool",
@@ -1105,6 +1163,7 @@
   },
   {
    "id": "T038",
+   "jira_key": "KK-58",
    "type": "Task",
    "epic": "E04",
    "summary": "Build the Physics item bank: 6,000 tagged items including 10 years of past Bac papers",
@@ -1128,6 +1187,7 @@
   },
   {
    "id": "T039",
+   "jira_key": "KK-59",
    "type": "Task",
    "epic": "E04",
    "summary": "Ingest official textbooks into the RAG corpus with chapter/KC-aware chunking",
@@ -1151,6 +1211,7 @@
   },
   {
    "id": "T040",
+   "jira_key": "KK-60",
    "type": "Spike",
    "epic": "E05",
    "summary": "Benchmark SAINT, SAINT+, SAKT and AKT on public datasets and our pilot data",
@@ -1174,6 +1235,7 @@
   },
   {
    "id": "T041",
+   "jira_key": "KK-61",
    "type": "Task",
    "epic": "E05",
    "summary": "Integrate pyKT into the ML mono-repo with our data adapter and reproducible training config",
@@ -1196,6 +1258,7 @@
   },
   {
    "id": "T042",
+   "jira_key": "KK-62",
    "type": "Task",
    "epic": "E05",
    "summary": "Implement production SAINT+ model with elapsed-time and lag-time embeddings",
@@ -1219,6 +1282,7 @@
   },
   {
    "id": "T043",
+   "jira_key": "KK-63",
    "type": "Task",
    "epic": "E05",
    "summary": "Implement IRT cold-start estimator and blended handoff to SAINT+",
@@ -1241,6 +1305,7 @@
   },
   {
    "id": "T044",
+   "jira_key": "KK-64",
    "type": "Task",
    "epic": "E04",
    "summary": "Run pilot item calibration and prune bad items",
@@ -1264,6 +1329,7 @@
   },
   {
    "id": "T045",
+   "jira_key": "KK-65",
    "type": "Task",
    "epic": "E05",
    "summary": "Deploy Kubeflow Pipelines on EKS and the weekly retraining DAG (Sunday 02:00 Africa/Tunis)",
@@ -1288,6 +1354,7 @@
   },
   {
    "id": "T046",
+   "jira_key": "KK-66",
    "type": "Task",
    "epic": "E05",
    "summary": "Deploy TorchServe inference service with batching, warm pools and model versioning",
@@ -1310,6 +1377,7 @@
   },
   {
    "id": "T047",
+   "jira_key": "KK-67",
    "type": "Task",
    "epic": "E05",
    "summary": "Build champion/challenger evaluation gate and automatic rollback on metric regression",
@@ -1334,6 +1402,7 @@
   },
   {
    "id": "T048",
+   "jira_key": "KK-68",
    "type": "Task",
    "epic": "E05",
    "summary": "Build the online sequence builder: assemble a student's recent interaction window for inference",
@@ -1357,6 +1426,7 @@
   },
   {
    "id": "T049",
+   "jira_key": "KK-69",
    "type": "Task",
    "epic": "E05",
    "summary": "Expose per-KC mastery estimates and attention-based explanations via an internal API",
@@ -1380,6 +1450,7 @@
   },
   {
    "id": "T050",
+   "jira_key": "KK-70",
    "type": "Task",
    "epic": "E05",
    "summary": "Implement model monitoring: prediction drift, input drift and data-leak tests",
@@ -1402,6 +1473,7 @@
   },
   {
    "id": "T051",
+   "jira_key": "KK-71",
    "type": "Spike",
    "epic": "E06",
    "summary": "Design the routing policy: mastery thresholds, exploration, spaced repetition and exam-date weighting",
@@ -1425,6 +1497,7 @@
   },
   {
    "id": "T052",
+   "jira_key": "KK-72",
    "type": "Task",
    "epic": "E06",
    "summary": "Build the routing microservice (Node.js) with cached graph, TorchServe client and policy engine",
@@ -1449,6 +1522,7 @@
   },
   {
    "id": "T053",
+   "jira_key": "KK-73",
    "type": "Story",
    "epic": "E06",
    "summary": "As a student stuck on a concept, I am routed to a prerequisite-level remediation path instead of harder items",
@@ -1472,6 +1546,7 @@
   },
   {
    "id": "T054",
+   "jira_key": "KK-74",
    "type": "Task",
    "epic": "E06",
    "summary": "Implement spaced-repetition scheduler with exam-date compression",
@@ -1493,6 +1568,7 @@
   },
   {
    "id": "T055",
+   "jira_key": "KK-75",
    "type": "Task",
    "epic": "E06",
    "summary": "Build the experimentation framework: assignment, exposure logging, learning-gain metrics",
@@ -1516,6 +1592,7 @@
   },
   {
    "id": "T056",
+   "jira_key": "KK-76",
    "type": "Task",
    "epic": "E06",
    "summary": "Add pre-computation of next-item candidates to hide inference latency behind the UI",
@@ -1538,6 +1615,7 @@
   },
   {
    "id": "T057",
+   "jira_key": "KK-77",
    "type": "Story",
    "epic": "E06",
    "summary": "As a student in a track with several subjects, I get a daily plan that splits time across subjects by exam weight and weakness",
@@ -1561,6 +1639,7 @@
   },
   {
    "id": "T058",
+   "jira_key": "KK-78",
    "type": "Story",
    "epic": "E06",
    "summary": "As a teacher, I can pin a chapter or assign a set for my class and the router respects it",
@@ -1584,6 +1663,7 @@
   },
   {
    "id": "T059",
+   "jira_key": "KK-79",
    "type": "Task",
    "epic": "E07",
    "summary": "Deploy LiteLLM proxy with provider routing, fallbacks, budgets and key management",
@@ -1607,6 +1687,7 @@
   },
   {
    "id": "T060",
+   "jira_key": "KK-80",
    "type": "Task",
    "epic": "E07",
    "summary": "Serve a local open-weights model on vLLM for the judge and low-cost paths",
@@ -1629,6 +1710,7 @@
   },
   {
    "id": "T061",
+   "jira_key": "KK-81",
    "type": "Task",
    "epic": "E07",
    "summary": "Build the curriculum RAG pipeline over pgvector with KC-filtered hybrid retrieval",
@@ -1652,6 +1734,7 @@
   },
   {
    "id": "T062",
+   "jira_key": "KK-82",
    "type": "Task",
    "epic": "E07",
    "summary": "Implement the LLM-as-a-Judge harness that intercepts tutor output before delivery",
@@ -1676,6 +1759,7 @@
   },
   {
    "id": "T063",
+   "jira_key": "KK-83",
    "type": "Task",
    "epic": "E07",
    "summary": "Refactor the judge into a verifier plug-in interface with symbolic and rubric implementations",
@@ -1698,6 +1782,7 @@
   },
   {
    "id": "T064",
+   "jira_key": "KK-84",
    "type": "Task",
    "epic": "E07",
    "summary": "Build the semantic cache in Redis for tutor and explanation queries",
@@ -1720,6 +1805,7 @@
   },
   {
    "id": "T065",
+   "jira_key": "KK-85",
    "type": "Task",
    "epic": "E07",
    "summary": "Create the prompt registry with versioning, evals and staged rollout",
@@ -1742,6 +1828,7 @@
   },
   {
    "id": "T066",
+   "jira_key": "KK-86",
    "type": "Task",
    "epic": "E07",
    "summary": "Harden the tutor against prompt injection, jailbreaks and data exfiltration",
@@ -1764,6 +1851,7 @@
   },
   {
    "id": "T067",
+   "jira_key": "KK-87",
    "type": "Task",
    "epic": "E07",
    "summary": "Build the LLM cost dashboard and automated cost-control policies",
@@ -1786,6 +1874,7 @@
   },
   {
    "id": "T068",
+   "jira_key": "KK-88",
    "type": "Task",
    "epic": "E07",
    "summary": "Curate the golden evaluation dataset for tutor quality with curriculum team",
@@ -1808,6 +1897,7 @@
   },
   {
    "id": "T069",
+   "jira_key": "KK-89",
    "type": "Story",
    "epic": "E08",
    "summary": "As a student, I chat with a streaming tutor beside the item, in Arabic or French, with LaTeX rendering",
@@ -1832,6 +1922,7 @@
   },
   {
    "id": "T070",
+   "jira_key": "KK-90",
    "type": "Story",
    "epic": "E08",
    "summary": "As a student, hints escalate in levels (question → nudge → worked step → solution) and never start at the answer",
@@ -1856,6 +1947,7 @@
   },
   {
    "id": "T071",
+   "jira_key": "KK-91",
    "type": "Task",
    "epic": "E08",
    "summary": "Build misconception diagnosis from distractor choice and interaction trace",
@@ -1879,6 +1971,7 @@
   },
   {
    "id": "T072",
+   "jira_key": "KK-92",
    "type": "Story",
    "epic": "E08",
    "summary": "As a student, I rate a hint and report a wrong explanation in one tap",
@@ -1902,6 +1995,7 @@
   },
   {
    "id": "T073",
+   "jira_key": "KK-93",
    "type": "Story",
    "epic": "E08",
    "summary": "As a student on mobile, I can dictate my question in Tunisian Arabic or French",
@@ -1926,6 +2020,7 @@
   },
   {
    "id": "T074",
+   "jira_key": "KK-94",
    "type": "Task",
    "epic": "E08",
    "summary": "Bilingual content strategy: translation memory, glossary enforcement and QA for tutor output",
@@ -1949,6 +2044,7 @@
   },
   {
    "id": "T075",
+   "jira_key": "KK-95",
    "type": "Story",
    "epic": "E08",
    "summary": "As a parent, I receive a weekly plain-language summary of what my child worked on and where they struggle",
@@ -1973,6 +2069,7 @@
   },
   {
    "id": "T076",
+   "jira_key": "KK-96",
    "type": "Task",
    "epic": "E09",
    "summary": "Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration",
@@ -1996,6 +2093,7 @@
   },
   {
    "id": "T077",
+   "jira_key": "KK-97",
    "type": "Task",
    "epic": "E09",
    "summary": "Build the React Three Fiber physics canvas core: scene, camera rigs, units, touch controls, performance tiers",
@@ -2019,6 +2117,7 @@
   },
   {
    "id": "T078",
+   "jira_key": "KK-98",
    "type": "Task",
    "epic": "E09",
    "summary": "Build the per-subject widget package system (registry, lazy loading, parameter-space contract)",
@@ -2041,6 +2140,7 @@
   },
   {
    "id": "T079",
+   "jira_key": "KK-99",
    "type": "Story",
    "epic": "E09",
    "summary": "As a student, I explore mechanics sandboxes: projectile motion, inclined plane, pendulum, collisions — with draggable vectors",
@@ -2066,6 +2166,7 @@
   },
   {
    "id": "T080",
+   "jira_key": "KK-100",
    "type": "Story",
    "epic": "E09",
    "summary": "As a student, I build DC and RLC circuits on a canvas and watch current, voltage and resonance curves",
@@ -2089,6 +2190,7 @@
   },
   {
    "id": "T081",
+   "jira_key": "KK-101",
    "type": "Story",
    "epic": "E09",
    "summary": "As a student, I manipulate wave and optics simulations: interference, diffraction, lenses, Doppler",
@@ -2113,6 +2215,7 @@
   },
   {
    "id": "T082",
+   "jira_key": "KK-102",
    "type": "Task",
    "epic": "E09",
    "summary": "Build the dynamic charts and graph-reading components (Recharts/Visx) linked to simulations",
@@ -2134,6 +2237,7 @@
   },
   {
    "id": "T083",
+   "jira_key": "KK-103",
    "type": "Story",
    "epic": "E09",
    "summary": "As a student, I complete an assessment during a 5-minute internet outage and nothing is lost",
@@ -2160,6 +2264,7 @@
   },
   {
    "id": "T084",
+   "jira_key": "KK-104",
    "type": "Story",
    "epic": "E09",
    "summary": "As a student, I challenge a peer to a real-time 5-question physics battle",
@@ -2185,6 +2290,7 @@
   },
   {
    "id": "T085",
+   "jira_key": "KK-105",
    "type": "Task",
    "epic": "E09",
    "summary": "Accessibility and low-end device pass: WCAG 2.2 AA, keyboard physics controls, 2 GB RAM devices",
@@ -2209,6 +2315,7 @@
   },
   {
    "id": "T086",
+   "jira_key": "KK-106",
    "type": "Task",
    "epic": "E09",
    "summary": "Enforce web performance budgets and real-user monitoring",
@@ -2232,6 +2339,7 @@
   },
   {
    "id": "T087",
+   "jira_key": "KK-107",
    "type": "Story",
    "epic": "E10",
    "summary": "As a student, I see my streak, XP and daily goal update instantly after each answer",
@@ -2255,6 +2363,7 @@
   },
   {
    "id": "T088",
+   "jira_key": "KK-108",
    "type": "Story",
    "epic": "E10",
    "summary": "As a student, I see class and national leaderboards that reward mastery gain, not volume",
@@ -2278,6 +2387,7 @@
   },
   {
    "id": "T089",
+   "jira_key": "KK-109",
    "type": "Task",
    "epic": "E10",
    "summary": "Build the notification service: push (web/FCM), SMS, email with quiet hours and per-tenant templates",
@@ -2301,6 +2411,7 @@
   },
   {
    "id": "T090",
+   "jira_key": "KK-110",
    "type": "Story",
    "epic": "E10",
    "summary": "As a student at risk of dropping off, I receive a personalised nudge with a 10-minute plan",
@@ -2325,6 +2436,7 @@
   },
   {
    "id": "T091",
+   "jira_key": "KK-111",
    "type": "Task",
    "epic": "E10",
    "summary": "Implement achievements and chapter-mastery certificates (shareable, verifiable)",
@@ -2346,6 +2458,7 @@
   },
   {
    "id": "T092",
+   "jira_key": "KK-112",
    "type": "Task",
    "epic": "E11",
    "summary": "Implement PostgreSQL Row-Level Security multi-tenancy with a tenant-context connection layer",
@@ -2369,6 +2482,7 @@
   },
   {
    "id": "T093",
+   "jira_key": "KK-113",
    "type": "Story",
    "epic": "E11",
    "summary": "As a platform admin, I onboard a school in 10 minutes: tenant, admins, classes, CSV student import",
@@ -2393,6 +2507,7 @@
   },
   {
    "id": "T094",
+   "jira_key": "KK-114",
    "type": "Story",
    "epic": "E11",
    "summary": "As a school, I sign in with our Microsoft 365 / Google Workspace SSO",
@@ -2417,6 +2532,7 @@
   },
   {
    "id": "T095",
+   "jira_key": "KK-115",
    "type": "Story",
    "epic": "E11",
    "summary": "As a teacher, I see real-time mastery heatmaps for my cohort and get intervention alerts",
@@ -2442,6 +2558,7 @@
   },
   {
    "id": "T096",
+   "jira_key": "KK-116",
    "type": "Task",
    "epic": "E11",
    "summary": "Build cohort anomaly detection: sudden drops, cheating patterns, disengagement",
@@ -2464,6 +2581,7 @@
   },
   {
    "id": "T097",
+   "jira_key": "KK-117",
    "type": "Story",
    "epic": "E11",
    "summary": "As a parent, I see my child's progress, consent settings and screen-time controls",
@@ -2487,6 +2605,7 @@
   },
   {
    "id": "T098",
+   "jira_key": "KK-118",
    "type": "Task",
    "epic": "E11",
    "summary": "Build seat-based B2B subscription billing with Stripe (annual school licences, proration, invoices)",
@@ -2509,6 +2628,7 @@
   },
   {
    "id": "T099",
+   "jira_key": "KK-119",
    "type": "Spike",
    "epic": "E11",
    "summary": "Evaluate local payment rails for B2C (Flouci, D17, ClicToPay, bank transfer) alongside Stripe",
@@ -2531,6 +2651,7 @@
   },
   {
    "id": "T100",
+   "jira_key": "KK-120",
    "type": "Story",
    "epic": "E11",
    "summary": "As a school admin, I export term reports and usage analytics per class",
@@ -2553,6 +2674,7 @@
   },
   {
    "id": "T101",
+   "jira_key": "KK-121",
    "type": "Task",
    "epic": "E12",
    "summary": "Define SLOs and error budgets per service and wire burn-rate alerting",
@@ -2575,6 +2697,7 @@
   },
   {
    "id": "T102",
+   "jira_key": "KK-122",
    "type": "Task",
    "epic": "E12",
    "summary": "Build the Playwright end-to-end suite covering the core learner journey in both languages",
@@ -2598,6 +2721,7 @@
   },
   {
    "id": "T103",
+   "jira_key": "KK-134",
    "type": "Task",
    "epic": "E12",
    "summary": "Implement consumer-driven contract tests (Pact) between frontend, gateway and microservices",
@@ -2620,6 +2744,7 @@
   },
   {
    "id": "T104",
+   "jira_key": "KK-123",
    "type": "Task",
    "epic": "E12",
    "summary": "Run Bac-eve load test: 50,000 concurrent students, 50k events/s, 2,000 inference RPS",
@@ -2646,6 +2771,7 @@
   },
   {
    "id": "T105",
+   "jira_key": "KK-124",
    "type": "Task",
    "epic": "E12",
    "summary": "Run chaos experiments: AZ loss, Kafka broker loss, TorchServe outage, LLM provider outage, Redis failover",
@@ -2668,6 +2794,7 @@
   },
   {
    "id": "T106",
+   "jira_key": "KK-125",
    "type": "Task",
    "epic": "E12",
    "summary": "Implement backups and disaster recovery: cross-region replication, RPO 15 min / RTO 1 h, quarterly drill",
@@ -2691,6 +2818,7 @@
   },
   {
    "id": "T107",
+   "jira_key": "KK-126",
    "type": "Task",
    "epic": "E12",
    "summary": "Write operational runbooks, on-call rotation and incident process",
@@ -2713,6 +2841,7 @@
   },
   {
    "id": "T108",
+   "jira_key": "KK-127",
    "type": "Task",
    "epic": "E12",
    "summary": "Run the closed pilot with 3 schools (≈ 2,000 students) and triage findings",
@@ -2738,6 +2867,7 @@
   },
   {
    "id": "T109",
+   "jira_key": "KK-128",
    "type": "Task",
    "epic": "E12",
    "summary": "Prepare the exam-season war room: freeze window, scaling pre-warm, comms plan",
@@ -2761,6 +2891,7 @@
   },
   {
    "id": "T110",
+   "jira_key": "KK-129",
    "type": "Task",
    "epic": "E12",
    "summary": "Production go-live (Physics + Maths) and 30-day hypercare",
@@ -2788,6 +2919,7 @@
   },
   {
    "id": "T111",
+   "jira_key": "KK-130",
    "type": "Task",
    "epic": "E13",
    "summary": "Mathématiques: encode the KC graph for all relevant Bac tracks",
@@ -2812,6 +2944,7 @@
   },
   {
    "id": "T112",
+   "jira_key": "KK-131",
    "type": "Task",
    "epic": "E13",
    "summary": "Mathématiques: build and tag the item bank incl. past Bac papers",
@@ -2836,6 +2969,7 @@
   },
   {
    "id": "T113",
+   "jira_key": "KK-132",
    "type": "Task",
    "epic": "E13",
    "summary": "Mathématiques: ingest official textbooks into the RAG corpus and build glossary + misconception taxonomy",
@@ -2860,6 +2994,7 @@
   },
   {
    "id": "T114",
+   "jira_key": "KK-133",
    "type": "Task",
    "epic": "E13",
    "summary": "Sciences (SVT / Chimie): encode the KC graph for all relevant Bac tracks",
@@ -2884,6 +3019,7 @@
   },
   {
    "id": "T115",
+   "jira_key": "KK-135",
    "type": "Task",
    "epic": "E13",
    "summary": "Sciences (SVT / Chimie): build and tag the item bank incl. past Bac papers",
@@ -2908,6 +3044,7 @@
   },
   {
    "id": "T116",
+   "jira_key": "KK-136",
    "type": "Task",
    "epic": "E13",
    "summary": "Sciences (SVT / Chimie): ingest official textbooks into the RAG corpus and build glossary + misconception taxonomy",
@@ -2932,6 +3069,7 @@
   },
   {
    "id": "T117",
+   "jira_key": "KK-137",
    "type": "Task",
    "epic": "E13",
    "summary": "Sciences techniques: encode the KC graph for all relevant Bac tracks",
@@ -2956,6 +3094,7 @@
   },
   {
    "id": "T118",
+   "jira_key": "KK-138",
    "type": "Task",
    "epic": "E13",
    "summary": "Sciences techniques: build and tag the item bank incl. past Bac papers",
@@ -2980,6 +3119,7 @@
   },
   {
    "id": "T119",
+   "jira_key": "KK-139",
    "type": "Task",
    "epic": "E13",
    "summary": "Sciences techniques: ingest official textbooks into the RAG corpus and build glossary + misconception taxonomy",
@@ -3004,6 +3144,7 @@
   },
   {
    "id": "T120",
+   "jira_key": "KK-140",
    "type": "Task",
    "epic": "E13",
    "summary": "Économie & Gestion: encode the KC graph for all relevant Bac tracks",
@@ -3028,6 +3169,7 @@
   },
   {
    "id": "T121",
+   "jira_key": "KK-141",
    "type": "Task",
    "epic": "E13",
    "summary": "Économie & Gestion: build and tag the item bank incl. past Bac papers",
@@ -3052,6 +3194,7 @@
   },
   {
    "id": "T122",
+   "jira_key": "KK-142",
    "type": "Task",
    "epic": "E13",
    "summary": "Économie & Gestion: ingest official textbooks into the RAG corpus and build glossary + misconception taxonomy",
@@ -3076,6 +3219,7 @@
   },
   {
    "id": "T123",
+   "jira_key": "KK-143",
    "type": "Story",
    "epic": "E13",
    "summary": "As a maths student, I use graphing, geometry and sequence/limit explorers with draggable parameters",
@@ -3100,6 +3244,7 @@
   },
   {
    "id": "T124",
+   "jira_key": "KK-144",
    "type": "Story",
    "epic": "E13",
    "summary": "As a sciences student, I explore chemistry and biology sims: titration, kinetics, molecular geometry, genetics crosses",
@@ -3124,6 +3269,7 @@
   },
   {
    "id": "T125",
+   "jira_key": "KK-145",
    "type": "Story",
    "epic": "E13",
    "summary": "As a sciences-techniques student, I build mechanisms and logic/automation schematics and simulate them",
@@ -3149,6 +3295,7 @@
   },
   {
    "id": "T126",
+   "jira_key": "KK-146",
    "type": "Story",
    "epic": "E13",
    "summary": "As an éco/gestion student, I work in interactive financial statements, supply/demand and accounting-entry widgets",
@@ -3173,6 +3320,7 @@
   },
   {
    "id": "T127",
+   "jira_key": "KK-147",
    "type": "Task",
    "epic": "E13",
    "summary": "Calibrate the rubric verifier and tutor prompts for éco/gestion and descriptive sciences",
@@ -3199,6 +3347,7 @@
   },
   {
    "id": "T128",
+   "jira_key": "KK-148",
    "type": "Task",
    "epic": "E13",
    "summary": "Calibrate Maths, Sciences, Technique and Éco/Gestion items on pilot cohorts",
@@ -3225,6 +3374,7 @@
   },
   {
    "id": "T129",
+   "jira_key": "KK-149",
    "type": "Task",
    "epic": "E13",
    "summary": "Train and validate SAINT+ per subject (or shared with subject embedding) and gate per subject",
@@ -3249,6 +3399,7 @@
   },
   {
    "id": "T130",
+   "jira_key": "KK-150",
    "type": "Task",
    "epic": "E13",
    "summary": "Release Mathématiques with the physics go-live (S18)",
@@ -3275,6 +3426,7 @@
   },
   {
    "id": "T131",
+   "jira_key": "KK-151",
    "type": "Task",
    "epic": "E13",
    "summary": "Release wave 2: Sciences and Sciences techniques",
@@ -3305,6 +3457,7 @@
   },
   {
    "id": "T132",
+   "jira_key": "KK-152",
    "type": "Task",
    "epic": "E13",
    "summary": "Release wave 3: Économie & Gestion and full-track coverage review",
@@ -3332,6 +3485,7 @@
   },
   {
    "id": "T133",
+   "jira_key": "KK-153",
    "type": "Task",
    "epic": "E14",
    "summary": "Accessibility baseline in the design system: focus ring, high-contrast theme, 200 % type scale, motion rules, component a11y contracts",
@@ -3355,6 +3509,7 @@
   },
   {
    "id": "T134",
+   "jira_key": "KK-154",
    "type": "Task",
    "epic": "E14",
    "summary": "Learner Comfort Profile service: preferences and accommodations API, versioned, synced across devices, cached offline",
@@ -3379,6 +3534,7 @@
   },
   {
    "id": "T135",
+   "jira_key": "KK-155",
    "type": "Story",
    "epic": "E14",
    "summary": "As a student, I set my comfort profile at onboarding or any time, with combinable presets",
@@ -3403,6 +3559,7 @@
   },
   {
    "id": "T136",
+   "jira_key": "KK-156",
    "type": "Story",
    "epic": "E14",
    "summary": "As a screen-reader user, I complete any item, hint and tutor exchange with VoiceOver, TalkBack or NVDA in French and Arabic",
@@ -3427,6 +3584,7 @@
   },
   {
    "id": "T137",
+   "jira_key": "KK-157",
    "type": "Task",
    "epic": "E14",
    "summary": "Accessible maths: MathML output with French and Arabic speech rules for screen readers and read-aloud",
@@ -3451,6 +3609,7 @@
   },
   {
    "id": "T138",
+   "jira_key": "KK-158",
    "type": "Story",
    "epic": "E14",
    "summary": "As a blind or low-vision student, every simulation has a live text description and a sonified mode, generated from its state",
@@ -3476,6 +3635,7 @@
   },
   {
    "id": "T139",
+   "jira_key": "KK-159",
    "type": "Task",
    "epic": "E14",
    "summary": "Non-drag alternatives for every widget: keyboard map, steppers, numeric input, switch and voice access; enforced by the widget contract",
@@ -3498,6 +3658,7 @@
   },
   {
    "id": "T140",
+   "jira_key": "KK-160",
    "type": "Story",
    "epic": "E14",
    "summary": "As a dyslexic student, I use Lexend or Atkinson fonts, spacing, a reading ruler and read-aloud with word highlighting",
@@ -3522,6 +3683,7 @@
   },
   {
    "id": "T141",
+   "jira_key": "KK-161",
    "type": "Task",
    "epic": "E14",
    "summary": "Speech service: read-aloud in French and Arabic with word timings, dictation (extends T073), caching",
@@ -3545,6 +3707,7 @@
   },
   {
    "id": "T142",
+   "jira_key": "KK-162",
    "type": "Story",
    "epic": "E14",
    "summary": "As a student with attention or learning difficulties (ADHD, dyscalculia), I get split items, step scaffolds, short sessions and break prompts",
@@ -3570,6 +3733,7 @@
   },
   {
    "id": "T143",
+   "jira_key": "KK-163",
    "type": "Story",
    "epic": "E14",
    "summary": "As an anxious student, calm mode hides timers, leaderboards and duels, and feedback uses gentle wording",
@@ -3594,6 +3758,7 @@
   },
   {
    "id": "T144",
+   "jira_key": "KK-164",
    "type": "Task",
    "epic": "E14",
    "summary": "Simplified language (FALC) and bilingual terms in the content model and tutor prompts, checked by the judge",
@@ -3618,6 +3783,7 @@
   },
   {
    "id": "T145",
+   "jira_key": "KK-165",
    "type": "Story",
    "epic": "E14",
    "summary": "As a student with an official accommodation, my time multiplier applies to timed items, duels and the mock Bac",
@@ -3642,6 +3808,7 @@
   },
   {
    "id": "T146",
+   "jira_key": "KK-166",
    "type": "Story",
    "epic": "E14",
    "summary": "As a teacher, I see and apply the accommodations a student chooses to share, and assign accessible versions of sets",
@@ -3666,6 +3833,7 @@
   },
   {
    "id": "T147",
+   "jira_key": "KK-167",
    "type": "Task",
    "epic": "E14",
    "summary": "Captions and transcripts for all audio and the tutor's voice; visual and haptic alternatives to sounds",
@@ -3688,6 +3856,7 @@
   },
   {
    "id": "T148",
+   "jira_key": "KK-168",
    "type": "Task",
    "epic": "E14",
    "summary": "Accommodation-aware knowledge tracing: normalised time features, assistive-mode embedding, fairness slices",
@@ -3712,6 +3881,7 @@
   },
   {
    "id": "T149",
+   "jira_key": "KK-169",
    "type": "Task",
    "epic": "E14",
    "summary": "Automated accessibility gates: axe-core and Playwright a11y suite in CI, pa11y on preview envs, RTL and 200 % snapshots",
@@ -3735,6 +3905,7 @@
   },
   {
    "id": "T150",
+   "jira_key": "KK-170",
    "type": "Task",
    "epic": "E14",
    "summary": "Co-design and audits with students with disabilities, through Tunisian disability associations; publish the accessibility statement",
@@ -3759,6 +3930,7 @@
   },
   {
    "id": "T151",
+   "jira_key": "KK-171",
    "type": "Task",
    "epic": "E14",
    "summary": "Protect accommodation data: sensitive classification, separate encrypted schema, explicit consent, DPIA update",
@@ -3783,6 +3955,7 @@
   },
   {
    "id": "T152",
+   "jira_key": "KK-172",
    "type": "Task",
    "epic": "E15",
    "summary": "Notification Orchestrator: single gateway, priority classes, daily budget, quiet hours, de-duplication and digests (above T089)",
@@ -3805,6 +3978,7 @@
   },
   {
    "id": "T153",
+   "jira_key": "KK-173",
    "type": "Task",
    "epic": "E15",
    "summary": "Import school timetables and calendars per tenant (class hours, holidays, mock Bac, Bac); no sends during class",
@@ -3828,6 +4002,7 @@
   },
   {
    "id": "T154",
+   "jira_key": "KK-174",
    "type": "Task",
    "epic": "E15",
    "summary": "Send-time model: learn each student's best study window from session history, a bandit with guardrails",
@@ -3852,6 +4027,7 @@
   },
   {
    "id": "T155",
+   "jira_key": "KK-175",
    "type": "Story",
    "epic": "E15",
    "summary": "As a student, I start a 15, 25 or 45-minute Focus session that silences Kuizi, defers social features and ends with a summary",
@@ -3874,6 +4050,7 @@
   },
   {
    "id": "T156",
+   "jira_key": "KK-176",
    "type": "Task",
    "epic": "E15",
    "summary": "OS Focus integration: iOS Focus filter (App Intents), Android Do Not Disturb and channels, web Notification API",
@@ -3897,6 +4074,7 @@
   },
   {
    "id": "T157",
+   "jira_key": "KK-177",
    "type": "Story",
    "epic": "E15",
    "summary": "As a student, I control categories, channels, daily maximum and tone; essential messages cannot be switched off",
@@ -3920,6 +4098,7 @@
   },
   {
    "id": "T158",
+   "jira_key": "KK-178",
    "type": "Task",
    "epic": "E15",
    "summary": "Message copy rules and library in French and Arabic: kind, no guilt, plain language, screen-reader friendly, judged before send",
@@ -3944,6 +4123,7 @@
   },
   {
    "id": "T159",
+   "jira_key": "KK-179",
    "type": "Task",
    "epic": "E15",
    "summary": "Exam-aware policy: ramp before the mock Bac and the Bac, calm exam-eve mode, no sends after 21:00 in exam weeks",
@@ -3967,6 +4147,7 @@
   },
   {
    "id": "T160",
+   "jira_key": "KK-180",
    "type": "Story",
    "epic": "E15",
    "summary": "As a parent, my notifications follow the same quiet hours and budget, with SMS fallback and opt-out honoured within one cycle",
@@ -3991,6 +4172,7 @@
   },
   {
    "id": "T161",
+   "jira_key": "KK-181",
    "type": "Task",
    "epic": "E15",
    "summary": "Notification quality metrics and kill-switch: opens, opt-outs, complaints, quiet-hour sends (must be 0), A/B through T055",
@@ -4014,6 +4196,7 @@
   },
   {
    "id": "T162",
+   "jira_key": "KK-182",
    "type": "Spike",
    "epic": "E16",
    "summary": "Confirm native learner apps versus PWA and the code-sharing strategy; write the ADR",
@@ -4037,6 +4220,7 @@
   },
   {
    "id": "T163",
+   "jira_key": "KK-183",
    "type": "Task",
    "epic": "E16",
    "summary": "iOS learner app shell (SwiftUI): Keycloak sign-in, navigation, Cyanotype tokens, offline store",
@@ -4060,6 +4244,7 @@
   },
   {
    "id": "T164",
+   "jira_key": "KK-184",
    "type": "Task",
    "epic": "E16",
    "summary": "Android learner app shell (Kotlin, Compose): sign-in, navigation, tokens, offline store",
@@ -4082,6 +4267,7 @@
   },
   {
    "id": "T165",
+   "jira_key": "KK-185",
    "type": "Task",
    "epic": "E16",
    "summary": "Embed simulations and items in the native apps through a bridge to the widget package, with telemetry passthrough",
@@ -4105,6 +4291,7 @@
   },
   {
    "id": "T166",
+   "jira_key": "KK-186",
    "type": "Story",
    "epic": "E16",
    "summary": "As a student, I sign in with Apple or Google; Sign in with Apple is offered on iOS (guideline 4.8)",
@@ -4130,6 +4317,7 @@
   },
   {
    "id": "T167",
+   "jira_key": "KK-187",
    "type": "Story",
    "epic": "E16",
    "summary": "As a student or parent, I delete my account inside the app (guideline 5.1.1(v)), wired to the erasure pipeline",
@@ -4155,6 +4343,7 @@
   },
   {
    "id": "T168",
+   "jira_key": "KK-188",
    "type": "Task",
    "epic": "E16",
    "summary": "In-App Purchase and Google Play Billing for B2C subscriptions, server receipt validation, entitlements synced with Stripe seats",
@@ -4177,6 +4366,7 @@
   },
   {
    "id": "T169",
+   "jira_key": "KK-189",
    "type": "Task",
    "epic": "E16",
    "summary": "Privacy manifest, App Store privacy labels, Play Data safety form, age rating, review of the minors' consent flow",
@@ -4200,6 +4390,7 @@
   },
   {
    "id": "T170",
+   "jira_key": "KK-190",
    "type": "Story",
    "epic": "E16",
    "summary": "As a student, I see today's plan and the Bac countdown in a home-screen widget, and a running duel or Focus session as a Live Activity",
@@ -4224,6 +4415,7 @@
   },
   {
    "id": "T171",
+   "jira_key": "KK-191",
    "type": "Story",
    "epic": "E16",
    "summary": "As an iPad student, I write derivations with Apple Pencil, recognised into the maths input",
@@ -4249,6 +4441,7 @@
   },
   {
    "id": "T172",
+   "jira_key": "KK-192",
    "type": "Task",
    "epic": "E16",
    "summary": "App Intents, Siri Shortcuts and Android App Actions (\"Start my 15-minute physics plan\")",
@@ -4271,6 +4464,7 @@
   },
   {
    "id": "T173",
+   "jira_key": "KK-193",
    "type": "Task",
    "epic": "E16",
    "summary": "Store release pipeline: TestFlight and Play internal testing, fastlane, review checklist, staged rollout",
@@ -4294,6 +4488,7 @@
   },
   {
    "id": "T174",
+   "jira_key": "KK-194",
    "type": "Task",
    "epic": "E17",
    "summary": "Cyanotype design system in code: tokens, components (buttons, chips, concept states, hint ladder, confidence scale), Storybook, RTL",
@@ -4316,6 +4511,7 @@
   },
   {
    "id": "T175",
+   "jira_key": "KK-195",
    "type": "Story",
    "epic": "E17",
    "summary": "As a new student, I choose my Bac section, get parental consent and take the 12-question placement test (screen 01)",
@@ -4340,6 +4536,7 @@
   },
   {
    "id": "T176",
+   "jira_key": "KK-196",
    "type": "Story",
    "epic": "E17",
    "summary": "As a student, I see Today: daily plan, Bac countdown, at-risk concepts and pending duels (screen 02)",
@@ -4364,6 +4561,7 @@
   },
   {
    "id": "T177",
+   "jira_key": "KK-197",
    "type": "Story",
    "epic": "E17",
    "summary": "As a student, I explore my concept map: prerequisite graph, mastery states, remediation route and what weighs on each concept (screen 03)",
@@ -4389,6 +4587,7 @@
   },
   {
    "id": "T178",
+   "jira_key": "KK-198",
    "type": "Story",
    "epic": "E17",
    "summary": "As a student, I work in the Lab: item, simulation, confidence 1–5 and tutor panel in one view (screen 04)",
@@ -4413,6 +4612,7 @@
   },
   {
    "id": "T179",
+   "jira_key": "KK-199",
    "type": "Story",
    "epic": "E17",
    "summary": "As a student who answers wrong, I see the diagnosed misconception and start a 1-minute micro-remediation (screen 05)",
@@ -4437,6 +4637,7 @@
   },
   {
    "id": "T180",
+   "jira_key": "KK-200",
    "type": "Story",
    "epic": "E17",
    "summary": "As a student, I see my progress: mastery gain, leaderboard by gain, stars and verifiable certificates (screen 07)",
@@ -4461,6 +4662,7 @@
   },
   {
    "id": "T181",
+   "jira_key": "KK-201",
    "type": "Story",
    "epic": "E17",
    "summary": "As a student, I play a live duel with keyboard shortcuts, accommodations and a calm-mode opt-out (screen 06)",
@@ -4484,6 +4686,7 @@
   },
   {
    "id": "T182",
+   "jira_key": "KK-202",
    "type": "Story",
    "epic": "E17",
    "summary": "As a student, I manage Focus, notifications and my comfort profile in one settings area",
@@ -4508,6 +4711,7 @@
   },
   {
    "id": "T183",
+   "jira_key": "KK-203",
    "type": "Task",
    "epic": "E17",
    "summary": "Usability testing of the learner journey with students in French and Arabic, then design iteration",
@@ -4530,6 +4734,7 @@
   },
   {
    "id": "T184",
+   "jira_key": "KK-204",
    "type": "Story",
    "epic": "E18",
    "summary": "As a student, I browse past Bac papers (annales) by year, section and chapter, with solutions unlocked after an attempt",
@@ -4554,6 +4759,7 @@
   },
   {
    "id": "T185",
+   "jira_key": "KK-205",
    "type": "Story",
    "epic": "E18",
    "summary": "As a student, I take a timed mock Bac paper in the official format, offline-capable, with my time multiplier applied",
@@ -4578,6 +4784,7 @@
   },
   {
    "id": "T186",
+   "jira_key": "KK-206",
    "type": "Task",
    "epic": "E18",
    "summary": "Auto-grading of mock Bac papers: symbolic verifiers for maths and physics, rubric scoring for open answers with teacher override",
@@ -4601,6 +4808,7 @@
   },
   {
    "id": "T187",
+   "jira_key": "KK-207",
    "type": "Task",
    "epic": "E18",
    "summary": "Bac grade estimate per subject from mastery, coefficients and mock-Bac results, with an uncertainty band",
@@ -4624,6 +4832,7 @@
   },
   {
    "id": "T188",
+   "jira_key": "KK-208",
    "type": "Story",
    "epic": "E18",
    "summary": "As a teacher, I schedule a class mock Bac, see the score distribution and per-question error analysis",
@@ -4648,6 +4857,7 @@
   },
   {
    "id": "T189",
+   "jira_key": "KK-209",
    "type": "Story",
    "epic": "E18",
    "summary": "As a student, I export a printable revision sheet for a chapter built from my weak concepts (PDF, FR/AR)",
@@ -4671,6 +4881,7 @@
   },
   {
    "id": "T190",
+   "jira_key": "KK-210",
    "type": "Task",
    "epic": "E18",
    "summary": "Exam-season mode: mock-Bac weeks and the Bac period switch the router to review-only and calm notifications",
@@ -4694,6 +4905,7 @@
   },
   {
    "id": "T191",
+   "jira_key": "KK-211",
    "type": "Task",
    "epic": "E19",
    "summary": "Product analytics event plan and pipeline (activation, retention, feature use) on the telemetry stream, consent-aware",
@@ -4717,6 +4929,7 @@
   },
   {
    "id": "T192",
+   "jira_key": "KK-212",
    "type": "Task",
    "epic": "E19",
    "summary": "KPI dashboards: activation, D7/D30 retention, weekly learning gain, teacher adoption, NPS, revenue",
@@ -4739,6 +4952,7 @@
   },
   {
    "id": "T193",
+   "jira_key": "KK-213",
    "type": "Story",
    "epic": "E19",
    "summary": "As a visitor, I learn what Kuizi does on a bilingual marketing site (FR/AR) with SEO, pricing and school demo request",
@@ -4763,6 +4977,7 @@
   },
   {
    "id": "T194",
+   "jira_key": "KK-214",
    "type": "Task",
    "epic": "E19",
    "summary": "B2C web checkout with the payment rail chosen in T099 (Flouci, D17 or ClicToPay): subscriptions, invoices, refunds",
@@ -4785,6 +5000,7 @@
   },
   {
    "id": "T195",
+   "jira_key": "KK-215",
    "type": "Task",
    "epic": "E19",
    "summary": "Plans, trials and coupons: free-tier limits, 7-day trial, school-sponsored seats, promo codes",
@@ -4807,6 +5023,7 @@
   },
   {
    "id": "T196",
+   "jira_key": "KK-216",
    "type": "Task",
    "epic": "E19",
    "summary": "Lifecycle messaging: onboarding, re-engagement and exam-season sequences through the Notification Orchestrator",
@@ -4830,6 +5047,7 @@
   },
   {
    "id": "T197",
+   "jira_key": "KK-217",
    "type": "Task",
    "epic": "E19",
    "summary": "App Store and Google Play listings: screenshots, previews, keywords in FR, AR and EN, ratings prompt policy",
@@ -4853,6 +5071,7 @@
   },
   {
    "id": "T198",
+   "jira_key": "KK-218",
    "type": "Story",
    "epic": "E19",
    "summary": "As a student or parent, I give in-app feedback and an NPS score; responses route to product and support",
@@ -4877,6 +5096,7 @@
   },
   {
    "id": "T199",
+   "jira_key": "KK-219",
    "type": "Task",
    "epic": "E19",
    "summary": "Substantiate public claims before marketing (latency, accuracy, \"first in MENA\") with a dated evidence file reviewed by legal",
@@ -4901,6 +5121,7 @@
   },
   {
    "id": "T200",
+   "jira_key": "KK-220",
    "type": "Task",
    "epic": "E19",
    "summary": "Pilot-to-launch go-to-market plan: school partnerships, teacher ambassadors, launch calendar aligned with the school year",
@@ -4923,6 +5144,7 @@
   },
   {
    "id": "T201",
+   "jira_key": "KK-221",
    "type": "Task",
    "epic": "E20",
    "summary": "Platform admin console: tenant and user lookup, role changes, consent status, impersonation with audit trail",
@@ -4946,6 +5168,7 @@
   },
   {
    "id": "T202",
+   "jira_key": "KK-222",
    "type": "Task",
    "epic": "E20",
    "summary": "Feature-flag service for staged rollouts per tenant, cohort and platform, with kill switches",
@@ -4968,6 +5191,7 @@
   },
   {
    "id": "T203",
+   "jira_key": "KK-223",
    "type": "Task",
    "epic": "E20",
    "summary": "Moderation queue for reported tutor answers and content issues, with SLA and links to the curriculum review flow",
@@ -4991,6 +5215,7 @@
   },
   {
    "id": "T204",
+   "jira_key": "KK-224",
    "type": "Task",
    "epic": "E20",
    "summary": "Help center in French and Arabic for students, parents, teachers and schools, with in-app contextual help",
@@ -5013,6 +5238,7 @@
   },
   {
    "id": "T205",
+   "jira_key": "KK-225",
    "type": "Task",
    "epic": "E20",
    "summary": "Support tooling: ticketing desk, macros, escalation to engineering through Jira, SLAs per plan",
@@ -5034,6 +5260,7 @@
   },
   {
    "id": "T206",
+   "jira_key": "KK-226",
    "type": "Task",
    "epic": "E20",
    "summary": "Public status page and incident communication templates in French and Arabic",
@@ -5056,6 +5283,7 @@
   },
   {
    "id": "T207",
+   "jira_key": "KK-227",
    "type": "Task",
    "epic": "E20",
    "summary": "Legal documents: terms of service, privacy policy, cookie policy, school data-processing agreement, content licensing register",
@@ -5078,6 +5306,7 @@
   },
   {
    "id": "T208",
+   "jira_key": "KK-228",
    "type": "Task",
    "epic": "E20",
    "summary": "Teacher and school-admin training kit: written guides, live onboarding sessions, certification badge",
@@ -5100,6 +5329,7 @@
   },
   {
    "id": "T209",
+   "jira_key": "KK-229",
    "type": "Story",
    "epic": "E17",
    "summary": "As a student, I manage my profile, language, password and linked parent account in one place",
@@ -5124,6 +5354,7 @@
   },
   {
    "id": "T210",
+   "jira_key": "KK-230",
    "type": "Story",
    "epic": "E15",
    "summary": "As a student, I see an in-app notification inbox with read state, deep links and category filters",

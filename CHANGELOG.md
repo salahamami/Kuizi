@@ -24,5 +24,12 @@ All notable changes to the Kuizi plan, backlog and documentation.
 - T110 go-live also requires T150 (accessibility gate), T207 (legal documents) and T169 (store compliance).
 - T142 and T143 placed in S12 to keep S11 within the 134-point capacity.
 
+### Jira sync
+- The planned project `APL` was not visible to the connector, so the backlog is mirrored in the existing project `KK` (board 37) instead.
+- Loaded into `KK`: 20 epics (KK-1 to KK-20), 210 tickets (KK-21 to KK-230) under their epics, and 351 "Blocks" links. Labels carry the backlog ID, team, persona, phase and sprint.
+- The Neural Core infographic is attached to E05 (KK-5).
+- `docs/backlog/jira_keys.csv` maps each backlog ID to its Jira key. The generator now prints Jira keys in `APL_Full_Backlog.md` and `apl_backlog.json`, and flags any item missing from Jira.
+
 ### Pending Jira sync
-- Jira project `APL` (Kuizi Adaptive Bac Platform, company-managed Scrum) to be created, then loaded with the full v2 backlog.
+- Sprints `APL Sprint 1`–`20`, sprint assignment and story-point estimates. These wait for the Sprints feature on `KK` (Project settings → Features → Sprints). Until then, each ticket's description carries a "Story points" line and a `sprint-NN` label.
+- Project rename from `Kuizi_KPI` to `Kuizi Adaptive Bac Platform` (manual, key stays `KK`).

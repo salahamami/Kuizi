@@ -8,7 +8,8 @@ Kuizi is an adaptive tutor for Tunisian Baccalauréat students (Physics, Maths, 
 | --- | --- | --- |
 | Backlog (epics, tickets, points, sprints, dependencies) | `tools/backlog/additions.py` + `docs/backlog/source/` (v1) | Edit data, never the generated files |
 | Generated backlog | `docs/backlog/APL_Full_Backlog.md`, `APL_jira_import_full.csv`, `apl_backlog.json` | Regenerate with `python3 tools/backlog/build_backlog.py` |
-| Jira | Project **Kuizi Adaptive Bac Platform** (`APL`, company-managed Scrum) at https://kuizi.atlassian.net | Must mirror the generated backlog |
+| Jira | Project key **`KK`** (team-managed Scrum, board 37) at https://kuizi.atlassian.net/jira/software/projects/KK/boards/37 | Must mirror the generated backlog |
+| Jira key map | `docs/backlog/jira_keys.csv` (backlog ID → `KK-n`) | Add a row for every issue created in Jira |
 | Requirements | `docs/requirements/` | Numbered IDs (FR-*, NFR-*) referenced by tickets |
 | Architecture | `docs/architecture/overview.md`, decisions in `docs/architecture/decisions/` | Any structural change gets an ADR |
 | Design | `docs/design/design-system.md` (Cyanotype) + design canvas (link inside) | UI follows the tokens and accessibility rules |
@@ -19,7 +20,7 @@ Whenever a session adds, removes or changes backlog items (scope, points, sprint
 
 1. Change `tools/backlog/additions.py` (or the v1 change lists in it).
 2. Run `python3 tools/backlog/build_backlog.py` and check the printed totals and sprint loads (no sprint above capacity, see `docs/backlog/README.md`).
-3. Apply the same change in Jira project `APL` in the same session, following the sync procedure in `docs/backlog/README.md`. Every Jira issue carries the label `apl-<ticket id>` (for example `apl-t134`) so it can be found by backlog ID.
+3. Apply the same change in Jira project `KK` in the same session, following the sync procedure in `docs/backlog/README.md`. Every Jira issue carries the label `apl-<ticket id>` (for example `apl-t134`) so it can be found by backlog ID; `docs/backlog/jira_keys.csv` gives its key directly. New issues get a row in `jira_keys.csv`, then rerun the generator so the backlog shows the key.
 4. Record the change in `CHANGELOG.md`.
 
 Never leave the repo and Jira out of sync at the end of a session. If Jira cannot be reached, say so and list the pending Jira changes in `CHANGELOG.md` under "Pending Jira sync".

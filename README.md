@@ -23,7 +23,7 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 
 ## Project tracking
 
-Jira project **Kuizi Adaptive Bac Platform** (key `APL`, company-managed Scrum) at https://kuizi.atlassian.net mirrors the backlog in this repository. The repository is the source of truth; see [`docs/backlog/README.md`](docs/backlog/README.md).
+Jira project `KK` ([board](https://kuizi.atlassian.net/jira/software/projects/KK/boards/37)) mirrors the backlog in this repository: 20 epics (KK-1 to KK-20), 210 tickets (KK-21 to KK-230) and 351 "blocks" links. The repository is the source of truth. [`docs/backlog/jira_keys.csv`](docs/backlog/jira_keys.csv) maps each backlog ID to its Jira key, and [`docs/backlog/README.md`](docs/backlog/README.md) describes the sync.
 
 ## Status
 

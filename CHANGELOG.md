@@ -2,6 +2,31 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
+## 2026-10-17 — Local-first plan: build on the PC, learn the brain early, cloud before the pilot
+
+The product owner works on their own PC, so the five sprints of AWS foundations at the start no longer made sense ([ADR 0006](docs/architecture/decisions/0006-local-first-development.md)). Totals: 240 tickets, 1,636 points, 440 links. The pilot stays in S12 and go-live in S18; S17 is left almost empty as a buffer.
+
+### Added
+- T237 (S1) local development stack on the PC: PostgreSQL with pgvector, Kafka (Redpanda), Redis, MinIO, Keycloak, MLflow, LiteLLM and the Python ML environment.
+- T238 (S1) brain walkthrough: each Neural Core concept explained simply, with notebooks on public data and an English–Arabic glossary.
+- T239 (S14) re-run of the knowledge-tracing benchmark on Kuizi pilot data.
+- T240 (S11) move to the cloud: every locally built service goes to AWS staging and production; the pilot (T108) now waits for it.
+- `tools/backlog/replan.py`: recomputes the sprint plan (original order as priority, dependencies, capacity ramp, cloud from S8, pilot fixed in S12). Rerun it after the S1–S2 velocity reset.
+
+### Changed
+- Sprint 1 is now T237, T234 and T238 (13 points). Cloud tickets (Terraform, VPC, EKS, ArgoCD, Kong, Datadog, Aurora, MSK, Snowflake, MWAA, KMS, Secrets Manager, WAF, CDN, vLLM) move to S8–S11.
+- The brain comes earlier: public-data benchmark (T040) in S2, pyKT (T041) in S3, SAINT+ (T042) and the IRT cold start (T043) in S4. The app shell (T076) moves to S3.
+- 14 tickets start from the local stack instead of waiting for cloud infrastructure (T006, T012, T023, T025, T026, T027, T032, T041, T059, T061, T092, T134); T040 starts from T238 on public data, and the judge (T062) starts with hosted models through LiteLLM (T059) instead of the self-hosted model (T060). Each carries a "Local-first (ADR 0006)" change line.
+- 144 tickets change sprint; phase labels follow the sprint.
+- The generator applies `LOCAL_FIRST_SWAPS` and `REPLAN_SPRINTS` from `additions.py`.
+
+### Jira sync
+- Created KK-257 to KK-260 (T237–T240) with labels, assignee, estimate and sprint, and added 31 "Blocks" links.
+- Moved 143 tickets to their new sprints; regenerated labels and descriptions for 147 tickets and the descriptions of 17 epics; updated 17 sprint goals. Checked: 240 tickets, and every ticket's sprint matches its `sprint-NN` label.
+
+### Pending Jira sync
+- Remove 17 obsolete "Blocks" links by hand (the connector cannot delete links). In each ticket, open *Linked work items* and remove the link: KK-21 blocks KK-26 · KK-23 blocks KK-32 · KK-23 blocks KK-79 · KK-25 blocks KK-45 · KK-35 blocks KK-154 · KK-36 blocks KK-79 · KK-41 blocks KK-43 · KK-41 blocks KK-46 · KK-41 blocks KK-47 · KK-48 blocks KK-60 · KK-80 blocks KK-82 · KK-231 blocks KK-32 · KK-231 blocks KK-52 · KK-231 blocks KK-81 · KK-231 blocks KK-112 · KK-237 blocks KK-47 · KK-238 blocks KK-61. Each ticket's description already lists the correct blockers.
+
 ## 2026-10-17 — Delivery by role agents, no human team
 
 Kuizi is built by one product owner working with a role-specific AI agent on every ticket ([ADR 0005](docs/architecture/decisions/0005-role-agents-and-one-product-owner.md)). The backlog now speaks of agent roles instead of teams. Totals: 236 tickets, 1,613 points, 426 links; Sprint 1 carries 13 points.

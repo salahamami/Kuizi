@@ -13,7 +13,7 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 | Rules for every contributor and AI session | [`CLAUDE.md`](CLAUDE.md) |
 | Documentation map | [`docs/README.md`](docs/README.md) |
 | Product overview, personas, screens, advanced concepts | [`docs/product/overview.md`](docs/product/overview.md) |
-| Full backlog (20 epics, 236 tickets, 1,613 points) | [`docs/backlog/APL_Full_Backlog.md`](docs/backlog/APL_Full_Backlog.md) |
+| Full backlog (20 epics, 240 tickets, 1,636 points) | [`docs/backlog/APL_Full_Backlog.md`](docs/backlog/APL_Full_Backlog.md) |
 | Jira import file and sync procedure | [`docs/backlog/README.md`](docs/backlog/README.md) |
 | Architecture and decisions | [`docs/architecture/`](docs/architecture/overview.md) |
 | Neural Core (knowledge-tracing engine) | [`docs/architecture/neural-core.md`](docs/architecture/neural-core.md) |
@@ -24,8 +24,8 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 
 ## Project tracking
 
-Jira project `KK` ([board](https://kuizi.atlassian.net/jira/software/projects/KK/boards/37)) mirrors the backlog in this repository: 20 epics (KK-1 to KK-20), 236 tickets (KK-21 to KK-256) estimated and placed in `APL Sprint 1` to `APL Sprint 20`, and 426 "blocks" links. The repository is the source of truth. [`docs/backlog/jira_keys.csv`](docs/backlog/jira_keys.csv) maps each backlog ID to its Jira key, and [`docs/backlog/README.md`](docs/backlog/README.md) describes the sync.
+Jira project `KK` ([board](https://kuizi.atlassian.net/jira/software/projects/KK/boards/37)) mirrors the backlog in this repository: 20 epics (KK-1 to KK-20), 240 tickets (KK-21 to KK-260) estimated and placed in `APL Sprint 1` to `APL Sprint 20`, and 440 "blocks" links. The repository is the source of truth. [`docs/backlog/jira_keys.csv`](docs/backlog/jira_keys.csv) maps each backlog ID to its Jira key, and [`docs/backlog/README.md`](docs/backlog/README.md) describes the sync.
 
 ## Status
 
-Planning and design. Sprint 1 starts 2026-11-02; Physics and Maths go live in S18 (July 2027), the other subjects in S19–S20.
+Planning and design. Development is local-first ([ADR 0006](docs/architecture/decisions/0006-local-first-development.md)): Sprint 1 (from 2026-11-02) sets up the local stack on the product owner's PC and starts the brain walkthrough; the cloud comes in S8–S11, before the pilot in S12. Physics and Maths go live in S18 (July 2027), the other subjects in S19–S20.

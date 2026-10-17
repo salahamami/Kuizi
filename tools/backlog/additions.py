@@ -833,6 +833,39 @@ TICKETS = [
              "Exam weights per knowledge component are recomputed with the new session and reviewed by subject leads",
              "A programme-change dry run moves students to a new KC graph version without losing mastery history"],
          blocked=["T110"], labels=["content", "curriculum", "operations"]),
+    # Local-first re-plan (2026-10-17, ADR 0006): build on the product owner's PC, learn the
+    # brain early, move to AWS before the pilot.
+    dict(id="T237", type="Task", epic="E01", team=PLAT, sprint=1, points=5, priority="Highest",
+         summary="Local development stack on the product owner's PC: one command starts PostgreSQL with pgvector, Kafka, Redis, object storage, Keycloak, MLflow and the Python ML environment",
+         desc="Everything Kuizi needs to run on one PC before any cloud account exists. Docker Compose services that mirror the future AWS ones (PostgreSQL 16 with pgvector, Redpanda for the Kafka API and schema registry, Redis, MinIO for the S3 API, Keycloak with development realms, MLflow, LiteLLM) and a Python environment with PyTorch (CPU) and pyKT for the brain. Configuration comes from environment variables with the same names the cloud will use, so moving to AWS (T240) changes configuration, not code. Only synthetic or public data.",
+         ac=["From a clean clone, one command starts the whole stack in under 10 minutes on a PC with 16 GB of RAM, and another resets it",
+             "Every service has a health check and a documented local port; services use the same environment variable names as the future cloud setup",
+             "The setup guide works on Windows 11 with WSL2, macOS and Ubuntu; local secrets live in an uncommitted .env file",
+             "No real student data and no cloud account are needed to run the stack"],
+         blocked=[], labels=["local-first", "docker", "dev-environment"]),
+    dict(id="T238", type="Task", epic="E05", team=ML, sprint=1, points=5, priority="Highest",
+         summary="Brain walkthrough: each Neural Core concept explained simply, with runnable notebooks on public data",
+         desc="A learning track so the product owner understands the brain before it is built: knowledge components and the concept graph, answer sequences, IRT, attention and transformers, the SAINT+ exercise encoder and response decoder, AUC and calibration, cold start, and fair treatment of accommodations. For each concept: a plain-language explanation, a small diagram, and a notebook on a public dataset (ASSISTments 2009, an EdNet KT1 sample) that runs on a laptop CPU, with a glossary in English and Arabic.",
+         ac=["At least 8 concept notebooks, each running end to end on a laptop CPU in under 15 minutes",
+             "Every code cell names the concept it implements and the production ticket that will build it (T040–T049, T052)",
+             "A glossary of at least 30 terms in English and Arabic",
+             "In a review session the product owner explains how SAINT+ turns an answer history into a per-concept prediction"],
+         blocked=["T237"], labels=["brain", "learning", "notebooks"]),
+    dict(id="T239", type="Task", epic="E05", team=ML, sprint=13, points=5, priority="High",
+         summary="Re-run the knowledge-tracing benchmark on Kuizi pilot data and confirm the production model",
+         desc="T040 benchmarks SAINT, SAINT+, SAKT and AKT on public datasets early. Once the pilot (T108) has produced real Kuizi interactions, re-run the same benchmark on them, compare with the public results, and confirm or change the production model and its hyperparameters.",
+         ac=["The benchmark runs on pilot data with the same code and metrics as on public data, tracked in MLflow",
+             "AUC, calibration and fairness slices (accommodation types) are reported per subject and track",
+             "A written decision confirms or changes the production model, reviewed by the product owner"],
+         blocked=["T108", "T040", "T028"], labels=["brain", "benchmark", "pilot"]),
+    dict(id="T240", type="Task", epic="E01", team=PLAT, sprint=11, points=8, priority="Highest",
+         summary="Move to the cloud: deploy every service built on the local stack to AWS staging and production before the pilot",
+         desc="The services built and tested on the local stack (T237) move to the AWS foundations (EKS, Aurora, MSK, ElastiCache, Snowflake, Keycloak, LiteLLM, MLflow) through GitOps, with data seeded from the synthetic generator and a full smoke test of the learning loop in staging, then production, ahead of the pilot.",
+         ac=["Every service that runs locally runs in staging and production from the same images and configuration names",
+             "The core learning loop (answer, mastery update, next step, tutor reply) passes an end-to-end smoke test in staging",
+             "Production is ready, monitored and backed up at least one sprint before the pilot starts"],
+         blocked=["T003", "T004", "T005", "T007", "T211", "T212", "T213", "T015", "T016", "T021", "T217", "T218"],
+         labels=["local-first", "cloud", "migration"]),
 ]
 
 # Changes to v1 tickets: extra acceptance criteria appended to their description.
@@ -842,6 +875,7 @@ CHANGES = {
              "Signed by the DPO (external counsel) and the product owner; there is no CTO (ADR 0005)"],
     "T023": ["Events carry time_multiplier, assistive_mode, input_modality and focus_session_id; new focus.*, notification.* and tts.played events"],
     "T024": ["No item.hesitation event while assistive audio plays; input modality recorded; screen-reader key commands never logged"],
+    "T040": ["Runs on public datasets (ASSISTments, EdNet) on a laptop from S2; the re-run on Kuizi pilot data is T239"],
     "T042": ["Time features normalised by the time multiplier; assistive-mode embedding (delivered with T148)"],
     "T047": ["Fairness slices by accommodation type, same 1-point AUC rule as other slices"],
     "T051": ["The design doc is approved by the product owner and a Tunisian Physics teacher as pedagogy reviewer; there is no ML or pedagogy lead (ADR 0005)"],
@@ -861,7 +895,8 @@ CHANGES = {
     "T097": ["Shows accommodations only if the student shares them; notifications follow quiet hours (T160)"],
     "T102": ["Adds keyboard-only and screen-reader smoke flows in both languages"],
     "T104": ["Includes read-aloud streaming and notification fan-out in the Bac-eve load"],
-    "T108": ["The pilot starts only once the tutor safeguarding layer (T223) and the vendor DPAs (T236) are in place"],
+    "T108": ["The pilot starts only once the tutor safeguarding layer (T223) and the vendor DPAs (T236) are in place",
+             "The pilot runs on AWS: every service has moved from the local stack (T240)"],
     "T110": ["Go-live also requires the accessibility gate (T150), legal documents (T207), store compliance (T169) and the data breach response plan (T216)"],
 }
 SPRINT_OVERRIDES = {"T085": 11}
@@ -878,13 +913,56 @@ EXTRA_BLOCKERS = {
     "T102": ["T219", "T232"], "T104": ["T219"],
     "T038": ["T235"], "T112": ["T235"],
     "T058": ["T225"],
-    "T108": ["T223", "T236"],
+    "T108": ["T223", "T236", "T240"],
+}
+
+# Local-first re-plan (ADR 0006): these tickets start from the local stack (T237) instead of
+# waiting for cloud infrastructure; T040 starts from the brain walkthrough on public data, and the
+# judge (T062) starts with hosted models through LiteLLM before the self-hosted model (T060).
+LOCAL_FIRST_SWAPS = {
+    "T006": {"T001": "T237"},
+    "T012": {"T003": "T237", "T211": "T237"},
+    "T023": {"T021": "T237"},
+    "T025": {"T005": "T237"},
+    "T026": {"T021": "T237"},
+    "T027": {"T021": "T237", "T217": "T237"},
+    "T032": {"T211": "T237"},
+    "T040": {"T028": "T238"},
+    "T041": {"T218": "T237"},
+    "T059": {"T003": "T237", "T016": "T237"},
+    "T061": {"T211": "T237"},
+    "T062": {"T060": "T059"},
+    "T092": {"T211": "T237"},
+    "T134": {"T015": "T237"},
+}
+# Cloud infrastructure waits until S8 at the earliest; it must be live before the pilot (S12).
+CLOUD_TICKETS = ["T001", "T002", "T003", "T004", "T005", "T007", "T008", "T010", "T011", "T211", "T212",
+                 "T213", "T015", "T016", "T019", "T021", "T217", "T218", "T060", "T240"]
+# Sprint of every ticket after the local-first re-plan, produced by tools/backlog/replan.py.
+REPLAN_SPRINTS = {
+    "T001": 8, "T002": 8, "T003": 9, "T004": 9, "T005": 10, "T007": 10, "T008": 11, "T010": 11, "T011": 10,
+    "T013": 3, "T015": 10, "T016": 10, "T017": 4, "T018": 6, "T019": 11, "T021": 9, "T022": 10, "T023": 2,
+    "T024": 3, "T026": 4, "T027": 4, "T028": 5, "T029": 6, "T030": 6, "T031": 11, "T032": 2, "T034": 4,
+    "T035": 5, "T036": 3, "T037": 5, "T038": 7, "T039": 5, "T040": 2, "T041": 3, "T042": 4, "T043": 4,
+    "T044": 10, "T045": 11, "T046": 7, "T047": 12, "T048": 7, "T049": 9, "T050": 13, "T051": 6, "T052": 8,
+    "T053": 9, "T054": 10, "T055": 10, "T056": 9, "T057": 11, "T059": 5, "T060": 10, "T061": 6, "T062": 7,
+    "T063": 9, "T064": 8, "T065": 8, "T066": 9, "T068": 7, "T069": 8, "T070": 8, "T072": 9, "T074": 9,
+    "T076": 3, "T080": 7, "T081": 8, "T082": 8, "T085": 12, "T086": 11, "T087": 9, "T089": 10, "T092": 5,
+    "T101": 11, "T102": 12, "T103": 6, "T111": 8, "T113": 12, "T114": 9, "T117": 10, "T123": 9, "T126": 15,
+    "T128": 16, "T134": 4, "T135": 6, "T136": 8, "T137": 7, "T140": 12, "T141": 11, "T143": 13, "T144": 13,
+    "T145": 9, "T147": 12, "T148": 8, "T149": 12, "T150": 13, "T151": 11, "T152": 10, "T154": 14, "T156": 14,
+    "T157": 13, "T162": 5, "T163": 7, "T164": 8, "T166": 7, "T167": 8, "T170": 15, "T171": 15, "T175": 7,
+    "T178": 9, "T179": 13, "T180": 14, "T181": 13, "T182": 13, "T183": 13, "T184": 14, "T185": 15, "T191": 8,
+    "T192": 13, "T193": 14, "T198": 14, "T199": 16, "T202": 10, "T203": 13, "T204": 16, "T205": 16,
+    "T208": 15, "T210": 14, "T211": 9, "T212": 9, "T213": 10, "T215": 3, "T217": 9, "T218": 10, "T221": 6,
+    "T222": 6, "T223": 9, "T224": 9, "T226": 15, "T227": 16, "T230": 9, "T231": 2, "T235": 3, "T236": 6,
+    "T239": 14,
 }
 
 # How the Kuizi Neural Core (docs/assets/kuizi-neural-core.jpg) maps to tickets.
 NEURAL_CORE = [
     ("Granular student telemetry: correctness, hesitation and hover time, tactile slider moves, confidence 1–5", "T023, T024, T025, T026, T221"),
-    ("Separated self-attention transformer: exercise encoder and response decoder (SAINT+)", "T040, T041, T042"),
+    ("Separated self-attention transformer: exercise encoder and response decoder (SAINT+)", "T238, T040, T041, T042, T239"),
     ("Cold start before enough history", "T043"),
     ("Dynamic cognitive embeddings and real-time mastery prediction", "T046, T048, T049"),
     ("Attention-based explanations of what weighs on a concept", "T049, T177"),

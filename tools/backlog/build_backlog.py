@@ -132,6 +132,20 @@ def build():
         tickets.append(t)
         by_id[t["id"]] = t
 
+    # Local-first re-plan (ADR 0006): swapped dependencies, then the re-planned sprints.
+    for tid, swaps in A.LOCAL_FIRST_SWAPS.items():
+        t = by_id[tid]
+        t["blocked"] = list(dict.fromkeys(swaps.get(b, b) for b in t["blocked"]))
+        for new in sorted(set(swaps.values())):
+            olds = ", ".join(o for o, n in swaps.items() if n == new)
+            line = f"Local-first (ADR 0006): starts from {new} instead of waiting for {olds}"
+            t["changes"].append(line + ("; moves to AWS with T240" if new == "T237" else ""))
+    for tid, sprint in A.REPLAN_SPRINTS.items():
+        by_id[tid]["sprint"] = sprint
+    for t in tickets:
+        if t["epic"] in v1_epics:
+            t["fix_version"] = sprint_phase[t["sprint"]]
+
     # Integrity checks.
     ids = [t["id"] for t in tickets]
     dupes = [i for i, n in Counter(ids).items() if n > 1]

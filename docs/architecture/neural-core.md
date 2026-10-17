@@ -16,7 +16,7 @@ The Neural Core is the knowledge-tracing engine at the centre of Kuizi: it turns
 | Neural Core element | Tickets |
 | --- | --- |
 | Granular student telemetry: correctness, hesitation and hover time, tactile slider moves, confidence 1–5 | T023, T024, T025, T026, T221 |
-| Separated self-attention transformer: exercise encoder and response decoder (SAINT+) | T040, T041, T042 |
+| Separated self-attention transformer: exercise encoder and response decoder (SAINT+) | T238, T040, T041, T042, T239 |
 | Cold start before enough history | T043 |
 | Dynamic cognitive embeddings and real-time mastery prediction | T046, T048, T049 |
 | Attention-based explanations of what weighs on a concept | T049, T177 |

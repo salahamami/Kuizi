@@ -34,6 +34,7 @@ Never leave the repo and Jira out of sync at the end of a session. If Jira canno
 - Product copy is French and Arabic; documentation is English.
 - Accessibility is not optional: WCAG 2.2 AA, French and Arabic right to left, no information by colour alone, touch targets of at least 44 px (`docs/requirements/accessibility-focus-notifications.md`).
 - Minors' data: follow Law 2004-63 rules in the requirements; accommodation data is sensitive.
+- Local-first (ADR 0006): until the cloud move (T240, S11) everything runs on the local stack (T237) with synthetic or public data; use the same environment variable names the cloud will use.
 
 ## Git
 

@@ -16,4 +16,4 @@ v1 placed accessibility in a single late ticket (T085, S13). Students with disab
 
 ## Consequences
 
-Epic E14 adds 19 tickets and 134 points. One accessibility engineer joins from S4. Go-live (T110) is blocked by the accessibility gate (T150).
+Epic E14 adds 19 tickets and 134 points. One accessibility engineer joins from S4 (superseded by ADR 0005: the Accessibility agent role owns this work, no hire). Go-live (T110) is blocked by the accessibility gate (T150).

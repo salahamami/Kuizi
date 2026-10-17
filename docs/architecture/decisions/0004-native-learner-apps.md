@@ -13,4 +13,4 @@ Build native learner apps (SwiftUI on iOS, Kotlin with Compose on Android) that 
 
 ## Consequences
 
-Epic E16 adds 12 tickets and 78 points and two mobile engineers from S6. Store compliance (Sign in with Apple, in-app account deletion, In-App Purchase, privacy declarations) is tracked in E16 and gates native go-live.
+Epic E16 adds 12 tickets and 78 points and two mobile engineers from S6 (superseded by ADR 0005: the Mobile agent role owns this work, no hires). Store compliance (Sign in with Apple, in-app account deletion, In-App Purchase, privacy declarations) is tracked in E16 and gates native go-live.

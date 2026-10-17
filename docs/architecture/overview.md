@@ -48,7 +48,7 @@ flowchart TB
 
 ## Components and owners
 
-| Component | Epic | Team | Key targets |
+| Component | Epic | Agent role | Key targets |
 | --- | --- | --- | --- |
 | AWS EKS, Terraform, ArgoCD, Kong, Datadog | E01 | Platform / DevOps | Staging from zero in under 60 minutes |
 | Identity (Keycloak), consent, encryption, audit | E02 | Backend, Security | Pen-test with no High/Critical findings |

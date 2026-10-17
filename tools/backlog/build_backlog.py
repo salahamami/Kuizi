@@ -167,7 +167,7 @@ def wiki_description(t, by_id):
     if t["changes"]:
         lines += ["", "h3. Addendum changes (v2)"] + [f"* {c}" for c in t["changes"]]
     lines += ["", "h3. Context", f"* Epic: {t['epic_name']}", f"* Phase: {t['fix_version']}",
-              f"* Target sprint: APL Sprint {t['sprint']}", f"* Team: {t['team']}"]
+              f"* Target sprint: APL Sprint {t['sprint']}", f"* Agent role: {t['team']}"]
     if t["personas"]:
         lines.append(f"* Personas: {', '.join(t['personas'])}")
     if t["blocked"]:
@@ -183,7 +183,7 @@ def markdown_description(t, by_id):
         lines += ["", "**Addendum changes (v2)**", ""] + [f"- {c}" for c in t["changes"]]
     lines += ["", "**Context**", "", f"- Backlog ID: {t['id']}", f"- Epic: {t['epic']} {t['epic_name']}",
               f"- Phase: {t['fix_version']}", f"- Target sprint: APL Sprint {t['sprint']}",
-              f"- Team: {t['team']}"]
+              f"- Agent role: {t['team']}"]
     if t["personas"]:
         lines.append(f"- Personas: {', '.join(t['personas'])}")
     if t["blocked"]:
@@ -202,15 +202,15 @@ def epic_description(e, markdown=False):
                       f"{bullet}Component: {e['component']}"])
 
 
-def team_label(team):
-    return "team-" + re.sub(r"[^a-z0-9]+", "-", team.split("(")[0].lower()).strip("-")
+def agent_label(team):
+    return "agent-" + re.sub(r"[^a-z0-9]+", "-", team.split("(")[0].lower()).strip("-")
 
 
 def write_csv(epics, tickets, by_id):
     n_labels = max(len(t["labels"]) + len(t["personas"]) + 1 for t in tickets)
     n_blocked = max(len(t["blocked"]) for t in tickets)
     header = ["Issue ID", "Issue Type", "Summary", "Description", "Priority", "Story Points", "Epic Name",
-              "Epic Link", "Parent", "Components", "Sprint", "Fix Version", "Team"]
+              "Epic Link", "Parent", "Components", "Sprint", "Fix Version", "Agent role"]
     header += ["Labels"] * n_labels + ["Blocked By"] * n_blocked
     with open(OUT_CSV, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
@@ -221,7 +221,7 @@ def write_csv(epics, tickets, by_id):
                         e["component"], "", e["phase"], ""] + labels + [""] * (n_labels - len(labels))
                        + [""] * n_blocked)
         for t in tickets:
-            labels = t["labels"] + [f"persona-{p}" for p in t["personas"]] + [team_label(t["team"])]
+            labels = t["labels"] + [f"persona-{p}" for p in t["personas"]] + [agent_label(t["team"])]
             w.writerow([t["id"], t["type"], t["summary"], wiki_description(t, by_id), t["priority"], t["points"],
                         "", t["epic_name"], t["epic"], t["component"], f"APL Sprint {t['sprint']}",
                         t["fix_version"], t["team"]] + labels + [""] * (n_labels - len(labels))
@@ -247,7 +247,7 @@ def write_json(epics, tickets, by_id, keys):
                         summary=t["summary"], priority=t["priority"],
                         points=t["points"], sprint=f"APL Sprint {t['sprint']}", component=t["component"],
                         team=t["team"], phase=t["fix_version"],
-                        labels=t["labels"] + [f"persona-{p}" for p in t["personas"]] + [team_label(t["team"]),
+                        labels=t["labels"] + [f"persona-{p}" for p in t["personas"]] + [agent_label(t["team"]),
                                                                                        f"apl-{t['id'].lower()}"],
                         blocked_by=t["blocked"], description=markdown_description(t, by_id))
                    for t in tickets],
@@ -319,32 +319,23 @@ def write_markdown(epics, tickets, by_id, keys):
         out.append(f"| {element} | {refs} |")
     out.append("")
 
-    out.append("## 2. Teams and roles\n")
-    out.append("Every ticket has one owning team (who builds it) and, for user stories, the personas it serves.\n")
-    v1_team_rows = [l for l in v1["2. Teams and capacity"].splitlines() if l.startswith("| ") and "---" not in l][1:]
-    out.append("| Team | Headcount | Owns | Tickets | Points |\n| --- | --- | --- | --- | --- |")
-    pts_by_team = Counter()
+    out.append("## 2. Delivery model and agent roles\n")
+    out.append("Kuizi has no human delivery team. Each ticket is done by the AI agent of its owning role, working "
+               "with the product owner, who is the Jira assignee on every ticket, briefs the agent, reviews its work "
+               "and accepts it against the acceptance criteria (ADR 0005). Every ticket has one owning agent role "
+               "(label `agent-*`) and, for user stories, the personas it serves.\n")
+    v1_role_rows = [l for l in v1["2. Teams and capacity"].splitlines() if l.startswith("| ") and "---" not in l][1:]
+    out.append("| Agent role | Label | Owns | Tickets | Points |\n| --- | --- | --- | --- | --- |")
+    pts_by_role = Counter()
     for t in tickets:
-        pts_by_team[t["team"]] += t["points"]
-    v1_names = {"Platform / DevOps": "Platform / DevOps", "Backend (Node.js / TypeScript)": "Backend (Node.js / TypeScript)",
-                "ML Engineering (Python / PyTorch)": "ML Engineering (Python / PyTorch)", "LLM / Applied AI": "LLM / Applied AI",
-                "Frontend (Next.js / R3F)": "Frontend (Next.js / R3F)", "Data Engineering": "Data Engineering",
-                "QA / SDET": "QA / SDET", "Product + Curriculum": "Product + Curriculum"}
-    headcount_total = 0
-    for row in v1_team_rows:
-        cells = [c.strip() for c in row.strip("|").split("|")]
-        name, count, owns = cells[0], int(cells[1]), cells[2]
-        count += A.TEAM_HEADCOUNT_CHANGES.get(name, 0)
-        headcount_total += count
-        key = v1_names.get(name, name)
-        out.append(f"| {name} | {count} | {owns} | {teams.get(key, 0)} | {pts_by_team.get(key, 0)} |")
-    for name, count, owns in A.NEW_TEAMS:
-        headcount_total += count
-        out.append(f"| {name} (new) | {count} | {owns} | {teams.get(name, 0)} | {pts_by_team.get(name, 0)} |")
+        pts_by_role[t["team"]] += t["points"]
+    roles = [(c[0], A.ROLE_SCOPE.get(c[0], c[2])) for c in ([x.strip() for x in row.strip("|").split("|")] for row in v1_role_rows)]
+    for name, owns in roles + A.NEW_ROLES:
+        out.append(f"| {name} | `{agent_label(name)}` | {owns} | {teams.get(name, 0)} | {pts_by_role.get(name, 0)} |")
     out.append("")
-    out.append(f"Total: {headcount_total} people (v1: 19). Engineering capacity rises from about 110 to about 134 "
-               "points per sprint with the four added engineers (accessibility, backend, iOS, Android); design, "
-               "growth, support and legal own their own tickets on top.\n")
+    out.append("**Sprint capacity.** The plan keeps a ceiling of 134 points per sprint. With agents doing the work, "
+               "the real limit is how much the product owner can brief, review and accept in two weeks: velocity "
+               "measured in S1 and S2 resets the ceiling and the plan is rebalanced then.\n")
     persona_counts = Counter(p for t in tickets for p in t["personas"])
     out.append("**Personas served by user stories.**\n")
     out.append("| Persona | Stories |\n| --- | --- |")
@@ -379,7 +370,7 @@ def write_markdown(epics, tickets, by_id, keys):
 
     out.append("## 6. Backlog detail\n")
     out.append("Conventions: story points are Fibonacci (13 = split before sprint entry); *Blocked by* references "
-               "the IDs in this file and in the CSV; labels `team-*` and `persona-*` carry the role and persona.\n")
+               "the IDs in this file and in the CSV; labels `agent-*` and `persona-*` carry the agent role and persona.\n")
     for e in epics:
         mine = [t for t in tickets if t["epic"] == e["id"]]
         out.append(f"### {e['id']} — {e['name']}\n")
@@ -387,7 +378,7 @@ def write_markdown(epics, tickets, by_id, keys):
                    f"**Component:** {e['component']} · **{e['tickets']} tickets / {e['points']} pts**\n")
         out.append(f"**Goal.** {e['goal']}\n")
         out.append(f"**Definition of done.** {e['dod']}\n")
-        out.append("| ID | Jira | Type | Summary | Pts | Priority | Sprint | Team | Blocked by |\n"
+        out.append("| ID | Jira | Type | Summary | Pts | Priority | Sprint | Agent role | Blocked by |\n"
                    "| --- | --- | --- | --- | --- | --- | --- | --- | --- |")
         for t in sorted(mine, key=lambda t: (t["sprint"], int(t["id"][1:]))):
             out.append(f"| {t['id']} | {jira(t['id'])} | {t['type']} | {t['summary']} | {t['points']} | "
@@ -426,7 +417,7 @@ def main():
     print(f"{len(epics)} epics, {len(tickets)} tickets, {sum(t['points'] for t in tickets)} points, "
           f"{sum(len(t['blocked']) for t in tickets)} dependency links")
     print("points per sprint:", dict(sorted(pts.items())))
-    print("tickets per team:", dict(Counter(t["team"] for t in tickets)))
+    print("tickets per agent role:", dict(Counter(t["team"] for t in tickets)))
     missing = [i["id"] for i in epics + tickets if i["id"] not in keys]
     stale = sorted(set(keys) - {i["id"] for i in epics + tickets})
     print(f"Jira {JIRA_PROJECT}: {len(epics) + len(tickets) - len(missing)} items mapped in jira_keys.csv"

@@ -2,6 +2,22 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
+## 2026-10-17 — Delivery by role agents, no human team
+
+Kuizi is built by one product owner working with a role-specific AI agent on every ticket ([ADR 0005](docs/architecture/decisions/0005-role-agents-and-one-product-owner.md)). The backlog now speaks of agent roles instead of teams. Totals: 236 tickets, 1,613 points, 426 links; Sprint 1 carries 13 points.
+
+### Changed
+- The 14 teams become agent roles. Label `team-*` becomes `agent-*`, the "Team" line in descriptions becomes "Agent role", and the generated backlog's team and headcount table becomes the agent roster with each role's scope.
+- No hiring: the staffing lines in ADR 0002, ADR 0004 and the open decisions in the accessibility requirements are superseded. Decisions owned by a CTO, ML lead or engineering manager now belong to the product owner.
+- Sprint capacity: the 134-point ceiling stays as the planning limit and is reset from the velocity measured in Sprints 1 and 2.
+- T234 becomes the agent operating model (role briefs, Definition of Ready and Done, review gates, least-privilege access, no real student data), 2 → 3 points.
+- Sign-offs that named people who do not exist: T215 is reviewed by the product owner and the DPO; T017 and T051 gain a change line naming the product owner, the external DPO and a Tunisian Physics teacher.
+- ADR 0005 lists where people outside the project are still needed: legal and DPO sign-off, accessibility testing with students, teacher review of content, pilot schools.
+
+### Jira sync
+- Project renamed to **Kuizi Adaptive Bac Platform** (key `KK`).
+- All 236 tickets: labels `agent-*` instead of `team-*`, assignee set to the product owner, descriptions regenerated with the "Agent role" line. KK-254 (T234) also gets its new summary and 3 points.
+
 ## 2026-10-17 — Sprints and estimates in Jira
 
 No backlog change; Jira catches up with the plan.
@@ -13,7 +29,7 @@ No backlog change; Jira catches up with the plan.
 - Sprint table added to `docs/backlog/README.md`.
 
 ### Pending Jira sync
-- Project rename from `Kuizi_KPI` to `Kuizi Adaptive Bac Platform` (manual, key stays `KK`).
+- Project rename from `Kuizi_KPI` to `Kuizi Adaptive Bac Platform` (manual, key stays `KK`). *Done the same day.*
 
 ## 2026-10-16 — Gap review: what the final version still needed
 

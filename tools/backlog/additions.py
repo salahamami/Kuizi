@@ -5,21 +5,27 @@ and for changes made to v1 tickets. Edit it, then run build_backlog.py to
 regenerate the CSV, JSON and Markdown in docs/backlog/.
 
 Ticket fields: id, type, summary, desc, ac (acceptance criteria), points
-(Fibonacci), priority, sprint (int), epic, team, blocked (ticket IDs),
-labels. Component and persona labels are derived by build_backlog.py.
+(Fibonacci), priority, sprint (int), epic, team (the owning agent role),
+blocked (ticket IDs), labels. Component and persona labels are derived by build_backlog.py.
 """
 
-# Teams added to the v1 team table (docs/backlog/source/APL_Production_Backlog_v1.md, section 2).
-NEW_TEAMS = [
-    ("Mobile (iOS / Android)", 2, "Native learner apps, store compliance, OS integrations"),
-    ("Accessibility", 1, "Accessibility engineering, screen-reader journeys, audits, co-design"),
-    ("Design / UX", 1, "Cyanotype design system, usability research, content design"),
-    ("Growth & Marketing", 1, "Marketing site, lifecycle messaging, store listings, launch plan"),
-    ("Customer Success & Support", 1, "Help center, support desk, teacher and school training"),
-    ("Legal / DPO", 1, "Legal documents, DPIA, store privacy declarations, public claims"),
+# Agent roles. Kuizi has no human delivery team: each ticket is done by the AI agent of its
+# owning role, working with the product owner, who is the Jira assignee and accepts the work
+# (docs/architecture/decisions/0005-role-agents-and-one-product-owner.md).
+# The v1 roles come from docs/backlog/source/APL_Production_Backlog_v1.md, section 2.
+NEW_ROLES = [
+    ("Mobile (iOS / Android)", "Native learner apps, store compliance, OS integrations"),
+    ("Accessibility", "Accessibility engineering, screen-reader journeys, audits, co-design"),
+    ("Design / UX", "Cyanotype design system, usability research, content design"),
+    ("Growth & Marketing", "Marketing site, lifecycle messaging, store listings, launch plan"),
+    ("Customer Success & Support", "Help center, support desk, teacher and school training"),
+    ("Legal / DPO", "Legal documents, DPIA, store privacy declarations, public claims"),
 ]
-# One extra backend engineer joins for the Notification Orchestrator.
-TEAM_HEADCOUNT_CHANGES = {"Backend (Node.js / TypeScript)": 1}
+# Scope of a v1 role where the v1 table describes people rather than the agent's work.
+ROLE_SCOPE = {
+    "Product + Curriculum": "KC graphs and item banks per subject and track (Physics, Maths, Sciences, Technique, "
+                            "Éco/Gestion); pedagogy review with Tunisian subject teachers",
+}
 
 TEAM_COMPONENT = {
     "Frontend (Next.js / R3F)": "Frontend",
@@ -644,13 +650,14 @@ TICKETS = [
          blocked=["T104", "T047"], labels=["claims", "legal", "marketing"]),
 
     # ---------------- Gap review (2026-10-16): work needed for the final version that v2 did not cover ----------------
-    dict(id="T234", type="Task", epic="E12", team=QA, sprint=1, points=2, priority="High",
-         summary="Ways of working: Definition of Ready and Done, branching and review rules, ADR process, onboarding guide",
-         desc="Agree how the teams work from sprint 1: Definition of Ready (acceptance criteria, design and dependencies clear) and Done (tests, accessibility gate, docs, Jira updated), branch and review rules, the ADR process, sprint ceremonies, and an onboarding guide for new engineers.",
-         ac=["Definition of Ready and Done published in the repository and linked from the Jira board",
-             "A new engineer ships a small change to staging within 2 days using the onboarding guide",
-             "Every team lead signs off the working agreement in sprint 1"],
-         blocked=[], labels=["process", "agile"]),
+    dict(id="T234", type="Task", epic="E12", team=QA, sprint=1, points=3, priority="High",
+         summary="Agent operating model: role briefs, Definition of Ready and Done, review gates, branching and ADR rules",
+         desc="Set up how the product owner and the role agents work from sprint 1 (ADR 0005). One brief per agent role: scope, tools and environments it may use, what it must hand back for review. Definition of Ready (acceptance criteria, design and dependencies clear) and Done (tests, accessibility gate, docs, Jira updated). Review gates: the product owner approves every merge to main, every production change, all student-facing copy and anything touching minors' data. Branch and pull-request rules, the ADR process and the sprint rhythm (planning, review, measured velocity).",
+         ac=["Each of the 14 agent roles has a written brief in the repository, linked from the Jira board",
+             "Branch protection on main requires the product owner's approval; an agent cannot merge or deploy to production on its own",
+             "Agents use least-privilege credentials and only synthetic or anonymised data; no agent can reach production student data",
+             "Definition of Ready and Done are published, and an agent given only its brief and a ticket ships a small change to staging in one session"],
+         blocked=[], labels=["process", "agile", "agents"]),
     dict(id="T211", type="Task", epic="E01", team=PLAT, sprint=2, points=5, priority="Highest",
          summary="Provision Aurora PostgreSQL with pgvector via Terraform: Multi-AZ, RDS Proxy, backups and schema-migration tooling",
          desc="The platform's main relational store: Aurora PostgreSQL (Multi-AZ) with the pgvector extension, RDS Proxy for connection pooling from EKS, IAM authentication, point-in-time recovery, and a schema-migration tool run from CI (one migration history per service, reviewed in pull requests). Keycloak, the knowledge graph, the item bank, tenancy (RLS) and the RAG corpus all live here.",
@@ -682,7 +689,7 @@ TICKETS = [
     dict(id="T215", type="Task", epic="E02", team=BE, sprint=4, points=5, priority="Highest",
          summary="Threat model of the platform and the AI tutor; static analysis, secret scanning and automated dependency updates in CI",
          desc="Run a STRIDE threat model covering identity, tenancy, telemetry, the LLM tutor (prompt injection, data leakage) and minors' data, and turn the findings into tickets. Add CodeQL or Semgrep static analysis and Renovate dependency updates to the CI pipeline, with a patch-time target for critical vulnerabilities.",
-         ac=["Threat model reviewed by the CTO and the DPO; every high risk has a mitigation ticket in Jira",
+         ac=["Threat model reviewed by the product owner and the DPO; every high risk has a mitigation ticket in Jira",
              "A pull request introducing a high-severity static-analysis finding cannot merge",
              "Critical dependency vulnerabilities are patched within 7 days, tracked on a dashboard"],
          blocked=["T006"], labels=["security", "threat-model", "sast"]),
@@ -831,11 +838,13 @@ TICKETS = [
 # Changes to v1 tickets: extra acceptance criteria appended to their description.
 CHANGES = {
     "T013": ["A separate, revocable consent covers accommodation data (E14, T151)"],
-    "T017": ["DPIA covers accommodation data, dictation audio and send-time profiling (E14, E15)"],
+    "T017": ["DPIA covers accommodation data, dictation audio and send-time profiling (E14, E15)",
+             "Signed by the DPO (external counsel) and the product owner; there is no CTO (ADR 0005)"],
     "T023": ["Events carry time_multiplier, assistive_mode, input_modality and focus_session_id; new focus.*, notification.* and tts.played events"],
     "T024": ["No item.hesitation event while assistive audio plays; input modality recorded; screen-reader key commands never logged"],
     "T042": ["Time features normalised by the time multiplier; assistive-mode embedding (delivered with T148)"],
     "T047": ["Fairness slices by accommodation type, same 1-point AUC rule as other slices"],
+    "T051": ["The design doc is approved by the product owner and a Tunisian Physics teacher as pedagogy reviewer; there is no ML or pedagogy lead (ADR 0005)"],
     "T057": ["Session length and breaks follow the comfort profile; plan blocks can start as Focus sessions"],
     "T069": ["Live regions, read-aloud of tutor messages, captions, dictation, keyboard shortcut to open and close the panel"],
     "T070": ["Time-based hint escalation scales with the time multiplier"],

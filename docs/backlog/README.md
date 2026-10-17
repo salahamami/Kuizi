@@ -7,11 +7,11 @@ The repository is the source of truth for the backlog. Jira project **`KK`** (te
 | File | Role | Edit? |
 | --- | --- | --- |
 | `source/APL_Production_Backlog_v1.md`, `.docx`, `source/APL_jira_import_v1.csv` | v1 backlog as received (13 epics, 132 tickets, 1,041 points) | Never |
-| `../../tools/backlog/additions.py` | Everything added or changed after v1: epics E14–E20, tickets T133–T236, changes to v1 tickets, team list, Neural Core mapping | Yes, this is where changes go |
+| `../../tools/backlog/additions.py` | Everything added or changed after v1: epics E14–E20, tickets T133–T236, changes to v1 tickets, agent roles, Neural Core mapping | Yes, this is where changes go |
 | `../../tools/backlog/build_backlog.py` | Generator | Only to change output formats |
 | `jira_keys.csv` | Backlog ID → Jira key (`E05,KK-5`, `T103,KK-134`) | Yes, add a row whenever an issue is created in Jira |
-| `APL_Full_Backlog.md` | Full readable backlog v2 (20 epics, 236 tickets, 1,612 points), with Jira keys | Generated |
-| `APL_jira_import_full.csv` | Jira CSV import file, same columns as v1 plus team and persona labels | Generated |
+| `APL_Full_Backlog.md` | Full readable backlog v2 (20 epics, 236 tickets, 1,613 points), with Jira keys | Generated |
+| `APL_jira_import_full.csv` | Jira CSV import file, same columns as v1 plus agent-role and persona labels | Generated |
 | `apl_backlog.json` | Input for the API sync (Markdown descriptions, labels, links, Jira keys) | Generated |
 
 Regenerate after any change:
@@ -20,11 +20,11 @@ Regenerate after any change:
 python3 tools/backlog/build_backlog.py
 ```
 
-The script fails if a ticket ID is duplicated, a dependency points to an unknown ticket, an epic is missing or points are not Fibonacci. It prints points per sprint: keep every sprint at or below capacity (134 points with the four added engineers, 110 without). It also lists backlog items that have no Jira key yet.
+The script fails if a ticket ID is duplicated, a dependency points to an unknown ticket, an epic is missing or points are not Fibonacci. It prints points per sprint: keep every sprint at or below the 134-point planning ceiling. Work is done by role agents with the product owner (ADR 0005), so the ceiling is reset from the velocity measured in Sprints 1 and 2. It also lists backlog items that have no Jira key yet.
 
 ## Jira project state
 
-Loaded on 2026-10-16 through the Atlassian connector:
+Project name **Kuizi Adaptive Bac Platform** (renamed from `Kuizi_KPI` on 2026-10-17). Loaded on 2026-10-16 through the Atlassian connector:
 
 - 20 epics, KK-1 to KK-20, in backlog order (E05 is KK-5).
 - 236 tickets, KK-21 to KK-256, each a child of its epic. Keys follow `20 + ticket number`, except T104–T114 (KK-123 to KK-133) and T103 (KK-134). `jira_keys.csv` has every key.
@@ -32,10 +32,11 @@ Loaded on 2026-10-16 through the Atlassian connector:
 - The gap review of the same day added T211–T236 (KK-231 to KK-256): foundations, safeguarding, teacher and school-admin tools, mobile quality and content operations.
 - The Neural Core infographic sits in a comment on KK-5.
 - On 2026-10-17, after Backlog, Sprints and Estimation were turned on, the 20 sprints were created, every ticket was put in its sprint and given its story-point estimate (field `Story point estimate`, `customfield_10016`; the board estimates by it). Each sprint's goal names its phase and the three epics carrying the most points in it.
+- The same day the delivery model changed to role agents with one product owner (ADR 0005): every ticket's `team-*` label became `agent-*`, its description says "Agent role", and the product owner is the assignee on all 236 tickets.
 
 | Sprint | Jira sprint ID | Start | End | Tickets | Points |
 | --- | --- | --- | --- | --- | --- |
-| APL Sprint 1 | 440 | 2026-11-02 | 2026-11-13 | 3 | 12 |
+| APL Sprint 1 | 440 | 2026-11-02 | 2026-11-13 | 3 | 13 |
 | APL Sprint 2 | 441 | 2026-11-16 | 2026-11-27 | 6 | 37 |
 | APL Sprint 3 | 442 | 2026-11-30 | 2026-12-11 | 11 | 63 |
 | APL Sprint 4 | 443 | 2026-12-14 | 2026-12-25 | 11 | 76 |
@@ -60,8 +61,7 @@ Jira sprint ID = 439 + sprint number. To move a ticket, change its sprint in `ad
 
 Still to do in Jira (the connector cannot do these):
 
-1. **Rename the project.** Project settings → Details → Name `Kuizi Adaptive Bac Platform`, keep key `KK`. It is currently named `Kuizi_KPI`.
-2. Optional: add the Releases view to get one version per phase (the label `phase-N` already carries it). On this site Releases is not listed under Features; add it as a tab with **+** in the space navigation, as for Backlog. The `fixVersions` field only appears on tickets once that view exists.
+1. Optional: add the Releases view to get one version per phase (the label `phase-N` already carries it). On this site Releases is not listed under Features; add it as a tab with **+** in the space navigation, as for Backlog. The `fixVersions` field only appears on tickets once that view exists.
 
 Issue types on this site are French: `Epic`, `Story`, `Tâche` (Task). Jira has no Spike type, so spikes are `Tâche` with the label `spike`.
 
@@ -77,7 +77,8 @@ Issue types on this site are French: `Epic`, `Story`, `Tâche` (Task). Jira has 
 | Points | Field "Story point estimate" (`customfield_10016`) and the "Story points: N" line in the description |
 | Sprint | Sprint `APL Sprint N` (Jira sprint ID 439 + N) and label `sprint-NN` |
 | Phase | Label `phase-N` |
-| Team | Label `team-*` (team-managed projects have no components) |
+| Agent role | Label `agent-*` (team-managed projects have no components) and the "Agent role" line in the description |
+| Owner | Assignee: the product owner on every ticket |
 | Personas | Labels `persona-*` |
 | Blocked by | Issue link "Blocks" (blocker blocks the ticket) |
 

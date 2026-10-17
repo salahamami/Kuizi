@@ -4,6 +4,7 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 
 **Subjects:** Physics, Mathématiques, Sciences (SVT / Chimie), Sciences techniques, Économie & Gestion.
 **Users:** students (17–19), parents, teachers, school admins, curriculum authors, platform admins.
+**Built by:** one product owner working with a role-specific AI agent on every ticket ([ADR 0005](docs/architecture/decisions/0005-role-agents-and-one-product-owner.md)).
 
 ## Where things are
 
@@ -12,7 +13,7 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 | Rules for every contributor and AI session | [`CLAUDE.md`](CLAUDE.md) |
 | Documentation map | [`docs/README.md`](docs/README.md) |
 | Product overview, personas, screens, advanced concepts | [`docs/product/overview.md`](docs/product/overview.md) |
-| Full backlog (20 epics, 236 tickets, 1,612 points) | [`docs/backlog/APL_Full_Backlog.md`](docs/backlog/APL_Full_Backlog.md) |
+| Full backlog (20 epics, 236 tickets, 1,613 points) | [`docs/backlog/APL_Full_Backlog.md`](docs/backlog/APL_Full_Backlog.md) |
 | Jira import file and sync procedure | [`docs/backlog/README.md`](docs/backlog/README.md) |
 | Architecture and decisions | [`docs/architecture/`](docs/architecture/overview.md) |
 | Neural Core (knowledge-tracing engine) | [`docs/architecture/neural-core.md`](docs/architecture/neural-core.md) |

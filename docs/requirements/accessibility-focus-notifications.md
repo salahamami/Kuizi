@@ -115,10 +115,10 @@ Without changes, SAINT+ would read a screen-reader user's listening time or a st
 
 | Decision | Recommended default | Owner |
 | --- | --- | --- |
-| Native learner apps or PWA on iOS | Native SwiftUI learner app; portals stay web (ADR 0004) | CTO |
+| Native learner apps or PWA on iOS | Native SwiftUI learner app; portals stay web (ADR 0004) | Product owner |
 | Who sees a minor's accommodations | Student chooses per flag; parents see what is shared; counsel confirms against Law 2004-63 | DPO, legal |
 | Proof of official accommodations | No medical document stored; a school admin attests the multiplier | Product |
-| Read-aloud voices | Managed cloud voices first for Arabic quality, self-hosted later, monthly cost cap | ML lead |
+| Read-aloud voices | Managed cloud voices first for Arabic quality, self-hosted later, monthly cost cap | Product owner |
 | Default notification budget | 2 useful messages a day for students, 1 weekly summary for parents | Product |
 | Tunisian Sign Language content | Out of scope for v1; revisit with associations after the pilot | Curriculum |
-| Staffing | Hire 4 engineers: accessibility and backend from S4, iOS and Android from S6 | Engineering manager |
+| Staffing | No hires: each ticket is done by the agent of its role with the product owner (ADR 0005) | Product owner |

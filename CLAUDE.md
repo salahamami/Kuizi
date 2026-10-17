@@ -29,7 +29,7 @@ Never leave the repo and Jira out of sync at the end of a session. If Jira canno
 
 - Ticket IDs `T###`, epic IDs `E##`, sprints `APL Sprint N` (two weeks, S1 starts 2026-11-02).
 - Story points are Fibonacci (1, 2, 3, 5, 8, 13); split anything at 13 before sprint entry.
-- Every ticket has one owning team (label `team-*`) and user stories carry `persona-*` labels.
+- There is no human delivery team (ADR 0005). Every ticket has one owning agent role (label `agent-*`), done by the AI agent of that role with the product owner, who is the Jira assignee on every ticket and approves the work. User stories carry `persona-*` labels.
 - Acceptance criteria are testable statements, three per ticket at minimum.
 - Product copy is French and Arabic; documentation is English.
 - Accessibility is not optional: WCAG 2.2 AA, French and Arabic right to left, no information by colour alone, touch targets of at least 44 px (`docs/requirements/accessibility-focus-notifications.md`).

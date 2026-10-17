@@ -4,10 +4,10 @@
 | --- | --- | --- |
 | [`product/`](product/overview.md) | Product overview, personas, advanced concepts | Product |
 | [`requirements/`](requirements/accessibility-focus-notifications.md) | Numbered functional and non-functional requirements | Product, Accessibility, DPO |
-| [`architecture/`](architecture/overview.md) | Architecture overview, Neural Core, decision records | Engineering leads |
+| [`architecture/`](architecture/overview.md) | Architecture overview, Neural Core, decision records | Product owner with the architecture agents |
 | [`design/`](design/design-system.md) | Cyanotype design system, screen list, canvas link | Design / UX |
-| [`backlog/`](backlog/README.md) | Full backlog, Jira import file, sync procedure, v1 sources | Product, Engineering manager |
-| [`deliverables/`](deliverables/) | Documents shared outside the team (bilingual concepts brief) | Product |
+| [`backlog/`](backlog/README.md) | Full backlog, Jira import file, sync procedure, v1 sources | Product owner |
+| [`deliverables/`](deliverables/) | Documents shared outside the project (bilingual concepts brief) | Product |
 | [`assets/`](assets/) | Images used by the documentation (Neural Core infographic) | Design / UX |
 
 ## Rules

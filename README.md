@@ -23,7 +23,7 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 
 ## Project tracking
 
-Jira project `KK` ([board](https://kuizi.atlassian.net/jira/software/projects/KK/boards/37)) mirrors the backlog in this repository: 20 epics (KK-1 to KK-20), 236 tickets (KK-21 to KK-256) and 426 "blocks" links. The repository is the source of truth. [`docs/backlog/jira_keys.csv`](docs/backlog/jira_keys.csv) maps each backlog ID to its Jira key, and [`docs/backlog/README.md`](docs/backlog/README.md) describes the sync.
+Jira project `KK` ([board](https://kuizi.atlassian.net/jira/software/projects/KK/boards/37)) mirrors the backlog in this repository: 20 epics (KK-1 to KK-20), 236 tickets (KK-21 to KK-256) placed in `APL Sprint 1` to `APL Sprint 20`, and 426 "blocks" links. The repository is the source of truth. [`docs/backlog/jira_keys.csv`](docs/backlog/jira_keys.csv) maps each backlog ID to its Jira key, and [`docs/backlog/README.md`](docs/backlog/README.md) describes the sync.
 
 ## Status
 

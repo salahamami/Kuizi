@@ -2,6 +2,19 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
+## 2026-10-17 — Sprints in Jira
+
+No backlog change; Jira catches up with the plan.
+
+### Jira sync
+- Backlog and Sprints were turned on in `KK`. Created `APL Sprint 1` to `APL Sprint 20` (Jira sprint IDs 440–459), two weeks each from 2026-11-02 to 2027-08-06, with a goal naming the phase and the main epics.
+- Put all 236 tickets in their sprints, matching the `sprint-NN` labels and the generated backlog. No ticket is left outside a sprint.
+- Sprint table added to `docs/backlog/README.md`.
+
+### Pending Jira sync
+- Story-point estimates. Estimation is still off in `KK` (the board counts issues and the "Story point estimate" field is on neither `Tâche` nor `Story`). Turn it on under Project settings → Features → Estimation → Story points; the next session then sets all 236 estimates. Until then, each ticket's description carries a "Story points" line.
+- Project rename from `Kuizi_KPI` to `Kuizi Adaptive Bac Platform` (manual, key stays `KK`).
+
 ## 2026-10-16 — Gap review: what the final version still needed
 
 The backlog was checked against what a production app for minors needs end to end. 26 tickets were added (T211–T236, 116 points), bringing it to 236 tickets, 1,612 points and 426 dependency links. Every sprint stays at or below 134 points.
@@ -52,5 +65,5 @@ The backlog was checked against what a production app for minors needs end to en
 - `docs/backlog/jira_keys.csv` maps each backlog ID to its Jira key. The generator now prints Jira keys in `APL_Full_Backlog.md` and `apl_backlog.json`, and flags any item missing from Jira.
 
 ### Pending Jira sync
-- Sprints `APL Sprint 1`–`20`, sprint assignment and story-point estimates. These wait for the Sprints feature on `KK` (Project settings → Features → Sprints). Until then, each ticket's description carries a "Story points" line and a `sprint-NN` label.
+- Sprints `APL Sprint 1`–`20`, sprint assignment and story-point estimates. These wait for the Sprints feature on `KK` (Project settings → Features → Sprints). Until then, each ticket's description carries a "Story points" line and a `sprint-NN` label. *Sprints and assignment done on 2026-10-17; estimates still pending, see that entry.*
 - Project rename from `Kuizi_KPI` to `Kuizi Adaptive Bac Platform` (manual, key stays `KK`).

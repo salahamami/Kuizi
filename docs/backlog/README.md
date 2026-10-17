@@ -31,11 +31,37 @@ Loaded on 2026-10-16 through the Atlassian connector:
 - 426 "Blocks" links reproduce every *Blocked by* in the backlog.
 - The gap review of the same day added T211–T236 (KK-231 to KK-256): foundations, safeguarding, teacher and school-admin tools, mobile quality and content operations.
 - The Neural Core infographic sits in a comment on KK-5.
+- On 2026-10-17, after Backlog and Sprints were turned on, the 20 sprints were created and every ticket was put in its sprint. Each sprint's goal names its phase and the three epics carrying the most points in it.
+
+| Sprint | Jira sprint ID | Start | End | Tickets | Points |
+| --- | --- | --- | --- | --- | --- |
+| APL Sprint 1 | 440 | 2026-11-02 | 2026-11-13 | 3 | 12 |
+| APL Sprint 2 | 441 | 2026-11-16 | 2026-11-27 | 6 | 37 |
+| APL Sprint 3 | 442 | 2026-11-30 | 2026-12-11 | 11 | 63 |
+| APL Sprint 4 | 443 | 2026-12-14 | 2026-12-25 | 11 | 76 |
+| APL Sprint 5 | 444 | 2026-12-28 | 2027-01-08 | 12 | 73 |
+| APL Sprint 6 | 445 | 2027-01-11 | 2027-01-22 | 17 | 123 |
+| APL Sprint 7 | 446 | 2027-01-25 | 2027-02-05 | 16 | 116 |
+| APL Sprint 8 | 447 | 2027-02-08 | 2027-02-19 | 14 | 131 |
+| APL Sprint 9 | 448 | 2027-02-22 | 2027-03-05 | 17 | 134 |
+| APL Sprint 10 | 449 | 2027-03-08 | 2027-03-19 | 20 | 133 |
+| APL Sprint 11 | 450 | 2027-03-22 | 2027-04-02 | 16 | 132 |
+| APL Sprint 12 | 451 | 2027-04-05 | 2027-04-16 | 21 | 131 |
+| APL Sprint 13 | 452 | 2027-04-19 | 2027-04-30 | 16 | 112 |
+| APL Sprint 14 | 453 | 2027-05-03 | 2027-05-14 | 19 | 131 |
+| APL Sprint 15 | 454 | 2027-05-17 | 2027-05-28 | 16 | 102 |
+| APL Sprint 16 | 455 | 2027-05-31 | 2027-06-11 | 12 | 65 |
+| APL Sprint 17 | 456 | 2027-06-14 | 2027-06-25 | 4 | 16 |
+| APL Sprint 18 | 457 | 2027-06-28 | 2027-07-09 | 2 | 10 |
+| APL Sprint 19 | 458 | 2027-07-12 | 2027-07-23 | 2 | 10 |
+| APL Sprint 20 | 459 | 2027-07-26 | 2027-08-06 | 1 | 5 |
+
+Jira sprint ID = 439 + sprint number. To move a ticket, change its sprint in `additions.py`, regenerate, then in Jira move it to the new sprint and update its `sprint-NN` label.
 
 Still to do in Jira (the connector cannot do these):
 
-1. **Rename the project.** Project settings → Details → Name `Kuizi Adaptive Bac Platform`, keep key `KK`. It is currently named `Kuizi_KPI`.
-2. **Turn on Sprints.** Project settings → Features → Sprints (this also turns on story-point estimation). Then the next session creates `APL Sprint 1` … `APL Sprint 20` (two weeks each, S1 from 2026-11-02), puts every ticket in its sprint (label `sprint-NN`) and sets the estimate from the "Story points" line.
+1. **Turn on Estimation.** Project settings → Features → Estimation → Story points. The board still counts issues (`estimation: issueCount`), and the "Story point estimate" field is not on the `Tâche` or `Story` screens, so the connector cannot write points yet. Once it is on, the next session sets each ticket's estimate from its "Story points" line.
+2. **Rename the project.** Project settings → Details → Name `Kuizi Adaptive Bac Platform`, keep key `KK`. It is currently named `Kuizi_KPI`.
 3. Optional: turn on Releases to get one version per phase (the label `phase-N` already carries it).
 
 Issue types on this site are French: `Epic`, `Story`, `Tâche` (Task). Jira has no Spike type, so spikes are `Tâche` with the label `spike`.
@@ -49,8 +75,8 @@ Issue types on this site are French: `Epic`, `Story`, `Tâche` (Task). Jira has 
 | Type | Story → `Story`; Task and Spike → `Tâche` (Spike adds label `spike`) |
 | Summary, description, acceptance criteria | Summary, Description (Markdown) |
 | Priority | Priority |
-| Points | "Story points: N" line in the description; the estimate field once Sprints is on |
-| Sprint | Label `sprint-NN`; the sprint `APL Sprint N` once Sprints is on |
+| Points | "Story points: N" line in the description; the "Story point estimate" field once Estimation is on |
+| Sprint | Sprint `APL Sprint N` (Jira sprint ID 439 + N) and label `sprint-NN` |
 | Phase | Label `phase-N` |
 | Team | Label `team-*` (team-managed projects have no components) |
 | Personas | Labels `persona-*` |

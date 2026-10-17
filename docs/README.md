@@ -7,6 +7,7 @@
 | [`architecture/`](architecture/overview.md) | Architecture overview, Neural Core, decision records | Product owner with the architecture agents |
 | [`design/`](design/design-system.md) | Cyanotype design system, screen list, canvas link | Design / UX |
 | [`backlog/`](backlog/README.md) | Full backlog, Jira import file, sync procedure, v1 sources | Product owner |
+| [`brain/`](brain/README.md) | Brain walkthrough (10 notebooks in English and Arabic) and the English–Arabic–French glossary | ML Engineering agent |
 | [`dev/`](dev/local-setup.md) | Running Kuizi on a PC: local stack, brain environment, everyday commands | Platform / DevOps agent |
 | [`deliverables/`](deliverables/) | Documents shared outside the project (bilingual concepts brief) | Product |
 | [`assets/`](assets/) | Images used by the documentation (Neural Core infographic) | Design / UX |

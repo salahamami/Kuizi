@@ -7,6 +7,8 @@ make ml-setup   # installs Python 3.12, PyTorch (CPU) and the libraries below wi
 make ml-lab     # opens JupyterLab
 ```
 
+Start with the [brain walkthrough](../docs/brain/README.md): ten notebooks in `notebooks/`, built on the small library in `kuizi_brain/`.
+
 Experiments are logged to the local MLflow server (`MLFLOW_TRACKING_URI` in `.env`, started by `make up`).
 
 Only public datasets (ASSISTments, EdNet) and synthetic data go here. Never put real student data in this folder or in a notebook.

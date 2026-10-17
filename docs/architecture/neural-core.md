@@ -4,6 +4,8 @@ The Neural Core is the knowledge-tracing engine at the centre of Kuizi: it turns
 
 ![Kuizi Neural Core infographic](../assets/kuizi-neural-core.jpg)
 
+To learn each idea step by step with runnable code, follow the [brain walkthrough](../brain/README.md) (T238), in English and Arabic.
+
 ## How it works, in four stages
 
 1. **Granular telemetry.** Every answer (correct or not), hesitation and hover time, slider move in a simulation, and confidence rating (1–5) is sent as an event (T023–T026); the answer evaluation service decides right, wrong or partial (T221).

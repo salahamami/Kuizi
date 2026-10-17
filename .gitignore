@@ -7,3 +7,4 @@ __pycache__/
 .venv/
 ml/.venv/
 .ipynb_checkpoints/
+ml/data/

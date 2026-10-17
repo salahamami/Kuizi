@@ -12,6 +12,7 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 | --- | --- |
 | Rules for every contributor and AI session | [`CLAUDE.md`](CLAUDE.md) |
 | Documentation map | [`docs/README.md`](docs/README.md) |
+| Run Kuizi on your PC (local stack, brain environment) | [`docs/dev/local-setup.md`](docs/dev/local-setup.md) |
 | Product overview, personas, screens, advanced concepts | [`docs/product/overview.md`](docs/product/overview.md) |
 | Full backlog (20 epics, 240 tickets, 1,636 points) | [`docs/backlog/APL_Full_Backlog.md`](docs/backlog/APL_Full_Backlog.md) |
 | Jira import file and sync procedure | [`docs/backlog/README.md`](docs/backlog/README.md) |

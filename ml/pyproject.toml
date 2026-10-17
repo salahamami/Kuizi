@@ -1,0 +1,31 @@
+[project]
+name = "kuizi-ml"
+version = "0.1.0"
+description = "Kuizi brain: knowledge tracing (SAINT+, IRT) notebooks and models. Local environment from T237."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "torch>=2.5",
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "scikit-learn>=1.5",
+    "matplotlib>=3.9",
+    "jupyterlab>=4.2",
+    "mlflow-skinny>=2.20",
+    "pykt-toolkit>=0.0.38",
+]
+
+[tool.uv]
+package = false
+# uv's own Python build: identical on every PC, and it includes Tk, which pyKT imports
+# (pykt/models/qdkt.py and iekt_ce.py import turtle; a system Python without Tk fails).
+python-preference = "only-managed"
+
+# CPU-only PyTorch on Windows (WSL2) and Linux keeps the download small; macOS uses the default build.
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform != 'darwin'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

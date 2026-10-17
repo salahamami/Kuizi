@@ -189,7 +189,7 @@ Conventions: story points are Fibonacci (13 = split before sprint entry); *Block
 
 *Jira KK-257 · Task · 5 pts · Highest · APL Sprint 1 · Platform / DevOps · labels: local-first, docker, dev-environment*
 
-Everything Kuizi needs to run on one PC before any cloud account exists. Docker Compose services that mirror the future AWS ones (PostgreSQL 16 with pgvector, Redpanda for the Kafka API and schema registry, Redis, MinIO for the S3 API, Keycloak with development realms, MLflow, LiteLLM) and a Python environment with PyTorch (CPU) and pyKT for the brain. Configuration comes from environment variables with the same names the cloud will use, so moving to AWS (T240) changes configuration, not code. Only synthetic or public data.
+Everything Kuizi needs to run on one PC before any cloud account exists. Docker Compose services that mirror the future AWS ones (PostgreSQL 16 with pgvector, Redpanda for the Kafka API and schema registry, Redis, SeaweedFS for the S3 API, Keycloak with a development realm, MLflow, and LiteLLM as an optional profile) and a Python environment with PyTorch (CPU) and pyKT for the brain. Configuration comes from environment variables with the same names the cloud will use, so moving to AWS (T240) changes configuration, not code. Only synthetic or public data.
 
 Acceptance criteria:
 

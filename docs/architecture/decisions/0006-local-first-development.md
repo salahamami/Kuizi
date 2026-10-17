@@ -9,7 +9,7 @@ The backlog started with five sprints of AWS foundations (Terraform, VPC, EKS, K
 
 ## Decision
 
-- **Local stack first.** T237 (Sprint 1) runs every service Kuizi needs on one PC with Docker Compose: PostgreSQL with pgvector, Kafka (Redpanda), Redis, object storage (MinIO), Keycloak, MLflow and LiteLLM, plus a Python environment for the brain. Services read the same environment variable names the cloud will use.
+- **Local stack first.** T237 (Sprint 1) runs every service Kuizi needs on one PC with Docker Compose: PostgreSQL with pgvector, Kafka (Redpanda), Redis, S3 storage (SeaweedFS, since MinIO stopped publishing community images), Keycloak, MLflow and LiteLLM (optional), plus a Python environment for the brain. Setup guide: `docs/dev/local-setup.md`. Services read the same environment variable names the cloud will use.
 - **Brain track early.** T238 (Sprint 1) walks the product owner through every Neural Core concept with notebooks on public data. The model benchmark (T040) runs on public datasets in Sprint 2, pyKT in Sprint 3, SAINT+ and the IRT cold start in Sprint 4. The re-run on Kuizi pilot data is T239, after the pilot.
 - **Dependencies on cloud infrastructure are replaced by the local stack** where a ticket only needed somewhere to run (`LOCAL_FIRST_SWAPS` in `tools/backlog/additions.py`). Tickets that genuinely need the cloud keep their dependency: KMS keys (T151), the self-hosted model on GPU (T060), Kubeflow on EKS (T045), WAF, CDN and performance monitoring.
 - **Cloud in Sprints 8 to 11.** The AWS foundations move to S8–S11, and T240 moves every locally built service to staging and production in S11. The pilot (S12) is blocked by T240.

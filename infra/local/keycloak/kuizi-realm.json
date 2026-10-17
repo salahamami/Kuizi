@@ -1,0 +1,32 @@
+{
+  "realm": "kuizi",
+  "displayName": "Kuizi (local development)",
+  "enabled": true,
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "internationalizationEnabled": true,
+  "supportedLocales": ["fr", "ar", "en"],
+  "defaultLocale": "fr",
+  "roles": {
+    "realm": [
+      { "name": "student", "description": "Bac student (17–19); under-18 accounts need parental consent (T013)" },
+      { "name": "parent", "description": "Parent or guardian" },
+      { "name": "teacher", "description": "Teacher in a school tenant" },
+      { "name": "school-admin", "description": "School administrator" },
+      { "name": "curriculum-author", "description": "Writes and reviews items and the concept graph" },
+      { "name": "platform-admin", "description": "Kuizi back-office" }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "kuizi-web",
+      "name": "Kuizi web app (local)",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": ["http://localhost:3000/*"],
+      "webOrigins": ["http://localhost:3000"],
+      "attributes": { "pkce.code.challenge.method": "S256" }
+    }
+  ]
+}

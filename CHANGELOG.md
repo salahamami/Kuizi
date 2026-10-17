@@ -2,6 +2,21 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
+## 2026-10-17 — T237 local stack (Sprint 1, in review)
+
+### Added
+- `infra/local/compose.yaml`: PostgreSQL 16 with pgvector, Redpanda (Kafka API and schema registry), Redis, SeaweedFS (S3 API), Keycloak with the development realm `kuizi`, MLflow, and LiteLLM as an optional profile. Every service has a health check.
+- `Makefile` (`make up`, `smoke`, `status`, `down`, `reset`, `up-llm`, `ml-setup`, `ml-lab`), `.env.example` with the variable names the cloud will use, `scripts/smoke-test.sh` (10 functional checks).
+- `ml/`: the brain's Python environment (uv, Python 3.12, PyTorch on CPU, pyKT, JupyterLab, MLflow client) with its lock file.
+- `docs/dev/local-setup.md`: setup guide for Windows 11 with WSL2, macOS and Ubuntu.
+
+### Changed
+- T237 text: SeaweedFS replaces MinIO, which stopped publishing community images in 2025; LiteLLM is an optional profile (its image is about 1.7 GB). ADR 0006 updated to match.
+- Local S3 keys are `S3_ACCESS_KEY_ID` and `S3_SECRET_ACCESS_KEY`, not `AWS_*`, so AWS keys already in a developer's shell never leak into the local stack; in the cloud, services use IAM roles.
+
+### Jira sync
+- KK-257 moved to *Revue en cours*, its description updated, and a comment lists what was built and tested.
+
 ## 2026-10-17 — Local-first plan: build on the PC, learn the brain early, cloud before the pilot
 
 The product owner works on their own PC, so the five sprints of AWS foundations at the start no longer made sense ([ADR 0006](docs/architecture/decisions/0006-local-first-development.md)). Totals: 240 tickets, 1,636 points, 440 links. The pilot stays in S12 and go-live in S18; S17 is left almost empty as a buffer.

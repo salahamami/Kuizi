@@ -1,0 +1,189 @@
+# Kuizi local stack (T237, ADR 0006): the services Kuizi needs, on one PC.
+# Start it with `make up` from the repository root; see docs/dev/local-setup.md.
+# Each service stands in for its future AWS counterpart and is reached through the
+# same environment variable names (.env.example), so the cloud move (T240) changes
+# configuration, not code. Development data only: synthetic or public, never real students.
+
+name: kuizi
+
+services:
+  # Aurora PostgreSQL in the cloud (T211). Databases: kuizi (with pgvector) and keycloak.
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      KEYCLOAK_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Amazon MSK in the cloud (T021). Redpanda speaks the Kafka protocol and ships a schema registry.
+  redpanda:
+    image: redpandadata/redpanda:v24.3.7
+    command:
+      - redpanda
+      - start
+      - --mode=dev-container
+      - --smp=1
+      - --memory=1G
+      - --kafka-addr=internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr=internal://redpanda:9092,external://localhost:${KAFKA_PORT:-19092}
+      - --schema-registry-addr=internal://0.0.0.0:8081,external://0.0.0.0:18081
+      - --pandaproxy-addr=internal://0.0.0.0:8082,external://0.0.0.0:18082
+      - --advertise-pandaproxy-addr=internal://redpanda:8082,external://localhost:18082
+    ports:
+      - "${KAFKA_PORT:-19092}:19092"
+      - "${SCHEMA_REGISTRY_PORT:-18081}:18081"
+    volumes:
+      - redpanda-data:/var/lib/redpanda/data
+    healthcheck:
+      test: ["CMD-SHELL", "rpk cluster health | grep -E 'Healthy:.+true'"]
+      interval: 5s
+      timeout: 10s
+      retries: 30
+
+  # ElastiCache in the cloud (T026): streaks, budgets, Focus state, real-time aggregates.
+  redis:
+    image: redis:7.4-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Amazon S3 in the cloud (T213). SeaweedFS serves the S3 API locally
+  # (MinIO stopped publishing community images in 2025).
+  seaweedfs:
+    image: chrislusf/seaweedfs:4.48
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        cat > /tmp/s3.json <<EOF
+        {"identities":[{"name":"kuizi-local","credentials":[{"accessKey":"$${S3_ACCESS_KEY_ID}","secretKey":"$${S3_SECRET_ACCESS_KEY}"}],"actions":["Admin","Read","List","Tagging","Write"]}]}
+        EOF
+        exec weed server -dir=/data -ip=seaweedfs -ip.bind=0.0.0.0 -master.volumeSizeLimitMB=1024 -volume.max=0 -s3 -s3.port=8333 -s3.config=/tmp/s3.json
+    environment:
+      S3_ACCESS_KEY_ID: ${S3_ACCESS_KEY_ID}
+      S3_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY}
+    ports:
+      - "${S3_PORT:-8333}:8333"
+    volumes:
+      - seaweedfs-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:8333/healthz"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  # One-off job, run by `make up` once the stack is healthy: creates the S3 buckets, then exits.
+  seaweedfs-buckets:
+    image: chrislusf/seaweedfs:4.48
+    profiles: ["init"]
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        existing=$$(echo "s3.bucket.list" | weed shell -master=seaweedfs:9333)
+        for b in $${S3_BUCKET_MEDIA} $${S3_BUCKET_ML_ARTIFACTS}; do
+          echo "$$existing" | grep -qw "$$b" || echo "s3.bucket.create -name $$b" | weed shell -master=seaweedfs:9333
+        done
+    environment:
+      S3_BUCKET_MEDIA: ${S3_BUCKET_MEDIA}
+      S3_BUCKET_ML_ARTIFACTS: ${S3_BUCKET_ML_ARTIFACTS}
+    depends_on:
+      seaweedfs:
+        condition: service_healthy
+
+  # Keycloak on EKS in the cloud (T012). Development realm "kuizi" with the platform roles.
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.1.4
+    command: ["start-dev", "--import-realm"]
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_HEALTH_ENABLED: "true"
+      KC_HOSTNAME: http://localhost:${KEYCLOAK_PORT:-8080}
+    ports:
+      - "${KEYCLOAK_PORT:-8080}:8080"
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      # The image has no curl: talk HTTP to the management port over bash's /dev/tcp.
+      test:
+        - CMD-SHELL
+        - >-
+          exec 3<>/dev/tcp/127.0.0.1/9000 &&
+          printf 'GET /health/ready HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n' >&3 &&
+          grep -q '"UP"' <&3
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  # MLflow on EKS in the cloud (T218): experiment tracking and model registry for the brain.
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.20.3
+    command:
+      - mlflow
+      - server
+      - --host=0.0.0.0
+      - --port=5000
+      - --backend-store-uri=sqlite:////mlflow/mlflow.db
+      - --artifacts-destination=/mlflow/artifacts
+      - --serve-artifacts
+    ports:
+      - "${MLFLOW_PORT:-5050}:5000"
+    volumes:
+      - mlflow-data:/mlflow
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+  # LiteLLM gateway (T059). Optional and large (about 1.7 GB): start it with `make up-llm`.
+  litellm:
+    image: ghcr.io/berriai/litellm@sha256:b7b9e2c306343721802253d0dd9436b9634a2eb4e14da7c7cf06c5c7b7530802
+    profiles: ["llm"]
+    command: ["--config", "/app/config.yaml", "--port", "4000"]
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY}
+      LLM_PROVIDER_API_KEY: ${LLM_PROVIDER_API_KEY:-}
+      LLM_TUTOR_MODEL: ${LLM_TUTOR_MODEL:-}
+    ports:
+      - "${LITELLM_PORT:-4000}:4000"
+    volumes:
+      - ./litellm/config.yaml:/app/config.yaml:ro
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:4000/health/liveliness')"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+volumes:
+  postgres-data:
+  redpanda-data:
+  redis-data:
+  seaweedfs-data:
+  mlflow-data:

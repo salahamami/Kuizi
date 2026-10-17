@@ -27,7 +27,7 @@ Never leave the repo and Jira out of sync at the end of a session. If Jira canno
 
 ## Conventions
 
-- Ticket IDs `T###`, epic IDs `E##`, sprints `APL Sprint N` (two weeks, S1 starts 2026-11-02).
+- Ticket IDs `T###`, epic IDs `E##`, sprints `APL Sprint N` (two weeks; S1 started 2026-10-17 and ends 2026-10-30, then a new sprint every second Monday).
 - Story points are Fibonacci (1, 2, 3, 5, 8, 13); split anything at 13 before sprint entry.
 - There is no human delivery team (ADR 0005). Every ticket has one owning agent role (label `agent-*`), done by the AI agent of that role with the product owner, who is the Jira assignee on every ticket and approves the work. User stories carry `persona-*` labels.
 - Acceptance criteria are testable statements, three per ticket at minimum.

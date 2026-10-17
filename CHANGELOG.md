@@ -2,6 +2,16 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
+## 2026-10-17 — Sprint 1 starts now
+
+The product owner decided not to wait for November: Sprint 1 started on 2026-10-17 and ends on 2026-10-30. Every sprint moves two weeks earlier, so S2 starts 2026-11-02, the pilot (S12) runs 2027-03-22 to 2027-04-02, go-live (S18) 2027-06-14 to 2027-06-25, and S20 ends 2027-07-23. Scope, points and sprint contents are unchanged.
+
+### Changed
+- Generator: `SPRINT_START` is 2026-10-19 (the Monday of the first sprint week); `CLAUDE.md`, `README.md` and the sprint table in `docs/backlog/README.md` show the new dates.
+
+### Jira sync
+- Updated the dates of `APL Sprint 1` to `APL Sprint 20` (goals unchanged) and started `APL Sprint 1`: it is the active sprint, with KK-254, KK-257 and KK-258.
+
 ## 2026-10-17 — T237 local stack (Sprint 1, in review)
 
 ### Added

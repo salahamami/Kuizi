@@ -4,7 +4,7 @@
   "name": "Kuizi",
   "jira_project": "KK",
   "sprint_length_days": 14,
-  "first_sprint_start": "2026-11-02",
+  "first_sprint_start": "2026-10-19",
   "sprints": 20
  },
  "epics": [

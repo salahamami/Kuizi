@@ -16,7 +16,7 @@ The product owner works on their own PC, so the five sprints of AWS foundations 
 ### Changed
 - Sprint 1 is now T237, T234 and T238 (13 points). Cloud tickets (Terraform, VPC, EKS, ArgoCD, Kong, Datadog, Aurora, MSK, Snowflake, MWAA, KMS, Secrets Manager, WAF, CDN, vLLM) move to S8–S11.
 - The brain comes earlier: public-data benchmark (T040) in S2, pyKT (T041) in S3, SAINT+ (T042) and the IRT cold start (T043) in S4. The app shell (T076) moves to S3.
-- 14 tickets start from the local stack instead of waiting for cloud infrastructure (T006, T012, T023, T025, T026, T027, T032, T041, T059, T061, T092, T134); T040 starts from T238 on public data, and the judge (T062) starts with hosted models through LiteLLM (T059) instead of the self-hosted model (T060). Each carries a "Local-first (ADR 0006)" change line.
+- 12 tickets start from the local stack instead of waiting for cloud infrastructure (T006, T012, T023, T025, T026, T027, T032, T041, T059, T061, T092, T134); T040 starts from T238 on public data, and the judge (T062) starts with hosted models through LiteLLM (T059) instead of the self-hosted model (T060). Each carries a "Local-first (ADR 0006)" change line.
 - 144 tickets change sprint; phase labels follow the sprint.
 - The generator applies `LOCAL_FIRST_SWAPS` and `REPLAN_SPRINTS` from `additions.py`.
 

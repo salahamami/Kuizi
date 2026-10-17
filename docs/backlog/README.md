@@ -31,7 +31,7 @@ Loaded on 2026-10-16 through the Atlassian connector:
 - 426 "Blocks" links reproduce every *Blocked by* in the backlog.
 - The gap review of the same day added T211–T236 (KK-231 to KK-256): foundations, safeguarding, teacher and school-admin tools, mobile quality and content operations.
 - The Neural Core infographic sits in a comment on KK-5.
-- On 2026-10-17, after Backlog and Sprints were turned on, the 20 sprints were created and every ticket was put in its sprint. Each sprint's goal names its phase and the three epics carrying the most points in it.
+- On 2026-10-17, after Backlog, Sprints and Estimation were turned on, the 20 sprints were created, every ticket was put in its sprint and given its story-point estimate (field `Story point estimate`, `customfield_10016`; the board estimates by it). Each sprint's goal names its phase and the three epics carrying the most points in it.
 
 | Sprint | Jira sprint ID | Start | End | Tickets | Points |
 | --- | --- | --- | --- | --- | --- |
@@ -60,9 +60,8 @@ Jira sprint ID = 439 + sprint number. To move a ticket, change its sprint in `ad
 
 Still to do in Jira (the connector cannot do these):
 
-1. **Turn on Estimation.** Project settings → Features → Estimation → Story points. The board still counts issues (`estimation: issueCount`), and the "Story point estimate" field is not on the `Tâche` or `Story` screens, so the connector cannot write points yet. Once it is on, the next session sets each ticket's estimate from its "Story points" line.
-2. **Rename the project.** Project settings → Details → Name `Kuizi Adaptive Bac Platform`, keep key `KK`. It is currently named `Kuizi_KPI`.
-3. Optional: turn on Releases to get one version per phase (the label `phase-N` already carries it).
+1. **Rename the project.** Project settings → Details → Name `Kuizi Adaptive Bac Platform`, keep key `KK`. It is currently named `Kuizi_KPI`.
+2. Optional: add the Releases view to get one version per phase (the label `phase-N` already carries it). On this site Releases is not listed under Features; add it as a tab with **+** in the space navigation, as for Backlog. The `fixVersions` field only appears on tickets once that view exists.
 
 Issue types on this site are French: `Epic`, `Story`, `Tâche` (Task). Jira has no Spike type, so spikes are `Tâche` with the label `spike`.
 
@@ -75,7 +74,7 @@ Issue types on this site are French: `Epic`, `Story`, `Tâche` (Task). Jira has 
 | Type | Story → `Story`; Task and Spike → `Tâche` (Spike adds label `spike`) |
 | Summary, description, acceptance criteria | Summary, Description (Markdown) |
 | Priority | Priority |
-| Points | "Story points: N" line in the description; the "Story point estimate" field once Estimation is on |
+| Points | Field "Story point estimate" (`customfield_10016`) and the "Story points: N" line in the description |
 | Sprint | Sprint `APL Sprint N` (Jira sprint ID 439 + N) and label `sprint-NN` |
 | Phase | Label `phase-N` |
 | Team | Label `team-*` (team-managed projects have no components) |

@@ -2,17 +2,17 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
-## 2026-10-17 — Sprints in Jira
+## 2026-10-17 — Sprints and estimates in Jira
 
 No backlog change; Jira catches up with the plan.
 
 ### Jira sync
 - Backlog and Sprints were turned on in `KK`. Created `APL Sprint 1` to `APL Sprint 20` (Jira sprint IDs 440–459), two weeks each from 2026-11-02 to 2027-08-06, with a goal naming the phase and the main epics.
 - Put all 236 tickets in their sprints, matching the `sprint-NN` labels and the generated backlog. No ticket is left outside a sprint.
+- Estimation turned on: all 236 tickets carry their story-point estimate (1,612 points in total) and board 37 now estimates by story points.
 - Sprint table added to `docs/backlog/README.md`.
 
 ### Pending Jira sync
-- Story-point estimates. Estimation is still off in `KK` (the board counts issues and the "Story point estimate" field is on neither `Tâche` nor `Story`). Turn it on under Project settings → Features → Estimation → Story points; the next session then sets all 236 estimates. Until then, each ticket's description carries a "Story points" line.
 - Project rename from `Kuizi_KPI` to `Kuizi Adaptive Bac Platform` (manual, key stays `KK`).
 
 ## 2026-10-16 — Gap review: what the final version still needed

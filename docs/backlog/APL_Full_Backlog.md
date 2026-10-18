@@ -99,8 +99,8 @@ Kuizi has no human delivery team. Each ticket is done by the AI agent of its own
 
 | Sprint | Dates | Tickets | Points | Epics active |
 | --- | --- | --- | --- | --- |
-| S1 | 2026-10-19 – 2026-11-01 | 3 | 13 | E01, E05, E12 |
-| S2 | 2026-11-02 – 2026-11-15 | 6 | 37 | E01, E02, E03, E04, E05, E17 |
+| S1 | 2026-10-19 – 2026-11-01 | 4 | 21 | E01, E05, E12 |
+| S2 | 2026-11-02 – 2026-11-15 | 5 | 29 | E01, E02, E03, E04, E17 |
 | S3 | 2026-11-16 – 2026-11-29 | 10 | 65 | E01, E02, E03, E04, E05, E09 |
 | S4 | 2026-11-30 – 2026-12-13 | 10 | 79 | E02, E03, E04, E05, E14, E17 |
 | S5 | 2026-12-14 – 2026-12-27 | 11 | 90 | E01, E03, E04, E07, E09, E11, E16, E17 |
@@ -1105,8 +1105,8 @@ Blocked by: T110 (Production go-live (Physics + Maths) and 30-day hypercare)
 
 | ID | Jira | Type | Summary | Pts | Priority | Sprint | Agent role | Blocked by |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| T040 | [KK-60](https://kuizi.atlassian.net/browse/KK-60) | Spike | Benchmark SAINT, SAINT+, SAKT and AKT on public datasets and our pilot data | 8 | Highest | S1 | ML Engineering (Python / PyTorch) | T238 |
 | T238 | [KK-258](https://kuizi.atlassian.net/browse/KK-258) | Task | Brain walkthrough: each Neural Core concept explained simply, with runnable notebooks on public data | 5 | Highest | S1 | ML Engineering (Python / PyTorch) | T237 |
-| T040 | [KK-60](https://kuizi.atlassian.net/browse/KK-60) | Spike | Benchmark SAINT, SAINT+, SAKT and AKT on public datasets and our pilot data | 8 | Highest | S2 | ML Engineering (Python / PyTorch) | T238 |
 | T041 | [KK-61](https://kuizi.atlassian.net/browse/KK-61) | Task | Integrate pyKT into the ML mono-repo with our data adapter and reproducible training config | 8 | Highest | S3 | ML Engineering (Python / PyTorch) | T040, T237 |
 | T042 | [KK-62](https://kuizi.atlassian.net/browse/KK-62) | Task | Implement production SAINT+ model with elapsed-time and lag-time embeddings | 13 | Highest | S4 | ML Engineering (Python / PyTorch) | T041 |
 | T043 | [KK-63](https://kuizi.atlassian.net/browse/KK-63) | Task | Implement IRT cold-start estimator and blended handoff to SAINT+ | 8 | Highest | S4 | ML Engineering (Python / PyTorch) | T041 |
@@ -1118,6 +1118,28 @@ Blocked by: T110 (Production go-live (Physics + Maths) and 30-day hypercare)
 | T047 | [KK-67](https://kuizi.atlassian.net/browse/KK-67) | Task | Build champion/challenger evaluation gate and automatic rollback on metric regression | 8 | Highest | S12 | ML Engineering (Python / PyTorch) | T045, T046 |
 | T050 | [KK-70](https://kuizi.atlassian.net/browse/KK-70) | Task | Implement model monitoring: prediction drift, input drift and data-leak tests | 5 | High | S13 | ML Engineering (Python / PyTorch) | T047 |
 | T239 | [KK-259](https://kuizi.atlassian.net/browse/KK-259) | Task | Re-run the knowledge-tracing benchmark on Kuizi pilot data and confirm the production model | 5 | High | S14 | ML Engineering (Python / PyTorch) | T108, T040, T028 |
+
+#### T040 · Benchmark SAINT, SAINT+, SAKT and AKT on public datasets and our pilot data
+
+*Jira KK-60 · Spike · 8 pts · Highest · APL Sprint 1 · ML Engineering (Python / PyTorch) · labels: spike, pykt, research*
+
+Time-boxed (1 sprint) evaluation using pyKT: train SAKT, SAINT, SAINT+ and AKT on ASSIST2009/2017, EdNet subset, and the first pilot sequences. Compare AUC, calibration (ECE), inference cost and sequence-length sensitivity. Decide the production architecture and write the ADR.
+
+Acceptance criteria:
+
+- ADR published with chosen model, rationale and fallback
+- Reproducible benchmark notebook in `ml/benchmarks/`
+- Inference latency per model measured on CPU and GPU
+
+Addendum changes (v2):
+
+- Runs on public datasets (ASSISTments, EdNet) on a laptop from S2; the re-run on Kuizi pilot data is T239
+- Pulled into Sprint 1 once T238 was done; DKT is added as a baseline (T238 found it ahead of SAINT+ on small data); GPU latency is measured when a GPU exists (cloud, S8+), CPU latency now
+- Local-first (ADR 0006): starts from T238 instead of waiting for T028
+
+Blocked by: T238 (Brain walkthrough: each Neural Core concept explained simply, with runnable notebooks on public data)
+
+Blocks: T041, T051, T239
 
 #### T238 · Brain walkthrough: each Neural Core concept explained simply, with runnable notebooks on public data
 
@@ -1135,27 +1157,6 @@ Acceptance criteria:
 Blocked by: T237 (Local development stack on the product owner's PC: one command starts PostgreSQL with pgvector, Kafka, Redis, object storage, Keycloak, MLflow and the Python ML environment)
 
 Blocks: T040
-
-#### T040 · Benchmark SAINT, SAINT+, SAKT and AKT on public datasets and our pilot data
-
-*Jira KK-60 · Spike · 8 pts · Highest · APL Sprint 2 · ML Engineering (Python / PyTorch) · labels: spike, pykt, research*
-
-Time-boxed (1 sprint) evaluation using pyKT: train SAKT, SAINT, SAINT+ and AKT on ASSIST2009/2017, EdNet subset, and the first pilot sequences. Compare AUC, calibration (ECE), inference cost and sequence-length sensitivity. Decide the production architecture and write the ADR.
-
-Acceptance criteria:
-
-- ADR published with chosen model, rationale and fallback
-- Reproducible benchmark notebook in `ml/benchmarks/`
-- Inference latency per model measured on CPU and GPU
-
-Addendum changes (v2):
-
-- Runs on public datasets (ASSISTments, EdNet) on a laptop from S2; the re-run on Kuizi pilot data is T239
-- Local-first (ADR 0006): starts from T238 instead of waiting for T028
-
-Blocked by: T238 (Brain walkthrough: each Neural Core concept explained simply, with runnable notebooks on public data)
-
-Blocks: T041, T051, T239
 
 #### T041 · Integrate pyKT into the ML mono-repo with our data adapter and reproducible training config
 

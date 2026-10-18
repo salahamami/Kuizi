@@ -1224,7 +1224,7 @@
    "summary": "Benchmark SAINT, SAINT+, SAKT and AKT on public datasets and our pilot data",
    "priority": "Highest",
    "points": 8,
-   "sprint": "APL Sprint 2",
+   "sprint": "APL Sprint 1",
    "component": "ML",
    "team": "ML Engineering (Python / PyTorch)",
    "phase": "Phase 0 — Foundations",
@@ -1238,7 +1238,7 @@
    "blocked_by": [
     "T238"
    ],
-   "description": "Time-boxed (1 sprint) evaluation using pyKT: train SAKT, SAINT, SAINT+ and AKT on ASSIST2009/2017, EdNet subset, and the first pilot sequences. Compare AUC, calibration (ECE), inference cost and sequence-length sensitivity. Decide the production architecture and write the ADR.\n\n**Acceptance criteria**\n\n- ADR published with chosen model, rationale and fallback\n- Reproducible benchmark notebook in `ml/benchmarks/`\n- Inference latency per model measured on CPU and GPU\n\n**Addendum changes (v2)**\n\n- Runs on public datasets (ASSISTments, EdNet) on a laptop from S2; the re-run on Kuizi pilot data is T239\n- Local-first (ADR 0006): starts from T238 instead of waiting for T028\n\n**Context**\n\n- Backlog ID: T040\n- Epic: E05 Deep Knowledge Tracing Core\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 2\n- Agent role: ML Engineering (Python / PyTorch)\n- Blocked by: T238 (Brain walkthrough: each Neural Core concept explained simply, with runnable notebooks on public data)\n- Blocks: T041, T051, T239"
+   "description": "Time-boxed (1 sprint) evaluation using pyKT: train SAKT, SAINT, SAINT+ and AKT on ASSIST2009/2017, EdNet subset, and the first pilot sequences. Compare AUC, calibration (ECE), inference cost and sequence-length sensitivity. Decide the production architecture and write the ADR.\n\n**Acceptance criteria**\n\n- ADR published with chosen model, rationale and fallback\n- Reproducible benchmark notebook in `ml/benchmarks/`\n- Inference latency per model measured on CPU and GPU\n\n**Addendum changes (v2)**\n\n- Runs on public datasets (ASSISTments, EdNet) on a laptop from S2; the re-run on Kuizi pilot data is T239\n- Pulled into Sprint 1 once T238 was done; DKT is added as a baseline (T238 found it ahead of SAINT+ on small data); GPU latency is measured when a GPU exists (cloud, S8+), CPU latency now\n- Local-first (ADR 0006): starts from T238 instead of waiting for T028\n\n**Context**\n\n- Backlog ID: T040\n- Epic: E05 Deep Knowledge Tracing Core\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 1\n- Agent role: ML Engineering (Python / PyTorch)\n- Blocked by: T238 (Brain walkthrough: each Neural Core concept explained simply, with runnable notebooks on public data)\n- Blocks: T041, T051, T239"
   },
   {
    "id": "T041",

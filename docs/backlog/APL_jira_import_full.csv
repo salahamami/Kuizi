@@ -823,15 +823,16 @@ h3. Acceptance Criteria
 
 h3. Addendum changes (v2)
 * Runs on public datasets (ASSISTments, EdNet) on a laptop from S2; the re-run on Kuizi pilot data is T239
+* Pulled into Sprint 1 once T238 was done; DKT is added as a baseline (T238 found it ahead of SAINT+ on small data); GPU latency is measured when a GPU exists (cloud, S8+), CPU latency now
 * Local-first (ADR 0006): starts from T238 instead of waiting for T028
 
 h3. Context
 * Epic: Deep Knowledge Tracing Core
 * Phase: Phase 0 — Foundations
-* Target sprint: APL Sprint 2
+* Target sprint: APL Sprint 1
 * Agent role: ML Engineering (Python / PyTorch)
 * Blocked by: T238 (Brain walkthrough: each Neural Core concept explained simply, with runnable notebooks on public data)
-* Blocks: T041, T051, T239",Highest,8,,Deep Knowledge Tracing Core,E05,ML,APL Sprint 2,Phase 0 — Foundations,ML Engineering (Python / PyTorch),spike,pykt,research,agent-ml-engineering,,,T238,,,,,,,,,,,
+* Blocks: T041, T051, T239",Highest,8,,Deep Knowledge Tracing Core,E05,ML,APL Sprint 1,Phase 0 — Foundations,ML Engineering (Python / PyTorch),spike,pykt,research,agent-ml-engineering,,,T238,,,,,,,,,,,
 T041,Task,Integrate pyKT into the ML mono-repo with our data adapter and reproducible training config,"h3. Description
 Vendor pyKT as a pinned dependency; write the Snowflake → pyKT sequence adapter (`ml_training_sequences` → question/KC/response/elapsed-time tensors); Hydra configs; MLflow experiment tracking; deterministic seeds; unit tests on the adapter.
 

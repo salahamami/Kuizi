@@ -68,6 +68,7 @@ Application code reads the connection settings from `.env` (`DATABASE_URL`, `KAF
 | `make up` | Start everything |
 | `make status` | Show each service and its address |
 | `make smoke` | Test that every service works |
+| `make check` | Check the repository is consistent (compose file, agent briefs, backlog); run it before handing work back |
 | `make logs` | Follow the logs (Ctrl+C to stop) |
 | `make down` | Stop everything, keep the data |
 | `make reset` | Delete all local data and start from zero |

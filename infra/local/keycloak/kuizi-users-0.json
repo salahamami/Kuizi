@@ -1,0 +1,173 @@
+{
+  "realm": "kuizi",
+  "users": [
+    {
+      "username": "dev-student",
+      "enabled": true,
+      "email": "dev-student@kuizi.test",
+      "emailVerified": true,
+      "firstName": "Dev",
+      "lastName": "Student",
+      "attributes": {
+        "tenant_id": [
+          "demo-school-a"
+        ]
+      },
+      "realmRoles": [
+        "default-roles-kuizi",
+        "student"
+      ],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "dev-student-local-only",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "dev-parent",
+      "enabled": true,
+      "email": "dev-parent@kuizi.test",
+      "emailVerified": true,
+      "firstName": "Dev",
+      "lastName": "Parent",
+      "attributes": {
+        "tenant_id": [
+          "demo-school-a"
+        ]
+      },
+      "realmRoles": [
+        "default-roles-kuizi",
+        "parent"
+      ],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "dev-parent-local-only",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "dev-teacher",
+      "enabled": true,
+      "email": "dev-teacher@kuizi.test",
+      "emailVerified": true,
+      "firstName": "Dev",
+      "lastName": "Teacher",
+      "attributes": {
+        "tenant_id": [
+          "demo-school-a"
+        ]
+      },
+      "realmRoles": [
+        "default-roles-kuizi",
+        "teacher"
+      ],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "dev-teacher-local-only",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "dev-teacher-b",
+      "enabled": true,
+      "email": "dev-teacher-b@kuizi.test",
+      "emailVerified": true,
+      "firstName": "Dev",
+      "lastName": "Teacher B",
+      "attributes": {
+        "tenant_id": [
+          "demo-school-b"
+        ]
+      },
+      "realmRoles": [
+        "default-roles-kuizi",
+        "teacher"
+      ],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "dev-teacher-b-local-only",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "dev-school-admin",
+      "enabled": true,
+      "email": "dev-school-admin@kuizi.test",
+      "emailVerified": true,
+      "firstName": "Dev",
+      "lastName": "School Admin",
+      "attributes": {
+        "tenant_id": [
+          "demo-school-a"
+        ]
+      },
+      "realmRoles": [
+        "default-roles-kuizi",
+        "school_admin"
+      ],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "dev-school-admin-local-only",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "dev-platform-admin",
+      "enabled": true,
+      "email": "dev-platform-admin@kuizi.test",
+      "emailVerified": true,
+      "firstName": "Dev",
+      "lastName": "Platform Admin",
+      "attributes": {
+        "tenant_id": [
+          "platform"
+        ]
+      },
+      "realmRoles": [
+        "default-roles-kuizi",
+        "platform_admin"
+      ],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "dev-platform-admin-local-only",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "dev-curriculum-author",
+      "enabled": true,
+      "email": "dev-curriculum-author@kuizi.test",
+      "emailVerified": true,
+      "firstName": "Dev",
+      "lastName": "Curriculum Author",
+      "attributes": {
+        "tenant_id": [
+          "platform"
+        ]
+      },
+      "realmRoles": [
+        "default-roles-kuizi",
+        "curriculum_author"
+      ],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "dev-curriculum-author-local-only",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}

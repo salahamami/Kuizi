@@ -2,6 +2,28 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
+## 2026-10-18 — Sprint 2 started early: CI, identity, learner events, concept graph, brand
+
+While Sprint 1 waits for the product owner's review, the five Sprint 2 tickets were started early ("work ahead"); they stay in APL Sprint 2 in Jira. Each was handed to the agent of its role, worked in its own git worktree and branch, reviewed by the main session and merged into `feat/sprint-2`. The backlog itself (scope, points, sprints, links) did not change.
+
+### Added
+- **ADR 0008 (proposed): monorepo layout and toolchains.** Folders `apps/`, `services/`, `packages/`, `schemas/`, `curriculum/`, `brand/`; Node 22 with pnpm workspaces, strict TypeScript, ESLint, Prettier, Vitest; Python 3.12 with uv, Ruff, pytest. Root tooling: `package.json`, `pnpm-workspace.yaml`, `tsconfig.base.json`, `eslint.config.js`, `.prettierrc.json`.
+- **T006 CI (KK-26, platform-devops agent).** GitHub Actions with project discovery (`scripts/ci/discover.py`): reusable Python, TypeScript and container workflows; coverage gates (services 80 %, frontends 70 %, `ml/` 75 %); Pact convention (`test:contract`); Syft SBOM, Trivy gate on CRITICAL, cosign keyless signing and SBOM attestation on `main` only (GHCR until T240); actions pinned to commit SHAs (new check in `make check`); `make lint` and `make test`; root `ruff.toml`; 50 pytest tests for `ml/kuizi_brain`. Guide: `docs/dev/ci.md`. Median run 59 s on GitHub.
+- **T012 identity (KK-32, backend agent).** One Keycloak realm `kuizi` (single issuer) with roles, `tenant_id` and `roles` claims, 15-minute access tokens, rotating refresh tokens, brute-force protection, French and Arabic; a Kuizi Keycloak image with a Have I Been Pwned password policy (k-anonymity) and a login theme with 44 px controls; `@kuizi/auth` verifies tokens in services (55 tests). ADR 0009 (proposed). Guide and screenshots: `docs/dev/identity.md`.
+- **T023 learner events (KK-43, data-engineering agent; ML sign-off by the ml-engineering agent).** 15 Avro events with a shared envelope, one topic per event, BACKWARD_TRANSITIVE compatibility enforced by the registry and by an offline check against git history; privacy class on every field, sensitive accommodation fields only in `AccommodationContext`, no free text in `tutor.message`; machine-readable catalogue and generated page `docs/data/event-catalogue.md`; 125 tests. ADR 0010 (proposed). ML review `docs/data/event-schema-ml-review.md`: signed off with conditions R1–R4, all applied.
+- **T032 concept graph (KK-52, product-curriculum agent; tests run by the main session).** PostgreSQL schema `curriculum` with ltree paths, KCs shared across tracks with per-track chapter and exam weight, typed edges and a cycle-rejecting trigger that holds under concurrent writes; starter Physics seed (70 KCs, 132 edges, 4e Mathématiques, Sciences expérimentales, Sciences techniques, all `to_review`); loader and JSON export with its JSON Schema; 50 tests. Doc: `docs/curriculum/kc-graph.md`.
+- **T231 brand (KK-251, design-ux agent; rendered and checked by the main session).** Eight-point star mark with a rhombus counter, logotypes «kuizi» and «كويزي» drawn as shapes (geometric Kufi), lockups, iOS, Android and web icons, social images; `brand/export.json` and 67 rendered PNGs plus `favicon.ico`; brand guide (draft) and review briefs for an Arabic type designer and a trademark search: `docs/design/brand-guide.md`, `docs/design/brand-reviews.md`.
+- `docs/product-owner-decisions.md`: every decision waiting for the product owner, grouped by urgency and ticket, with the acceptance-criteria wording the agents proposed (not applied).
+
+### Changed
+- `infra/local/compose.yaml`: Keycloak is built from `services/keycloak` (`pull_policy: never`). `.env.example` gains `KEYCLOAK_API_AUDIENCE` and the Google sign-in variables (empty).
+- `ml/`: six files reformatted by Ruff and small lint fixes; the T040 benchmark records a new `code_sha256` from now on.
+- `Makefile`: `lint`, `test`, `graph-*` and `schemas-*` targets.
+- `docs/STATUS.md`, `README.md`, `docs/README.md`, `docs/dev/local-setup.md`: links to the new guides.
+
+### Jira sync
+- KK-26, KK-32, KK-43, KK-52 and KK-251 moved À faire → En cours → Revue en cours, each with a comment on what was built, how each acceptance criterion was verified and what waits for the product owner. They stay in APL Sprint 2. No scope, point, sprint or link change, so `additions.py` and the generated backlog are unchanged.
+
 ## 2026-10-18 — Session hand-off: status page and documentation rule
 
 ### Added

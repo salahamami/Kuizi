@@ -6,7 +6,7 @@ on:
   workflow_call:
     inputs:
       projects:
-        description: 'JSON list, for example [{"path": "ml", "id": "ml", "coverage": 75, "typecheck": false}]'
+        description: 'JSON list from scripts/ci/discover.py, for example [{"path": "ml", "id": "ml", "coverage": 75, "typecheck": false, "services": [], "fetch_depth": 1, "checks": []}]'
         required: true
         type: string
 
@@ -34,6 +34,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          # 1 = this commit only; 0 = the whole history ([tool.kuizi.ci] full-history = true)
+          fetch-depth: ${{ matrix.project.fetch_depth }}
 
       - name: Set up uv (cache keyed on uv.lock)
         uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
@@ -59,6 +61,30 @@ jobs:
         if: ${{ !cancelled() }}
         run: uv sync --locked
 
+      - name: Start PostgreSQL (the local stack's pgvector image, with ltree)
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' && contains(matrix.project.services, 'postgres') }}
+        env:
+          # Same image as infra/local/compose.yaml, pinned by digest. Throwaway credentials,
+          # valid only inside this job.
+          POSTGRES_IMAGE: pgvector/pgvector:pg16@sha256:7b822b0aac60967beb1ea5e576b8602c94c300a157d187f385ae3e0da199b90a
+        run: |
+          docker run -d --name kuizi-ci-postgres -p 127.0.0.1:5432:5432 \
+            -e POSTGRES_USER=kuizi -e POSTGRES_PASSWORD=kuizi-ci-only -e POSTGRES_DB=kuizi "$POSTGRES_IMAGE"
+          # Ask over TCP inside the container: the server started during initialisation only
+          # listens on a socket, so this succeeds once the final server is up.
+          for _ in $(seq 1 60); do
+            if docker exec kuizi-ci-postgres pg_isready -h 127.0.0.1 -U kuizi -d kuizi -q; then break; fi
+            sleep 1
+          done
+          docker exec kuizi-ci-postgres psql -h 127.0.0.1 -U kuizi -d kuizi -v ON_ERROR_STOP=1 -tAc \
+            "SELECT 'PostgreSQL ' || current_setting('server_version') || ', ltree ' || default_version
+             FROM pg_available_extensions WHERE name = 'ltree'" \
+            || { docker logs kuizi-ci-postgres; exit 1; }
+          {
+            echo "DATABASE_URL=postgresql://kuizi:kuizi-ci-only@127.0.0.1:5432/kuizi"
+            echo "KUIZI_REQUIRE_POSTGRES=1" # database tests fail instead of skipping
+          } >> "$GITHUB_ENV"
+
       - name: Type check (mypy)
         if: ${{ !cancelled() && steps.sync.outcome == 'success' && matrix.project.typecheck }}
         run: uv run --locked mypy
@@ -77,6 +103,19 @@ jobs:
             { echo "### Coverage: ${PROJECT_PATH} (gate ${COVERAGE_MIN} %)"; echo
               uv run --locked coverage report --format=markdown; } >> "$GITHUB_STEP_SUMMARY" || true
           fi
+          exit "$status"
+
+      - name: Project checks ([tool.kuizi.ci] checks)
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' && join(matrix.project.checks, '') != '' }}
+        env:
+          CHECKS: ${{ toJSON(matrix.project.checks) }}
+        run: |
+          status=0
+          while IFS= read -r command; do
+            echo "::group::${command}"
+            uv run --locked bash -euo pipefail -c "$command" || status=1
+            echo "::endgroup::"
+          done < <(jq -r '.[]' <<< "$CHECKS")
           exit "$status"
 
       - name: Keep the test and coverage reports

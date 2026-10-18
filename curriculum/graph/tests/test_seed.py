@@ -7,6 +7,7 @@ import dataclasses
 
 import pytest
 import yaml
+
 from kuizi_kc_graph import STARTER_SEED
 from kuizi_kc_graph import graph as g
 from kuizi_kc_graph.cli import main

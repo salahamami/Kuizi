@@ -13,10 +13,11 @@ import time
 
 import psycopg
 import pytest
+from psycopg import errors
+
 from kuizi_kc_graph import STARTER_SEED, db
 from kuizi_kc_graph.cli import main
 from kuizi_kc_graph.export import build_export, check_export
-from psycopg import errors
 
 pytestmark = pytest.mark.postgres
 

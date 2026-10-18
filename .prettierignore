@@ -7,6 +7,7 @@ pnpm-lock.yaml
 ml/
 docs/
 infra/
+brand/
 tools/
 scripts/
 **/dist/

@@ -8,7 +8,7 @@ Every push and every pull request runs the checks below on GitHub Actions (T006)
 | --- | --- | --- |
 | Discover projects | Finds the Python projects, TypeScript packages and Dockerfiles ([`scripts/ci/discover.py`](../../scripts/ci/discover.py)) | Always |
 | Repository checks | `make check` (compose file, agent briefs, backlog, actions pinned to commit SHAs), tests of the CI scripts, Ruff on Python outside the projects, `pnpm install --frozen-lockfile` and Prettier, actionlint with shellcheck on the workflows | Always |
-| Python / `<folder>` | Ruff lint and format check, `uv sync --locked`, mypy if the project opts in, pytest with the project's coverage gate | One job per Python project |
+| Python / `<folder>` | Ruff lint and format check, `uv sync --locked`, PostgreSQL if the project asks for it, mypy if the project opts in, pytest with the project's coverage gate, then the project's own checks (`schemas/`: `kuizi-schemas check`) | One job per Python project |
 | TypeScript / `<folder>` | `lint`, `typecheck`, Vitest with the coverage gate, `test:contract` if the package has it, `build` | One job per workspace package; skipped while there is none |
 | Containers / `<image>` | Build with Buildx, Syft SBOM, Trivy scan that fails on any CRITICAL finding. Nothing is pushed | Branches and pull requests |
 | Containers (publish) / `<image>` | The same, then push to GHCR, sign with cosign and attach the SBOM as a signed attestation | `main` only, after every other check passed |
@@ -22,12 +22,27 @@ Each job writes a summary on the run page (coverage table, image findings) and k
 
 Nothing to edit in the workflows: discovery reads the repository on every run.
 
-**Python project** (a folder with a `pyproject.toml`, for example `schemas/events` or `curriculum/graph`):
+**Python project** (a folder with a `pyproject.toml`, for example `schemas` or `curriculum/graph`):
 
 - Commit `uv.lock` next to `pyproject.toml` (`uv lock`); CI runs `uv sync --locked`, which fails if the lockfile is stale.
 - Add the test tools to a dev group: `uv add --dev pytest pytest-cov` (and `mypy` if the code is typed). Put tests in `tests/`; CI fails when a project has no test.
 - Set the coverage gate, if not 80 %, in `pyproject.toml`: `[tool.coverage.report]` `fail_under = 90`. Also set `[tool.coverage.run]` `source = ["your_package"]`.
 - Type checks: add a `[tool.mypy]` section with `files = [...]` (and `strict = true` for new code); CI then runs `uv run mypy`.
+- Tests that need PostgreSQL: add the lines below. CI then starts the local stack's image (`pgvector/pgvector:pg16`, pinned by digest, with the `vector` and `ltree` extensions available) before the tests and sets `DATABASE_URL=postgresql://kuizi:kuizi-ci-only@127.0.0.1:5432/kuizi` and `KUIZI_REQUIRE_POSTGRES=1`. Write the tests so that this flag turns a missing database into a failure instead of a skip (as `curriculum/graph/tests/conftest.py` does), and give each test its own schema so runs never collide. `make test` sets the same flag and uses `DATABASE_URL` from `.env`, so start the local stack first (`make up`).
+
+  ```toml
+  [tool.kuizi.ci]
+  services = ["postgres"]
+  ```
+
+  PostgreSQL is the only service so far; a project asking for an unknown one fails discovery. Another service (for example the Kafka schema registry for T023's live tests) is added in `scripts/ci/discover.py` (`CI_SERVICES`) and `.github/workflows/python.yml`.
+- Two more settings in the same table, both optional. `full-history = true` checks out the whole git history instead of the last commit (`fetch-depth: 0`), for checks that compare with earlier versions. `checks = ["command", ...]` lists commands that CI and `make test` run after the tests, in the project folder and inside its environment (`uv run`). `schemas/` uses both, so its compatibility check sees every committed version and its `make schemas-check` runs on every pull request:
+
+  ```toml
+  [tool.kuizi.ci]
+  full-history = true
+  checks = ["kuizi-schemas check --require-full-history"]
+  ```
 - Ruff settings come from the root [`ruff.toml`](../../ruff.toml). Do not add `[tool.ruff]` to a project: it would replace the shared settings. If a project really needs a different rule, start its `[tool.ruff]` with `extend = "../../ruff.toml"` (the path from the project to the root) and say why in the pull request.
 
 **TypeScript package** (a folder under `apps/`, `services/` or `packages/` with a `package.json`):
@@ -40,7 +55,8 @@ Nothing to edit in the workflows: discovery reads the repository on every run.
 **Container image**: a file named `Dockerfile` in the app or service folder.
 
 - The image is `ghcr.io/salahamami/kuizi-<folder name>` (two folders with the same name are refused).
-- It is built from the **repository root**, so it can copy shared packages and lockfiles: write `COPY services/routing/...`, not `COPY ...`. Add a `Dockerfile.dockerignore` next to the Dockerfile to keep the build context small.
+- **Build context**: the Dockerfile's own folder, as in `docker compose` (`build: ../../services/keycloak`), so `COPY themes/ ...` means `services/keycloak/themes/`, and a `.dockerignore` in that folder applies.
+- A Dockerfile that needs the whole repository (a TypeScript service that copies workspace packages and `pnpm-lock.yaml`, for example) opts in with one line anywhere in the Dockerfile: `# kuizi-ci: context=repo-root`. Its `COPY` paths then start at the root (`COPY services/routing/...`), and its ignore file is `Dockerfile.dockerignore` next to the Dockerfile. Use the same context in compose (`build: {context: ../.., dockerfile: services/routing/Dockerfile}`). Any other value, or two such lines, fails discovery.
 - Branches and pull requests: build, SBOM and scan only. `main`: also published, tagged `sha-<12 characters of the commit>` and `main`.
 
 ## Coverage gates
@@ -67,7 +83,7 @@ There is nothing to test yet; the convention is ready for T103 and T214.
 
 1. **Build**: Buildx with a layer cache per image; the image is loaded into the runner, not pushed.
 2. **SBOM**: Syft v1.54.0 writes an SPDX JSON file, kept as an artifact.
-3. **Scan**: Trivy v0.70.0 keeps a full report and fails the job on any **CRITICAL** vulnerability (fixed or not) or CRITICAL secret baked into the image. HIGH findings are shown but do not fail the job. A CRITICAL finding that cannot be fixed by a newer base image goes in a `.trivyignore` file at the root, one CVE per line with a comment (reason, link, review date), and needs the product owner's approval in the pull request.
+3. **Scan**: Trivy v0.70.0 keeps a full report, then the gate reads that report and fails the job on any **CRITICAL** vulnerability (fixed or not) or CRITICAL secret baked into the image. HIGH findings are shown but do not fail the job. A CRITICAL finding that cannot be fixed by a newer base image goes in a `.trivyignore` file at the root, one CVE per line with a comment (reason, link, review date), and needs the product owner's approval in the pull request.
 4. **Publish** (`main` only, after every other check passed): push the exact image that was scanned, sign its digest with cosign v3 **keyless** (the workflow's GitHub OIDC identity, no key to store), attach the SBOM as a signed SPDX attestation, then verify both.
 
 Check an image yourself:
@@ -94,7 +110,7 @@ A CI fixture in [`.github/ci-fixtures/container/`](../../.github/ci-fixtures/con
 | Command | What it runs |
 | --- | --- |
 | `make lint` | Ruff lint and format check (whole repository), mypy for projects that opt in, then with pnpm installed: frozen-lockfile install, Prettier, ESLint and tsc for each package |
-| `make test` | Tests of the CI scripts, pytest with each Python project's coverage gate, Vitest with each package's gate, contract tests |
+| `make test` | Tests of the CI scripts, pytest with each Python project's coverage gate (database tests need `make up`), the projects' own checks, Vitest with each package's gate, contract tests |
 | `make check` | Repository consistency, including the rule that workflow actions are pinned to commit SHAs |
 
 They use the same tool versions as CI (Ruff from `ruff.toml`, uv, pnpm from `package.json`). Container images are not built locally by these commands; to scan one yourself, install [Trivy](https://trivy.dev/) and run `trivy image --severity CRITICAL <image>`.

@@ -37,7 +37,7 @@ ignore = [
 "**/tests/**" = ["B011"]
 
 [lint.isort]
-known-first-party = ["kuizi_brain"]
+known-first-party = ["kuizi_brain", "kuizi_kc_graph", "kuizi_schemas"]
 
 [format]
 # Notebooks keep the layout their authors chose.

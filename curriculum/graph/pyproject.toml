@@ -33,3 +33,8 @@ addopts = "-ra"
 markers = [
     "postgres: needs the local PostgreSQL (make up); skipped when it is not reachable unless KUIZI_REQUIRE_POSTGRES=1",
 ]
+
+# CI (T006, docs/dev/ci.md): start PostgreSQL with pgvector and ltree for the tests and set
+# KUIZI_REQUIRE_POSTGRES=1, so the database tests run and count towards the coverage gate.
+[tool.kuizi.ci]
+services = ["postgres"]

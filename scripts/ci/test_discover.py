@@ -25,6 +25,9 @@ packages:
 """
 
 
+NO_EXTRAS = {"services": [], "fetch_depth": 1, "checks": []}
+
+
 class RepoTestCase(unittest.TestCase):
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory(prefix="kuizi-discover-")
@@ -50,8 +53,8 @@ class PythonTests(RepoTestCase):
         self.assertEqual(
             self.found()["python"],
             [
-                {"path": "ml", "id": "ml", "coverage": 80, "typecheck": False},
-                {"path": "services/api", "id": "services-api", "coverage": 90, "typecheck": True},
+                {"path": "ml", "id": "ml", "coverage": 80, "typecheck": False, **NO_EXTRAS},
+                {"path": "services/api", "id": "services-api", "coverage": 90, "typecheck": True, **NO_EXTRAS},
             ],
         )
 
@@ -71,6 +74,35 @@ class PythonTests(RepoTestCase):
     def test_a_bad_gate_is_reported(self):
         self.write("ml/pyproject.toml", '[tool.coverage.report]\nfail_under = "high"\n')
         with self.assertRaisesRegex(discover.DiscoveryError, "fail_under"):
+            self.found()
+
+    def test_a_project_can_ask_for_postgres(self):
+        self.write("curriculum/graph/pyproject.toml", '[tool.kuizi.ci]\nservices = ["postgres"]\n')
+        self.assertEqual(self.found()["python"][0]["services"], ["postgres"])
+
+    def test_full_history_and_extra_checks(self):
+        self.write(
+            "schemas/pyproject.toml",
+            '[tool.kuizi.ci]\nfull-history = true\nchecks = ["kuizi-schemas check --require-full-history"]\n',
+        )
+        project = self.found()["python"][0]
+        self.assertEqual(project["fetch_depth"], 0)
+        self.assertEqual(project["checks"], ["kuizi-schemas check --require-full-history"])
+
+    def test_bad_ci_settings_are_refused(self):
+        for settings, message in [
+            ("fullhistory = true", "unknown keys"),
+            ('full-history = "yes"', "true or false"),
+            ('checks = "kuizi-schemas check"', "list of commands"),
+            ('checks = [""]', "list of commands"),
+        ]:
+            self.write("schemas/pyproject.toml", f"[tool.kuizi.ci]\n{settings}\n")
+            with self.subTest(settings), self.assertRaisesRegex(discover.DiscoveryError, message):
+                self.found()
+
+    def test_an_unknown_service_is_refused(self):
+        self.write("schemas/events/pyproject.toml", '[tool.kuizi.ci]\nservices = ["mongodb"]\n')
+        with self.assertRaisesRegex(discover.DiscoveryError, '"postgres"'):
             self.found()
 
 
@@ -130,10 +162,33 @@ class ContainerTests(RepoTestCase):
                     "context": ".github/ci-fixtures/container",
                     "publish": False,
                 },
-                {"name": "kuizi-routing", "dockerfile": "services/routing/Dockerfile", "context": ".", "publish": True},
+                {
+                    "name": "kuizi-routing",
+                    "dockerfile": "services/routing/Dockerfile",
+                    "context": "services/routing",
+                    "publish": True,
+                },
             ],
         )
         self.assertEqual([i["name"] for i in found["images"]], ["kuizi-routing"])
+
+    def test_context_is_the_folder_unless_the_dockerfile_asks_for_the_repository_root(self):
+        self.write("services/keycloak/Dockerfile", "# Kuizi Keycloak image\nFROM scratch\nCOPY themes/ /themes/\n")
+        self.write("services/tutor/Dockerfile", "# kuizi-ci: context=repo-root\nFROM scratch\nCOPY packages/ /p/\n")
+        self.write("services/explicit/Dockerfile", "  #kuizi-ci:context=folder\nFROM scratch\n")
+        contexts = {i["name"]: i["context"] for i in self.found()["containers"]}
+        self.assertEqual(
+            contexts,
+            {"kuizi-keycloak": "services/keycloak", "kuizi-tutor": ".", "kuizi-explicit": "services/explicit"},
+        )
+
+    def test_a_wrong_or_repeated_context_line_is_refused(self):
+        self.write("services/tutor/Dockerfile", "# kuizi-ci: context=root\nFROM scratch\n")
+        with self.assertRaisesRegex(discover.DiscoveryError, "context=root"):
+            self.found()
+        self.write("services/tutor/Dockerfile", "# kuizi-ci: context=folder\n# kuizi-ci: context=repo-root\n")
+        with self.assertRaisesRegex(discover.DiscoveryError, "one `# kuizi-ci"):
+            self.found()
 
     def test_two_folders_with_the_same_name_are_refused(self):
         self.write("services/web/Dockerfile", "FROM scratch\n")
@@ -159,15 +214,28 @@ class OutputTests(RepoTestCase):
             del os.environ["GITHUB_OUTPUT"]
         lines = dict(line.split("=", 1) for line in output.read_text().splitlines())
         self.assertEqual(sorted(lines), ["containers", "images", "python", "typescript"])
-        self.assertEqual(json.loads(lines["python"]), [{"path": "ml", "id": "ml", "coverage": 80, "typecheck": False}])
+        self.assertEqual(
+            json.loads(lines["python"]),
+            [{"path": "ml", "id": "ml", "coverage": 80, "typecheck": False, **NO_EXTRAS}],
+        )
         self.assertEqual(lines["typescript"], "[]")
 
     def test_list_mode_prints_space_separated_fields(self):
         self.write("ml/pyproject.toml", "[tool.coverage.report]\nfail_under = 75\n")
+        self.write("curriculum/graph/pyproject.toml", '[tool.kuizi.ci]\nservices = ["postgres"]\n')
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
             discover.main(["--root", str(self.root), "--list", "python"])
-        self.assertEqual(out.getvalue(), "ml 75 false\n")
+        self.assertEqual(out.getvalue(), "curriculum/graph 80 false postgres\nml 75 false -\n")
+
+    def test_list_checks_prints_folder_and_command(self):
+        self.write(
+            "schemas/pyproject.toml", '[tool.kuizi.ci]\nchecks = ["kuizi-schemas check", "kuizi-schemas docs"]\n'
+        )
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            discover.main(["--root", str(self.root), "--list", "checks"])
+        self.assertEqual(out.getvalue(), "schemas\tkuizi-schemas check\nschemas\tkuizi-schemas docs\n")
 
     def test_errors_exit_with_one(self):
         self.write("Dockerfile", "FROM scratch\n")

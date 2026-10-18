@@ -7,6 +7,7 @@ import json
 import shutil
 
 import pytest
+
 from kuizi_schemas import Paths, cli
 from kuizi_schemas.avsc import expand, load_sources, parse_fastavro, to_registry_string
 from kuizi_schemas.examples import contains, load_examples, normalise

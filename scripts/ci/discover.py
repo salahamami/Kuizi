@@ -5,18 +5,28 @@ Usage:
   python3 scripts/ci/discover.py                  # summary for people
   python3 scripts/ci/discover.py --github-output  # JSON lists for .github/workflows/ci.yml
   python3 scripts/ci/discover.py --list python    # one project per line, for the Makefile
+  python3 scripts/ci/discover.py --list checks    # project<TAB>command for every [tool.kuizi.ci] check
 
 What is found (files known to git, plus new files not ignored by .gitignore):
   Python projects   every folder holding a pyproject.toml.
                     Coverage gate: fail_under in its [tool.coverage.report], otherwise 80 (the
                     backend gate). Type check with mypy when it has a [tool.mypy] section.
+                    [tool.kuizi.ci], all optional:
+                      services = ["postgres"]  start the local stack's PostgreSQL (pgvector) in CI
+                                               and make database tests mandatory
+                      full-history = true      check out the whole git history, not one commit
+                      checks = ["cmd", ...]    more commands run after the tests, inside the
+                                               project's environment (uv run)
   TypeScript        every folder matched by pnpm-workspace.yaml that holds a package.json.
   packages          Coverage gate: "kuizi": {"coverage": N} in its package.json, otherwise 70 under
                     apps/ (the frontend gate) and 80 elsewhere. Contract tests run when it has a
                     "test:contract" script.
   Container images  every file named Dockerfile; the image is named kuizi-<folder name> and is
-                    published from main. Folders under .github/ci-fixtures/ hold CI's own test
-                    images: they are built and scanned, never published.
+                    published from main. Build context: the Dockerfile's folder, as in docker
+                    compose; a Dockerfile that needs the whole repository (workspace packages,
+                    root lockfile) says so on its own line: `# kuizi-ci: context=repo-root`.
+                    Folders under .github/ci-fixtures/ hold CI's own test images: they are built
+                    and scanned, never published.
 
 Standard library only (system Python 3.12 on the CI runner, no PyYAML).
 """
@@ -37,6 +47,11 @@ FRONTEND_COVERAGE = 70
 FRONTEND_ROOT = "apps"
 FIXTURES = ".github/ci-fixtures"
 IMAGE_PREFIX = "kuizi-"
+# Services a Python project can ask for in [tool.kuizi.ci] services (started by python.yml).
+CI_SERVICES = {"postgres"}
+# `# kuizi-ci: context=folder|repo-root` on its own line in a Dockerfile.
+CONTEXT_DIRECTIVE = re.compile(r"#\s*kuizi-ci:\s*context\s*=\s*(\S*)")
+CONTEXTS = ("folder", "repo-root")
 SKIPPED_DIRS = {"node_modules", ".venv", "venv", "__pycache__", "dist", "build", "coverage"}
 
 
@@ -92,12 +107,29 @@ def find_python(root: Path, files: list[str]) -> list[dict]:
         coverage = tool.get("coverage", {}).get("report", {}).get("fail_under", BACKEND_COVERAGE)
         if not isinstance(coverage, int | float) or not 0 <= coverage <= 100:
             raise DiscoveryError(f"{path}: [tool.coverage.report] fail_under must be a number from 0 to 100")
+        ci = tool.get("kuizi", {}).get("ci", {})
+        unknown = sorted(set(ci) - {"services", "full-history", "checks"})
+        if unknown:
+            raise DiscoveryError(f"{path}: [tool.kuizi.ci] has unknown keys {unknown} (services, full-history, checks)")
+        services = ci.get("services", [])
+        if not isinstance(services, list) or not set(services) <= CI_SERVICES:
+            known = ", ".join(f'"{name}"' for name in sorted(CI_SERVICES))
+            raise DiscoveryError(f"{path}: [tool.kuizi.ci] services must be a list drawn from {known}")
+        full_history = ci.get("full-history", False)
+        if not isinstance(full_history, bool):
+            raise DiscoveryError(f"{path}: [tool.kuizi.ci] full-history must be true or false")
+        checks = ci.get("checks", [])
+        if not isinstance(checks, list) or not all(isinstance(c, str) and c.strip() for c in checks):
+            raise DiscoveryError(f"{path}: [tool.kuizi.ci] checks must be a list of commands")
         projects.append(
             {
                 "path": folder,
                 "id": slug(folder),
                 "coverage": coverage,
                 "typecheck": "mypy" in tool or (root / folder / "mypy.ini").is_file(),
+                "services": sorted(set(services)),
+                "fetch_depth": 0 if full_history else 1,  # actions/checkout: 0 = whole history
+                "checks": checks,
             }
         )
     return projects
@@ -173,7 +205,24 @@ def find_typescript(root: Path, files: list[str]) -> list[dict]:
     return packages
 
 
-def find_containers(files: list[str]) -> list[dict]:
+def build_context(root: Path, path: str, folder: str) -> str:
+    """The Dockerfile's folder, or the repository root when the Dockerfile asks for it."""
+    choices = []
+    for line in (root / path).read_text(encoding="utf-8").splitlines():
+        match = CONTEXT_DIRECTIVE.fullmatch(line.strip())
+        if match:
+            choices.append(match.group(1))
+    if not choices:
+        return folder
+    if len(choices) > 1 or choices[0] not in CONTEXTS:
+        found = ", ".join(f"context={c}" for c in choices)
+        raise DiscoveryError(
+            f"{path}: write one `# kuizi-ci: context=folder` or `context=repo-root` line (found {found})"
+        )
+    return "." if choices[0] == "repo-root" else folder
+
+
+def find_containers(root: Path, files: list[str]) -> list[dict]:
     images, seen = [], {}
     for path in files:
         if PurePosixPath(path).name != "Dockerfile":
@@ -193,9 +242,7 @@ def find_containers(files: list[str]) -> list[dict]:
             {
                 "name": name,
                 "dockerfile": path,
-                # Services build from the repository root so they can copy shared packages and
-                # lockfiles; CI fixtures are self-contained.
-                "context": folder if fixture else ".",
+                "context": build_context(root, path, folder),
                 "publish": not fixture,
             }
         )
@@ -204,7 +251,7 @@ def find_containers(files: list[str]) -> list[dict]:
 
 def discover(root: Path) -> dict[str, list[dict]]:
     files = repo_files(root)
-    containers = find_containers(files)
+    containers = find_containers(root, files)
     return {
         "python": find_python(root, files),
         "typescript": find_typescript(root, files),
@@ -217,13 +264,18 @@ def summary(found: dict[str, list[dict]]) -> str:
     lines = []
     for project in found["python"]:
         typecheck = "mypy" if project["typecheck"] else "no type check"
-        lines.append(f"python      {project['path']}  (coverage >= {project['coverage']}%, {typecheck})")
+        extras = [f"with {name}" for name in project["services"]]
+        extras += ["full git history"] if project["fetch_depth"] == 0 else []
+        extras += [f"then: {command}" for command in project["checks"]]
+        details = ", ".join([f"coverage >= {project['coverage']}%", typecheck, *extras])
+        lines.append(f"python      {project['path']}  ({details})")
     for package in found["typescript"]:
         contract = ", contract tests" if package["contract"] else ""
         lines.append(f"typescript  {package['path']}  {package['name']} (coverage >= {package['coverage']}%{contract})")
     for image in found["containers"]:
         target = "published from main" if image["publish"] else "built and scanned only"
-        lines.append(f"container   {image['dockerfile']}  -> {image['name']} ({target})")
+        context = "repository root" if image["context"] == "." else "its folder"
+        lines.append(f"container   {image['dockerfile']}  -> {image['name']} (context: {context}, {target})")
     return "\n".join(lines) or "nothing found"
 
 
@@ -232,7 +284,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--github-output", action="store_true", help="write JSON lists to $GITHUB_OUTPUT")
-    mode.add_argument("--list", choices=["python", "typescript"], help="one project per line (space separated)")
+    mode.add_argument(
+        "--list", choices=["python", "typescript", "checks"], help="one project per line (space separated)"
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -243,7 +297,11 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.list == "python":
         for p in found["python"]:
-            print(p["path"], p["coverage"], str(p["typecheck"]).lower())
+            print(p["path"], p["coverage"], str(p["typecheck"]).lower(), ",".join(p["services"]) or "-")
+    elif args.list == "checks":
+        for p in found["python"]:
+            for command in p["checks"]:
+                print(f"{p['path']}\t{command}")
     elif args.list == "typescript":
         for p in found["typescript"]:
             print(p["path"], p["name"], p["coverage"], str(p["contract"]).lower())

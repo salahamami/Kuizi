@@ -6,6 +6,7 @@ COMPOSE := docker compose -f infra/local/compose.yaml --env-file .env
 .DEFAULT_GOAL := help
 
 .PHONY: help up up-llm down reset status smoke check logs ml-setup ml-lab
+.PHONY: graph-setup graph-load graph-export graph-test
 
 help: ## List the commands
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-10s %s\n", $$1, $$2}'
@@ -56,3 +57,15 @@ ml-setup: ## Install the Python environment for the brain (needs uv)
 
 ml-lab: ## Open JupyterLab in the brain environment
 	cd ml && uv run jupyter lab
+
+graph-setup: ## Install the concept-graph tooling (needs uv)
+	cd curriculum/graph && uv sync
+
+graph-load: ## Create the concept-graph tables and load the starter Physics graph (needs make up)
+	cd curriculum/graph && uv run kuizi-kc-graph migrate && uv run kuizi-kc-graph load seed/physics_starter.yaml --replace
+
+graph-export: ## Export the concept graph to curriculum/graph/out/kc_graph.json
+	cd curriculum/graph && uv run kuizi-kc-graph export --out out/kc_graph.json
+
+graph-test: ## Run the concept-graph tests (database tests need make up)
+	cd curriculum/graph && uv run pytest

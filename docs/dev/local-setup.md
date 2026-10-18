@@ -30,7 +30,7 @@ cd kuizi
 make up
 ```
 
-The first `make up` downloads about 4 GB of images, so it takes a few minutes. After that it starts in under a minute. It creates your `.env` file from `.env.example`, starts every service and waits until each one is healthy.
+The first `make up` downloads about 4 GB of images and builds the Kuizi Keycloak image (about 2 more minutes), so it takes a few minutes. After that it starts in under a minute. It creates your `.env` file from `.env.example`, starts every service and waits until each one is healthy.
 
 Check that everything really works:
 
@@ -55,7 +55,7 @@ make ml-lab     # opens JupyterLab in your browser
 | Kafka API (Redpanda) | `localhost:19092`, schema registry `localhost:18081` | Amazon MSK (T021) |
 | Redis | `localhost:6379` | ElastiCache (T026) |
 | S3 storage (SeaweedFS) | `localhost:8333` | Amazon S3 (T213) |
-| Keycloak (sign-in) | http://localhost:8080/admin (user `admin`, password in `.env`) | Keycloak on EKS (T012) |
+| Keycloak (sign-in) | http://localhost:8080/admin (user `admin`, password in `.env`), realm `kuizi` with synthetic dev users: see [identity.md](identity.md) | Keycloak on EKS (T012) |
 | MLflow (brain experiments) | http://localhost:5050 | MLflow on EKS (T218) |
 | LiteLLM gateway, optional | `localhost:4000`, start with `make up-llm` | LiteLLM on EKS (T059) |
 

@@ -1,0 +1,4 @@
+# Exports written by `make graph-export`; regenerate them, never commit them.
+out/
+.pytest_cache/
+.coverage

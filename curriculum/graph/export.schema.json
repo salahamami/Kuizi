@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:kuizi:kc-graph-export:1.0",
+  "title": "Kuizi knowledge-component graph export",
+  "description": "The KC graph of one or more programme tracks, as read by the routing service (T052, T053) and the tutor RAG (T039, T061). Produced by `kuizi-kc-graph export` (T032); documented in docs/curriculum/kc-graph.md. KC ids referenced in prerequisites, dependents, parents, children, related, edges and topological_order are KCs of this export (checked by kuizi_kc_graph.export.check_export).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "format_version",
+    "generated_at",
+    "graph_hash",
+    "filter",
+    "subjects",
+    "tracks",
+    "kcs",
+    "edges"
+  ],
+  "properties": {
+    "format": { "const": "kuizi.kc-graph" },
+    "format_version": {
+      "const": "1.0",
+      "description": "Changes to this schema bump the version; consumers reject versions they do not know."
+    },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "graph_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "sha256 of the canonical JSON of every field except generated_at and graph_hash. The routing service reloads its cached graph when the hash changes."
+    },
+    "filter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tracks", "reviewed_only"],
+      "properties": {
+        "tracks": {
+          "description": "Tracks asked for; null means every track.",
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/$defs/trackId" },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          ]
+        },
+        "reviewed_only": {
+          "type": "boolean",
+          "description": "True when only teacher-reviewed KCs and edges are included. Anything students see must come from such an export (ADR 0005)."
+        }
+      }
+    },
+    "subjects": { "type": "array", "items": { "$ref": "#/$defs/subject" } },
+    "tracks": { "type": "array", "items": { "$ref": "#/$defs/track" } },
+    "kcs": { "type": "array", "items": { "$ref": "#/$defs/kc" } },
+    "edges": { "type": "array", "items": { "$ref": "#/$defs/edge" } }
+  },
+  "$defs": {
+    "subjectId": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "trackId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*-[1-4]$",
+      "description": "<section>-<year>, for example sexp-4 for 4e année Sciences expérimentales."
+    },
+    "kcId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$",
+      "maxLength": 120
+    },
+    "kcIdList": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/kcId" },
+      "uniqueItems": true
+    },
+    "bilingual": {
+      "type": "object",
+      "description": "Product copy in French and Arabic; both are mandatory.",
+      "additionalProperties": false,
+      "required": ["fr", "ar"],
+      "properties": {
+        "fr": { "type": "string", "minLength": 1 },
+        "ar": { "type": "string", "minLength": 1 }
+      }
+    },
+    "reviewStatus": {
+      "enum": ["to_review", "reviewed"],
+      "description": "to_review until a Tunisian subject teacher has checked it."
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "$ref": "#/$defs/subjectId" },
+        "name": { "$ref": "#/$defs/bilingual" }
+      }
+    },
+    "chapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["number", "theme", "title", "source_ref"],
+      "properties": {
+        "number": { "type": "integer", "minimum": 1 },
+        "theme": { "$ref": "#/$defs/bilingual" },
+        "title": { "$ref": "#/$defs/bilingual" },
+        "source_ref": { "type": "string", "minLength": 1 }
+      }
+    },
+    "programme": {
+      "type": "object",
+      "description": "The official programme of one subject in the track, with its chapters in programme order. RAG citations use the chapter number and title.",
+      "additionalProperties": false,
+      "required": ["subject", "title", "source_ref", "chapters"],
+      "properties": {
+        "subject": { "$ref": "#/$defs/subjectId" },
+        "title": { "$ref": "#/$defs/bilingual" },
+        "source_ref": { "type": "string", "minLength": 1 },
+        "chapters": { "type": "array", "items": { "$ref": "#/$defs/chapter" } }
+      }
+    },
+    "track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "section", "year", "name", "programmes", "topological_order"],
+      "properties": {
+        "id": { "$ref": "#/$defs/trackId" },
+        "section": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "year": { "type": "integer", "minimum": 1, "maximum": 4 },
+        "name": { "$ref": "#/$defs/bilingual" },
+        "programmes": { "type": "array", "items": { "$ref": "#/$defs/programme" } },
+        "topological_order": {
+          "description": "Every KC of the track exactly once, each after all of its prerequisites (ties broken by id).",
+          "$ref": "#/$defs/kcIdList"
+        }
+      }
+    },
+    "membership": {
+      "type": "object",
+      "description": "How a KC belongs to one track. core: in the track's programme, at that chapter. prerequisite: needed by a core KC but taught in an earlier year or another subject; not examined in this track.",
+      "additionalProperties": false,
+      "required": ["track", "scope", "chapter", "exam_weight", "exam_weight_source", "source_ref"],
+      "properties": {
+        "track": { "$ref": "#/$defs/trackId" },
+        "scope": { "enum": ["core", "prerequisite"] },
+        "chapter": {
+          "description": "Chapter number in the track's programme of the KC's subject; null for prerequisite scope.",
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "exam_weight": {
+          "description": "Share (0..1) of the track's Bac points in this subject tagged with this KC over past papers; null until measured (T035).",
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "exam_weight_source": { "type": ["string", "null"] },
+        "source_ref": {
+          "description": "Where the KC is taught when it is not in the programme (prerequisite scope), or a finer reference.",
+          "type": ["string", "null"]
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "scope": { "const": "core" } } },
+          "then": { "properties": { "chapter": { "type": "integer" } } },
+          "else": {
+            "properties": {
+              "chapter": { "type": "null" },
+              "exam_weight": { "type": "null" },
+              "source_ref": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "exam_weight": { "type": "number" } } },
+          "then": { "properties": { "exam_weight_source": { "type": "string", "minLength": 1 } } }
+        }
+      ]
+    },
+    "kc": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "subject",
+        "path",
+        "name",
+        "description",
+        "difficulty_prior",
+        "review_status",
+        "depth",
+        "prerequisites",
+        "dependents",
+        "parents",
+        "children",
+        "related",
+        "memberships"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/kcId" },
+        "subject": { "$ref": "#/$defs/subjectId" },
+        "path": {
+          "description": "ltree path in the subject taxonomy; a prefix such as physics.elec.rlc selects a whole subtree (RAG filters).",
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"
+        },
+        "name": { "$ref": "#/$defs/bilingual" },
+        "description": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/bilingual" }]
+        },
+        "difficulty_prior": {
+          "description": "Expected IRT difficulty b (logit scale) of a typical item before calibration; null = unknown.",
+          "type": ["number", "null"],
+          "minimum": -4,
+          "maximum": 4
+        },
+        "review_status": { "$ref": "#/$defs/reviewStatus" },
+        "depth": {
+          "description": "Longest chain of prerequisites below this KC: 0 for a KC without prerequisites.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "prerequisites": {
+          "description": "Direct prerequisites: KCs that must be known before this one.",
+          "$ref": "#/$defs/kcIdList"
+        },
+        "dependents": {
+          "description": "KCs that list this one as a direct prerequisite.",
+          "$ref": "#/$defs/kcIdList"
+        },
+        "parents": {
+          "description": "KCs this one is a sub-concept of.",
+          "$ref": "#/$defs/kcIdList"
+        },
+        "children": {
+          "description": "Sub-concepts of this KC (mastery of a parent aggregates its children).",
+          "$ref": "#/$defs/kcIdList"
+        },
+        "related": {
+          "description": "Symmetric related KCs (analogies, RAG query expansion).",
+          "$ref": "#/$defs/kcIdList"
+        },
+        "memberships": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/membership" },
+          "minItems": 1
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "description": "prerequisite: from must be known before to. sub_concept: from contains to. related: symmetric, listed once.",
+      "additionalProperties": false,
+      "required": ["from", "to", "type", "review_status"],
+      "properties": {
+        "from": { "$ref": "#/$defs/kcId" },
+        "to": { "$ref": "#/$defs/kcId" },
+        "type": { "enum": ["prerequisite", "sub_concept", "related"] },
+        "review_status": { "$ref": "#/$defs/reviewStatus" }
+      }
+    }
+  }
+}

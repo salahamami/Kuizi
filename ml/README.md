@@ -11,4 +11,4 @@ Start with the [brain walkthrough](../docs/brain/README.md): ten notebooks in `n
 
 Experiments are logged to the local MLflow server (`MLFLOW_TRACKING_URI` in `.env`, started by `make up`).
 
-Only public datasets (ASSISTments, EdNet) and synthetic data go here. Never put real student data in this folder or in a notebook.
+Only public datasets with a licence that allows our use (today ASSISTments 2009; EdNet is excluded because its CC BY-NC licence forbids commercial use) and synthetic data go here. Never put real student data in this folder or in a notebook.

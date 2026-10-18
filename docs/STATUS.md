@@ -1,6 +1,6 @@
 # Project status — start here
 
-**Last updated:** 2026-10-18, end of the first working session. Every session updates this page before it ends (`CLAUDE.md`).
+**Last updated:** 2026-10-18, end of the first working session (final check: all work committed and pushed on `feat/t040-benchmark`). Every session updates this page before it ends (`CLAUDE.md`).
 
 Kuizi is planned (240 tickets in 20 two-week sprints, mirrored in Jira `KK`), runs on the product owner's PC (local-first, ADR 0006), and is built by the product owner with one AI agent per role (ADR 0005). Sprint 1 is active and all its work is built and waiting for review.
 

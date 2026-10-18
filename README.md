@@ -1,6 +1,6 @@
 # Kuizi — Adaptive Bac Platform
 
-Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It traces what each student knows, concept by concept, with a transformer knowledge-tracing model (SAINT+), routes them through a prerequisite graph to the next best step, and teaches through a Socratic tutor, hands-on simulations and 1-minute micro-remediations. It works in French and Arabic, on web, iOS and Android, and is built to be fully accessible.
+Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It traces what each student knows, concept by concept, with a deep knowledge-tracing model (proposed: AKT, with DKT as fallback; [ADR 0007](docs/architecture/decisions/0007-knowledge-tracing-model.md) is waiting for the product owner's decision), routes them through a prerequisite graph to the next best step, and teaches through a Socratic tutor, hands-on simulations and 1-minute micro-remediations. It works in French and Arabic, on web, iOS and Android, and is built to be fully accessible.
 
 **Subjects:** Physics, Mathématiques, Sciences (SVT / Chimie), Sciences techniques, Économie & Gestion.
 **Users:** students (17–19), parents, teachers, school admins, curriculum authors, platform admins.

@@ -1,0 +1,4 @@
+# MLflow local store (used when the server from `make up` is not running)
+mlruns/
+# quick mode is a smoke test; only the full-mode results are kept
+results/t040_quick_*

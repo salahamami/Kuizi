@@ -1,0 +1,20 @@
+dataset,max_len,challenger,baseline,folds,delta_auc_mean,delta_auc_std,delta_ece_mean,worst_slice,worst_slice_delta_auc,passes_t047_gate
+assist2009,50,akt,dkt,3,0.01494,0.00387,0.02255,answers 2-10,0.00194,False
+assist2009,50,saint,dkt,3,-0.05329,0.00223,0.01561,answers 51+,-0.06043,False
+assist2009,50,saint_plus,dkt,3,-0.05118,0.00141,0.01526,answers 51+,-0.05863,False
+assist2009,50,sakt,dkt,3,-0.03661,0.00236,0.02953,answers 51+,-0.03997,False
+assist2009,100,akt,dkt,3,0.01215,0.00404,0.03515,answers 2-10,0.00202,False
+assist2009,100,saint,dkt,3,-0.05644,0.00162,0.02846,answers 51+,-0.06504,False
+assist2009,100,saint_plus,dkt,3,-0.05680,0.00104,0.02428,answers 51+,-0.06649,False
+assist2009,100,saint_plus_notime,dkt,3,-0.05762,0.00148,0.02540,answers 51+,-0.06678,False
+assist2009,100,sakt,dkt,3,-0.03688,0.00222,0.02947,answers 51+,-0.03808,False
+assist2009,200,akt,dkt,3,0.01324,0.00478,0.03466,answers 2-10,0.00144,False
+assist2009,200,saint,dkt,3,-0.05685,0.00167,0.01516,answers 51+,-0.06536,False
+assist2009,200,saint_plus,dkt,3,-0.05607,0.00234,0.00468,answers 51+,-0.06484,False
+assist2009,200,sakt,dkt,3,-0.03806,0.00257,0.03312,answers 11-50,-0.04115,False
+simulated,100,akt,dkt,3,0.02446,0.00534,0.00619,assistive mode,0.01886,True
+simulated,100,saint,dkt,3,-0.09338,0.00132,0.00794,answers 51+,-0.11743,False
+simulated,100,saint_plus,dkt,3,-0.09501,0.00350,0.01008,answers 51+,-0.12154,False
+simulated,100,saint_plus_fairtime,dkt,3,-0.09486,0.00351,0.01971,answers 51+,-0.12165,False
+simulated,100,saint_plus_notime,dkt,3,-0.09569,0.00283,0.00016,answers 51+,-0.12053,False
+simulated,100,sakt,dkt,3,-0.01556,0.00619,0.00605,answers 2-10,-0.02592,False

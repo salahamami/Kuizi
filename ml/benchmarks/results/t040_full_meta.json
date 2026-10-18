@@ -1,0 +1,108 @@
+{
+  "ticket": "T040",
+  "mode": "full",
+  "started": "2026-10-18T01:33:12+0000",
+  "config": {
+    "folds": [
+      0,
+      1,
+      2
+    ],
+    "max_epochs": 20,
+    "patience": 3,
+    "assist2009": {
+      "max_students": null,
+      "lengths": [
+        50,
+        100,
+        200
+      ],
+      "main_length": 100,
+      "models": [
+        "dkt",
+        "sakt",
+        "saint",
+        "akt",
+        "saint_plus"
+      ],
+      "main_only_models": [
+        "saint_plus_notime"
+      ]
+    },
+    "simulated": {
+      "n_students": 600,
+      "answers_per_student": 120,
+      "lengths": [
+        100
+      ],
+      "main_length": 100,
+      "models": [
+        "dkt",
+        "sakt",
+        "saint",
+        "akt",
+        "saint_plus"
+      ],
+      "main_only_models": [
+        "saint_plus_notime",
+        "saint_plus_fairtime"
+      ]
+    },
+    "latency_iters": {
+      "1": 200,
+      "64": 30
+    }
+  },
+  "hyperparameters": {
+    "d": 64,
+    "heads": 4,
+    "dropout": 0.2,
+    "lr": 0.001,
+    "batch_size": 64,
+    "clip": 1.0
+  },
+  "fold_seed": 2026,
+  "n_folds": 5,
+  "data_sha256": {
+    "assist2009": "162ef8d2d28bcbfea6591a282994062bd8d5eaa00636544292a0d268dca6e5da"
+  },
+  "data_sources": {
+    "assist2009": {
+      "name": "ASSISTments 2009-2010 skill builder (corrected, collapsed)",
+      "url": "https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010",
+      "terms": "Public research data; cite the URL above and Feng, Heffernan & Koedinger (2009).",
+      "file": "skill_builder_data_corrected_collapsed.csv",
+      "sha256": "162ef8d2d28bcbfea6591a282994062bd8d5eaa00636544292a0d268dca6e5da"
+    },
+    "simulated": {
+      "name": "Simulated Bac Physics students (kuizi_brain.data.simulate_students, seed 7)",
+      "url": "ml/kuizi_brain/data.py",
+      "terms": "Synthetic, no real person behind it."
+    }
+  },
+  "code": {
+    "git_commit": "f17f265cdd9b3215978f67f76e68b0a82f6d079b",
+    "git_branch": "feat/t040-benchmark",
+    "git_dirty": true,
+    "code_sha256": "d6cbb02bbb7de1b3327b98d811214595572870c3becce5a4ac09834a0b5d63dc"
+  },
+  "environment": {
+    "python": "3.12.13",
+    "platform": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "cpu_count": 4,
+    "torch": "2.14.1+cpu",
+    "pykt_toolkit": "0.0.38",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "cuda_available": false
+  },
+  "workers": 4,
+  "threads_per_worker": 1,
+  "assist2017": "not used: the official source (sites.google.com/view/assistmentsdatamining/dataset) gives the file only after an email sign-up and acceptance of terms of use (no redistribution, declared purpose, publish code); needs the product owner's decision",
+  "ednet": "not used: no reachable official source and CC BY-NC 4.0 licence",
+  "finished": "2026-10-18T02:11:28+0000",
+  "training_wall_seconds": 2134.8,
+  "total_wall_seconds": 2295.6,
+  "training_runs": 69
+}

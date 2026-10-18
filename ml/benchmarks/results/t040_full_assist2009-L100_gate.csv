@@ -1,0 +1,11 @@
+dataset,max_len,ece_metric,challenger,baseline,folds,delta_auc_mean,delta_auc_std,delta_ece_mean,worst_slice,worst_slice_delta_auc,passes_t047_gate
+assist2009,100,ece,akt,dkt,3,0.01215,0.00404,0.03515,answers 2-10,0.00202,False
+assist2009,100,ece,saint,dkt,3,-0.05644,0.00162,0.02846,answers 51+,-0.06504,False
+assist2009,100,ece,saint_plus,dkt,3,-0.05680,0.00104,0.02428,answers 51+,-0.06649,False
+assist2009,100,ece,saint_plus_notime,dkt,3,-0.05762,0.00148,0.02540,answers 51+,-0.06678,False
+assist2009,100,ece,sakt,dkt,3,-0.03688,0.00222,0.02947,answers 51+,-0.03808,False
+assist2009,100,ece_platt,akt,dkt,3,0.01215,0.00404,0.00112,answers 2-10,0.00202,True
+assist2009,100,ece_platt,saint,dkt,3,-0.05644,0.00162,-0.00236,answers 51+,-0.06504,False
+assist2009,100,ece_platt,saint_plus,dkt,3,-0.05680,0.00104,0.00235,answers 51+,-0.06649,False
+assist2009,100,ece_platt,saint_plus_notime,dkt,3,-0.05762,0.00148,0.00214,answers 51+,-0.06678,False
+assist2009,100,ece_platt,sakt,dkt,3,-0.03688,0.00222,0.00486,answers 51+,-0.03808,False

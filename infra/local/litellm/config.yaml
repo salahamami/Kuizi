@@ -1,0 +1,14 @@
+# LiteLLM gateway, local development (T237). Provider and model choices belong to T059:
+# set LLM_TUTOR_MODEL (for example "<provider>/<model>") and LLM_PROVIDER_API_KEY in .env.
+# Without them the gateway still starts, so the rest of the stack can be tested offline.
+model_list:
+  - model_name: tutor
+    litellm_params:
+      model: os.environ/LLM_TUTOR_MODEL
+      api_key: os.environ/LLM_PROVIDER_API_KEY
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+
+litellm_settings:
+  drop_params: true

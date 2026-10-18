@@ -1,0 +1,5 @@
+# Workspace layout from ADR 0008.
+packages:
+  - "apps/*"
+  - "services/*"
+  - "packages/*"

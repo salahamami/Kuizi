@@ -49,7 +49,7 @@ Kuizi is planned (240 tickets in 20 two-week sprints, mirrored in Jira `KK`), ru
 | Rules for every session | [`../CLAUDE.md`](../CLAUDE.md) |
 | History of every change | [`../CHANGELOG.md`](../CHANGELOG.md) |
 | Backlog and Jira sync | [`backlog/README.md`](backlog/README.md), [`backlog/APL_Full_Backlog.md`](backlog/APL_Full_Backlog.md) |
-| Decisions | [`architecture/decisions/`](architecture/decisions/) (0001–0007) |
+| Decisions | [`architecture/decisions/`](architecture/decisions/) (0001–0008) |
 | Run Kuizi on a PC | [`dev/local-setup.md`](dev/local-setup.md) |
 | The brain, step by step | [`brain/README.md`](brain/README.md) |
 | Model benchmark | [`../ml/benchmarks/README.md`](../ml/benchmarks/README.md) |

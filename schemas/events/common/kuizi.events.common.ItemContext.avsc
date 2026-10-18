@@ -1,0 +1,61 @@
+{
+  "type": "record",
+  "name": "ItemContext",
+  "namespace": "kuizi.events.common",
+  "doc": "Which item (question) the event is about and which showing of it. Every item-scoped event of one showing carries the same presentation_id, which joins item.presented, item.interaction, item.hesitation, hint.* and item.answered.",
+  "fields": [
+    {
+      "name": "item_id",
+      "type": "string",
+      "privacy": "none",
+      "doc": "Item ID in the item bank (T036)."
+    },
+    {
+      "name": "item_version",
+      "type": ["null", "int"],
+      "default": null,
+      "privacy": "none",
+      "doc": "Published version of the item that was shown; null until the item bank versions items (T036)."
+    },
+    {
+      "name": "kc_ids",
+      "type": {"type": "array", "items": "string"},
+      "privacy": "none",
+      "doc": "Knowledge components the item is tagged with, primary first (concept-graph IDs such as mech.newton2, T032). At least one. Tag weights stay in the item bank and are joined by item_id and item_version."
+    },
+    {
+      "name": "subject_id",
+      "type": ["null", "string"],
+      "default": null,
+      "privacy": "none",
+      "doc": "Subject of the item: physics, maths, sciences, technique or eco_gestion (T033). Null until T033 fills it."
+    },
+    {
+      "name": "track_id",
+      "type": ["null", "string"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "Bac section the item was served for (T033); personal because it reveals the learner's section. Null until T033 fills it."
+    },
+    {
+      "name": "item_language",
+      "type": "kuizi.events.common.Language",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Language variant of the item that was shown."
+    },
+    {
+      "name": "presentation_id",
+      "type": {"type": "string", "logicalType": "uuid"},
+      "privacy": "pseudonymous",
+      "doc": "ID of this showing of the item, created by the app with item.presented."
+    },
+    {
+      "name": "activity",
+      "type": "kuizi.events.common.Activity",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Why the item was shown (practice, placement, review, remediation, assignment, mock Bac, duel)."
+    }
+  ]
+}

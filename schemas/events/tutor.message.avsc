@@ -1,0 +1,113 @@
+{
+  "type": "record",
+  "name": "TutorMessage",
+  "namespace": "kuizi.events",
+  "doc": "One message in a conversation with the Socratic tutor, from the learner or from the tutor. Metadata only: the text stays in the tutor's conversation store (T069) under its own access and retention rules, and is never copied into telemetry, because a learner's free text can hold personal data that cannot be minimised automatically.",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context."
+    },
+    {
+      "name": "conversation_id",
+      "type": {"type": "string", "logicalType": "uuid"},
+      "privacy": "pseudonymous",
+      "doc": "Tutor conversation the message belongs to."
+    },
+    {
+      "name": "message_id",
+      "type": {"type": "string", "logicalType": "uuid"},
+      "privacy": "pseudonymous",
+      "doc": "ID of the message in the tutor's conversation store, where its text lives."
+    },
+    {
+      "name": "role",
+      "type": {
+        "type": "enum",
+        "name": "TutorRole",
+        "doc": "Author of the message.",
+        "symbols": ["UNKNOWN", "STUDENT", "TUTOR"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "STUDENT or TUTOR."
+    },
+    {
+      "name": "item",
+      "type": ["null", "kuizi.events.common.ItemContext"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "Item the conversation is about, when the tutor is opened beside an item; null otherwise."
+    },
+    {
+      "name": "language",
+      "type": "kuizi.events.common.Language",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Language of the message."
+    },
+    {
+      "name": "length_chars",
+      "type": "int",
+      "privacy": "personal",
+      "doc": "Length of the message in characters."
+    },
+    {
+      "name": "input_method",
+      "type": {
+        "type": "enum",
+        "name": "TutorInputMethod",
+        "doc": "How the message was written.",
+        "symbols": ["UNKNOWN", "TYPED", "DICTATED", "MATH_KEYPAD", "SUGGESTED_PROMPT", "GENERATED"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Learner messages: TYPED, DICTATED (T073), MATH_KEYPAD or SUGGESTED_PROMPT. Tutor messages: GENERATED."
+    },
+    {
+      "name": "hint_level",
+      "type": ["null", "int"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "When a tutor message is a hint, its level 1 to 4 (T070); null otherwise."
+    },
+    {
+      "name": "first_token_ms",
+      "type": ["null", "int"],
+      "default": null,
+      "privacy": "none",
+      "doc": "Tutor messages: milliseconds from the learner's message to the first streamed token (target under 1.2 s at p75, T069); null for learner messages."
+    },
+    {
+      "name": "judge_verdict",
+      "type": {
+        "type": "enum",
+        "name": "JudgeVerdict",
+        "doc": "Outcome of the LLM judge for a tutor message.",
+        "symbols": ["UNKNOWN", "NOT_JUDGED", "PASSED", "REVISED", "BLOCKED"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "none",
+      "doc": "Tutor messages: PASSED, REVISED (regenerated before delivery) or BLOCKED by the judge (T062). NOT_JUDGED for learner messages."
+    },
+    {
+      "name": "prompt_version",
+      "type": ["null", "string"],
+      "default": null,
+      "privacy": "none",
+      "doc": "Tutor messages: version of the prompt in the prompt registry (E07)."
+    },
+    {
+      "name": "stuck_escalation",
+      "type": "boolean",
+      "default": false,
+      "privacy": "personal",
+      "doc": "True when the learner sent the message with the 'I'm still stuck' button (T069)."
+    }
+  ]
+}

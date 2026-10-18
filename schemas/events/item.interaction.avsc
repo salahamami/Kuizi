@@ -1,0 +1,81 @@
+{
+  "type": "record",
+  "name": "ItemInteraction",
+  "namespace": "kuizi.events",
+  "doc": "One gesture on an item before the answer: a slider move, a drag, a hover, a focus change or a burst of typing. The app coalesces each gesture into one event (start and end values, duration), never one event per frame. Raw keystrokes, key codes, typed characters and screen-reader commands are never recorded (T024).",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context."
+    },
+    {
+      "name": "item",
+      "type": "kuizi.events.common.ItemContext",
+      "privacy": "personal",
+      "doc": "The item and its presentation_id."
+    },
+    {
+      "name": "kind",
+      "type": {
+        "type": "enum",
+        "name": "InteractionKind",
+        "doc": "Kind of gesture.",
+        "symbols": ["UNKNOWN", "SLIDER_MOVE", "DRAG", "HOVER_ENTER", "HOVER_EXIT", "FOCUS", "KEYSTROKE_BURST"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Kind of gesture: SLIDER_MOVE and DRAG in simulations and drag-to-order items, HOVER_ENTER and HOVER_EXIT over choices, FOCUS when an element of the item receives focus, KEYSTROKE_BURST for a run of typing in an answer field."
+    },
+    {
+      "name": "target_id",
+      "type": ["null", "string"],
+      "default": null,
+      "privacy": "none",
+      "doc": "Element of the item the gesture touched, as named in the item definition (for example choice.B or slider.mass). Never text the learner typed."
+    },
+    {
+      "name": "offset_ms",
+      "type": "long",
+      "privacy": "personal",
+      "doc": "Milliseconds between the presentation of the item and the start of the gesture."
+    },
+    {
+      "name": "duration_ms",
+      "type": ["null", "long"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "Length of the gesture in milliseconds (drag, slider move, hover, typing burst)."
+    },
+    {
+      "name": "value_from",
+      "type": ["null", "double"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "SLIDER_MOVE and DRAG: numeric value at the start of the gesture, in the widget's own unit."
+    },
+    {
+      "name": "value_to",
+      "type": ["null", "double"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "SLIDER_MOVE and DRAG: numeric value at the end of the gesture."
+    },
+    {
+      "name": "sample_count",
+      "type": ["null", "int"],
+      "default": null,
+      "privacy": "none",
+      "doc": "Number of raw input samples coalesced into this event."
+    },
+    {
+      "name": "key_count",
+      "type": ["null", "int"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "KEYSTROKE_BURST only: how many keys were pressed in the burst, inside an answer field. Which keys were pressed is never recorded."
+    }
+  ]
+}

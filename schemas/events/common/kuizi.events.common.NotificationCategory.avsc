@@ -1,0 +1,8 @@
+{
+  "type": "enum",
+  "name": "NotificationCategory",
+  "namespace": "kuizi.events.common",
+  "doc": "Category of a notification, as configured in the Notification Orchestrator (T152) and the student's settings (T157).",
+  "symbols": ["UNKNOWN", "CONSENT", "ACCOUNT_SECURITY", "REVIEW_DUE", "PLAN_REMINDER", "DUEL_INVITE", "PARENT_SUMMARY", "DIGEST", "LIFECYCLE"],
+  "default": "UNKNOWN"
+}

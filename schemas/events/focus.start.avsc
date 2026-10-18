@@ -1,0 +1,40 @@
+{
+  "type": "record",
+  "name": "FocusStart",
+  "namespace": "kuizi.events",
+  "doc": "The learner started a Focus session (FR-F1, FR-F6, T155). envelope.focus_session_id is the new Focus session's ID; every event until focus.end carries it.",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context."
+    },
+    {
+      "name": "planned_minutes",
+      "type": "int",
+      "privacy": "personal",
+      "doc": "Length chosen: 15, 25 or 45 minutes (FR-F1)."
+    },
+    {
+      "name": "source",
+      "type": {
+        "type": "enum",
+        "name": "FocusSource",
+        "doc": "Where the Focus session was started.",
+        "symbols": ["UNKNOWN", "DAILY_PLAN", "EXERCISE", "OS_FOCUS"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "From the daily plan, from an exercise, or OS_FOCUS when Kuizi follows a Focus started on the device (FR-F3)."
+    },
+    {
+      "name": "device_focus_enabled",
+      "type": "boolean",
+      "default": false,
+      "privacy": "personal",
+      "doc": "True when the device's own Focus or Do Not Disturb was switched on for the session (FR-F3, T156)."
+    }
+  ]
+}

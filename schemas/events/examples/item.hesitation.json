@@ -1,0 +1,37 @@
+[
+  {
+    "envelope": {
+      "event_id": "f9810e12-a918-41dc-8801-920e9271a86f",
+      "student_id": "4a37fa2d-f2d7-440f-8785-9faeecc3f80c",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": 1793718036600,
+      "server_ts": 1793718036780,
+      "session_id": "045f21da-1563-43d8-9463-75dce47682e6",
+      "session_seq": 4,
+      "focus_session_id": "611244c0-6c7a-45c9-8e86-c4fa978f18a7",
+      "device": {
+        "platform": "WEB",
+        "form_factor": "DESKTOP"
+      },
+      "app_version": "0.3.0",
+      "ui_language": "FR",
+      "input_modality": "POINTER"
+    },
+    "item": {
+      "item_id": "phys.mech.newton2.q0042",
+      "item_version": 3,
+      "kc_ids": [
+        "mech.newton2",
+        "mech.forces"
+      ],
+      "subject_id": "physics",
+      "track_id": "sciences_experimentales",
+      "item_language": "FR",
+      "presentation_id": "e6d30f0a-747d-4a2b-9ec2-d776389605fe",
+      "activity": "PRACTICE"
+    },
+    "offset_ms": 1200,
+    "idle_ms": 5400,
+    "before_first_action": true
+  }
+]

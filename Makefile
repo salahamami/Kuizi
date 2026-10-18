@@ -56,3 +56,21 @@ ml-setup: ## Install the Python environment for the brain (needs uv)
 
 ml-lab: ## Open JupyterLab in the brain environment
 	cd ml && uv run jupyter lab
+
+# Event schemas (T023): Avro contracts in schemas/events, their tooling in schemas/ (needs uv).
+.PHONY: schemas-setup schemas-check schemas-test schemas-docs schemas-register
+
+schemas-setup: ## Install the event-schema tooling (needs uv)
+	cd schemas && uv sync
+
+schemas-check: ## Check event schemas, catalogue, examples, generated page and compatibility
+	cd schemas && uv run kuizi-schemas check
+
+schemas-test: .env ## Run the event-schema tests (the registry tests need make up)
+	cd schemas && uv run pytest
+
+schemas-docs: ## Regenerate docs/data/event-catalogue.md from the schemas and catalogue
+	cd schemas && uv run kuizi-schemas docs
+
+schemas-register: .env ## Register the event schemas in the local schema registry (needs make up)
+	cd schemas && uv run kuizi-schemas register

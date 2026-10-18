@@ -1,0 +1,8 @@
+{
+  "type": "enum",
+  "name": "NotificationChannel",
+  "namespace": "kuizi.events.common",
+  "doc": "Delivery channel of a notification (FR-N8).",
+  "symbols": ["UNKNOWN", "PUSH", "WEB_PUSH", "SMS", "EMAIL", "IN_APP"],
+  "default": "UNKNOWN"
+}

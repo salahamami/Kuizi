@@ -1,0 +1,88 @@
+{
+  "type": "record",
+  "name": "Envelope",
+  "namespace": "kuizi.events.common",
+  "doc": "Context every learner event carries: who (pseudonymously), when, in which session and on which app. Fields that only an app can know are nullable so server-side producers can leave them empty; the data catalogue lists, per event, which of them must be filled.",
+  "fields": [
+    {
+      "name": "event_id",
+      "type": {"type": "string", "logicalType": "uuid"},
+      "privacy": "none",
+      "doc": "Unique ID of this event, created by the producer when the event happens (UUIDv7 recommended, so IDs sort by time). Retries and offline replays send the same ID again; consumers de-duplicate on it (T024, T025)."
+    },
+    {
+      "name": "student_id",
+      "type": {"type": "string", "logicalType": "uuid"},
+      "privacy": "pseudonymous",
+      "doc": "Pseudonymous learner ID issued by identity (T012). Never a login, email address, phone number, national ID (CIN) or name. Also the Kafka message key, so each learner's events stay in order within a topic."
+    },
+    {
+      "name": "tenant_id",
+      "type": "string",
+      "privacy": "pseudonymous",
+      "doc": "Opaque ID of the tenant (school, or the direct-to-consumer tenant) the learner belongs to (E11)."
+    },
+    {
+      "name": "client_ts",
+      "type": ["null", {"type": "long", "logicalType": "timestamp-millis"}],
+      "default": null,
+      "privacy": "personal",
+      "doc": "When the event happened, by the device clock, in UTC milliseconds since the epoch. Elapsed and lag times are computed from this clock. Null only for events produced by a server without a client request."
+    },
+    {
+      "name": "server_ts",
+      "type": {"type": "long", "logicalType": "timestamp-millis"},
+      "privacy": "personal",
+      "doc": "When a Kuizi server received or produced the event, in UTC milliseconds since the epoch: set by ingestion (T025) for app events and by the producing service for server events. Never trusted from a client."
+    },
+    {
+      "name": "session_id",
+      "type": ["null", {"type": "string", "logicalType": "uuid"}],
+      "default": null,
+      "privacy": "pseudonymous",
+      "doc": "App session the event belongs to (see session.start and session.end). Null for server events outside a session, such as notification decisions."
+    },
+    {
+      "name": "session_seq",
+      "type": ["null", "int"],
+      "default": null,
+      "privacy": "none",
+      "doc": "Position of the event in its session, counted by the app from 1. Orders events with equal timestamps and reveals lost events (T029). Null for server events."
+    },
+    {
+      "name": "focus_session_id",
+      "type": ["null", {"type": "string", "logicalType": "uuid"}],
+      "default": null,
+      "privacy": "pseudonymous",
+      "doc": "Focus session in progress when the event happened (FR-F6, T155); null outside Focus sessions."
+    },
+    {
+      "name": "device",
+      "type": ["null", "kuizi.events.common.Device"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "Coarse device description; null for server events."
+    },
+    {
+      "name": "app_version",
+      "type": ["null", "string"],
+      "default": null,
+      "privacy": "none",
+      "doc": "Semantic version of the app build that produced the event, for example 1.4.2; null for server events."
+    },
+    {
+      "name": "ui_language",
+      "type": "kuizi.events.common.Language",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Language of the interface when the event happened."
+    },
+    {
+      "name": "input_modality",
+      "type": "kuizi.events.common.InputModality",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Input channel of the action behind the event (pointer, touch, keyboard, voice, stylus); UNKNOWN for server events."
+    }
+  ]
+}

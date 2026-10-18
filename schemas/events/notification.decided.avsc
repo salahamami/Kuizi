@@ -1,0 +1,100 @@
+{
+  "type": "record",
+  "name": "NotificationDecided",
+  "namespace": "kuizi.events",
+  "doc": "The Notification Orchestrator (T152) decided what to do with a requested message: send it now, defer it to a digest, or suppress it, and why. Lets T161 prove that nothing non-essential was sent in a protected window and nothing was dropped silently. Carries the copy template, never the message text.",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context; a server event, so client fields are null. focus_session_id is set when a Focus session was in progress."
+    },
+    {
+      "name": "notification_id",
+      "type": {"type": "string", "logicalType": "uuid"},
+      "privacy": "pseudonymous",
+      "doc": "ID of the notification, shared by its decided, sent and opened events. Also the orchestrator's idempotency key."
+    },
+    {
+      "name": "category",
+      "type": "kuizi.events.common.NotificationCategory",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Category of the message."
+    },
+    {
+      "name": "priority",
+      "type": "kuizi.events.common.PriorityClass",
+      "default": "UNKNOWN",
+      "privacy": "none",
+      "doc": "Priority class (FR-N2)."
+    },
+    {
+      "name": "recipient_role",
+      "type": "kuizi.events.common.RecipientRole",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "The learner or a parent."
+    },
+    {
+      "name": "decision",
+      "type": {
+        "type": "enum",
+        "name": "NotificationDecision",
+        "doc": "What the orchestrator decided.",
+        "symbols": ["UNKNOWN", "SEND_NOW", "DEFER", "SUPPRESS"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "SEND_NOW, DEFER to the next digest or allowed window, or SUPPRESS."
+    },
+    {
+      "name": "reason",
+      "type": {
+        "type": "enum",
+        "name": "NotificationDecisionReason",
+        "doc": "Rule that decided.",
+        "symbols": ["UNKNOWN", "ALLOWED", "QUIET_HOURS", "CLASS_HOURS", "FOCUS_SESSION", "DAILY_BUDGET", "DUPLICATE", "OPTED_OUT", "KILL_SWITCH", "EXAM_RULE"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Rule behind the decision (FR-N3, FR-N4, FR-N7, FR-N9): ALLOWED for SEND_NOW, otherwise the protected window, budget, duplicate, opt-out, kill-switch or exam rule that applied."
+    },
+    {
+      "name": "deferred_until",
+      "type": ["null", {"type": "long", "logicalType": "timestamp-millis"}],
+      "default": null,
+      "privacy": "personal",
+      "doc": "DEFER only: earliest time the message may go out, in UTC milliseconds."
+    },
+    {
+      "name": "template_id",
+      "type": "string",
+      "privacy": "none",
+      "doc": "Copy template in the French and Arabic message library (T158)."
+    },
+    {
+      "name": "template_version",
+      "type": ["null", "int"],
+      "default": null,
+      "privacy": "none",
+      "doc": "Version of the copy template."
+    },
+    {
+      "name": "requester",
+      "type": "string",
+      "privacy": "none",
+      "doc": "Service that asked for the message, for example routing, spaced-repetition, duels or lifecycle."
+    },
+    {
+      "name": "decision_ms",
+      "type": ["null", "int"],
+      "default": null,
+      "privacy": "none",
+      "doc": "Milliseconds the orchestrator took to decide (NFR-10: under 50 ms)."
+    }
+  ]
+}

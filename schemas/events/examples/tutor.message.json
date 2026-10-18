@@ -1,0 +1,85 @@
+[
+  {
+    "envelope": {
+      "event_id": "951179a0-3213-4b34-8523-2575d0dd15d6",
+      "student_id": "4a37fa2d-f2d7-440f-8785-9faeecc3f80c",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": 1793718051000,
+      "server_ts": 1793718051180,
+      "session_id": "045f21da-1563-43d8-9463-75dce47682e6",
+      "session_seq": 9,
+      "focus_session_id": "611244c0-6c7a-45c9-8e86-c4fa978f18a7",
+      "device": {
+        "platform": "WEB",
+        "form_factor": "DESKTOP"
+      },
+      "app_version": "0.3.0",
+      "ui_language": "FR",
+      "input_modality": "KEYBOARD"
+    },
+    "conversation_id": "ac61e3a6-52cb-46d8-8899-230b2db4cb47",
+    "message_id": "6d17abfb-193e-4ff7-9513-64291d42d810",
+    "role": "STUDENT",
+    "item": {
+      "item_id": "phys.mech.newton2.q0042",
+      "item_version": 3,
+      "kc_ids": [
+        "mech.newton2",
+        "mech.forces"
+      ],
+      "subject_id": "physics",
+      "track_id": "sciences_experimentales",
+      "item_language": "FR",
+      "presentation_id": "e6d30f0a-747d-4a2b-9ec2-d776389605fe",
+      "activity": "PRACTICE"
+    },
+    "language": "FR",
+    "length_chars": 64,
+    "input_method": "TYPED",
+    "hint_level": null,
+    "first_token_ms": null,
+    "judge_verdict": "NOT_JUDGED",
+    "prompt_version": null,
+    "stuck_escalation": false
+  },
+  {
+    "envelope": {
+      "event_id": "f0a9fed6-468b-4467-9169-1c4d09f78636",
+      "student_id": "4a37fa2d-f2d7-440f-8785-9faeecc3f80c",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": null,
+      "server_ts": 1793718052080,
+      "session_id": "045f21da-1563-43d8-9463-75dce47682e6",
+      "session_seq": null,
+      "focus_session_id": "611244c0-6c7a-45c9-8e86-c4fa978f18a7",
+      "device": null,
+      "app_version": null,
+      "ui_language": "FR",
+      "input_modality": "UNKNOWN"
+    },
+    "conversation_id": "ac61e3a6-52cb-46d8-8899-230b2db4cb47",
+    "message_id": "9707d5ae-d216-4b71-87d4-270192a474bb",
+    "role": "TUTOR",
+    "item": {
+      "item_id": "phys.mech.newton2.q0042",
+      "item_version": 3,
+      "kc_ids": [
+        "mech.newton2",
+        "mech.forces"
+      ],
+      "subject_id": "physics",
+      "track_id": "sciences_experimentales",
+      "item_language": "FR",
+      "presentation_id": "e6d30f0a-747d-4a2b-9ec2-d776389605fe",
+      "activity": "PRACTICE"
+    },
+    "language": "FR",
+    "length_chars": 212,
+    "input_method": "GENERATED",
+    "hint_level": 1,
+    "first_token_ms": 840,
+    "judge_verdict": "PASSED",
+    "prompt_version": "socratic-hint@3",
+    "stuck_escalation": false
+  }
+]

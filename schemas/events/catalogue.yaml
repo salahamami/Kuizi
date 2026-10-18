@@ -1,0 +1,568 @@
+# Kuizi learner event catalogue (T023): the one machine-readable source for event metadata.
+#
+# - Each event has one schema file <event>.avsc next to this file, and one entry below.
+# - Field-level privacy labels live next to each field in the .avsc files ("privacy": ...).
+# - docs/data/event-catalogue.md is generated from this file and the schemas: run `make schemas-docs`.
+# - `make schemas-check` fails when a schema has no entry here, an entry has no schema, a ticket or
+#   agent role does not exist, or a field path below does not exist in its schema.
+#
+# Changing an event that other services read needs the product owner's approval; adding a
+# personal or sensitive field also needs the DPO (docs/process/working-agreement.md).
+
+version: 1
+steward: data-engineering            # agent role that reviews every change to these contracts
+compatibility: BACKWARD_TRANSITIVE   # set on every registry subject; also the level of the offline check
+topic_prefix: learner                # topic = learner.<event>.v<major>; subject = <topic>-value
+key: envelope.student_id             # Kafka message key (plain UTF-8 string): per-learner order in each topic
+
+privacy:
+  rule: >-
+    Law 2004-63 on personal data, with the minors' rules of E02 and the data-protection section of
+    docs/requirements/accessibility-focus-notifications.md (section 3). Accommodation data is sensitive.
+  classes:
+    none:
+      meaning: Technical or curriculum value that says nothing about the learner, even next to the student ID (event IDs, item and concept IDs, versions).
+      readers: Any service or analyst with telemetry access.
+      handling: No restriction beyond the event's retention.
+    pseudonymous:
+      meaning: Identifier that points to a learner, a group of learners or one of their sessions, conversations or notifications only through another Kuizi store.
+      readers: Services that join or de-duplicate events; analysts only in hashed form.
+      handling: Kept in raw telemetry; replaced by a salted hash or dropped in analytics exports; erased with the learner (T018).
+    personal:
+      meaning: What a pseudonymous learner did, answered or uses (answers, timings, confidence, device class, language).
+      readers: Learning services (knowledge tracing, routing, gamification, notifications) and the analytics warehouse.
+      handling: Aggregated in exports and dashboards (no small groups); erased with the learner (T018); raw rows purged after the event's retention.
+    sensitive:
+      meaning: May reveal a disability or health need (accommodations). Sensitive health-related data under Law 2004-63.
+      readers: Only the services listed in the event's sensitive_readers, and the learner's own data export (T018).
+      handling: >-
+        Sent only with the separate accommodation consent (T013, T151); masked by default in the
+        warehouse (T217) with every read audited (T022); never in leaderboards, analytics exports,
+        parent summaries, teacher views (unless the learner shares the flag through the comfort
+        profile, T146) or LLM prompts; cleared when accommodation consent is withdrawn (T151).
+  # The only records allowed to hold sensitive fields. A sensitive field anywhere else fails the check.
+  sensitive_records:
+    - kuizi.events.common.AccommodationContext
+  # Field names that suggest direct identifiers, location, free text or raw keystrokes. A field with
+  # one of these names fails the check; adding one needs the product owner and the DPO.
+  forbidden_field_names:
+    - name
+    - first_name
+    - last_name
+    - full_name
+    - surname
+    - display_name
+    - username
+    - login
+    - email
+    - phone
+    - phone_number
+    - mobile
+    - msisdn
+    - national_id
+    - cin
+    - passport
+    - birth_date
+    - date_of_birth
+    - age
+    - gender
+    - address
+    - city
+    - ip
+    - ip_address
+    - user_agent
+    - device_id
+    - advertising_id
+    - latitude
+    - longitude
+    - location
+    - geo
+    - key
+    - key_code
+    - keys
+    - typed_text
+    - text
+    - message_text
+    - body
+    - content
+    - transcript
+    - audio
+    - photo
+
+# Added to the consumers of every event in the generated documentation.
+consumers_of_every_event:
+  - service: Warehouse sink
+    tickets: [T027, T028]
+    uses: Every field into the RAW schema, then one dbt staging model per event; sensitive fields land in masked columns.
+  - service: Data-quality monitors
+    tickets: [T029]
+    uses: Volume per event and app version, null rates, duplicate rate on envelope.event_id, client-to-server lag.
+  - service: Data lifecycle (erasure and export)
+    tickets: [T018]
+    uses: Finds every row by envelope.student_id for erasure and the learner's own export.
+  - service: Synthetic data generator (writes, does not read)
+    tickets: [T219]
+    uses: Produces synthetic events of every type, including accommodations, for tests and preview environments.
+
+# Proposed retention, to be confirmed by the DPO in the DPIA (T017) and enforced by T018.
+# kafka_days stays at 30 or less so Kafka copies expire within the 30-day erasure deadline (T018).
+# warehouse_raw_months stays at 24 or less (raw telemetry rule, T018); aggregates may live longer.
+
+events:
+  item.presented:
+    schema: item.presented.avsc
+    topic: learner.item.presented.v1
+    description: An item appeared on screen; starts a presentation that later item events join on.
+    owner: data-engineering
+    producer:
+      service: Web and native apps, through the telemetry SDK and ingestion
+      tickets: [T024, T025]
+      origin: app
+    consumers:
+      - service: Learning-analytics warehouse models
+        tickets: [T028]
+        uses: Exposure per item and abandoned presentations (no item.answered).
+      - service: Misconception diagnosis
+        tickets: [T071]
+        uses: Start of the interaction trace of each presentation.
+      - service: Experimentation framework
+        tickets: [T055]
+        uses: Exposure logging through routing_decision_id.
+    sensitive_readers:
+      - service: Knowledge-tracing training, through the restricted warehouse role
+        tickets: [T041, T042, T148]
+        uses: accommodation.* to normalise time features and to keep abandoned items fair.
+      - service: Champion/challenger gate
+        tickets: [T047]
+        uses: Fairness slices by accommodation type (aggregates only).
+    retention: {kafka_days: 7, warehouse_raw_months: 24}
+    required_envelope: [client_ts, session_id, session_seq, device, app_version]
+    examples: examples/item.presented.json
+
+  item.interaction:
+    schema: item.interaction.avsc
+    topic: learner.item.interaction.v1
+    description: One coalesced gesture on an item (slider move, drag, hover, focus, typing burst); never raw keystrokes.
+    owner: data-engineering
+    producer:
+      service: Web and native apps, through the telemetry SDK and ingestion
+      tickets: [T024, T025]
+      origin: app
+    consumers:
+      - service: Misconception diagnosis
+        tickets: [T071]
+        uses: Interaction trace (slider values, hovered choices) to explain wrong answers.
+      - service: Learning-analytics warehouse models
+        tickets: [T028]
+        uses: fct_interactions.
+    retention: {kafka_days: 3, warehouse_raw_months: 12}
+    required_envelope: [client_ts, session_id, session_seq, device, app_version]
+    examples: examples/item.interaction.json
+
+  item.hesitation:
+    schema: item.hesitation.avsc
+    topic: learner.item.hesitation.v1
+    description: The learner stayed idle more than 3 seconds on an item; never emitted while Kuizi audio plays.
+    owner: data-engineering
+    producer:
+      service: Web and native apps, through the telemetry SDK and ingestion
+      tickets: [T024, T025]
+      origin: app
+    consumers:
+      - service: Misconception diagnosis
+        tickets: [T071]
+        uses: Hesitation before and between gestures.
+      - service: Knowledge-tracing experiments
+        tickets: [T042, T148]
+        uses: Hesitation as a candidate feature, kept only if it passes the T047 gate including accommodation slices.
+      - service: Learning-analytics warehouse models
+        tickets: [T028]
+        uses: fct_interactions.
+    retention: {kafka_days: 7, warehouse_raw_months: 12}
+    required_envelope: [client_ts, session_id, session_seq, device, app_version]
+    examples: examples/item.hesitation.json
+
+  item.answered:
+    schema: item.answered.avsc
+    topic: learner.item.answered.v1
+    description: One graded answer (one per attempt); the main input of knowledge tracing, self-sufficient without joins.
+    owner: backend
+    producer:
+      service: Answer evaluation service (client fields come from the app's submit request)
+      tickets: [T221]
+      origin: server
+    consumers:
+      - service: Real-time aggregation (streaks, XP, daily goal)
+        tickets: [T026, T087]
+        uses: correct, score and envelope timestamps; must ignore accommodation.
+      - service: Learning-analytics warehouse models and training sequences
+        tickets: [T028, T041]
+        uses: fct_attempts and ml_training_sequences (one row per attempt, ordered per learner).
+      - service: Feature store
+        tickets: [T030]
+        uses: Rolling accuracy per concept, mean latency, hint dependency ratio.
+      - service: Misconception diagnosis
+        tickets: [T071]
+        uses: response and misconception_code.
+      - service: Experimentation framework
+        tickets: [T055]
+        uses: Learning-gain metrics.
+      - service: Product analytics
+        tickets: [T191]
+        uses: Activation and feature use, without sensitive fields.
+    sensitive_readers:
+      - service: Online sequence builder
+        tickets: [T048, T148]
+        uses: accommodation.* for accommodation-aware inference.
+      - service: Knowledge-tracing training, through the restricted warehouse role
+        tickets: [T041, T042, T148]
+        uses: Time features divided by time_multiplier; assistive-mode embedding.
+      - service: Champion/challenger gate
+        tickets: [T047]
+        uses: Fairness slices by accommodation type (aggregates only).
+    retention: {kafka_days: 7, warehouse_raw_months: 24}
+    required_envelope: [client_ts, session_id, device, app_version]
+    examples: examples/item.answered.json
+
+  hint.requested:
+    schema: hint.requested.avsc
+    topic: learner.hint.requested.v1
+    description: A hint was asked for, by the learner, a hint timer or the tutor.
+    owner: frontend
+    producer:
+      service: Web and native apps (hint ladder), through the telemetry SDK and ingestion
+      tickets: [T070, T024, T025]
+      origin: app
+    consumers:
+      - service: Learning-analytics warehouse models
+        tickets: [T028]
+        uses: Hint dependency per learner and item.
+      - service: Feature store
+        tickets: [T030]
+        uses: Hint dependency ratio.
+      - service: Hint ladder
+        tickets: [T070]
+        uses: Which levels are requested, by trigger, before and after attempts.
+    retention: {kafka_days: 7, warehouse_raw_months: 24}
+    required_envelope: [client_ts, session_id, session_seq, device, app_version]
+    examples: examples/hint.requested.json
+
+  hint.shown:
+    schema: hint.shown.avsc
+    topic: learner.hint.shown.v1
+    description: A hint was displayed; carries its content ID and level, never its text.
+    owner: frontend
+    producer:
+      service: Web and native apps (hint ladder), through the telemetry SDK and ingestion
+      tickets: [T070, T024, T025]
+      origin: app
+    consumers:
+      - service: Learning-analytics warehouse models and training sequences
+        tickets: [T028, T042]
+        uses: Hint level as a knowledge-tracing feature (T070 acceptance criterion).
+      - service: Hint feedback
+        tickets: [T072]
+        uses: Joins ratings and 'this is wrong' reports to the hint shown.
+    retention: {kafka_days: 7, warehouse_raw_months: 24}
+    required_envelope: [client_ts, session_id, session_seq, device, app_version]
+    examples: examples/hint.shown.json
+
+  tutor.message:
+    schema: tutor.message.avsc
+    topic: learner.tutor.message.v1
+    description: One tutor-conversation message (learner or tutor); metadata only, the text stays in the tutor store.
+    owner: llm-applied-ai
+    producer:
+      service: Socratic tutor service, after the judge
+      tickets: [T069, T062]
+      origin: server
+    consumers:
+      - service: Tutor quality monitoring
+        tickets: [T062, T072]
+        uses: Judge verdicts, first-token latency, prompt versions.
+      - service: Product analytics
+        tickets: [T191]
+        uses: Tutor use per session; stuck escalations.
+      - service: Learning-analytics warehouse models
+        tickets: [T028]
+        uses: Tutor engagement per item and concept.
+    retention: {kafka_days: 7, warehouse_raw_months: 24}
+    required_envelope: [session_id]
+    examples: examples/tutor.message.json
+
+  session.start:
+    schema: session.start.avsc
+    topic: learner.session.start.v1
+    description: A learning session started in an app.
+    owner: data-engineering
+    producer:
+      service: Web and native apps, through the telemetry SDK and ingestion
+      tickets: [T024, T025]
+      origin: app
+    consumers:
+      - service: Real-time aggregation (session state)
+        tickets: [T026]
+        uses: Open sessions per learner.
+      - service: Send-time model
+        tickets: [T154]
+        uses: Study-time history per learner.
+      - service: Notification quality metrics
+        tickets: [T161]
+        uses: Sessions opened from a notification.
+      - service: Feature store
+        tickets: [T030]
+        uses: Session count.
+      - service: Product analytics
+        tickets: [T191]
+        uses: Activation and retention.
+    retention: {kafka_days: 7, warehouse_raw_months: 24}
+    required_envelope: [client_ts, session_id, session_seq, device, app_version]
+    examples: examples/session.start.json
+
+  session.end:
+    schema: session.end.avsc
+    topic: learner.session.end.v1
+    description: A learning session ended.
+    owner: data-engineering
+    producer:
+      service: Web and native apps, through the telemetry SDK and ingestion
+      tickets: [T024, T025]
+      origin: app
+    consumers:
+      - service: Real-time aggregation (session state)
+        tickets: [T026]
+        uses: Closes the learner's session.
+      - service: Send-time model
+        tickets: [T154]
+        uses: Session length per time of day.
+      - service: Product analytics
+        tickets: [T191]
+        uses: Session length and retention.
+    retention: {kafka_days: 7, warehouse_raw_months: 24}
+    required_envelope: [client_ts, session_id, session_seq, device, app_version]
+    examples: examples/session.end.json
+
+  focus.start:
+    schema: focus.start.avsc
+    topic: learner.focus.start.v1
+    description: A Focus session started (FR-F6).
+    owner: frontend
+    producer:
+      service: Web and native apps (Focus mode), through the telemetry SDK and ingestion
+      tickets: [T155, T024, T025]
+      origin: app
+    consumers:
+      - service: Real-time aggregation (Focus state in Redis)
+        tickets: [T026]
+        uses: Marks the learner as in Focus until focus.end or the planned end.
+      - service: Notification Orchestrator
+        tickets: [T152]
+        uses: Defers non-essential messages during Focus (FR-F2, FR-N3), through the Focus state.
+      - service: Send-time model
+        tickets: [T154]
+        uses: Focus sessions as study-window signal.
+      - service: Product analytics
+        tickets: [T191]
+        uses: Feature use.
+    retention: {kafka_days: 7, warehouse_raw_months: 24}
+    required_envelope: [client_ts, session_id, session_seq, focus_session_id, device, app_version]
+    examples: examples/focus.start.json
+
+  focus.end:
+    schema: focus.end.avsc
+    topic: learner.focus.end.v1
+    description: A Focus session ended, completed or stopped early.
+    owner: frontend
+    producer:
+      service: Web and native apps (Focus mode), through the telemetry SDK and ingestion
+      tickets: [T155, T024, T025]
+      origin: app
+    consumers:
+      - service: Real-time aggregation (Focus state in Redis)
+        tickets: [T026]
+        uses: Clears the Focus state.
+      - service: Send-time model
+        tickets: [T154]
+        uses: Completed sessions per time of day.
+      - service: Product analytics
+        tickets: [T191]
+        uses: Completion rate of Focus sessions.
+    retention: {kafka_days: 7, warehouse_raw_months: 24}
+    required_envelope: [client_ts, session_id, session_seq, focus_session_id, device, app_version]
+    examples: examples/focus.end.json
+
+  notification.decided:
+    schema: notification.decided.avsc
+    topic: learner.notification.decided.v1
+    description: The Notification Orchestrator decided to send, defer or suppress a message, and why.
+    owner: backend
+    producer:
+      service: Notification Orchestrator
+      tickets: [T152]
+      origin: server
+    consumers:
+      - service: Notification quality metrics and kill-switch
+        tickets: [T161]
+        uses: Deferrals and suppressions per rule; proof that nothing is dropped silently.
+      - service: Send-time model
+        tickets: [T154]
+        uses: Deferred and suppressed messages.
+      - service: Learning-analytics warehouse models
+        tickets: [T028]
+        uses: Notification funnel.
+    retention: {kafka_days: 7, warehouse_raw_months: 24}
+    required_envelope: []
+    examples: examples/notification.decided.json
+
+  notification.sent:
+    schema: notification.sent.avsc
+    topic: learner.notification.sent.v1
+    description: A notification left Kuizi on one channel.
+    owner: backend
+    producer:
+      service: Notification Orchestrator, on hand-off to the delivery layer (T089)
+      tickets: [T152]
+      origin: server
+    consumers:
+      - service: Notification quality metrics and kill-switch
+        tickets: [T161]
+        uses: Sends per category and channel; alert on any non-essential send in a protected window.
+      - service: Send-time model
+        tickets: [T154]
+        uses: Send times.
+      - service: Learning-analytics warehouse models
+        tickets: [T028]
+        uses: Notification funnel.
+    retention: {kafka_days: 7, warehouse_raw_months: 24}
+    required_envelope: []
+    examples: examples/notification.sent.json
+
+  notification.opened:
+    schema: notification.opened.avsc
+    topic: learner.notification.opened.v1
+    description: The recipient opened a notification.
+    owner: backend
+    producer:
+      service: Web and native apps (system notifications, inbox), through the telemetry SDK and ingestion
+      tickets: [T156, T210, T024, T025]
+      origin: app
+    consumers:
+      - service: Notification quality metrics and kill-switch
+        tickets: [T161]
+        uses: Open rates per category and channel.
+      - service: Send-time model
+        tickets: [T154]
+        uses: Reward signal of the send-time bandit.
+      - service: Product analytics
+        tickets: [T191]
+        uses: Re-engagement.
+    retention: {kafka_days: 7, warehouse_raw_months: 24}
+    required_envelope: [client_ts, device, app_version]
+    examples: examples/notification.opened.json
+
+  tts.played:
+    schema: tts.played.avsc
+    topic: learner.tts.played.v1
+    description: Kuizi read something aloud; carries what kind of content and for how long, never the text.
+    owner: accessibility
+    producer:
+      service: Web and native apps (read-aloud), through the telemetry SDK and ingestion
+      tickets: [T140, T024, T025]
+      origin: app
+    consumers:
+      - service: Speech service and read-aloud quality
+        tickets: [T141, T140]
+        uses: Completion and playback speed per content type and language.
+      - service: Accommodation-aware knowledge tracing
+        tickets: [T148]
+        uses: Listening time per item, beside item.answered.audio_playback_ms.
+      - service: Product analytics
+        tickets: [T191]
+        uses: Feature use.
+    retention: {kafka_days: 7, warehouse_raw_months: 12}
+    required_envelope: [client_ts, session_id, session_seq, device, app_version]
+    examples: examples/tts.played.json
+
+# What the knowledge-tracing models consume, and where each input comes from (for the ML sign-off,
+# acceptance criterion 3). Field references are <event>:<dotted path>; the check verifies each one.
+ml_features:
+  - feature: Learner sequence and order
+    models: [DKT, AKT, SAINT+, IRT]
+    fields: ["item.answered:envelope.student_id", "item.answered:envelope.client_ts", "item.answered:envelope.session_seq"]
+    notes: Kafka key is student_id, so one learner's answers stay in order in the topic. Sequences sort by client_ts, then session_seq, then server_ts.
+  - feature: Question (exercise) ID
+    models: [AKT, SAINT+, IRT]
+    fields: ["item.answered:item.item_id", "item.answered:item.item_version"]
+    notes: AKT learns one Rasch difficulty per item, SAINT+ an item embedding, IRT a and b per item. The version separates edited items.
+  - feature: Concepts (knowledge components)
+    models: [DKT, AKT, SAINT+, BKT]
+    fields: ["item.answered:item.kc_ids"]
+    notes: Primary concept first; tag weights are joined from the item bank (T036). The T041 adapter expands multi-concept items.
+  - feature: Correctness label and partial credit
+    models: [DKT, AKT, SAINT+, BKT, IRT]
+    fields: ["item.answered:correct", "item.answered:score"]
+    notes: correct is full credit; score from 0 to 1 carries partial credit (T221, T041).
+  - feature: Elapsed time
+    models: [SAINT+, AKT time experiment (T042)]
+    fields: ["item.answered:latency_ms", "item.answered:active_ms"]
+    notes: Known only after the answer, so it enters the model one step later (as kuizi_brain.models.SaintPlus does). active_ms excludes time in the background.
+  - feature: Lag time
+    models: [SAINT+, AKT time experiment (T042)]
+    fields: ["item.answered:presented_client_ts", "item.answered:envelope.client_ts"]
+    notes: lag(i) = presented_client_ts(i) minus envelope.client_ts of the learner's previous item.answered. Known at presentation. T028 and T048 must use this same definition.
+  - feature: Hints used and hint level
+    models: [SAINT+ decoder (T042), DKT features (T070)]
+    fields: ["item.answered:hints_used", "item.answered:max_hint_level", "hint.requested:level", "hint.shown:level"]
+    notes: Counted before each attempt, per presentation.
+  - feature: Attempt number
+    models: [DKT, AKT, SAINT+]
+    fields: ["item.answered:attempt"]
+    notes: Training keeps attempt 1 by default (like ASSISTments original == 1); later attempts are available.
+  - feature: Confidence 1 to 5
+    models: [SAINT+ decoder (T042)]
+    fields: ["item.answered:confidence_1_5"]
+    notes: Null when not asked; models need a missing value.
+  - feature: Time multiplier (normalisation)
+    models: [Accommodation-aware tracing (T148)]
+    fields: ["item.answered:accommodation.time_multiplier", "item.answered:accommodation.untimed"]
+    notes: Sensitive. Elapsed and lag time are divided by the multiplier; a null accommodation means 1.0.
+  - feature: Assistive-mode embedding
+    models: [Accommodation-aware tracing (T148)]
+    fields: ["item.answered:accommodation.assistive_modes"]
+    notes: Sensitive. Empty list or null accommodation means no assistive technology.
+  - feature: Listening time apart from thinking time
+    models: [Accommodation-aware tracing (T148)]
+    fields: ["item.answered:audio_playback_ms", "tts.played:played_ms"]
+    notes: Kuizi's own audio on the item before the answer. Screen-reader speech is invisible to Kuizi.
+  - feature: Timed out
+    models: [AKT, SAINT+]
+    fields: ["item.answered:timed_out"]
+    notes: Lets training drop or flag forced submissions.
+  - feature: Activity (placement, practice, review, mock Bac)
+    models: [IRT cold start (T043), all models as a filter]
+    fields: ["item.answered:item.activity"]
+    notes: Placement answers seed the IRT estimate; mock-Bac answers can be weighted apart.
+  - feature: Subject and Bac section
+    models: [All models (T033)]
+    fields: ["item.answered:item.subject_id", "item.answered:item.track_id"]
+    notes: Filled once T033 lands.
+  - feature: Item language variant
+    models: [Candidate feature]
+    fields: ["item.answered:item.item_language"]
+    notes: French and Arabic variants of an item may differ in difficulty.
+  - feature: Misconception code
+    models: [Misconception diagnosis (T071), candidate feature]
+    fields: ["item.answered:misconception_code"]
+    notes: From the answer evaluation service (T221).
+  - feature: Hesitation and time to first action
+    models: [Candidate features (T042, gated by T047)]
+    fields: ["item.answered:first_action_ms", "item.hesitation:idle_ms", "item.hesitation:before_first_action"]
+    notes: No hesitation is emitted while Kuizi audio plays (T148).
+  - feature: Interaction trace in simulations
+    models: [Misconception diagnosis (T071)]
+    fields: ["item.interaction:kind", "item.interaction:value_from", "item.interaction:value_to"]
+    notes: One event per gesture.
+  - feature: Session and Focus context
+    models: [Feature store (T030), send-time model (T154)]
+    fields: ["session.start:envelope.session_id", "session.end:duration_ms", "focus.end:reason"]
+    notes: Session count and study windows.

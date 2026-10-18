@@ -1,0 +1,8 @@
+{
+  "type": "enum",
+  "name": "AssistiveMode",
+  "namespace": "kuizi.events.common",
+  "doc": "Assistive technology in use, from the comfort profile (T134) and, on native apps, the operating system's accessibility state. Sensitive: it can reveal a disability (Law 2004-63).",
+  "symbols": ["UNKNOWN", "SCREEN_READER", "SCREEN_MAGNIFIER", "SWITCH_ACCESS", "VOICE_CONTROL"],
+  "default": "UNKNOWN"
+}

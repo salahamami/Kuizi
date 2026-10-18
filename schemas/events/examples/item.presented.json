@@ -1,0 +1,79 @@
+[
+  {
+    "envelope": {
+      "event_id": "f7f3a683-5e62-4fe9-9c32-60fdc2816017",
+      "student_id": "4a37fa2d-f2d7-440f-8785-9faeecc3f80c",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": 1793718030000,
+      "server_ts": 1793718030180,
+      "session_id": "045f21da-1563-43d8-9463-75dce47682e6",
+      "session_seq": 3,
+      "focus_session_id": "611244c0-6c7a-45c9-8e86-c4fa978f18a7",
+      "device": {
+        "platform": "WEB",
+        "form_factor": "DESKTOP"
+      },
+      "app_version": "0.3.0",
+      "ui_language": "FR",
+      "input_modality": "POINTER"
+    },
+    "item": {
+      "item_id": "phys.mech.newton2.q0042",
+      "item_version": 3,
+      "kc_ids": [
+        "mech.newton2",
+        "mech.forces"
+      ],
+      "subject_id": "physics",
+      "track_id": "sciences_experimentales",
+      "item_language": "FR",
+      "presentation_id": "e6d30f0a-747d-4a2b-9ec2-d776389605fe",
+      "activity": "PRACTICE"
+    },
+    "accommodation": null,
+    "routing_decision_id": "34a3f451-0ebb-44d0-8551-76d55be72f6e",
+    "position": 3,
+    "time_limit_ms": null
+  },
+  {
+    "envelope": {
+      "event_id": "38e2406f-f946-4d51-8342-a992afecb0c5",
+      "student_id": "b9d8249e-215b-4892-9bab-1eec87b3d90e",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": 1793774410000,
+      "server_ts": 1793774410180,
+      "session_id": "039a7b88-71cf-42e3-8473-24943126b9c3",
+      "session_seq": 2,
+      "focus_session_id": null,
+      "device": {
+        "platform": "ANDROID",
+        "form_factor": "PHONE"
+      },
+      "app_version": "0.3.1",
+      "ui_language": "AR",
+      "input_modality": "TOUCH"
+    },
+    "item": {
+      "item_id": "phys.elec.rlc.resonance.q0007",
+      "item_version": 1,
+      "kc_ids": [
+        "elec.rlc.resonance"
+      ],
+      "subject_id": "physics",
+      "track_id": "mathematiques",
+      "item_language": "AR",
+      "presentation_id": "05032a7e-6bd6-4ed6-bf8c-b6d1b5c318e9",
+      "activity": "MOCK_BAC"
+    },
+    "accommodation": {
+      "time_multiplier": 1.5,
+      "untimed": false,
+      "assistive_modes": [
+        "SCREEN_READER"
+      ]
+    },
+    "routing_decision_id": null,
+    "position": 1,
+    "time_limit_ms": 120000
+  }
+]

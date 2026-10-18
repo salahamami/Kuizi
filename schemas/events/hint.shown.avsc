@@ -1,0 +1,52 @@
+{
+  "type": "record",
+  "name": "HintShown",
+  "namespace": "kuizi.events",
+  "doc": "A hint was displayed to the learner. Carries the hint's content ID, never its text.",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context."
+    },
+    {
+      "name": "item",
+      "type": "kuizi.events.common.ItemContext",
+      "privacy": "personal",
+      "doc": "The item and its presentation_id."
+    },
+    {
+      "name": "hint_id",
+      "type": "string",
+      "privacy": "none",
+      "doc": "Content ID of the hint: a hint in the item bank, or the tutor message that carried it."
+    },
+    {
+      "name": "level",
+      "type": "int",
+      "privacy": "personal",
+      "doc": "Level of the hint shown, 1 to 4 (T070)."
+    },
+    {
+      "name": "source",
+      "type": {
+        "type": "enum",
+        "name": "HintSource",
+        "doc": "Where the hint came from.",
+        "symbols": ["UNKNOWN", "ITEM_BANK", "TUTOR"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "none",
+      "doc": "ITEM_BANK for authored hints, TUTOR for hints written by the Socratic tutor and passed by the judge (T062)."
+    },
+    {
+      "name": "request_event_id",
+      "type": ["null", {"type": "string", "logicalType": "uuid"}],
+      "default": null,
+      "privacy": "none",
+      "doc": "event_id of the hint.requested event this hint answers."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "type": "record",
+  "name": "AccommodationContext",
+  "namespace": "kuizi.events.common",
+  "doc": "Accommodations in force when the event happened, so knowledge tracing never reads extra time or assistive listening as weakness (T148). SENSITIVE health-related data under Law 2004-63 (docs/requirements/accessibility-focus-notifications.md, section 3): filled only when the student has an accommodation and has given the separate accommodation consent (T013, T151); readers are restricted to those listed in the data catalogue. The field holding this record is null otherwise, and models treat null as standard conditions.",
+  "fields": [
+    {
+      "name": "time_multiplier",
+      "type": "double",
+      "default": 1.0,
+      "privacy": "sensitive",
+      "doc": "Official time multiplier attested by the school (1.0, 1.33 or 1.5; FR-A14, T145). Models divide elapsed and lag time by it."
+    },
+    {
+      "name": "untimed",
+      "type": "boolean",
+      "default": false,
+      "privacy": "sensitive",
+      "doc": "True when the accommodation removes time limits altogether; time_multiplier is then ignored."
+    },
+    {
+      "name": "assistive_modes",
+      "type": {"type": "array", "items": "kuizi.events.common.AssistiveMode"},
+      "default": [],
+      "privacy": "sensitive",
+      "doc": "Assistive technologies in use (screen reader, magnifier, switch access, voice control). Empty when none. Feeds the assistive-mode embedding (T148)."
+    }
+  ]
+}

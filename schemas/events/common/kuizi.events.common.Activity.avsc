@@ -1,0 +1,8 @@
+{
+  "type": "enum",
+  "name": "Activity",
+  "namespace": "kuizi.events.common",
+  "doc": "Why the item was shown: free practice, the placement test (T175), spaced review, a remediation, a teacher assignment, the mock Bac (E18) or a duel.",
+  "symbols": ["UNKNOWN", "PRACTICE", "PLACEMENT", "REVIEW", "REMEDIATION", "ASSIGNMENT", "MOCK_BAC", "DUEL"],
+  "default": "UNKNOWN"
+}

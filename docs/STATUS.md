@@ -17,11 +17,13 @@ Kuizi is planned (241 tickets in 20 two-week sprints, mirrored in Jira `KK`), ru
 
 | Jira | Ticket | What was built | Status | What is left |
 | --- | --- | --- | --- | --- |
-| [KK-26](https://kuizi.atlassian.net/browse/KK-26) | T006 | GitHub Actions CI: discovery, lint, tests with coverage gates, SBOM, Trivy, cosign on `main` ([guide](dev/ci.md)) | See the CI note below | Protect `main` with the check **CI result** |
+| [KK-26](https://kuizi.atlassian.net/browse/KK-26) | T006 | GitHub Actions CI: discovery, lint, tests with coverage gates, SBOM, Trivy, cosign on `main` ([guide](dev/ci.md)) | Revue en cours | Protect `main` with the check **CI result** |
 | [KK-32](https://kuizi.atlassian.net/browse/KK-32) | T012 | Keycloak realm, roles and claims, HIBP password policy, Arabic RTL login, `@kuizi/auth` ([guide](dev/identity.md)) | Revue en cours | Kong checks come with T005 (cloud); approvals in the decisions page |
 | [KK-43](https://kuizi.atlassian.net/browse/KK-43) | T023 | 15 Avro learner events, data catalogue, compatibility checks, ML sign-off ([catalogue](data/event-catalogue.md)) | Revue en cours | DPO questions (accommodation data protection, retention) |
 | [KK-52](https://kuizi.atlassian.net/browse/KK-52) | T032 | Concept graph in PostgreSQL with a cycle-proof trigger, starter Physics seed, JSON export ([doc](curriculum/kc-graph.md)) | Revue en cours | Teacher validation of the seed in T035 |
 | [KK-251](https://kuizi.atlassian.net/browse/KK-251) | T231 | Star mark, logotypes «kuizi» and «كويزي», app icons, brand guide (draft) ([guide](design/brand-guide.md)) | Revue en cours | Arabic type designer review and trademark search (people, budget) |
+
+CI is green on `feat/sprint-2` (GitHub Actions run 39172730213: 8 jobs, about 2.6 minutes). Its Trivy gate made Keycloak move from 26.1.4 to 26.8.1 (7 CRITICAL vulnerabilities fixed).
 
 ## Waiting for the product owner
 

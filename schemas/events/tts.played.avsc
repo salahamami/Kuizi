@@ -16,7 +16,17 @@
         "type": "enum",
         "name": "SpeechContent",
         "doc": "What kind of content was read.",
-        "symbols": ["UNKNOWN", "ITEM_STEM", "ITEM_CHOICE", "HINT", "TUTOR_MESSAGE", "FEEDBACK", "SIMULATION_DESCRIPTION", "NOTIFICATION", "OTHER"],
+        "symbols": [
+          "UNKNOWN",
+          "ITEM_STEM",
+          "ITEM_CHOICE",
+          "HINT",
+          "TUTOR_MESSAGE",
+          "FEEDBACK",
+          "SIMULATION_DESCRIPTION",
+          "NOTIFICATION",
+          "OTHER"
+        ],
         "default": "UNKNOWN"
       },
       "default": "UNKNOWN",

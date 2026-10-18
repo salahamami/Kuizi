@@ -22,9 +22,7 @@
     "item": {
       "item_id": "phys.elec.rlc.resonance.q0007",
       "item_version": 1,
-      "kc_ids": [
-        "elec.rlc.resonance"
-      ],
+      "kc_ids": ["elec.rlc.resonance"],
       "subject_id": "physics",
       "track_id": "mathematiques",
       "item_language": "AR",

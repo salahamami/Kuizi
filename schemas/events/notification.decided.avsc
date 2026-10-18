@@ -12,7 +12,7 @@
     },
     {
       "name": "notification_id",
-      "type": {"type": "string", "logicalType": "uuid"},
+      "type": { "type": "string", "logicalType": "uuid" },
       "privacy": "pseudonymous",
       "doc": "ID of the notification, shared by its decided, sent and opened events. Also the orchestrator's idempotency key."
     },
@@ -56,7 +56,18 @@
         "type": "enum",
         "name": "NotificationDecisionReason",
         "doc": "Rule that decided.",
-        "symbols": ["UNKNOWN", "ALLOWED", "QUIET_HOURS", "CLASS_HOURS", "FOCUS_SESSION", "DAILY_BUDGET", "DUPLICATE", "OPTED_OUT", "KILL_SWITCH", "EXAM_RULE"],
+        "symbols": [
+          "UNKNOWN",
+          "ALLOWED",
+          "QUIET_HOURS",
+          "CLASS_HOURS",
+          "FOCUS_SESSION",
+          "DAILY_BUDGET",
+          "DUPLICATE",
+          "OPTED_OUT",
+          "KILL_SWITCH",
+          "EXAM_RULE"
+        ],
         "default": "UNKNOWN"
       },
       "default": "UNKNOWN",
@@ -65,7 +76,7 @@
     },
     {
       "name": "deferred_until",
-      "type": ["null", {"type": "long", "logicalType": "timestamp-millis"}],
+      "type": ["null", { "type": "long", "logicalType": "timestamp-millis" }],
       "default": null,
       "privacy": "personal",
       "doc": "DEFER only: earliest time the message may go out, in UTC milliseconds."

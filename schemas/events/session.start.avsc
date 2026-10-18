@@ -25,7 +25,7 @@
     },
     {
       "name": "notification_id",
-      "type": ["null", {"type": "string", "logicalType": "uuid"}],
+      "type": ["null", { "type": "string", "logicalType": "uuid" }],
       "default": null,
       "privacy": "pseudonymous",
       "doc": "Notification that opened the session, when entry_point is NOTIFICATION (T161 attributes sessions to messages)."

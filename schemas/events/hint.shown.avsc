@@ -43,7 +43,7 @@
     },
     {
       "name": "request_event_id",
-      "type": ["null", {"type": "string", "logicalType": "uuid"}],
+      "type": ["null", { "type": "string", "logicalType": "uuid" }],
       "default": null,
       "privacy": "none",
       "doc": "event_id of the hint.requested event this hint answers."

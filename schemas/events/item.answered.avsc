@@ -31,7 +31,7 @@
     },
     {
       "name": "presented_client_ts",
-      "type": {"type": "long", "logicalType": "timestamp-millis"},
+      "type": { "type": "long", "logicalType": "timestamp-millis" },
       "privacy": "personal",
       "doc": "When the item was presented, by the device clock (equals envelope.client_ts of item.presented). Lag time is derived from it; the exact definition is in the data catalogue (knowledge-tracing inputs)."
     },
@@ -89,7 +89,15 @@
               "type": "enum",
               "name": "ResponseKind",
               "doc": "Shape of the response.",
-              "symbols": ["UNKNOWN", "CHOICE", "NUMERIC", "EXPRESSION", "ORDER", "WIDGET", "SKIPPED"],
+              "symbols": [
+                "UNKNOWN",
+                "CHOICE",
+                "NUMERIC",
+                "EXPRESSION",
+                "ORDER",
+                "WIDGET",
+                "SKIPPED"
+              ],
               "default": "UNKNOWN"
             },
             "default": "UNKNOWN",
@@ -98,7 +106,7 @@
           },
           {
             "name": "choice_ids",
-            "type": {"type": "array", "items": "string"},
+            "type": { "type": "array", "items": "string" },
             "default": [],
             "privacy": "personal",
             "doc": "CHOICE: IDs of the options chosen, as named in the item definition."
@@ -126,14 +134,14 @@
           },
           {
             "name": "order",
-            "type": {"type": "array", "items": "string"},
+            "type": { "type": "array", "items": "string" },
             "default": [],
             "privacy": "personal",
             "doc": "ORDER: element IDs in the order the learner gave."
           },
           {
             "name": "widget_values",
-            "type": {"type": "map", "values": "double"},
+            "type": { "type": "map", "values": "double" },
             "default": {},
             "privacy": "personal",
             "doc": "WIDGET: parameter values set in the interactive simulation, by parameter name from the item definition."

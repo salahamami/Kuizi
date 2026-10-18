@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 
 import pytest
-
 from kuizi_schemas import cli
 from kuizi_schemas.avsc import (
     SchemaError,

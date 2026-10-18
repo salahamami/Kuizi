@@ -10,7 +10,6 @@ import uuid
 from collections.abc import Iterator
 
 import pytest
-
 from kuizi_schemas import Paths
 from kuizi_schemas.avsc import Sources, load_sources
 from kuizi_schemas.catalogue import Catalogue, load_catalogue

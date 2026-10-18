@@ -22,7 +22,15 @@
         "type": "enum",
         "name": "InteractionKind",
         "doc": "Kind of gesture.",
-        "symbols": ["UNKNOWN", "SLIDER_MOVE", "DRAG", "HOVER_ENTER", "HOVER_EXIT", "FOCUS", "KEYSTROKE_BURST"],
+        "symbols": [
+          "UNKNOWN",
+          "SLIDER_MOVE",
+          "DRAG",
+          "HOVER_ENTER",
+          "HOVER_EXIT",
+          "FOCUS",
+          "KEYSTROKE_BURST"
+        ],
         "default": "UNKNOWN"
       },
       "default": "UNKNOWN",

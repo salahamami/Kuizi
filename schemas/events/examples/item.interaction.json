@@ -20,10 +20,7 @@
     "item": {
       "item_id": "phys.mech.newton2.q0042",
       "item_version": 3,
-      "kc_ids": [
-        "mech.newton2",
-        "mech.forces"
-      ],
+      "kc_ids": ["mech.newton2", "mech.forces"],
       "subject_id": "physics",
       "track_id": "sciences_experimentales",
       "item_language": "FR",
@@ -60,9 +57,7 @@
     "item": {
       "item_id": "phys.mech.inclined_plane.sim07",
       "item_version": 1,
-      "kc_ids": [
-        "mech.newton2"
-      ],
+      "kc_ids": ["mech.newton2"],
       "subject_id": "physics",
       "track_id": "sciences_experimentales",
       "item_language": "FR",
@@ -99,9 +94,7 @@
     "item": {
       "item_id": "phys.mech.inclined_plane.sim07",
       "item_version": 1,
-      "kc_ids": [
-        "mech.newton2"
-      ],
+      "kc_ids": ["mech.newton2"],
       "subject_id": "physics",
       "track_id": "sciences_experimentales",
       "item_language": "FR",

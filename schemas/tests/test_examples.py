@@ -5,7 +5,6 @@ from __future__ import annotations
 import copy
 
 import pytest
-
 from kuizi_schemas.avsc import parse_fastavro
 from kuizi_schemas.examples import (
     check_all_examples,

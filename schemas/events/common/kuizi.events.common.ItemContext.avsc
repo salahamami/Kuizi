@@ -19,7 +19,7 @@
     },
     {
       "name": "kc_ids",
-      "type": {"type": "array", "items": "string"},
+      "type": { "type": "array", "items": "string" },
       "privacy": "none",
       "doc": "Knowledge components the item is tagged with, primary first (concept-graph IDs such as mech.newton2, T032). At least one. Tag weights stay in the item bank and are joined by item_id and item_version."
     },
@@ -46,7 +46,7 @@
     },
     {
       "name": "presentation_id",
-      "type": {"type": "string", "logicalType": "uuid"},
+      "type": { "type": "string", "logicalType": "uuid" },
       "privacy": "pseudonymous",
       "doc": "ID of this showing of the item, created by the app with item.presented."
     },

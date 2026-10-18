@@ -36,7 +36,7 @@ Inside `schemas/`, the same commands are `uv run kuizi-schemas check | docs | re
    - enums start with `UNKNOWN` and declare `"default": "UNKNOWN"`, so new values never break older readers;
    - never a name, email, phone number, national ID, IP address, location, device identifier, raw keystroke or free text from a learner.
 3. Add or update the entry in `events/catalogue.yaml` (topic `learner.<event>.v1`, owner, producer, consumers with tickets, retention, envelope fields the producer must fill) and synthetic examples in `events/examples/<event>.json`.
-4. Run `make schemas-docs`, then `make schemas-check` and `make schemas-test`.
+4. Run `make schemas-docs`, then `make schemas-check` and `make schemas-test`. `make lint` also checks the layout of the `.avsc` and `.json` files with Prettier; `pnpm format` fixes it.
 5. A change the compatibility check refuses is a new major version: a new file and topic `learner.<event>.v2`, both published during a migration period. Schemas already committed are never deleted; deprecate the event in the catalogue instead.
 
 After the merge, `make schemas-register` (locally) or the cloud pipeline (T021) registers the new versions; the registry refuses anything incompatible.

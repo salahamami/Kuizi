@@ -6,13 +6,13 @@
   "fields": [
     {
       "name": "event_id",
-      "type": {"type": "string", "logicalType": "uuid"},
+      "type": { "type": "string", "logicalType": "uuid" },
       "privacy": "none",
       "doc": "Unique ID of this event, created by the producer when the event happens (UUIDv7 recommended, so IDs sort by time). Retries and offline replays send the same ID again; consumers de-duplicate on it (T024, T025)."
     },
     {
       "name": "student_id",
-      "type": {"type": "string", "logicalType": "uuid"},
+      "type": { "type": "string", "logicalType": "uuid" },
       "privacy": "pseudonymous",
       "doc": "Pseudonymous learner ID issued by identity (T012). Never a login, email address, phone number, national ID (CIN) or name. Also the Kafka message key, so each learner's events stay in order within a topic."
     },
@@ -24,20 +24,20 @@
     },
     {
       "name": "client_ts",
-      "type": ["null", {"type": "long", "logicalType": "timestamp-millis"}],
+      "type": ["null", { "type": "long", "logicalType": "timestamp-millis" }],
       "default": null,
       "privacy": "personal",
       "doc": "When the event happened, by the device clock, in UTC milliseconds since the epoch. Elapsed and lag times are computed from this clock. Null only for events produced by a server without a client request."
     },
     {
       "name": "server_ts",
-      "type": {"type": "long", "logicalType": "timestamp-millis"},
+      "type": { "type": "long", "logicalType": "timestamp-millis" },
       "privacy": "personal",
       "doc": "When a Kuizi server received or produced the event, in UTC milliseconds since the epoch: set by ingestion (T025) for app events and by the producing service for server events. Never trusted from a client."
     },
     {
       "name": "session_id",
-      "type": ["null", {"type": "string", "logicalType": "uuid"}],
+      "type": ["null", { "type": "string", "logicalType": "uuid" }],
       "default": null,
       "privacy": "pseudonymous",
       "doc": "App session the event belongs to (see session.start and session.end). Null for server events outside a session, such as notification decisions."
@@ -51,7 +51,7 @@
     },
     {
       "name": "focus_session_id",
-      "type": ["null", {"type": "string", "logicalType": "uuid"}],
+      "type": ["null", { "type": "string", "logicalType": "uuid" }],
       "default": null,
       "privacy": "pseudonymous",
       "doc": "Focus session in progress when the event happened (FR-F6, T155); null outside Focus sessions."

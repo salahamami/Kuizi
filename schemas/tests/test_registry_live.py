@@ -11,7 +11,6 @@ import copy
 import json
 
 import pytest
-
 from kuizi_schemas import cli
 from kuizi_schemas.avsc import parse_fastavro, to_registry_string
 from kuizi_schemas.compat import check_pair

@@ -20,7 +20,7 @@
     },
     {
       "name": "assistive_modes",
-      "type": {"type": "array", "items": "kuizi.events.common.AssistiveMode"},
+      "type": { "type": "array", "items": "kuizi.events.common.AssistiveMode" },
       "default": [],
       "privacy": "sensitive",
       "doc": "Assistive technologies in use (screen reader, magnifier, switch access, voice control). Empty when none. Feeds the assistive-mode embedding (T148)."

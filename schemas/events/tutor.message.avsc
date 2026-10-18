@@ -12,13 +12,13 @@
     },
     {
       "name": "conversation_id",
-      "type": {"type": "string", "logicalType": "uuid"},
+      "type": { "type": "string", "logicalType": "uuid" },
       "privacy": "pseudonymous",
       "doc": "Tutor conversation the message belongs to."
     },
     {
       "name": "message_id",
-      "type": {"type": "string", "logicalType": "uuid"},
+      "type": { "type": "string", "logicalType": "uuid" },
       "privacy": "pseudonymous",
       "doc": "ID of the message in the tutor's conversation store, where its text lives."
     },

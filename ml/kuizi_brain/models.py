@@ -17,6 +17,7 @@ from torch import nn
 # Batches: answer histories cut into fixed-length windows
 # ---------------------------------------------------------------------------
 
+
 def make_windows(df, max_len=100, time_multiplier_fairness=False):
     """Cut each student's answers into windows of `max_len` steps (T048 builds this online).
 
@@ -43,7 +44,7 @@ def make_windows(df, max_len=100, time_multiplier_fairness=False):
             n = min(max_len, len(g) - start)
             for k, v in cols.items():
                 w = np.zeros(max_len, dtype=float)
-                w[:n] = v[start:start + n]
+                w[:n] = v[start : start + n]
                 windows[k].append(w)
             m = np.zeros(max_len, dtype=bool)
             m[:n] = True
@@ -61,7 +62,7 @@ def _batches(windows, batch_size, shuffle, seed=0):
     n = windows["mask"].shape[0]
     order = torch.randperm(n, generator=torch.Generator().manual_seed(seed)) if shuffle else torch.arange(n)
     for i in range(0, n, batch_size):
-        idx = order[i:i + batch_size]
+        idx = order[i : i + batch_size]
         yield {k: v[idx] for k, v in windows.items()}
 
 
@@ -105,6 +106,7 @@ def predict(model, windows, batch_size=256):
 # ---------------------------------------------------------------------------
 # IRT: one number per student (ability) and per item (difficulty) — T043
 # ---------------------------------------------------------------------------
+
 
 class IRT(nn.Module):
     """Two-parameter logistic IRT: P(correct) = sigmoid(a_item * (theta_student - b_item)).
@@ -165,12 +167,13 @@ def item_information(theta, b, a):
     (T175) asks the item with the most information, i.e. the one whose answer is least
     predictable for this student right now."""
     p = 1 / (1 + np.exp(-a * (theta - b)))
-    return a ** 2 * p * (1 - p)
+    return a**2 * p * (1 - p)
 
 
 # ---------------------------------------------------------------------------
 # BKT: a hidden "known / not known" switch per concept — the classic tracer
 # ---------------------------------------------------------------------------
+
 
 class BKT(nn.Module):
     """Bayesian Knowledge Tracing, trained by gradient descent.
@@ -201,9 +204,7 @@ class BKT(nn.Module):
             p_correct = pk * (1 - slip[k]) + (1 - pk) * guess[k]
             logits.append(torch.logit(p_correct.clamp(1e-4, 1 - 1e-4)))
             obs = y[:, t]
-            post = torch.where(obs > 0.5,
-                               pk * (1 - slip[k]) / p_correct,
-                               pk * slip[k] / (1 - p_correct))
+            post = torch.where(obs > 0.5, pk * (1 - slip[k]) / p_correct, pk * slip[k] / (1 - p_correct))
             new = post + (1 - post) * learn[k]
             real = batch["mask"][:, t]
             known = known.scatter(1, k[:, None], torch.where(real, new, pk)[:, None])
@@ -213,6 +214,7 @@ class BKT(nn.Module):
 # ---------------------------------------------------------------------------
 # DKT: a recurrent network reads the whole history — first deep tracer
 # ---------------------------------------------------------------------------
+
 
 class DKT(nn.Module):
     """Deep Knowledge Tracing (Piech et al., 2015): an LSTM reads (concept, right/wrong) pairs
@@ -246,6 +248,7 @@ class DKT(nn.Module):
 # ---------------------------------------------------------------------------
 # SAINT+: exercise encoder + response decoder with attention — the Kuizi brain (T042)
 # ---------------------------------------------------------------------------
+
 
 def causal_mask(L):
     """True where attention is forbidden: position t may only look at positions <= t."""
@@ -291,14 +294,13 @@ class SaintPlus(nn.Module):
     items weigh on a prediction (T049, T177).
     """
 
-    def __init__(self, n_items, n_kc, d=64, heads=4, layers=2, max_len=100, dropout=0.1,
-                 use_time=True):
+    def __init__(self, n_items, n_kc, d=64, heads=4, layers=2, max_len=100, dropout=0.1, use_time=True):
         super().__init__()
         self.use_time = use_time
         self.item = nn.Embedding(n_items + 1, d, padding_idx=0)
         self.kc = nn.Embedding(n_kc + 1, d, padding_idx=0)
         self.pos = nn.Embedding(max_len, d)
-        self.response = nn.Embedding(3, d)          # 0 wrong, 1 right, 2 start
+        self.response = nn.Embedding(3, d)  # 0 wrong, 1 right, 2 start
         self.elapsed = nn.Linear(1, d)
         self.lag = nn.Linear(1, d)
         self.encoder = nn.ModuleList(_Block(d, heads, dropout, cross=False) for _ in range(layers))
@@ -344,7 +346,9 @@ def probe(model, history, items, item_kc, max_len=100, lag_s=60.0):
         "kc": torch.tensor(np.r_[h.kc.to_numpy(), 0] + 1).repeat(B, 1),
         "correct": torch.tensor(np.r_[h.correct.to_numpy(), 0]).repeat(B, 1),
         "elapsed": torch.tensor(np.r_[np.log1p(h.elapsed_s.to_numpy()) / 5.0, 0.0], dtype=torch.float32).repeat(B, 1),
-        "lag": torch.tensor(np.r_[np.log1p(lag / 60.0) / 8.0, np.log1p(lag_s / 60.0) / 8.0], dtype=torch.float32).repeat(B, 1),
+        "lag": torch.tensor(
+            np.r_[np.log1p(lag / 60.0) / 8.0, np.log1p(lag_s / 60.0) / 8.0], dtype=torch.float32
+        ).repeat(B, 1),
         "mask": torch.ones(B, n + 1, dtype=torch.bool),
     }
     batch["item"][:, n] = torch.tensor(np.asarray(items)) + 1
@@ -357,8 +361,10 @@ def probe(model, history, items, item_kc, max_len=100, lag_s=60.0):
 def typical_items(item_kc, item_difficulty):
     """For each concept, the item whose difficulty is closest to 0: a "typical" question."""
     item_kc, item_difficulty = np.asarray(item_kc), np.asarray(item_difficulty)
-    return {int(k): int(np.flatnonzero(item_kc == k)[np.argmin(np.abs(item_difficulty[item_kc == k]))])
-            for k in np.unique(item_kc)}
+    return {
+        int(k): int(np.flatnonzero(item_kc == k)[np.argmin(np.abs(item_difficulty[item_kc == k]))])
+        for k in np.unique(item_kc)
+    }
 
 
 def probe_mastery(model, history, item_kc, item_difficulty, **kwargs):
@@ -367,8 +373,10 @@ def probe_mastery(model, history, item_kc, item_difficulty, **kwargs):
     typical = typical_items(item_kc, item_difficulty)
     kcs = list(typical)
     p, attention = probe(model, history, [typical[k] for k in kcs], item_kc, **kwargs)
-    return ({k: float(p[i]) for i, k in enumerate(kcs)},
-            {k: attention[i] for i, k in enumerate(kcs)} if attention is not None else None)
+    return (
+        {k: float(p[i]) for i, k in enumerate(kcs)},
+        {k: attention[i] for i, k in enumerate(kcs)} if attention is not None else None,
+    )
 
 
 def count_parameters(model):

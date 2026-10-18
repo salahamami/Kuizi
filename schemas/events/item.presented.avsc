@@ -1,0 +1,48 @@
+{
+  "type": "record",
+  "name": "ItemPresented",
+  "namespace": "kuizi.events",
+  "doc": "An item (question) appeared on the learner's screen. Starts a presentation: every later event about this showing carries its presentation_id.",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context."
+    },
+    {
+      "name": "item",
+      "type": "kuizi.events.common.ItemContext",
+      "privacy": "personal",
+      "doc": "The item shown and its presentation_id."
+    },
+    {
+      "name": "accommodation",
+      "type": ["null", "kuizi.events.common.AccommodationContext"],
+      "default": null,
+      "privacy": "sensitive",
+      "doc": "Accommodations in force for this showing; null when none or not consented. Sensitive: restricted readers only."
+    },
+    {
+      "name": "routing_decision_id",
+      "type": ["null", "string"],
+      "default": null,
+      "privacy": "pseudonymous",
+      "doc": "ID of the routing decision that chose the item (routing.decision, T052); null when the item was not chosen by the router."
+    },
+    {
+      "name": "position",
+      "type": ["null", "int"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "1-based position of the item in its set, test or session."
+    },
+    {
+      "name": "time_limit_ms",
+      "type": ["null", "long"],
+      "default": null,
+      "privacy": "none",
+      "doc": "Standard time limit of the item before any accommodation, in milliseconds; null when the item is untimed. The limit that applied to this learner is this value times accommodation.time_multiplier, so it is never stored outside the sensitive record."
+    }
+  ]
+}

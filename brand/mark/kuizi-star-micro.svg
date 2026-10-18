@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" color="#0A6F8C">
+  <title>Kuizi</title>
+  <!-- Kuizi star mark, micro version for 24 px and below (favicons, small UI badges).
+       Same star; the rhombus counter grows from 1/4 to 1/3 of R (half-diagonal 16.667) so it stays open
+       at 16 px. Fill is currentColor (default cyan #0A6F8C). -->
+  <path fill="currentColor" fill-rule="evenodd" d="M50 0L64.645 14.645H85.355V35.355L100 50L85.355 64.645V85.355H64.645L50 100L35.355 85.355H14.645V64.645L0 50L14.645 35.355V14.645H35.355Z M50 33.333L33.333 50L50 66.667L66.667 50Z"/>
+</svg>

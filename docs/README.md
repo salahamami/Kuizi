@@ -5,10 +5,12 @@
 | [`product/`](product/overview.md) | Product overview, personas, advanced concepts | Product |
 | [`requirements/`](requirements/accessibility-focus-notifications.md) | Numbered functional and non-functional requirements | Product, Accessibility, DPO |
 | [`architecture/`](architecture/overview.md) | Architecture overview, Neural Core, decision records | Product owner with the architecture agents |
-| [`design/`](design/design-system.md) | Cyanotype design system, screen list, canvas link | Design / UX |
+| [`design/`](design/design-system.md) | Cyanotype design system, screen list, canvas link, [brand guide](design/brand-guide.md) (draft) and its [reviews](design/brand-reviews.md) | Design / UX |
 | [`backlog/`](backlog/README.md) | Full backlog, Jira import file, sync procedure, v1 sources | Product owner |
 | [`STATUS.md`](STATUS.md) | **Start here**: active sprint, decisions waiting for the product owner, next work | Main session, updated every session |
+| [`product-owner-decisions.md`](product-owner-decisions.md) | Every decision waiting for the product owner, by urgency and ticket, and the acceptance-criteria wording proposed by agents | Main session |
 | [`agents/`](agents/README.md), [`process/`](process/working-agreement.md) | The 14 agent roles and the working agreement (Definition of Ready and Done, review gates, branches, sprint rhythm) | Product owner |
+| [`data/`](data/event-catalogue.md) | Learner event catalogue (generated from `schemas/events/`): every event, its owner, producer, consumers, privacy class and retention | Data Engineering agent |
 | [`brain/`](brain/README.md) | Brain walkthrough (10 notebooks in English and Arabic) and the English–Arabic–French glossary | ML Engineering agent |
 | [`curriculum/`](curriculum/kc-graph.md) | Knowledge-component graph: model, KC naming rules, how to add a KC, the JSON export, sources of the Physics seed | Product + Curriculum agent |
 | [`dev/`](dev/local-setup.md) | Running Kuizi on a PC: local stack, brain environment, everyday commands; [CI](dev/ci.md) (what runs on every pull request, coverage gates, protecting `main`); [identity](dev/identity.md) (Keycloak realm, roles, tokens, dev users) | Platform / DevOps agent, Backend agent |

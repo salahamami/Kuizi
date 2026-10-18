@@ -1,0 +1,113 @@
+[
+  {
+    "envelope": {
+      "event_id": "d0745cc1-15f2-4d71-92af-2f03507bef95",
+      "student_id": "4a37fa2d-f2d7-440f-8785-9faeecc3f80c",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": 1793718037000,
+      "server_ts": 1793718037180,
+      "session_id": "045f21da-1563-43d8-9463-75dce47682e6",
+      "session_seq": 5,
+      "focus_session_id": "611244c0-6c7a-45c9-8e86-c4fa978f18a7",
+      "device": {
+        "platform": "WEB",
+        "form_factor": "DESKTOP"
+      },
+      "app_version": "0.3.0",
+      "ui_language": "FR",
+      "input_modality": "POINTER"
+    },
+    "item": {
+      "item_id": "phys.mech.newton2.q0042",
+      "item_version": 3,
+      "kc_ids": ["mech.newton2", "mech.forces"],
+      "subject_id": "physics",
+      "track_id": "sciences_experimentales",
+      "item_language": "FR",
+      "presentation_id": "e6d30f0a-747d-4a2b-9ec2-d776389605fe",
+      "activity": "PRACTICE"
+    },
+    "kind": "HOVER_ENTER",
+    "target_id": "choice.B",
+    "offset_ms": 7000,
+    "duration_ms": null,
+    "value_from": null,
+    "value_to": null,
+    "sample_count": null,
+    "key_count": null
+  },
+  {
+    "envelope": {
+      "event_id": "e50086cd-4e06-4c8e-8aca-c02449da1bd7",
+      "student_id": "4a37fa2d-f2d7-440f-8785-9faeecc3f80c",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": 1793718094000,
+      "server_ts": 1793718094180,
+      "session_id": "045f21da-1563-43d8-9463-75dce47682e6",
+      "session_seq": 11,
+      "focus_session_id": "611244c0-6c7a-45c9-8e86-c4fa978f18a7",
+      "device": {
+        "platform": "WEB",
+        "form_factor": "DESKTOP"
+      },
+      "app_version": "0.3.0",
+      "ui_language": "FR",
+      "input_modality": "POINTER"
+    },
+    "item": {
+      "item_id": "phys.mech.inclined_plane.sim07",
+      "item_version": 1,
+      "kc_ids": ["mech.newton2"],
+      "subject_id": "physics",
+      "track_id": "sciences_experimentales",
+      "item_language": "FR",
+      "presentation_id": "fb34ccc5-15f5-4a5c-9b1c-3f27065720ce",
+      "activity": "PRACTICE"
+    },
+    "kind": "SLIDER_MOVE",
+    "target_id": "slider.angle_deg",
+    "offset_ms": 4000,
+    "duration_ms": 1200,
+    "value_from": 20.0,
+    "value_to": 35.0,
+    "sample_count": 18,
+    "key_count": null
+  },
+  {
+    "envelope": {
+      "event_id": "37e23242-8c8a-4616-b469-11c2c70fa585",
+      "student_id": "4a37fa2d-f2d7-440f-8785-9faeecc3f80c",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": 1793718099000,
+      "server_ts": 1793718099180,
+      "session_id": "045f21da-1563-43d8-9463-75dce47682e6",
+      "session_seq": 12,
+      "focus_session_id": "611244c0-6c7a-45c9-8e86-c4fa978f18a7",
+      "device": {
+        "platform": "WEB",
+        "form_factor": "DESKTOP"
+      },
+      "app_version": "0.3.0",
+      "ui_language": "FR",
+      "input_modality": "KEYBOARD"
+    },
+    "item": {
+      "item_id": "phys.mech.inclined_plane.sim07",
+      "item_version": 1,
+      "kc_ids": ["mech.newton2"],
+      "subject_id": "physics",
+      "track_id": "sciences_experimentales",
+      "item_language": "FR",
+      "presentation_id": "fb34ccc5-15f5-4a5c-9b1c-3f27065720ce",
+      "activity": "PRACTICE"
+    },
+    "kind": "KEYSTROKE_BURST",
+    "target_id": "answer.numeric",
+    "offset_ms": 9000,
+    "duration_ms": 2100,
+    "value_from": null,
+    "value_to": null,
+    "sample_count": null,
+    "key_count": 4
+  }
+]

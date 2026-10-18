@@ -1,0 +1,8 @@
+{
+  "type": "enum",
+  "name": "PriorityClass",
+  "namespace": "kuizi.events.common",
+  "doc": "Priority class of a notification (FR-N2): essential messages are always delivered, useful ones follow the budget and protected windows, optional ones are off by default.",
+  "symbols": ["UNKNOWN", "ESSENTIAL", "USEFUL", "OPTIONAL"],
+  "default": "UNKNOWN"
+}

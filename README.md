@@ -21,9 +21,11 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 | Jira import file and sync procedure | [`docs/backlog/README.md`](docs/backlog/README.md) |
 | Architecture and decisions | [`docs/architecture/`](docs/architecture/overview.md) |
 | Neural Core (knowledge-tracing engine) | [`docs/architecture/neural-core.md`](docs/architecture/neural-core.md) |
+| Learner event catalogue and Avro schemas (telemetry contracts) | [`docs/data/event-catalogue.md`](docs/data/event-catalogue.md), [`schemas/`](schemas/README.md) |
 | Brain walkthrough: 10 notebooks, EN + AR, and glossary | [`docs/brain/README.md`](docs/brain/README.md) |
 | Accessibility, Focus and notifications requirements | [`docs/requirements/accessibility-focus-notifications.md`](docs/requirements/accessibility-focus-notifications.md) |
 | Cyanotype design system and screens | [`docs/design/design-system.md`](docs/design/design-system.md) |
+| Brand guide (logo, app icons, voice), draft, and brand source files | [`docs/design/brand-guide.md`](docs/design/brand-guide.md), [`brand/`](brand/README.md) |
 | Bilingual concepts brief (EN + AR, PDF) | [`docs/deliverables/Kuizi-Concepts-EN-AR.pdf`](docs/deliverables/Kuizi-Concepts-EN-AR.pdf) |
 | History of changes | [`CHANGELOG.md`](CHANGELOG.md) |
 
@@ -33,4 +35,4 @@ Jira project `KK` ([board](https://kuizi.atlassian.net/jira/software/projects/KK
 
 ## Status
 
-Sprint 1 is active (see [`docs/STATUS.md`](docs/STATUS.md)). Development is local-first ([ADR 0006](docs/architecture/decisions/0006-local-first-development.md)): Sprint 1 (started 2026-10-17) sets up the local stack on the product owner's PC and starts the brain walkthrough; the cloud comes in S8–S11, before the pilot in S12. Physics and Maths go live in S18 (June 2027), the other subjects in S19–S20.
+Sprint 1 is active and in review; the Sprint 2 tickets (CI, identity, learner events, concept graph, brand) were worked ahead and are in review too (see [`docs/STATUS.md`](docs/STATUS.md) and the [decisions waiting for the product owner](docs/product-owner-decisions.md)). Development is local-first ([ADR 0006](docs/architecture/decisions/0006-local-first-development.md)): the cloud comes in S8–S11, before the pilot in S12. Physics and Maths go live in S18 (June 2027), the other subjects in S19–S20.

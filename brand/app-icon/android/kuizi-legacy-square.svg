@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <title>Kuizi launcher icon (legacy, square)</title>
+  <!-- Legacy launcher icon (ic_launcher, before Android 8), 48 x 48 dp, transparent outside the tile.
+       Tile night #0B1E3A, 44 x 44 at (2,2), corner radius 6. Star cyan-light #4FD1F0, centre (24,24),
+       R = 13.5 (diameter 27 = 61 % of the tile). Offsets 9.546 / 3.954, rhombus half-diagonal 3.375. -->
+  <rect x="2" y="2" width="44" height="44" rx="6" fill="#0B1E3A"/>
+  <path fill="#4FD1F0" fill-rule="evenodd" d="M24 10.5L27.954 14.454H33.546V20.046L37.5 24L33.546 27.954V33.546H27.954L24 37.5L20.046 33.546H14.454V27.954L10.5 24L14.454 20.046V14.454H20.046Z M24 20.625L20.625 24L24 27.375L27.375 24Z"/>
+</svg>

@@ -1,0 +1,8 @@
+{
+  "type": "enum",
+  "name": "RecipientRole",
+  "namespace": "kuizi.events.common",
+  "doc": "Who receives the notification. Envelope.student_id is always the learner the notification is about, also when a parent receives it; the parent's own identifiers are never recorded.",
+  "symbols": ["UNKNOWN", "STUDENT", "PARENT"],
+  "default": "UNKNOWN"
+}

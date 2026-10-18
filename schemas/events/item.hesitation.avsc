@@ -1,0 +1,39 @@
+{
+  "type": "record",
+  "name": "ItemHesitation",
+  "namespace": "kuizi.events",
+  "doc": "The learner stayed idle on an item for more than 3 seconds after it was presented (no gesture, no answer). Emitted when the idle window ends, so its length is known. The app emits none while Kuizi audio plays or a voice command runs (T148), and none while the item is hidden or the app is in the background.",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context."
+    },
+    {
+      "name": "item",
+      "type": "kuizi.events.common.ItemContext",
+      "privacy": "personal",
+      "doc": "The item and its presentation_id."
+    },
+    {
+      "name": "offset_ms",
+      "type": "long",
+      "privacy": "personal",
+      "doc": "Milliseconds between the presentation of the item and the start of the idle window."
+    },
+    {
+      "name": "idle_ms",
+      "type": "long",
+      "privacy": "personal",
+      "doc": "Length of the idle window in milliseconds; above 3,000 by definition."
+    },
+    {
+      "name": "before_first_action",
+      "type": "boolean",
+      "default": false,
+      "privacy": "personal",
+      "doc": "True when the learner had not touched the item yet (hesitation before the first gesture)."
+    }
+  ]
+}

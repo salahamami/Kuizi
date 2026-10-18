@@ -34,6 +34,7 @@ Project name **Kuizi Adaptive Bac Platform** (renamed from `Kuizi_KPI` on 2026-1
 - On 2026-10-17, after Backlog, Sprints and Estimation were turned on, the 20 sprints were created, every ticket was put in its sprint and given its story-point estimate (field `Story point estimate`, `customfield_10016`; the board estimates by it). Each sprint's goal names its phase and the three epics carrying the most points in it.
 - The same day the delivery model changed to role agents with one product owner (ADR 0005): every ticket's `team-*` label became `agent-*`, its description says "Agent role", and the product owner is the assignee on all 236 tickets.
 - Still on 2026-10-17, the plan became local-first (ADR 0006): T237–T240 were added (KK-257 to KK-260), 143 tickets moved sprint, their labels and descriptions were regenerated, 17 epic descriptions and 17 sprint goals were updated. The sprint plan comes from `tools/backlog/replan.py`.
+- On 2026-10-18 Sprint 1 was started (it began 2026-10-17); its four tickets are in *Revue en cours*. The five Sprint 2 tickets (KK-26, KK-32, KK-43, KK-52, KK-251) were worked ahead the same day and are also in *Revue en cours*, still in APL Sprint 2. Each reviewed ticket has a comment saying how its acceptance criteria were verified and what waits for the product owner.
 
 | Sprint | Jira sprint ID | Start | End | Tickets | Points |
 | --- | --- | --- | --- | --- | --- |

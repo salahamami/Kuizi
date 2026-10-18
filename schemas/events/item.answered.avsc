@@ -1,0 +1,195 @@
+{
+  "type": "record",
+  "name": "ItemAnswered",
+  "namespace": "kuizi.events",
+  "doc": "One submitted answer to an item, graded on the server by the answer evaluation service (T221). One event per attempt. It is self-sufficient for knowledge tracing: item, concepts, correctness, timings, hints, attempt and confidence are all here, so the online sequence builder (T048) and the training sequences (T028) need no join.",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context. client_ts is the moment the learner submitted, sent by the app with the answer."
+    },
+    {
+      "name": "item",
+      "type": "kuizi.events.common.ItemContext",
+      "privacy": "personal",
+      "doc": "The item answered and its presentation_id."
+    },
+    {
+      "name": "accommodation",
+      "type": ["null", "kuizi.events.common.AccommodationContext"],
+      "default": null,
+      "privacy": "sensitive",
+      "doc": "Accommodations in force for this attempt; null when none or not consented. Sensitive: restricted readers only."
+    },
+    {
+      "name": "attempt",
+      "type": "int",
+      "privacy": "personal",
+      "doc": "1-based number of this submission within the presentation. Knowledge tracing uses attempt 1 by default."
+    },
+    {
+      "name": "presented_client_ts",
+      "type": { "type": "long", "logicalType": "timestamp-millis" },
+      "privacy": "personal",
+      "doc": "When the item was presented, by the device clock (equals envelope.client_ts of item.presented). Lag time is derived from it; the exact definition is in the data catalogue (knowledge-tracing inputs)."
+    },
+    {
+      "name": "latency_ms",
+      "type": "long",
+      "privacy": "personal",
+      "doc": "Milliseconds from the presentation of the item to this submission, by the device clock. The elapsed-time feature of knowledge tracing."
+    },
+    {
+      "name": "active_ms",
+      "type": ["null", "long"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "Part of latency_ms during which the item was on screen with the app in the foreground."
+    },
+    {
+      "name": "first_action_ms",
+      "type": ["null", "long"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "Milliseconds from the presentation to the learner's first gesture on the item (time to first click, T024); null if the learner answered without any recorded gesture."
+    },
+    {
+      "name": "audio_playback_ms",
+      "type": "long",
+      "default": 0,
+      "privacy": "personal",
+      "doc": "Milliseconds of Kuizi audio (read-aloud, sonified simulation) played on this item before the submission. Lets models separate listening time from thinking time (T148)."
+    },
+    {
+      "name": "hints_used",
+      "type": "int",
+      "default": 0,
+      "privacy": "personal",
+      "doc": "Number of hints shown in this presentation before the submission."
+    },
+    {
+      "name": "max_hint_level",
+      "type": ["null", "int"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "Highest hint level shown before the submission (1 question, 2 nudge, 3 worked step, 4 solution; T070); null when no hint was shown."
+    },
+    {
+      "name": "response",
+      "type": {
+        "type": "record",
+        "name": "Response",
+        "doc": "What the learner answered, in the shape of the item type (T036). Only answer-field input; tutor chat text is never here.",
+        "fields": [
+          {
+            "name": "kind",
+            "type": {
+              "type": "enum",
+              "name": "ResponseKind",
+              "doc": "Shape of the response.",
+              "symbols": [
+                "UNKNOWN",
+                "CHOICE",
+                "NUMERIC",
+                "EXPRESSION",
+                "ORDER",
+                "WIDGET",
+                "SKIPPED"
+              ],
+              "default": "UNKNOWN"
+            },
+            "default": "UNKNOWN",
+            "privacy": "personal",
+            "doc": "Shape of the response; SKIPPED when the learner moved on without answering."
+          },
+          {
+            "name": "choice_ids",
+            "type": { "type": "array", "items": "string" },
+            "default": [],
+            "privacy": "personal",
+            "doc": "CHOICE: IDs of the options chosen, as named in the item definition."
+          },
+          {
+            "name": "numeric_value",
+            "type": ["null", "double"],
+            "default": null,
+            "privacy": "personal",
+            "doc": "NUMERIC: the number entered."
+          },
+          {
+            "name": "unit",
+            "type": ["null", "string"],
+            "default": null,
+            "privacy": "personal",
+            "doc": "NUMERIC: the unit symbol chosen, from the item's list of units."
+          },
+          {
+            "name": "expression",
+            "type": ["null", "string"],
+            "default": null,
+            "privacy": "personal",
+            "doc": "EXPRESSION: the algebraic answer entered with the maths keypad or answer field, at most 500 characters (checked at ingestion, T025)."
+          },
+          {
+            "name": "order",
+            "type": { "type": "array", "items": "string" },
+            "default": [],
+            "privacy": "personal",
+            "doc": "ORDER: element IDs in the order the learner gave."
+          },
+          {
+            "name": "widget_values",
+            "type": { "type": "map", "values": "double" },
+            "default": {},
+            "privacy": "personal",
+            "doc": "WIDGET: parameter values set in the interactive simulation, by parameter name from the item definition."
+          }
+        ]
+      },
+      "privacy": "personal",
+      "doc": "The learner's answer."
+    },
+    {
+      "name": "correct",
+      "type": "boolean",
+      "privacy": "personal",
+      "doc": "True when the answer earns full credit. The correctness label of knowledge tracing."
+    },
+    {
+      "name": "score",
+      "type": "double",
+      "privacy": "personal",
+      "doc": "Credit earned, from 0.0 to 1.0: partial credit for multi-step and widget items (T221), 0 or 1 for the others."
+    },
+    {
+      "name": "misconception_code",
+      "type": ["null", "string"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "Misconception diagnosed from a wrong answer (T071, T221), as a code from the curriculum team's taxonomy; null when none."
+    },
+    {
+      "name": "confidence_1_5",
+      "type": ["null", "int"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "Confidence the learner gave before seeing the result, from 1 (guessing) to 5 (sure); null when not asked."
+    },
+    {
+      "name": "timed_out",
+      "type": "boolean",
+      "default": false,
+      "privacy": "personal",
+      "doc": "True when the submission was forced because the item's time ran out."
+    },
+    {
+      "name": "grader_version",
+      "type": ["null", "string"],
+      "default": null,
+      "privacy": "none",
+      "doc": "Version of the answer evaluation service that graded the answer (T221), for re-grading and audits."
+    }
+  ]
+}

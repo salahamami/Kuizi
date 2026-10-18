@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img">
+  <title>Kuizi</title>
+  <!-- Kuizi star mark for dark (night #0B1E3A) backgrounds. Colour: cyan-light #4FD1F0 (9.3:1 on night).
+       Same geometry as kuizi-star.svg. -->
+  <path fill="#4FD1F0" fill-rule="evenodd" d="M50 0L64.645 14.645H85.355V35.355L100 50L85.355 64.645V85.355H64.645L50 100L35.355 85.355H14.645V64.645L0 50L14.645 35.355V14.645H35.355Z M50 37.5L37.5 50L50 62.5L62.5 50Z"/>
+</svg>

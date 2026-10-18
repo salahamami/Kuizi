@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 689 142" width="689" height="142" role="img">
+  <title>Kuizi — كويزي</title>
+  <!-- Bilingual lockup, for light backgrounds. Both names start at the star and read outwards:
+       «كويزي» on the left (x 0-298, reads right to left from the star), star in the centre (x 330-430),
+       "kuizi" on the right (x 462-689, reads left to right from the star). Gaps 32. Never mirrored.
+       Logotypes night #0B1E3A, star cyan #0A6F8C. Clear space: 25 units on every side. -->
+  <g fill="#0B1E3A" transform="translate(0 8)">
+    <path d="M62 36H106V50H76V70H126L62 134H26A26 26 0 0 1 0 108V70H14V108A12 12 0 0 0 26 120H56L92 84H62Z"/>
+    <path d="M31 90L41 100L31 110L21 100Z M55 90L65 100L55 110L45 100Z"/>
+    <path d="M182 36H196V84H146L110 120H90L140 70H182Z"/>
+    <path d="M150 40L160 50L150 60L140 50Z"/>
+    <path d="M174 90L184 100L174 110L164 100Z M198 90L208 100L198 110L188 100Z"/>
+    <path fill-rule="evenodd" d="M254 0H298V84H260L224 120H204L240 84H212V36H260V70H284V14H268L254 0Z M226 50V70H246V50Z"/>
+  </g>
+  <path fill="#0A6F8C" fill-rule="evenodd" transform="translate(330 0)" d="M50 0L64.645 14.645H85.355V35.355L100 50L85.355 64.645V85.355H64.645L50 100L35.355 85.355H14.645V64.645L0 50L14.645 35.355V14.645H35.355Z M50 37.5L37.5 50L50 62.5L62.5 50Z"/>
+  <g fill="#0B1E3A" transform="translate(462 8)">
+    <path d="M0 0H14V44L30 28H50L23 55L52 84H32L14 66V84H0Z"/>
+    <path d="M60 28H74V58A12 12 0 0 0 98 58V28H112V84H98V81.065A26 26 0 0 1 60 58Z"/>
+    <path d="M125 28H139V84H125Z M132 0L142 10L132 20L122 10Z"/>
+    <path d="M151 28H197V42L169 70H199V84H151V70L179 42H151Z"/>
+    <path d="M210 28H224V84H210Z M217 0L227 10L217 20L207 10Z"/>
+  </g>
+</svg>

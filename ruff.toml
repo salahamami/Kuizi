@@ -1,0 +1,45 @@
+# Ruff settings for every Python project in the monorepo (ADR 0008, T006).
+# CI and `make lint` run exactly this version: change it here and both follow.
+required-version = "==0.16.8"
+
+target-version = "py312"
+# 120 keeps the existing brain code close to its current shape; the formatter wraps longer code.
+line-length = 120
+# Apply the excludes below even when a file is passed explicitly on the command line.
+force-exclude = true
+# The backlog generator belongs to the main session (CLAUDE.md) and is not linted yet.
+extend-exclude = ["tools/backlog"]
+
+[lint]
+# Rules are listed explicitly, so a Ruff upgrade never changes what is checked by surprise.
+select = [
+  "E",   # pycodestyle errors
+  "W",   # pycodestyle warnings
+  "F",   # pyflakes: undefined names, unused imports and variables
+  "I",   # import order
+  "B",   # bugbear: likely bugs
+  "UP",  # pyupgrade: modern syntax for Python 3.12
+  "C4",  # comprehensions
+  "SIM", # simplifications
+  "NPY", # NumPy-specific rules
+  "RUF", # Ruff-specific rules
+]
+ignore = [
+  "C408",   # dict(key=value) reads well for keyword arguments (matplotlib styles)
+  "SIM108", # an if/else block is often clearer than a long conditional expression
+]
+
+[lint.per-file-ignores]
+# Teaching notebooks (T238) favour short cells: several imports or statements on a line, small
+# lambdas, imports kept for the reader. Ruff still reports undefined names and syntax errors there.
+"*.ipynb" = ["E401", "E402", "E501", "E702", "E731", "F401", "B", "C4", "I", "RUF", "SIM"]
+# Tests use plain asserts and fixed sample values.
+"**/tests/**" = ["B011"]
+
+[lint.isort]
+known-first-party = ["kuizi_brain"]
+
+[format]
+# Notebooks keep the layout their authors chose.
+# scripts/check_repo.py is a shared file: its 37-line reformat is left to the main session.
+exclude = ["*.ipynb", "scripts/check_repo.py"]

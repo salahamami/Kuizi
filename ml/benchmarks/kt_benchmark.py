@@ -96,7 +96,8 @@ MODES = {
         "assist2009": {"max_students": None, "lengths": [50, 100, 200], "main_length": 100,
                        "models": MODELS, "main_only_models": ["saint_plus_notime"]},
         "simulated": {"n_students": 600, "answers_per_student": 120, "lengths": [100],
-                      "main_length": 100, "models": MODELS, "main_only_models": ["saint_plus_fairtime"]},
+                      "main_length": 100, "models": MODELS,
+                      "main_only_models": ["saint_plus_notime", "saint_plus_fairtime"]},
         "latency_iters": {1: 200, 64: 30},
     },
 }
@@ -125,10 +126,12 @@ DATA_SOURCES = {
 
 @lru_cache(maxsize=None)
 def load_dataset(name: str, mode: str) -> pd.DataFrame:
-    """One row per answer, sorted by student then time. Cached per process."""
+    """One row per answer, sorted by student then time. Cached per process. df.attrs holds the
+    vocabulary sizes of the whole dataset (n_items, n_kc), also when students are subsampled."""
     cfg = MODES[mode][name]
     if name == "assist2009":
         df = kb_data.load_assist2009()
+        n_items, n_kc = int(df.item.max()) + 1, int(df.kc.max()) + 1
         if cfg["max_students"]:
             rng = np.random.default_rng(FOLD_SEED)
             keep = rng.choice(np.sort(df.student.unique()), size=cfg["max_students"], replace=False)
@@ -136,19 +139,18 @@ def load_dataset(name: str, mode: str) -> pd.DataFrame:
     elif name == "simulated":
         df = kb_data.simulate_students(n_students=cfg["n_students"],
                                        answers_per_student=cfg["answers_per_student"], seed=7)
+        n_items, n_kc = int(df.attrs["n_items"]), int(df.attrs["n_kc"])
         df = df.sort_values(["student", "t"], kind="stable").reset_index(drop=True)
     else:
         raise ValueError(name)
+    df.attrs = {"n_items": n_items, "n_kc": n_kc}
     return df
 
 
 def vocab_sizes(name: str, mode: str) -> tuple[int, int]:
     """Number of items and concepts in the whole dataset (ids start at 0 in the loaders)."""
-    if name == "assist2009":
-        df = kb_data.load_assist2009() if MODES[mode][name]["max_students"] else load_dataset(name, mode)
-        return int(df.item.max()) + 1, int(df.kc.max()) + 1
     df = load_dataset(name, mode)
-    return int(df.attrs["n_items"]), int(df.attrs["n_kc"])
+    return df.attrs["n_items"], df.attrs["n_kc"]
 
 
 def student_folds(students: np.ndarray, n_folds: int = N_FOLDS, seed: int = FOLD_SEED) -> dict:
@@ -411,7 +413,7 @@ def run_job(job: dict) -> dict:
             loss.backward()
             nn.utils.clip_grad_norm_(model.parameters(), HYPER["clip"])
             opt.step()
-            total += float(loss) * int(sel.sum())
+            total += float(loss.detach()) * int(sel.sum())
             count += int(sel.sum())
         v = predict(model, W_valid)
         v_auc = kb_metrics.auc(v["y"], v["p"])
@@ -587,31 +589,30 @@ def gate_vs_baseline(runs: pd.DataFrame, slices: pd.DataFrame, dataset: str, max
                      baseline: str = "dkt") -> pd.DataFrame:
     """T047 rule, on fold-paired differences against the baseline: a challenger is better only if
     mean AUC gain >= +0.005, no slice AUC down by more than 0.01, ECE not worse by more than 0.01."""
-    r = runs[(runs.dataset == dataset) & (runs.max_len == max_len)].set_index(["model", "fold"])
-    s = slices[(slices.dataset == dataset) & (slices.max_len == max_len)].set_index(["model", "fold", "slice"])
-    rows = []
-    if baseline not in r.index.get_level_values(0):
+    r = runs[(runs.dataset == dataset) & (runs.max_len == max_len)]
+    if baseline not in set(r.model):
         return pd.DataFrame()
-    base = r.loc[baseline]
-    for model in r.index.get_level_values(0).unique():
+    auc = r.pivot_table(index="fold", columns="model", values="auc")
+    ece = r.pivot_table(index="fold", columns="model", values="ece")
+    s = slices[(slices.dataset == dataset) & (slices.max_len == max_len)]
+    s_auc = s.pivot_table(index=["slice", "fold"], columns="model", values="auc") if len(s) else None
+    rows = []
+    for model in auc.columns:
         if model == baseline:
             continue
-        m = r.loc[model]
-        folds = m.index.intersection(base.index)
-        d_auc = (m.loc[folds, "auc"] - base.loc[folds, "auc"])
-        d_ece = (m.loc[folds, "ece"] - base.loc[folds, "ece"])
-        worst_slice, worst = None, np.inf
-        for sl in s.index.get_level_values(2).unique():
-            try:
-                diff = (s.loc[(model, slice(None), sl), "auc"].droplevel([0, 2]).loc[folds]
-                        - s.loc[(baseline, slice(None), sl), "auc"].droplevel([0, 2]).loc[folds]).mean()
-            except KeyError:
-                continue
-            if diff < worst:
-                worst_slice, worst = sl, diff
-        passed = (d_auc.mean() >= GATE["auc_gain"]) and (worst >= -GATE["slice_drop"]) and (d_ece.mean() <= GATE["ece_worse"])
+        folds = auc[[model, baseline]].dropna().index
+        d_auc = auc.loc[folds, model] - auc.loc[folds, baseline]
+        d_ece = ece.loc[folds, model] - ece.loc[folds, baseline]
+        worst_slice, worst = None, np.nan
+        if s_auc is not None and model in s_auc:
+            per_slice = (s_auc[model] - s_auc[baseline]).dropna().groupby(level="slice").mean()
+            if len(per_slice):
+                worst_slice, worst = per_slice.idxmin(), float(per_slice.min())
+        passed = (d_auc.mean() >= GATE["auc_gain"]) and not (worst < -GATE["slice_drop"]) \
+            and (d_ece.mean() <= GATE["ece_worse"])
         rows.append({"dataset": dataset, "max_len": max_len, "challenger": model, "baseline": baseline,
-                     "folds": len(folds), "delta_auc_mean": d_auc.mean(), "delta_auc_std": d_auc.std(ddof=1) if len(folds) > 1 else np.nan,
+                     "folds": len(folds), "delta_auc_mean": d_auc.mean(),
+                     "delta_auc_std": d_auc.std(ddof=1) if len(folds) > 1 else np.nan,
                      "delta_ece_mean": d_ece.mean(), "worst_slice": worst_slice, "worst_slice_delta_auc": worst,
                      "passes_t047_gate": bool(passed)})
     return pd.DataFrame(rows)
@@ -745,6 +746,8 @@ def main(argv=None):
     (args.out / f"{prefix}_meta.json").write_text(json.dumps(provenance, indent=2, default=str))
 
     pd.set_option("display.width", 200)
+    if args.mode == "quick":
+        print("\nQUICK MODE: a smoke test on a small sample with 2 epochs. Do not compare models on these numbers.")
     print("\nAUC / ECE (mean and standard deviation over folds)")
     print(summary[["dataset", "model", "max_len", "folds", "auc_mean", "auc_std", "ece_mean", "ece_std",
                    "accuracy_mean"]].round(4).to_string(index=False))

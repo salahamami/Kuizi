@@ -39,3 +39,10 @@ source = ["kuizi_schemas"]
 
 [tool.coverage.report]
 fail_under = 85
+
+# CI (T006, docs/dev/ci.md): the compatibility check compares every schema with all its committed
+# versions, so CI checks out the whole history; `make schemas-check` runs after the tests, and
+# refuses to pass on a shallow clone.
+[tool.kuizi.ci]
+full-history = true
+checks = ["kuizi-schemas check --require-full-history"]

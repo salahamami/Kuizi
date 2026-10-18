@@ -62,6 +62,11 @@ run_tests() {
       (cd "$path" && uv run --locked pytest --cov --cov-fail-under="$coverage")
     fi
   done <<< "$python_projects"
+  while IFS=$'\t' read -r path command; do
+    [ -n "$path" ] || continue
+    echo "== ${path}: ${command}"
+    (cd "$path" && uv run --locked bash -euo pipefail -c "$command")
+  done <<< "$(python3 scripts/ci/discover.py --list checks)"
 
   if [ -z "$ts_packages" ]; then
     echo "== No TypeScript package yet: Vitest skipped"

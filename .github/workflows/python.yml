@@ -6,7 +6,7 @@ on:
   workflow_call:
     inputs:
       projects:
-        description: 'JSON list, for example [{"path": "ml", "id": "ml", "coverage": 75, "typecheck": false, "services": []}]'
+        description: 'JSON list from scripts/ci/discover.py, for example [{"path": "ml", "id": "ml", "coverage": 75, "typecheck": false, "services": [], "fetch_depth": 1, "checks": []}]'
         required: true
         type: string
 
@@ -34,6 +34,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          # 1 = this commit only; 0 = the whole history ([tool.kuizi.ci] full-history = true)
+          fetch-depth: ${{ matrix.project.fetch_depth }}
 
       - name: Set up uv (cache keyed on uv.lock)
         uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
@@ -101,6 +103,19 @@ jobs:
             { echo "### Coverage: ${PROJECT_PATH} (gate ${COVERAGE_MIN} %)"; echo
               uv run --locked coverage report --format=markdown; } >> "$GITHUB_STEP_SUMMARY" || true
           fi
+          exit "$status"
+
+      - name: Project checks ([tool.kuizi.ci] checks)
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' && join(matrix.project.checks, '') != '' }}
+        env:
+          CHECKS: ${{ toJSON(matrix.project.checks) }}
+        run: |
+          status=0
+          while IFS= read -r command; do
+            echo "::group::${command}"
+            uv run --locked bash -euo pipefail -c "$command" || status=1
+            echo "::endgroup::"
+          done < <(jq -r '.[]' <<< "$CHECKS")
           exit "$status"
 
       - name: Keep the test and coverage reports

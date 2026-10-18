@@ -19,7 +19,7 @@ import pandas as pd
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import kt_benchmark as kb  # noqa: E402
+import kt_benchmark as kb
 
 MODELS = ["dkt", "sakt", "saint", "akt", "saint_plus", "saint_plus_notime"]
 
@@ -36,14 +36,14 @@ def check_windows():
         # evaluation: each answer except a student's first, exactly once
         W = kb.build_windows(df, L, stride=L // 2)
         t = W["target"]
-        got = sorted(zip(W["student"][t].tolist(), W["pos"][t].tolist()))
+        got = sorted(zip(W["student"][t].tolist(), W["pos"][t].tolist(), strict=True))
         want = sorted((s, i) for s, g in df.groupby("student") for i in range(1, len(g)))
         assert got == want, f"evaluation windows, L={L}"
         ctx = torch.arange(L).expand_as(W["pos"])[t]
         assert bool((ctx >= torch.minimum(W["pos"][t], torch.tensor(L // 2))).all()), f"history, L={L}"
         # training: every answer after the first of its window
         W = kb.build_windows(df, L)
-        got = sorted(zip(W["student"][W["target"]].tolist(), W["pos"][W["target"]].tolist()))
+        got = sorted(zip(W["student"][W["target"]].tolist(), W["pos"][W["target"]].tolist(), strict=True))
         want = sorted(
             (s, i)
             for s, g in df.groupby("student")

@@ -41,7 +41,7 @@ import sys
 import time
 import urllib.request
 from concurrent.futures import ProcessPoolExecutor, as_completed
-from functools import lru_cache
+from functools import cache
 from pathlib import Path
 
 import numpy as np
@@ -140,7 +140,7 @@ DATA_SOURCES = {
 # ---------------------------------------------------------------------------
 
 
-@lru_cache(maxsize=None)
+@cache
 def load_dataset(name: str, mode: str) -> pd.DataFrame:
     """One row per answer, sorted by student then time. Cached per process. df.attrs holds the
     vocabulary sizes of the whole dataset (n_items, n_kc), also when students are subsampled."""
@@ -217,7 +217,7 @@ def build_windows(df: pd.DataFrame, max_len: int, stride: int | None = None, fai
         "assistive": df.assistive.to_numpy().astype(bool) if "assistive" in df else np.zeros(len(df), bool),
     }
     spans = []  # (row offset of window start, n real answers, first target position in window)
-    for a, b in zip(starts, ends):
+    for a, b in zip(starts, ends, strict=True):
         n = b - a
         if n < 2:
             continue
@@ -436,7 +436,7 @@ def scores(y, p) -> dict:
         "auc": kb_metrics.auc(y, p),
         "accuracy": kb_metrics.accuracy(y, p),
         "ece": kb_metrics.expected_calibration_error(y, p),
-        "n_predictions": int(len(y)),
+        "n_predictions": len(y),
     }
 
 
@@ -468,7 +468,7 @@ def run_job(job: dict) -> dict:
     torch.set_num_threads(job["threads"])
     seed = job["seed"]
     torch.manual_seed(seed)
-    np.random.seed(seed)
+    np.random.seed(seed)  # noqa: NPY002 - pyKT and other libraries draw from NumPy's global generator
     t0 = time.time()
     df = load_dataset(job["dataset"], job["mode"])
     n_items, n_kc = vocab_sizes(job["dataset"], job["mode"])
@@ -638,7 +638,7 @@ def code_version() -> dict:
         except (OSError, subprocess.SubprocessError):
             return ""
 
-    files = [HERE / "kt_benchmark.py"] + sorted((ML_DIR / "kuizi_brain").glob("*.py"))
+    files = [HERE / "kt_benchmark.py", *sorted((ML_DIR / "kuizi_brain").glob("*.py"))]
     h = hashlib.sha256()
     for f in files:
         h.update(f.read_bytes())
@@ -857,7 +857,7 @@ def plan_jobs(mode: str, threads: int, cfg: dict | None = None) -> list[dict]:
         if not dcfg:
             continue
         for L in dcfg["lengths"]:
-            models = list(dcfg["models"]) + (dcfg["main_only_models"] if L == dcfg["main_length"] else [])
+            models = list(dcfg["models"]) + (dcfg["main_only_models"] if dcfg["main_length"] == L else [])
             for model in models:
                 for fold in cfg["folds"]:
                     jobs.append(
@@ -946,7 +946,7 @@ def main(argv=None):
         "ticket": "T040",
         "mode": args.mode,
         "started": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        "config": {k: v for k, v in cfg.items()},
+        "config": dict(cfg),
         "hyperparameters": HYPER,
         "fold_seed": FOLD_SEED,
         "n_folds": N_FOLDS,
@@ -1000,7 +1000,8 @@ def main(argv=None):
                             latency.append({"dataset": dataset, **m})
                             print(
                                 f"  {model:11s} L={L:3d} batch {batch:2d} threads {threads}: "
-                                f"{m['ms_per_call_median']:.2f} ms per call, {m['ms_per_prediction']:.3f} ms per prediction"
+                                f"{m['ms_per_call_median']:.2f} ms per call, "
+                                f"{m['ms_per_prediction']:.3f} ms per prediction"
                             )
                     latency.append(
                         {

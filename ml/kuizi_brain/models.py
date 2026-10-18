@@ -12,7 +12,6 @@ import numpy as np
 import torch
 from torch import nn
 
-
 # ---------------------------------------------------------------------------
 # Batches: answer histories cut into fixed-length windows
 # ---------------------------------------------------------------------------
@@ -153,7 +152,7 @@ def estimate_ability(items, correct, b, a, prior_sd=1.0):
     """
     grid = np.linspace(-4, 4, 401)
     log_post = -0.5 * (grid / prior_sd) ** 2
-    for i, y in zip(items, correct):
+    for i, y in zip(items, correct, strict=True):
         p = 1 / (1 + np.exp(-a[i] * (grid - b[i])))
         log_post += np.log(p if y else 1 - p)
     post = np.exp(log_post - log_post.max())
@@ -311,7 +310,7 @@ class SaintPlus(nn.Module):
 
     def forward(self, batch):
         item, kc, y = batch["item"], batch["kc"], batch["correct"]
-        B, L = item.shape
+        L = item.shape[1]
         pos = self.pos(torch.arange(L))
         mask = causal_mask(L)
         enc = self.item(item) + self.kc(kc) + pos

@@ -65,7 +65,8 @@ An access token for `dev-student` signed in through the web app:
   "sub": "f41e3b5c-b3e8-484d-8d70-a5405d99b689",
   "typ": "Bearer",
   "azp": "kuizi-web",
-  "sid": "5c08c133-6beb-4e9d-b6be-360b0c866c4c",
+  "sid": "Zz4Jwbds0bIuUQi8NoXJfRfd",
+  "jti": "onltro:8b744b10-1de5-6b26-5c69-099326bfd985",
   "scope": "openid email profile",
   "tenant_id": "demo-school-a",
   "roles": ["student"],
@@ -76,6 +77,7 @@ An access token for `dev-student` signed in through the web app:
 
 - **No name, email or username in access tokens.** Clients use Keycloak's *lightweight access token*, so tokens that travel to every service (and may end up in gateway logs) carry no personal data beyond the user ID. The ID token, read only by the app that signed in, carries the name and email (and the locale once set) for display, plus `tenant_id` and `roles`.
 - Signed RS256 with the realm key; Keycloak publishes the public keys at `/realms/kuizi/protocol/openid-connect/certs`.
+- `sid` and `jti` are opaque strings: their format changed between Keycloak 26.1 and 26.8 (UUIDs before), so code must not parse them.
 
 | Setting | Value | Why |
 | --- | --- | --- |
@@ -99,7 +101,7 @@ The login page offers exactly French (default) and Arabic. Arabic renders right 
 
 Arabic on a phone (390 px wide): ![Login page in Arabic on a phone](identity/login-ar-mobile.png)
 
-Screenshots taken with Playwright (Chromium) against the local stack on 2026-10-18; every control measured 44 px high or more.
+Screenshots taken with Playwright (Chromium) against the local stack (Keycloak 26.8.1) on 2026-10-18; every control measured 44 px high or more (Keycloak's own theme draws them 36 px high).
 
 Self-registration is **off** until the consent flow exists (T013): accounts are created by admins, by Google sign-in, or later by Kuizi's own onboarding. Password reset by email and email verification are off locally because the local stack has no mail server; they come with SES (T212).
 
@@ -182,6 +184,8 @@ docker compose -f infra/local/compose.yaml --env-file .env up -d --force-recreat
 ```
 
 `make reset` also works but deletes every service's data. After a change in `services/keycloak/`, bump the image tag in `infra/local/compose.yaml` (or run `docker compose -f infra/local/compose.yaml --env-file .env build keycloak`) so the image is rebuilt.
+
+Keycloak upgrades are one-way: on start, a newer Keycloak migrates its database (for example 26.1 to 26.8), and an older image then refuses to start on it. Going back to an older Keycloak means `make reset`, or dropping and recreating only the `keycloak` database.
 
 Stock Keycloak (without the Kuizi image) cannot load this realm: it does not know the `pwnedPassword` policy and answers HTTP 500 for every `kuizi` page, including the admin call that would delete the realm. Before going back to a checkout older than T012, delete the realm with the commands above while the Kuizi image still runs, or use `make reset`.
 

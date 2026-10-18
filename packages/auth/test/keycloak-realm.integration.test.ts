@@ -127,17 +127,25 @@ describe.skipIf(!running)(`Keycloak realm settings (${ISSUER})`, () => {
       expect((await setPassword(`violet-otter-${randomUUID()}`)).status).toBe(204);
     });
 
+    // Keycloak 26.8 refuses a password grant with HTTP 400 invalid_grant (RFC 6749 section 5.2);
+    // 26.1 answered 401. Both mean "no token".
+    async function expectRefused(password: string) {
+      const { status, body } = await passwordGrant(username, password);
+      expect([400, 401]).toContain(status);
+      expect(body.error).toBe("invalid_grant");
+    }
+
     it("locks the account for a while after 5 failed sign-ins", async () => {
       const password = `amber-falcon-${randomUUID()}`;
       expect((await setPassword(password)).status).toBe(204);
       for (let attempt = 0; attempt < 5; attempt += 1) {
-        expect((await passwordGrant(username, "not-the-password-local-only")).status).toBe(401);
+        await expectRefused("not-the-password-local-only");
       }
       const state = (await (
         await adminApi("GET", `/attack-detection/brute-force/users/${userId}`)
       ).json()) as { disabled: boolean; numFailures: number };
       expect(state.disabled).toBe(true);
-      expect((await passwordGrant(username, password)).status).toBe(401);
+      await expectRefused(password); // the right password is refused while locked
     });
   });
 

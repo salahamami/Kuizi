@@ -19,10 +19,10 @@
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- Keep in step with the Keycloak image tag in ../../Dockerfile. -->
-    <keycloak.version>26.1.4</keycloak.version>
-    <!-- Versions bundled in the Keycloak 26.1.4 image (/opt/keycloak/lib/lib/main). -->
+    <keycloak.version>26.8.1</keycloak.version>
+    <!-- Versions bundled in the Keycloak 26.8.1 image (/opt/keycloak/lib/lib/main). -->
     <httpclient.version>4.5.14</httpclient.version>
-    <jboss-logging.version>3.6.0.Final</jboss-logging.version>
+    <jboss-logging.version>3.6.3.Final</jboss-logging.version>
     <junit.version>5.11.4</junit.version>
   </properties>
 

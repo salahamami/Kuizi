@@ -19,7 +19,7 @@ flowchart TB
   end
   subgraph Brain["The Brain"]
     ROUTER["Routing service (E06)<br/>DAG + policy, ≤ 80 ms"]
-    TS["TorchServe SAINT+ (E05)<br/>p99 ≤ 50 ms"]
+    TS["TorchServe knowledge-tracing model (E05, ADR 0007)<br/>p99 ≤ 50 ms"]
     TUTOR["Socratic tutor (E08)<br/>LiteLLM + RAG + judge (E07)"]
     KF["Kubeflow weekly retrain (E05)"]
   end
@@ -54,7 +54,7 @@ flowchart TB
 | Identity (Keycloak), consent, encryption, audit | E02 | Backend, Security | Pen-test with no High/Critical findings |
 | Telemetry (Kafka, Redis, Snowflake, dbt, feature store) | E03 | Data Engineering | 50k events/s, warehouse lag under 5 minutes |
 | Knowledge graph and item bank | E04, E13 | Product + Curriculum | At least 400 KCs and 6,000 items for Physics |
-| SAINT+ knowledge tracing, IRT cold start, retraining | E05 | ML Engineering | AUC ≥ 0.80, p99 ≤ 50 ms |
+| Knowledge tracing (model chosen in ADR 0007: AKT proposed, DKT fallback), IRT cold start, retraining | E05 | ML Engineering | AUC ≥ 0.80, p99 ≤ 50 ms |
 | Routing, remediation, spaced repetition, daily plan | E06 | Backend | Next step in ≤ 80 ms |
 | LLM gateway, RAG, judge, prompt registry | E07 | LLM / Applied AI | No unjudged tutor output reaches a student |
 | Socratic tutor UX, hint ladder, misconceptions | E08 | Frontend, LLM | First token under 1.2 s at p75 on 3G |

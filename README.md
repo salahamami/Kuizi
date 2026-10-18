@@ -10,6 +10,7 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 
 | Need | Go to |
 | --- | --- |
+| **Current status: sprint, decisions waiting, next work** | [`docs/STATUS.md`](docs/STATUS.md) |
 | Rules for every contributor and AI session | [`CLAUDE.md`](CLAUDE.md) |
 | Agent roles and working agreement (Ready, Done, review gates) | [`docs/agents/README.md`](docs/agents/README.md), [`docs/process/working-agreement.md`](docs/process/working-agreement.md) |
 | Documentation map | [`docs/README.md`](docs/README.md) |
@@ -31,4 +32,4 @@ Jira project `KK` ([board](https://kuizi.atlassian.net/jira/software/projects/KK
 
 ## Status
 
-Planning and design. Development is local-first ([ADR 0006](docs/architecture/decisions/0006-local-first-development.md)): Sprint 1 (started 2026-10-17) sets up the local stack on the product owner's PC and starts the brain walkthrough; the cloud comes in S8–S11, before the pilot in S12. Physics and Maths go live in S18 (June 2027), the other subjects in S19–S20.
+Sprint 1 is active (see [`docs/STATUS.md`](docs/STATUS.md)). Development is local-first ([ADR 0006](docs/architecture/decisions/0006-local-first-development.md)): Sprint 1 (started 2026-10-17) sets up the local stack on the product owner's PC and starts the brain walkthrough; the cloud comes in S8–S11, before the pilot in S12. Physics and Maths go live in S18 (June 2027), the other subjects in S19–S20.

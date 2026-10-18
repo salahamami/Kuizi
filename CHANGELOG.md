@@ -2,6 +2,16 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
+## 2026-10-18 — Session hand-off: status page and documentation rule
+
+### Added
+- `docs/STATUS.md`: the page every session starts from — Sprint 1 state, decisions waiting for the product owner, next work, how a new session continues (Jira IDs, transitions, story-point field), environment notes for Claude sessions.
+
+### Changed
+- `CLAUDE.md`: sessions start with `docs/STATUS.md`; new rule "Always keep the documentation updated" (update STATUS, CHANGELOG and every changed `.md` file, commit and push, before a session ends).
+- `README.md` and `docs/README.md` link the status page. The sprint table in `docs/backlog/README.md` shows Sprint 1 with 4 tickets (21 points) and Sprint 2 with 5 (29) after T040 moved forward.
+- `docs/architecture/overview.md` and `neural-core.md` no longer present SAINT+ as decided: the model is chosen in ADR 0007 (proposed AKT, DKT fallback).
+
 ## 2026-10-18 — T040 knowledge-tracing benchmark (Sprint 1, in review)
 
 Done by the `ml-engineering` agent; reviewed by the main session (self-checks rerun, results files and ADR checked).

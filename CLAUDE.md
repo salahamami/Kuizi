@@ -2,6 +2,8 @@
 
 Kuizi is an adaptive tutor for Tunisian Baccalauréat students (Physics, Maths, Sciences, Sciences techniques, Économie & Gestion), in French and Arabic. Read `README.md` for the product and `docs/README.md` for the documentation map.
 
+**Start every session with [`docs/STATUS.md`](docs/STATUS.md)**: the active sprint, what is waiting for the product owner, the next work and environment notes.
+
 ## Sources of truth
 
 | What | Where | Rule |
@@ -25,6 +27,13 @@ Whenever a session adds, removes or changes backlog items (scope, points, sprint
 4. Record the change in `CHANGELOG.md`.
 
 Never leave the repo and Jira out of sync at the end of a session. If Jira cannot be reached, say so and list the pending Jira changes in `CHANGELOG.md` under "Pending Jira sync".
+
+## Always keep the documentation updated
+
+The product owner works across several chats, so the repository must always tell the whole story:
+
+- Before a session ends, update `docs/STATUS.md` (sprint state, decisions waiting, next work), add a `CHANGELOG.md` entry, and update every `.md` file whose content changed (READMEs, guides, ADRs, the backlog README).
+- Commit and push everything; never leave work only in a session.
 
 ## Conventions
 

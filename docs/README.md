@@ -7,6 +7,7 @@
 | [`architecture/`](architecture/overview.md) | Architecture overview, Neural Core, decision records | Product owner with the architecture agents |
 | [`design/`](design/design-system.md) | Cyanotype design system, screen list, canvas link | Design / UX |
 | [`backlog/`](backlog/README.md) | Full backlog, Jira import file, sync procedure, v1 sources | Product owner |
+| [`STATUS.md`](STATUS.md) | **Start here**: active sprint, decisions waiting for the product owner, next work | Main session, updated every session |
 | [`agents/`](agents/README.md), [`process/`](process/working-agreement.md) | The 14 agent roles and the working agreement (Definition of Ready and Done, review gates, branches, sprint rhythm) | Product owner |
 | [`brain/`](brain/README.md) | Brain walkthrough (10 notebooks in English and Arabic) and the English–Arabic–French glossary | ML Engineering agent |
 | [`dev/`](dev/local-setup.md) | Running Kuizi on a PC: local stack, brain environment, everyday commands | Platform / DevOps agent |

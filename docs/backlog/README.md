@@ -37,8 +37,8 @@ Project name **Kuizi Adaptive Bac Platform** (renamed from `Kuizi_KPI` on 2026-1
 
 | Sprint | Jira sprint ID | Start | End | Tickets | Points |
 | --- | --- | --- | --- | --- | --- |
-| APL Sprint 1 | 440 | 2026-10-17 | 2026-10-30 | 3 | 13 |
-| APL Sprint 2 | 441 | 2026-11-02 | 2026-11-13 | 6 | 37 |
+| APL Sprint 1 | 440 | 2026-10-17 | 2026-10-30 | 4 | 21 |
+| APL Sprint 2 | 441 | 2026-11-02 | 2026-11-13 | 5 | 29 |
 | APL Sprint 3 | 442 | 2026-11-16 | 2026-11-27 | 10 | 65 |
 | APL Sprint 4 | 443 | 2026-11-30 | 2026-12-11 | 10 | 79 |
 | APL Sprint 5 | 444 | 2026-12-14 | 2026-12-25 | 11 | 90 |

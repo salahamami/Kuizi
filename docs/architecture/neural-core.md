@@ -4,6 +4,8 @@ The Neural Core is the knowledge-tracing engine at the centre of Kuizi: it turns
 
 ![Kuizi Neural Core infographic](../assets/kuizi-neural-core.jpg)
 
+> **Model choice.** This page describes SAINT+, the model the plan started from. The T040 benchmark proposes AKT instead, with DKT as fallback ([ADR 0007](decisions/0007-knowledge-tracing-model.md), waiting for the product owner's decision); the four stages below stay the same whichever model is chosen.
+
 To learn each idea step by step with runnable code, follow the [brain walkthrough](../brain/README.md) (T238), in English and Arabic.
 
 ## How it works, in four stages

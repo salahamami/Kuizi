@@ -69,6 +69,8 @@ Application code reads the connection settings from `.env` (`DATABASE_URL`, `KAF
 | `make status` | Show each service and its address |
 | `make smoke` | Test that every service works |
 | `make check` | Check the repository is consistent (compose file, agent briefs, backlog); run it before handing work back |
+| `make lint` | Run the CI linters on every project (Ruff, mypy, Prettier, ESLint, tsc); see [CI](ci.md) |
+| `make test` | Run the unit tests with the CI coverage gates on every project |
 | `make logs` | Follow the logs (Ctrl+C to stop) |
 | `make down` | Stop everything, keep the data |
 | `make reset` | Delete all local data and start from zero |

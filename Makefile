@@ -5,7 +5,7 @@ COMPOSE := docker compose -f infra/local/compose.yaml --env-file .env
 
 .DEFAULT_GOAL := help
 
-.PHONY: help up up-llm down reset status smoke check logs ml-setup ml-lab
+.PHONY: help up up-llm down reset status smoke check lint test logs ml-setup ml-lab
 .PHONY: graph-setup graph-load graph-export graph-test
 
 help: ## List the commands
@@ -48,6 +48,12 @@ smoke: .env ## Check that every service really works (write and read data)
 
 check: ## Check the repository is consistent before handing work back
 	@python3 scripts/check_repo.py
+
+lint: ## Run the CI linters on every project (Ruff, mypy, Prettier, ESLint, tsc)
+	@scripts/ci/run-checks.sh lint
+
+test: ## Run the CI unit tests with their coverage gates on every project
+	@scripts/ci/run-checks.sh test
 
 logs: ## Follow the logs of every service
 	$(COMPOSE) --profile llm logs -f --tail=50

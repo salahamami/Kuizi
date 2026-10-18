@@ -35,3 +35,27 @@ torch = [{ index = "pytorch-cpu", marker = "sys_platform != 'darwin'" }]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
 explicit = true
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+]
+
+# Tests (T006): synthetic data, CPU only, no download. CI and `make test` run
+#   uv run --locked pytest --cov
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers", "--strict-config"]
+
+[tool.coverage.run]
+source = ["kuizi_brain"]
+branch = true
+
+[tool.coverage.report]
+# Coverage gate for this research library, read by CI (scripts/ci/discover.py). Services keep the
+# 80 % gate and apps 70 % (T006). The brain library grows by experiments run from notebooks, so its
+# gate stops it growing without tests rather than taxing each experiment (measured: 98 % on
+# 2026-10-18; reasons in docs/dev/ci.md).
+fail_under = 75
+show_missing = true

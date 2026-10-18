@@ -1,0 +1,91 @@
+# Reusable Python checks (T006, ADR 0008): one job per uv project, called by ci.yml with the
+# projects found by scripts/ci/discover.py. Same commands as `make lint` and `make test`.
+name: Python
+
+on:
+  workflow_call:
+    inputs:
+      projects:
+        description: 'JSON list, for example [{"path": "ml", "id": "ml", "coverage": 75, "typecheck": false}]'
+        required: true
+        type: string
+
+permissions: {}
+
+jobs:
+  check:
+    name: ${{ matrix.project.path }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJSON(inputs.projects) }}
+    defaults:
+      run:
+        working-directory: ${{ matrix.project.path }}
+    env:
+      # Values reach the scripts through the environment, never pasted into them.
+      PROJECT_PATH: ${{ matrix.project.path }}
+      COVERAGE_MIN: ${{ matrix.project.coverage }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up uv (cache keyed on uv.lock)
+        uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: "0.11.32"
+          enable-cache: true
+          cache-dependency-glob: ${{ matrix.project.path }}/uv.lock
+          cache-suffix: ${{ matrix.project.id }}
+          cache-python: true
+
+      - name: Lint (ruff check)
+        run: |
+          ruff_version="$(sed -n 's/^required-version = "==\(.*\)"$/\1/p' "${GITHUB_WORKSPACE}/ruff.toml")"
+          echo "RUFF_VERSION=${ruff_version}" >> "$GITHUB_ENV"
+          uvx "ruff@${ruff_version}" check --output-format=github .
+
+      - name: Format (ruff format --check)
+        if: ${{ !cancelled() }}
+        run: uvx "ruff@${RUFF_VERSION}" format --check .
+
+      - name: Install (uv sync --locked)
+        id: sync
+        if: ${{ !cancelled() }}
+        run: uv sync --locked
+
+      - name: Type check (mypy)
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' && matrix.project.typecheck }}
+        run: uv run --locked mypy
+
+      - name: Unit tests with coverage (gate ${{ matrix.project.coverage }} %)
+        id: test
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' }}
+        run: |
+          status=0
+          uv run --locked pytest --cov --cov-report=term-missing:skip-covered --cov-report=xml:coverage.xml \
+            --junitxml=junit.xml --cov-fail-under="${COVERAGE_MIN}" || status=$?
+          if [ "$status" -eq 5 ]; then
+            echo "::error::No tests found in ${PROJECT_PATH}: every Python project needs pytest tests (docs/dev/ci.md)."
+          fi
+          if [ -f .coverage ]; then
+            { echo "### Coverage: ${PROJECT_PATH} (gate ${COVERAGE_MIN} %)"; echo
+              uv run --locked coverage report --format=markdown; } >> "$GITHUB_STEP_SUMMARY" || true
+          fi
+          exit "$status"
+
+      - name: Keep the test and coverage reports
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: python-${{ matrix.project.id }}-reports
+          path: |
+            ${{ matrix.project.path }}/coverage.xml
+            ${{ matrix.project.path }}/junit.xml
+          if-no-files-found: ignore
+          retention-days: 14

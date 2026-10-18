@@ -53,20 +53,28 @@ def load_assist2009(data_dir=DATA_DIR, min_answers=5):
     df = raw[(raw.original == 1) & raw.skill_id.notna()].copy()
     df = df.sort_values(["user_id", "order_id"])
     df = df[df.groupby("user_id").user_id.transform("size") >= min_answers]
-    out = pd.DataFrame({
-        "student": df.user_id.astype("category").cat.codes.astype("int64"),
-        "item": df.problem_id.astype("category").cat.codes.astype("int64"),
-        "kc": df.skill_id.astype(str).astype("category").cat.codes.astype("int64"),
-        "kc_name": df.skill_name.astype(str),
-        "correct": df.correct.astype(int),
-        "elapsed_s": (df.ms_first_response.clip(lower=0) / 1000).clip(upper=600),
-        "hints": df.hint_count.astype(int),
-    })
+    out = pd.DataFrame(
+        {
+            "student": df.user_id.astype("category").cat.codes.astype("int64"),
+            "item": df.problem_id.astype("category").cat.codes.astype("int64"),
+            "kc": df.skill_id.astype(str).astype("category").cat.codes.astype("int64"),
+            "kc_name": df.skill_name.astype(str),
+            "correct": df.correct.astype(int),
+            "elapsed_s": (df.ms_first_response.clip(lower=0) / 1000).clip(upper=600),
+            "hints": df.hint_count.astype(int),
+        }
+    )
     return out.reset_index(drop=True)
 
 
-def simulate_students(n_students=600, answers_per_student=120, items_per_kc=25, seed=7,
-                      share_with_accommodation=0.15, kc_graph=G.PHYSICS_KCS):
+def simulate_students(
+    n_students=600,
+    answers_per_student=120,
+    items_per_kc=25,
+    seed=7,
+    share_with_accommodation=0.15,
+    kc_graph=G.PHYSICS_KCS,
+):
     """Simulated Bac Physics students on the concept graph (T219 builds the production version).
 
     Each student has a general ability and a hidden mastery per concept (a logit). A concept
@@ -129,22 +137,54 @@ def simulate_students(n_students=600, answers_per_student=120, items_per_kc=25, 
             uncertainty = 1 - abs(2 * p - 1)
             elapsed = rng.lognormal(np.log(35 + 50 * uncertainty), 0.35) * speed * multiplier
             hints = int(rng.random() < 0.6 * (1 - p)) + int(rng.random() < 0.25 * (1 - p))
-            rows.append((s, t, item, k, kcs[k], correct, elapsed, gap, hints, multiplier, assistive,
-                         p, 1 / (1 + np.exp(-(mastery[k] + ability)))))
+            rows.append(
+                (
+                    s,
+                    t,
+                    item,
+                    k,
+                    kcs[k],
+                    correct,
+                    elapsed,
+                    gap,
+                    hints,
+                    multiplier,
+                    assistive,
+                    p,
+                    1 / (1 + np.exp(-(mastery[k] + ability))),
+                )
+            )
             mastery[k] += learn_rate * (1.0 if correct else 0.6)
             last_seen[k] = t
             if mastery[k] + ability > 0.8 and frontier == k:
                 frontier = min(frontier + 1, n_kc - 1)
         final_p[s] = guess + (1 - guess - slip) / (1 + np.exp(-(mastery + ability)))
-    df = pd.DataFrame(rows, columns=["student", "t", "item", "kc", "kc_id", "correct", "elapsed_s",
-                                     "lag_s", "hints", "time_multiplier", "assistive", "p_true",
-                                     "mastery_true"])
+    df = pd.DataFrame(
+        rows,
+        columns=[
+            "student",
+            "t",
+            "item",
+            "kc",
+            "kc_id",
+            "correct",
+            "elapsed_s",
+            "lag_s",
+            "hints",
+            "time_multiplier",
+            "assistive",
+            "p_true",
+            "mastery_true",
+        ],
+    )
     df["kc_name"] = df.kc_id.map(lambda k: kc_graph[k][0])
     df.attrs["n_items"] = len(item_kc)
     df.attrs["n_kc"] = n_kc
     df.attrs["item_kc"] = item_kc
     df.attrs["item_difficulty"] = item_b
-    df.attrs["final_p_true"] = final_p   # true chance of success on a typical item (difficulty 0), per student and concept, at the end
+    df.attrs["final_p_true"] = (
+        final_p  # true chance of success on a typical item (difficulty 0), per student and concept, at the end
+    )
     return df
 
 

@@ -397,7 +397,7 @@ TICKETS = [
          ac=["Tokens published as a package used by web and native apps",
              "Every component documented in Storybook in FR and AR",
              "Visual regression tests cover every component"],
-         blocked=["T076", "T231"], labels=["design-system", "cyanotype"]),
+         blocked=["T076", "T231", "T241"], labels=["design-system", "cyanotype"]),
     dict(id="T175", type="Story", epic="E17", team=FE, sprint=8, points=5, priority="High",
          summary="As a new student, I choose my Bac section, get parental consent and take the 12-question placement test (screen 01)",
          desc="Onboarding flow from screen 01: choose the Bac section, capture a parent's phone for consent, then take the 12-question adaptive placement test (T043).",
@@ -866,7 +866,28 @@ TICKETS = [
              "Production is ready, monitored and backed up at least one sprint before the pilot starts"],
          blocked=["T003", "T004", "T005", "T007", "T211", "T212", "T213", "T015", "T016", "T021", "T217", "T218"],
          labels=["local-first", "cloud", "migration"]),
+    dict(id="T241", type="Task", epic="E09", team=FE, sprint=3, points=5, priority="Highest",
+         summary="Shared UI package and Storybook: packages/ui, stories in French and Arabic, accessibility checks, Storybook for every pull request",
+         desc="Split from T076 (13 points) before sprint entry. `packages/ui` in the pnpm workspace (ADR 0008) holds the components the web app and the portals share. Storybook documents them in French and Arabic with a direction switch; high-contrast, reduced-motion and 200 % text are story parameters; the axe accessibility check runs on every story in CI (T006). The Cyanotype components themselves come with T174.",
+         ac=["Storybook builds for every pull request and is available to reviewers (CI artifact now, a preview URL after T240)",
+             "Every story renders in French and Arabic with the direction switch, with no clipped or overlapping content",
+             "The axe check runs on every story in CI and fails on serious or critical violations"],
+         blocked=["T076"], labels=["storybook", "design-system", "frontend"]),
 ]
+
+# v1 tickets rewritten when they were split before sprint entry (13 points is too big, CLAUDE.md).
+# The fields given replace the v1 ones; a change line records the split.
+SPLITS = {
+    "T076": dict(
+        summary="Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in",
+        points=8,
+        desc="The web app shell in the pnpm workspace (ADR 0008): `apps/web` on Next.js 15 with the App Router, server components for shells and client islands for widgets; next-intl with Arabic and French and layout direction switching; sign-in with Keycloak through PKCE (T012) and token checks through `@kuizi/auth`; CSS logical properties, user-scalable text and reduced motion from the start; jsx-a11y lint; a JavaScript budget for the learning route checked in CI (T006). The shared UI package and Storybook moved to T241.",
+        ac=["Initial JS ≤ 180 KB gz on the learning route, checked in CI",
+            "Switching ar ↔ fr flips layout direction with no layout shift",
+            "A synthetic dev user signs in with Keycloak (PKCE) and the app reads their roles and tenant from the token"],
+        change="Split on 2026-10-18 before sprint entry: 13 → 8 points; the shared UI package and Storybook (5 points) became T241",
+    ),
+}
 
 # Changes to v1 tickets: extra acceptance criteria appended to their description.
 CHANGES = {
@@ -948,7 +969,7 @@ REPLAN_SPRINTS = {
     "T044": 10, "T045": 11, "T046": 7, "T047": 12, "T048": 7, "T049": 9, "T050": 13, "T051": 6, "T052": 8,
     "T053": 9, "T054": 10, "T055": 10, "T056": 9, "T057": 11, "T059": 5, "T060": 10, "T061": 6, "T062": 7,
     "T063": 9, "T064": 8, "T065": 8, "T066": 9, "T068": 7, "T069": 8, "T070": 8, "T072": 9, "T074": 9,
-    "T076": 3, "T080": 7, "T081": 8, "T082": 8, "T085": 12, "T086": 11, "T087": 9, "T089": 10, "T092": 5,
+    "T076": 3, "T241": 3, "T080": 7, "T081": 8, "T082": 8, "T085": 12, "T086": 11, "T087": 9, "T089": 10, "T092": 5,
     "T101": 11, "T102": 12, "T103": 6, "T111": 8, "T113": 12, "T114": 9, "T117": 10, "T123": 9, "T126": 15,
     "T128": 16, "T134": 4, "T135": 6, "T136": 8, "T137": 7, "T140": 12, "T141": 11, "T143": 13, "T144": 13,
     "T145": 9, "T147": 12, "T148": 8, "T149": 12, "T150": 13, "T151": 11, "T152": 10, "T154": 14, "T156": 14,

@@ -17,7 +17,7 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 | Run Kuizi on your PC (local stack, brain environment) | [`docs/dev/local-setup.md`](docs/dev/local-setup.md) |
 | CI: checks on every pull request, coverage gates, signed images | [`docs/dev/ci.md`](docs/dev/ci.md) |
 | Product overview, personas, screens, advanced concepts | [`docs/product/overview.md`](docs/product/overview.md) |
-| Full backlog (20 epics, 240 tickets, 1,636 points) | [`docs/backlog/APL_Full_Backlog.md`](docs/backlog/APL_Full_Backlog.md) |
+| Full backlog (20 epics, 241 tickets, 1,636 points) | [`docs/backlog/APL_Full_Backlog.md`](docs/backlog/APL_Full_Backlog.md) |
 | Jira import file and sync procedure | [`docs/backlog/README.md`](docs/backlog/README.md) |
 | Architecture and decisions | [`docs/architecture/`](docs/architecture/overview.md) |
 | Neural Core (knowledge-tracing engine) | [`docs/architecture/neural-core.md`](docs/architecture/neural-core.md) |
@@ -31,7 +31,7 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 
 ## Project tracking
 
-Jira project `KK` ([board](https://kuizi.atlassian.net/jira/software/projects/KK/boards/37)) mirrors the backlog in this repository: 20 epics (KK-1 to KK-20), 240 tickets (KK-21 to KK-260) estimated and placed in `APL Sprint 1` to `APL Sprint 20`, and 440 "blocks" links. The repository is the source of truth. [`docs/backlog/jira_keys.csv`](docs/backlog/jira_keys.csv) maps each backlog ID to its Jira key, and [`docs/backlog/README.md`](docs/backlog/README.md) describes the sync.
+Jira project `KK` ([board](https://kuizi.atlassian.net/jira/software/projects/KK/boards/37)) mirrors the backlog in this repository: 20 epics (KK-1 to KK-20), 241 tickets (KK-21 to KK-261) estimated and placed in `APL Sprint 1` to `APL Sprint 20`, and 442 "blocks" links. The repository is the source of truth. [`docs/backlog/jira_keys.csv`](docs/backlog/jira_keys.csv) maps each backlog ID to its Jira key, and [`docs/backlog/README.md`](docs/backlog/README.md) describes the sync.
 
 ## Status
 

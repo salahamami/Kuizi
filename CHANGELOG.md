@@ -2,6 +2,22 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
+## 2026-10-18 — T076 split before Sprint 3 (new ticket T241)
+
+T076 was 13 points, and the conventions split anything at 13 before sprint entry.
+
+### Changed
+- **T076 (KK-96)** is now "Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in", 8 points, still Sprint 3. Its description follows ADR 0008 (pnpm workspace instead of Turborepo), and its third acceptance criterion is now Keycloak sign-in (PKCE) with roles and tenant read from the token.
+- **New T241 (KK-261)** "Shared UI package and Storybook: packages/ui, stories in French and Arabic, accessibility checks, Storybook for every pull request", 5 points, Sprint 3, frontend agent, blocked by T076. It blocks T174, which now also lists it as a blocker.
+- Sprint 3 keeps 65 points (now 11 tickets). Totals: 241 tickets, 1,636 points, 442 dependency links.
+- `tools/backlog/build_backlog.py` reads a new `SPLITS` table in `additions.py`: the fields it gives replace the v1 ticket's, and a change line records the split.
+
+### Jira sync
+- KK-96: summary, description and story points (13 → 8) updated.
+- KK-261 created: Tâche, child of KK-9 (E09), APL Sprint 3, 5 points, labels `agent-frontend`, `apl-t241`, `sprint-03`, `phase-0`, `storybook`, `design-system`, `frontend`; assigned to the product owner. Links: KK-96 blocks KK-261, KK-261 blocks KK-194.
+- Descriptions refreshed for the 13 tickets blocked by T076 (KK-97, KK-103, KK-104, KK-106, KK-122, KK-153, KK-155, KK-157, KK-182, KK-194, KK-240, KK-244, KK-252) and the scope line of KK-9.
+- `docs/backlog/jira_keys.csv`: new row `T241,KK-261`.
+
 ## 2026-10-18 — Sprint 2 started early: CI, identity, learner events, concept graph, brand
 
 While Sprint 1 waits for the product owner's review, the five Sprint 2 tickets were started early ("work ahead"); they stay in APL Sprint 2 in Jira. Each was handed to the agent of its role, worked in its own git worktree and branch, reviewed by the main session and merged into `feat/sprint-2`. The backlog itself (scope, points, sprints, links) did not change.

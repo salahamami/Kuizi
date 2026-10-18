@@ -2,7 +2,7 @@
 
 **Last updated:** 2026-10-18, end of the second working session. Every session updates this page before it ends (`CLAUDE.md`).
 
-Kuizi is planned (240 tickets in 20 two-week sprints, mirrored in Jira `KK`), runs on the product owner's PC (local-first, ADR 0006), and is built by the product owner with one AI agent per role (ADR 0005). Sprint 1 is active and in review. The five Sprint 2 tickets were worked ahead and are in review too. **All the work is on the branch `feat/sprint-2`; `main` is still empty until the product owner merges it.**
+Kuizi is planned (241 tickets in 20 two-week sprints, mirrored in Jira `KK`), runs on the product owner's PC (local-first, ADR 0006), and is built by the product owner with one AI agent per role (ADR 0005). Sprint 1 is active and in review. The five Sprint 2 tickets were worked ahead and are in review too. **All the work is on the branch `feat/sprint-2`; `main` is still empty until the product owner merges it.**
 
 ## Sprint 1 — active, 2026-10-17 → 2026-10-30
 
@@ -31,11 +31,11 @@ The full list, by urgency and ticket, is in [`product-owner-decisions.md`](produ
 2. **Protect `main`**: require a pull request and the status check **CI result** (steps in [`dev/ci.md`](dev/ci.md)).
 3. **Decide ADR 0007** (brain model: AKT with Platt calibration, or DKT until T239) and **accept ADRs 0008, 0009, 0010** (monorepo layout, identity, event contracts).
 4. **Approve the new dependencies** (list with licences in the decisions page).
-5. **Split T076 (13 points)** before Sprint 3; the frontend agent proposes the split.
 
 ## Next work
 
-- **Sprint 3 (2026-11-16 → 2026-11-27):** T013 parental consent (KK-33), T014 authorisation middleware (KK-34), T024 telemetry SDK (KK-44), T033 subject and track first-class (KK-53), T036 item data model (KK-56), T041 pyKT integration (KK-61, after ADR 0007), T076 Next.js app architecture (KK-96, split first), T214 backend service template (KK-234), T215 threat model and security scanning (KK-235), T235 content operations (KK-255). All their blockers are built.
+- **Sprint 3 (2026-11-16 → 2026-11-27):** T013 parental consent (KK-33), T014 authorisation middleware (KK-34), T024 telemetry SDK (KK-44), T033 subject and track first-class (KK-53), T036 item data model (KK-56), T041 pyKT integration (KK-61, after ADR 0007), T076 Next.js app foundation (KK-96, split from 13 to 8 points), T241 shared UI package and Storybook (KK-261, new, 5 points), T214 backend service template (KK-234), T215 threat model and security scanning (KK-235), T235 content operations (KK-255). All their blockers are built.
+- Split every 13-point ticket before its sprint starts (CLAUDE.md). Next ones: T042 (Sprint 4, after ADR 0007), then T035, T037, T077 and T092 (Sprint 5). `SPLITS` in `tools/backlog/additions.py` holds the rewritten v1 ticket; T076/T241 is the example.
 - After Sprint 2: replace the 134-point ceiling with the measured velocity and rerun `tools/backlog/replan.py`.
 
 ## How a new session continues

@@ -137,7 +137,7 @@
     "webgl",
     "pwa"
    ],
-   "description": "## Goal\nA per-subject widget package system on React Three Fiber, with the physics package (mechanics, circuits, optics, waves) built first, an offline-first PWA that survives outages mid-assessment, and real-time peer trivia battles.\n\n## Definition of Done\nLighthouse performance ≥ 85 on a mid-range Android device over 3G; a 20-minute assessment completes with the network cut for 5 minutes and syncs losslessly.\n\n## Scope\n- 12 tickets, 122 story points\n- Sprints S3–S12 (Phase 3)\n- Component: Frontend"
+   "description": "## Goal\nA per-subject widget package system on React Three Fiber, with the physics package (mechanics, circuits, optics, waves) built first, an offline-first PWA that survives outages mid-assessment, and real-time peer trivia battles.\n\n## Definition of Done\nLighthouse performance ≥ 85 on a mid-range Android device over 3G; a 20-minute assessment completes with the network cut for 5 minutes and syncs losslessly.\n\n## Scope\n- 13 tickets, 122 story points\n- Sprints S3–S12 (Phase 3)\n- Component: Frontend"
   },
   {
    "id": "E10",
@@ -2082,9 +2082,9 @@
    "jira_key": "KK-96",
    "type": "Task",
    "epic": "E09",
-   "summary": "Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration",
+   "summary": "Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in",
    "priority": "Highest",
-   "points": 13,
+   "points": 8,
    "sprint": "APL Sprint 3",
    "component": "Frontend",
    "team": "Frontend (Next.js / R3F)",
@@ -2099,7 +2099,7 @@
    "blocked_by": [
     "T012"
    ],
-   "description": "Monorepo (Turborepo) with `apps/web`, `packages/ui`, `packages/telemetry`, `packages/physics`. Server components for shells, client islands for widgets; next-intl with RTL layout switching; Keycloak PKCE flow; Storybook for the design system; bundle budget enforced in CI.\n\n**Acceptance criteria**\n\n- Initial JS ≤ 180 KB gz on the learning route\n- Switching ar ↔ fr flips layout direction with no layout shift\n- Storybook deployed per PR\n\n**Addendum changes (v2)**\n\n- jsx-a11y lint, high-contrast tokens, user-scalable text, reduced motion, CSS logical properties for RTL; Cyanotype tokens from T174\n\n**Context**\n\n- Backlog ID: T076\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 3\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms)\n- Blocks: T077, T083, T084, T086, T102, T133, T135, T137, T162, T174, T220, T224, T232"
+   "description": "The web app shell in the pnpm workspace (ADR 0008): `apps/web` on Next.js 15 with the App Router, server components for shells and client islands for widgets; next-intl with Arabic and French and layout direction switching; sign-in with Keycloak through PKCE (T012) and token checks through `@kuizi/auth`; CSS logical properties, user-scalable text and reduced motion from the start; jsx-a11y lint; a JavaScript budget for the learning route checked in CI (T006). The shared UI package and Storybook moved to T241.\n\n**Acceptance criteria**\n\n- Initial JS ≤ 180 KB gz on the learning route, checked in CI\n- Switching ar ↔ fr flips layout direction with no layout shift\n- A synthetic dev user signs in with Keycloak (PKCE) and the app reads their roles and tenant from the token\n\n**Addendum changes (v2)**\n\n- jsx-a11y lint, high-contrast tokens, user-scalable text, reduced motion, CSS logical properties for RTL; Cyanotype tokens from T174\n- Split on 2026-10-18 before sprint entry: 13 → 8 points; the shared UI package and Storybook (5 points) became T241\n\n**Context**\n\n- Backlog ID: T076\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 3\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T012 (Deploy Keycloak identity provider with student / parent / teacher / school-admin realms)\n- Blocks: T077, T083, T084, T086, T102, T133, T135, T137, T162, T174, T220, T224, T232, T241"
   },
   {
    "id": "T077",
@@ -2123,7 +2123,7 @@
    "blocked_by": [
     "T076"
    ],
-   "description": "`@apl/physics` package: shared scene wrapper, SI unit helpers, deterministic fixed-step integrator (Rapier WASM for rigid bodies), touch/pointer gesture layer, three performance tiers detected from GPU benchmark (shadows/particles toggled), WebGL context-loss recovery.\n\n**Acceptance criteria**\n\n- 60 fps on a mid-range Android (e.g., Snapdragon 6-series) at tier 2\n- Context loss recovers without losing the student's state\n- Simulation is deterministic given the same seed and inputs (replayable)\n\n**Addendum changes (v2)**\n\n- Canvas exposes an accessibility tree and honours reduced motion\n\n**Context**\n\n- Backlog ID: T077\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 5\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)\n- Blocks: T078, T079, T080, T081, T082, T138"
+   "description": "`@apl/physics` package: shared scene wrapper, SI unit helpers, deterministic fixed-step integrator (Rapier WASM for rigid bodies), touch/pointer gesture layer, three performance tiers detected from GPU benchmark (shadows/particles toggled), WebGL context-loss recovery.\n\n**Acceptance criteria**\n\n- 60 fps on a mid-range Android (e.g., Snapdragon 6-series) at tier 2\n- Context loss recovers without losing the student's state\n- Simulation is deterministic given the same seed and inputs (replayable)\n\n**Addendum changes (v2)**\n\n- Canvas exposes an accessibility tree and honours reduced motion\n\n**Context**\n\n- Backlog ID: T077\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 5\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in)\n- Blocks: T078, T079, T080, T081, T082, T138"
   },
   {
    "id": "T078",
@@ -2270,7 +2270,7 @@
     "T024",
     "T056"
    ],
-   "description": "Offline-first PWA: Workbox service worker precaches the shell and the current assignment's items/widgets; answers and telemetry queued in IndexedDB; background sync on reconnect with conflict rules (server-authoritative timestamps); UI shows offline state.\n\n**Acceptance criteria**\n\n- Cut network for 5 minutes mid-assessment → 100% of answers and events sync on reconnect\n- Pre-fetch of the next 10 routed items happens on Wi-Fi only (configurable)\n- Service worker update does not interrupt an active session\n\n**Addendum changes (v2)**\n\n- Comfort profile and read-aloud voices cached offline\n\n**Context**\n\n- Backlog ID: T083\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 11\n- Agent role: Frontend (Next.js / R3F)\n- Personas: student\n- Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration), T024 (Build the Next.js telemetry SDK: batching, offline buffering, hesitation and time-to-first-click), T056 (Add pre-computation of next-item candidates to hide inference latency behind the UI)\n- Blocks: T185"
+   "description": "Offline-first PWA: Workbox service worker precaches the shell and the current assignment's items/widgets; answers and telemetry queued in IndexedDB; background sync on reconnect with conflict rules (server-authoritative timestamps); UI shows offline state.\n\n**Acceptance criteria**\n\n- Cut network for 5 minutes mid-assessment → 100% of answers and events sync on reconnect\n- Pre-fetch of the next 10 routed items happens on Wi-Fi only (configurable)\n- Service worker update does not interrupt an active session\n\n**Addendum changes (v2)**\n\n- Comfort profile and read-aloud voices cached offline\n\n**Context**\n\n- Backlog ID: T083\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 11\n- Agent role: Frontend (Next.js / R3F)\n- Personas: student\n- Blocked by: T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in), T024 (Build the Next.js telemetry SDK: batching, offline buffering, hesitation and time-to-first-click), T056 (Add pre-computation of next-item candidates to hide inference latency behind the UI)\n- Blocks: T185"
   },
   {
    "id": "T084",
@@ -2296,7 +2296,7 @@
     "T026",
     "T076"
    ],
-   "description": "WebSocket service (Node.js + Socket.IO on Redis adapter) for matchmaking by mastery band, synchronised question reveal, 15 s timers with server-authoritative scoring, anti-cheat (answer hash submitted before reveal), spectator mode for class battles.\n\n**Acceptance criteria**\n\n- Two clients on 3G see question reveal within 300 ms of each other\n- A disconnect/reconnect within 10 s resumes the battle\n- Load test: 5,000 concurrent battles on 4 pods\n\n**Addendum changes (v2)**\n\n- Time multiplier applies per player; calm mode can opt out of battles\n\n**Context**\n\n- Backlog ID: T084\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 12\n- Agent role: Frontend (Next.js / R3F)\n- Personas: student\n- Blocked by: T026 (Deploy Redis Cluster (ElastiCache) and the real-time aggregation consumer), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)\n- Blocks: T104, T181"
+   "description": "WebSocket service (Node.js + Socket.IO on Redis adapter) for matchmaking by mastery band, synchronised question reveal, 15 s timers with server-authoritative scoring, anti-cheat (answer hash submitted before reveal), spectator mode for class battles.\n\n**Acceptance criteria**\n\n- Two clients on 3G see question reveal within 300 ms of each other\n- A disconnect/reconnect within 10 s resumes the battle\n- Load test: 5,000 concurrent battles on 4 pods\n\n**Addendum changes (v2)**\n\n- Time multiplier applies per player; calm mode can opt out of battles\n\n**Context**\n\n- Backlog ID: T084\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 12\n- Agent role: Frontend (Next.js / R3F)\n- Personas: student\n- Blocked by: T026 (Deploy Redis Cluster (ElastiCache) and the real-time aggregation consumer), T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in)\n- Blocks: T104, T181"
   },
   {
    "id": "T085",
@@ -2346,7 +2346,7 @@
     "T007",
     "T213"
    ],
-   "description": "Lighthouse CI per PR with budgets; Datadog RUM with Core Web Vitals by device class and region (Tunis vs. interior governorates); error tracking with source maps.\n\n**Acceptance criteria**\n\n- PR fails if LCP budget on learning route exceeds 2.5 s (throttled)\n- RUM dashboard segments by governorate and connection type\n- Source-mapped stack traces for 100% of prod JS errors\n\n**Context**\n\n- Backlog ID: T086\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 11\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration), T007 (Roll out Datadog APM, distributed tracing, log pipeline and memory-leak watchdogs), T213 (CDN and media store: CloudFront for the web app and media, S3 media buckets with image resizing and cache rules)"
+   "description": "Lighthouse CI per PR with budgets; Datadog RUM with Core Web Vitals by device class and region (Tunis vs. interior governorates); error tracking with source maps.\n\n**Acceptance criteria**\n\n- PR fails if LCP budget on learning route exceeds 2.5 s (throttled)\n- RUM dashboard segments by governorate and connection type\n- Source-mapped stack traces for 100% of prod JS errors\n\n**Context**\n\n- Backlog ID: T086\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 11\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in), T007 (Roll out Datadog APM, distributed tracing, log pipeline and memory-leak watchdogs), T213 (CDN and media store: CloudFront for the web app and media, S3 media buckets with image resizing and cache rules)"
   },
   {
    "id": "T087",
@@ -2732,7 +2732,7 @@
     "T219",
     "T232"
    ],
-   "description": "Journeys: signup + consent, placement test, routed session with widget interaction, tutor hint ladder, offline/online assessment, battle, teacher dashboard, billing. Runs on preview envs per PR (smoke subset) and nightly (full) on real mobile device cloud.\n\n**Acceptance criteria**\n\n- Full suite < 25 minutes, flake rate < 2%\n- Smoke subset blocks merge\n- Runs on Chrome, Safari iOS and Android WebView\n\n**Addendum changes (v2)**\n\n- Adds keyboard-only and screen-reader smoke flows in both languages\n\n**Context**\n\n- Backlog ID: T102\n- Epic: E12 Observability, Quality & Release Readiness\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 12\n- Agent role: QA / SDET\n- Blocked by: T010 (Provision ephemeral preview environments per pull request), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration), T219 (Synthetic learner data generator for development, preview environments, tests and load tests), T232 (UI string localisation workflow: message catalogs, translation management, native-speaker review, pseudo-localisation and RTL checks in CI)"
+   "description": "Journeys: signup + consent, placement test, routed session with widget interaction, tutor hint ladder, offline/online assessment, battle, teacher dashboard, billing. Runs on preview envs per PR (smoke subset) and nightly (full) on real mobile device cloud.\n\n**Acceptance criteria**\n\n- Full suite < 25 minutes, flake rate < 2%\n- Smoke subset blocks merge\n- Runs on Chrome, Safari iOS and Android WebView\n\n**Addendum changes (v2)**\n\n- Adds keyboard-only and screen-reader smoke flows in both languages\n\n**Context**\n\n- Backlog ID: T102\n- Epic: E12 Observability, Quality & Release Readiness\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 12\n- Agent role: QA / SDET\n- Blocked by: T010 (Provision ephemeral preview environments per pull request), T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in), T219 (Synthetic learner data generator for development, preview environments, tests and load tests), T232 (UI string localisation workflow: message catalogs, translation management, native-speaker review, pseudo-localisation and RTL checks in CI)"
   },
   {
    "id": "T103",
@@ -3526,7 +3526,7 @@
     "T076",
     "T174"
    ],
-   "description": "Extend the Cyanotype design system (T174) with the accessibility baseline: a visible 3 px focus ring, a high-contrast theme, a type scale that reflows to 200 %, reduced-motion rules, and an accessibility contract per component (role, name, keyboard behaviour, states).\n\n**Acceptance criteria**\n\n- Every component in Storybook passes axe-core with zero violations\n- High-contrast theme meets 7:1 for text and 3:1 for UI parts\n- Each component documents its keyboard map and screen-reader output in FR and AR\n\n**Context**\n\n- Backlog ID: T133\n- Epic: E14 Inclusive Learning & Accessibility\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 4\n- Agent role: Accessibility\n- Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration), T174 (Cyanotype design system in code: tokens, components (buttons, chips, concept states, hint ladder, confidence scale), Storybook, RTL)\n- Blocks: T136, T140"
+   "description": "Extend the Cyanotype design system (T174) with the accessibility baseline: a visible 3 px focus ring, a high-contrast theme, a type scale that reflows to 200 %, reduced-motion rules, and an accessibility contract per component (role, name, keyboard behaviour, states).\n\n**Acceptance criteria**\n\n- Every component in Storybook passes axe-core with zero violations\n- High-contrast theme meets 7:1 for text and 3:1 for UI parts\n- Each component documents its keyboard map and screen-reader output in FR and AR\n\n**Context**\n\n- Backlog ID: T133\n- Epic: E14 Inclusive Learning & Accessibility\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 4\n- Agent role: Accessibility\n- Blocked by: T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in), T174 (Cyanotype design system in code: tokens, components (buttons, chips, concept states, hint ladder, confidence scale), Storybook, RTL)\n- Blocks: T136, T140"
   },
   {
    "id": "T134",
@@ -3577,7 +3577,7 @@
     "T134",
     "T076"
    ],
-   "description": "Optional onboarding step and a settings page with presets (low vision, screen reader, dyslexia, attention, motor, hearing, calm) that combine, plus fine-grained toggles. The profile follows OS settings by default.\n\n**Acceptance criteria**\n\n- Presets combine and can be undone individually\n- OS text size, reduced motion and screen reader are detected and applied on first launch\n- Changes apply instantly without reload, in FR and AR\n\n**Context**\n\n- Backlog ID: T135\n- Epic: E14 Inclusive Learning & Accessibility\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 6\n- Agent role: Frontend (Next.js / R3F)\n- Personas: student\n- Blocked by: T134 (Learner Comfort Profile service: preferences and accommodations API, versioned, synced across devices, cached offline), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)\n- Blocks: T142, T143, T182"
+   "description": "Optional onboarding step and a settings page with presets (low vision, screen reader, dyslexia, attention, motor, hearing, calm) that combine, plus fine-grained toggles. The profile follows OS settings by default.\n\n**Acceptance criteria**\n\n- Presets combine and can be undone individually\n- OS text size, reduced motion and screen reader are detected and applied on first launch\n- Changes apply instantly without reload, in FR and AR\n\n**Context**\n\n- Backlog ID: T135\n- Epic: E14 Inclusive Learning & Accessibility\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 6\n- Agent role: Frontend (Next.js / R3F)\n- Personas: student\n- Blocked by: T134 (Learner Comfort Profile service: preferences and accommodations API, versioned, synced across devices, cached offline), T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in)\n- Blocks: T142, T143, T182"
   },
   {
    "id": "T136",
@@ -3627,7 +3627,7 @@
     "T036",
     "T076"
    ],
-   "description": "Render every formula as MathML alongside the KaTeX visual and add speech rules so screen readers and read-aloud speak formulas correctly in French and Arabic, including formulas inside right-to-left text.\n\n**Acceptance criteria**\n\n- Screen readers read the 200-formula test set correctly in FR and AR (curriculum sign-off)\n- Formulas inside Arabic sentences keep left-to-right order\n- Read-aloud uses the same speech rules\n\n**Context**\n\n- Backlog ID: T137\n- Epic: E14 Inclusive Learning & Accessibility\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 7\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T036 (Define the item (question) data model: types, KC tags, difficulty, distractor rationale, media), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)"
+   "description": "Render every formula as MathML alongside the KaTeX visual and add speech rules so screen readers and read-aloud speak formulas correctly in French and Arabic, including formulas inside right-to-left text.\n\n**Acceptance criteria**\n\n- Screen readers read the 200-formula test set correctly in FR and AR (curriculum sign-off)\n- Formulas inside Arabic sentences keep left-to-right order\n- Read-aloud uses the same speech rules\n\n**Context**\n\n- Backlog ID: T137\n- Epic: E14 Inclusive Learning & Accessibility\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 7\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T036 (Define the item (question) data model: types, KC tags, difficulty, distractor rationale, media), T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in)"
   },
   {
    "id": "T138",
@@ -4238,7 +4238,7 @@
    "blocked_by": [
     "T076"
    ],
-   "description": "Confirm native learner apps (SwiftUI, Kotlin) versus a PWA or a shared framework; evaluate reuse of the R3F widget package; write the architecture decision record.\n\n**Acceptance criteria**\n\n- ADR published with the decision, trade-offs and cost\n- A prototype embeds one simulation on iOS and Android\n- App Store guideline 4.2 (minimum functionality) risk assessed\n\n**Context**\n\n- Backlog ID: T162\n- Epic: E16 Native Apps & Store Compliance\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 5\n- Agent role: Mobile (iOS / Android)\n- Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)\n- Blocks: T163, T164"
+   "description": "Confirm native learner apps (SwiftUI, Kotlin) versus a PWA or a shared framework; evaluate reuse of the R3F widget package; write the architecture decision record.\n\n**Acceptance criteria**\n\n- ADR published with the decision, trade-offs and cost\n- A prototype embeds one simulation on iOS and Android\n- App Store guideline 4.2 (minimum functionality) risk assessed\n\n**Context**\n\n- Backlog ID: T162\n- Epic: E16 Native Apps & Store Compliance\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 5\n- Agent role: Mobile (iOS / Android)\n- Blocked by: T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in)\n- Blocks: T163, T164"
   },
   {
    "id": "T163",
@@ -4530,9 +4530,10 @@
    ],
    "blocked_by": [
     "T076",
-    "T231"
+    "T231",
+    "T241"
    ],
-   "description": "Implement the Cyanotype design system from the design canvas (board 00): tokens for colour, type, spacing and states; components (buttons, chips, concept-state nodes, hint ladder, confidence scale, Bac countdown ruler); Storybook; RTL through CSS logical properties.\n\n**Acceptance criteria**\n\n- Tokens published as a package used by web and native apps\n- Every component documented in Storybook in FR and AR\n- Visual regression tests cover every component\n\n**Context**\n\n- Backlog ID: T174\n- Epic: E17 Learner Experience & Cyanotype Design System\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 4\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration), T231 (Brand identity: logo, eight-point star mark, app icon, illustration style and brand guidelines in FR and AR)\n- Blocks: T133, T193, T204, T209"
+   "description": "Implement the Cyanotype design system from the design canvas (board 00): tokens for colour, type, spacing and states; components (buttons, chips, concept-state nodes, hint ladder, confidence scale, Bac countdown ruler); Storybook; RTL through CSS logical properties.\n\n**Acceptance criteria**\n\n- Tokens published as a package used by web and native apps\n- Every component documented in Storybook in FR and AR\n- Visual regression tests cover every component\n\n**Context**\n\n- Backlog ID: T174\n- Epic: E17 Learner Experience & Cyanotype Design System\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 4\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in), T231 (Brand identity: logo, eight-point star mark, app icon, illustration style and brand guidelines in FR and AR), T241 (Shared UI package and Storybook: packages/ui, stories in French and Arabic, accessibility checks, Storybook for every pull request)\n- Blocks: T133, T193, T204, T209"
   },
   {
    "id": "T175",
@@ -5653,7 +5654,7 @@
     "T036",
     "T076"
    ],
-   "description": "One item player used by the Lab, the placement test, annales and the mock Bac: it renders each item type from the item model (T036) in FR and AR, captures answers with the maths keypad and unit picker, shows feedback, emits telemetry, and runs inside the native apps through the widget bridge.\n\n**Acceptance criteria**\n\n- Every item type in the item model renders and accepts an answer in FR and AR, right to left included\n- The player works with keyboard and screen readers (ordering items included) and passes the accessibility gate (T149)\n- The same item renders identically in the authoring preview, the web app and the native apps (visual snapshot tests)\n\n**Context**\n\n- Backlog ID: T220\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 6\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T036 (Define the item (question) data model: types, KC tags, difficulty, distractor rationale, media), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)\n- Blocks: T175, T178, T185"
+   "description": "One item player used by the Lab, the placement test, annales and the mock Bac: it renders each item type from the item model (T036) in FR and AR, captures answers with the maths keypad and unit picker, shows feedback, emits telemetry, and runs inside the native apps through the widget bridge.\n\n**Acceptance criteria**\n\n- Every item type in the item model renders and accepts an answer in FR and AR, right to left included\n- The player works with keyboard and screen readers (ordering items included) and passes the accessibility gate (T149)\n- The same item renders identically in the authoring preview, the web app and the native apps (visual snapshot tests)\n\n**Context**\n\n- Backlog ID: T220\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 1 — Data Plane\n- Target sprint: APL Sprint 6\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T036 (Define the item (question) data model: types, KC tags, difficulty, distractor rationale, media), T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in)\n- Blocks: T175, T178, T185"
   },
   {
    "id": "T221",
@@ -5752,7 +5753,7 @@
     "T092",
     "T076"
    ],
-   "description": "Teacher class management: create a class per subject and section, share a join code or link, approve join requests, move or remove students, and see who has not activated yet. Students under 18 still go through parental consent (T013) before joining.\n\n**Acceptance criteria**\n\n- A student joins a class with a 6-character code in under 30 seconds on mobile\n- A teacher only sees classes of their own school (tenant isolation test)\n- Removing a student from a class keeps the student's learning history but hides it from that teacher\n\n**Context**\n\n- Backlog ID: T224\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 9\n- Agent role: Frontend (Next.js / R3F)\n- Personas: teacher\n- Blocked by: T092 (Implement PostgreSQL Row-Level Security multi-tenancy with a tenant-context connection layer), T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)\n- Blocks: T225, T227"
+   "description": "Teacher class management: create a class per subject and section, share a join code or link, approve join requests, move or remove students, and see who has not activated yet. Students under 18 still go through parental consent (T013) before joining.\n\n**Acceptance criteria**\n\n- A student joins a class with a 6-character code in under 30 seconds on mobile\n- A teacher only sees classes of their own school (tenant isolation test)\n- Removing a student from a class keeps the student's learning history but hides it from that teacher\n\n**Context**\n\n- Backlog ID: T224\n- Epic: E11 Institution & Parent B2B Portals (Multi-Tenancy)\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 9\n- Agent role: Frontend (Next.js / R3F)\n- Personas: teacher\n- Blocked by: T092 (Implement PostgreSQL Row-Level Security multi-tenancy with a tenant-context connection layer), T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in)\n- Blocks: T225, T227"
   },
   {
    "id": "T225",
@@ -5948,7 +5949,7 @@
    "blocked_by": [
     "T076"
    ],
-   "description": "All interface text in FR and AR comes from ICU message catalogs managed in a translation tool; new strings go to Tunisian translators for review; CI runs pseudo-localisation and RTL checks so hard-coded text, clipped strings and broken plurals are caught before merge. Shared by the web and native apps.\n\n**Acceptance criteria**\n\n- CI fails on hard-coded user-facing text in web and native code\n- Every release ships with 100 % of strings translated and reviewed in FR and AR\n- Arabic plural forms are handled through ICU rules, with test cases for 0, 1, 2, 3–10 and 11+\n\n**Context**\n\n- Backlog ID: T232\n- Epic: E17 Learner Experience & Cyanotype Design System\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 5\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T076 (Architect the Next.js 15 app: App Router, design system, i18n (ar/fr) with RTL, auth integration)\n- Blocks: T102"
+   "description": "All interface text in FR and AR comes from ICU message catalogs managed in a translation tool; new strings go to Tunisian translators for review; CI runs pseudo-localisation and RTL checks so hard-coded text, clipped strings and broken plurals are caught before merge. Shared by the web and native apps.\n\n**Acceptance criteria**\n\n- CI fails on hard-coded user-facing text in web and native code\n- Every release ships with 100 % of strings translated and reviewed in FR and AR\n- Arabic plural forms are handled through ICU rules, with test cases for 0, 1, 2, 3–10 and 11+\n\n**Context**\n\n- Backlog ID: T232\n- Epic: E17 Learner Experience & Cyanotype Design System\n- Phase: Phase 3 — Product Surfaces\n- Target sprint: APL Sprint 5\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in)\n- Blocks: T102"
   },
   {
    "id": "T233",
@@ -6149,6 +6150,30 @@
     "T218"
    ],
    "description": "The services built and tested on the local stack (T237) move to the AWS foundations (EKS, Aurora, MSK, ElastiCache, Snowflake, Keycloak, LiteLLM, MLflow) through GitOps, with data seeded from the synthetic generator and a full smoke test of the learning loop in staging, then production, ahead of the pilot.\n\n**Acceptance criteria**\n\n- Every service that runs locally runs in staging and production from the same images and configuration names\n- The core learning loop (answer, mastery update, next step, tutor reply) passes an end-to-end smoke test in staging\n- Production is ready, monitored and backed up at least one sprint before the pilot starts\n\n**Context**\n\n- Backlog ID: T240\n- Epic: E01 Platform Foundations: Infrastructure & DevOps\n- Phase: Phase 2 — Intelligence\n- Target sprint: APL Sprint 11\n- Agent role: Platform / DevOps\n- Blocked by: T003 (Deploy AWS EKS cluster with managed node groups, Karpenter and GPU node pool), T004 (Set up ArgoCD GitOps with Helm charts and per-environment overlays), T005 (Deploy Kong API Gateway with rate limiting, JWT validation and per-tenant quotas), T007 (Roll out Datadog APM, distributed tracing, log pipeline and memory-leak watchdogs), T211 (Provision Aurora PostgreSQL with pgvector via Terraform: Multi-AZ, RDS Proxy, backups and schema-migration tooling), T212 (Domains, DNS and certificates: Route 53 zones, ACM certificates, SES sending domain with SPF, DKIM and DMARC), T213 (CDN and media store: CloudFront for the web app and media, S3 media buckets with image resizing and cache rules), T015 (Encryption at rest and in transit: KMS CMKs, TLS everywhere, field-level encryption for PII), T016 (Centralise secrets in AWS Secrets Manager with automatic rotation), T021 (Provision Apache Kafka (MSK) cluster with Schema Registry and topic conventions), T217 (Provision Snowflake with Terraform: databases, warehouses, role-based access, PII masking policies and cost monitors), T218 (Deploy the ML platform services: Airflow (Amazon MWAA) for data jobs and the MLflow tracking server and model registry)\n- Blocks: T108"
+  },
+  {
+   "id": "T241",
+   "jira_key": "KK-261",
+   "type": "Task",
+   "epic": "E09",
+   "summary": "Shared UI package and Storybook: packages/ui, stories in French and Arabic, accessibility checks, Storybook for every pull request",
+   "priority": "Highest",
+   "points": 5,
+   "sprint": "APL Sprint 3",
+   "component": "Frontend",
+   "team": "Frontend (Next.js / R3F)",
+   "phase": "Phase 0 — Foundations",
+   "labels": [
+    "storybook",
+    "design-system",
+    "frontend",
+    "agent-frontend",
+    "apl-t241"
+   ],
+   "blocked_by": [
+    "T076"
+   ],
+   "description": "Split from T076 (13 points) before sprint entry. `packages/ui` in the pnpm workspace (ADR 0008) holds the components the web app and the portals share. Storybook documents them in French and Arabic with a direction switch; high-contrast, reduced-motion and 200 % text are story parameters; the axe accessibility check runs on every story in CI (T006). The Cyanotype components themselves come with T174.\n\n**Acceptance criteria**\n\n- Storybook builds for every pull request and is available to reviewers (CI artifact now, a preview URL after T240)\n- Every story renders in French and Arabic with the direction switch, with no clipped or overlapping content\n- The axe check runs on every story in CI and fails on serious or critical violations\n\n**Context**\n\n- Backlog ID: T241\n- Epic: E09 Interactive Learning Frontend (Next.js / WebGL)\n- Phase: Phase 0 — Foundations\n- Target sprint: APL Sprint 3\n- Agent role: Frontend (Next.js / R3F)\n- Blocked by: T076 (Next.js 15 app foundation: apps/web with the App Router, i18n (ar/fr) with RTL and Keycloak sign-in)\n- Blocks: T174"
   }
  ]
 }

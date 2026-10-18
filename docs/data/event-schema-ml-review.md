@@ -3,7 +3,7 @@
 - Ticket: T023 (KK-43), criterion 3: "ML team signs off that the schema contains everything SAINT+ features need"
 - Reviewer: ML Engineering agent, for the product owner's approval
 - Date: 2026-10-18
-- Reviewed: branch `feat/t023-event-schemas` at commit `14fe141` ([catalogue](event-catalogue.md), [`schemas/events/`](../../schemas/events/), [ADR 0009](../architecture/decisions/0009-learner-event-contracts.md))
+- Reviewed: branch `feat/t023-event-schemas` at commit `14fe141` ([catalogue](event-catalogue.md), [`schemas/events/`](../../schemas/events/), [ADR 0010](../architecture/decisions/0010-learner-event-contracts.md))
 - Scope: the inputs needed by every knowledge-tracing model still in play: AKT (proposed in [ADR 0007](../architecture/decisions/0007-knowledge-tracing-model.md)), DKT (fallback), SAINT+ (re-tested in T239), BKT, the IRT cold start (T043) and pilot calibration (T044). Also the accommodation-aware features (T148) and the slices of the T047 fairness gate.
 
 ## Verdict: signed off with conditions
@@ -14,7 +14,7 @@ The sign-off holds once R1 to R4 are in, and as long as the later tickets follow
 
 ## How it was checked
 
-1. Read every schema in `schemas/events/` and `schemas/events/common/`, plus `catalogue.yaml`, `schemas/README.md`, the producer rules in `schemas/kuizi_schemas/examples.py`, ADR 0009 and the generated catalogue.
+1. Read every schema in `schemas/events/` and `schemas/events/common/`, plus `catalogue.yaml`, `schemas/README.md`, the producer rules in `schemas/kuizi_schemas/examples.py`, ADR 0010 and the generated catalogue.
 2. Read what the models consume: `ml/kuizi_brain/models.py` (`make_windows`, `SaintPlus`, `IRT`, `estimate_ability`), `ml/kuizi_brain/data.py`, `ml/benchmarks/kt_benchmark.py` (`build_windows`, slices, T047 gate rule), ADR 0007, `docs/architecture/neural-core.md`, tickets T041 to T050, T148, T221, T239, T070, T145, T036, T032, T033, and sections 3 and 4 of `docs/requirements/accessibility-focus-notifications.md`.
 3. **Adapter probe.** I built the columns that `make_windows` and `build_windows` read (student, item, kc, correct, elapsed_s, lag_s, hints, time_multiplier, assistive) from the synthetic `item.answered` examples alone, with no join. The output is in the appendix. Everything was derivable. The probe also showed the ambiguity in the lag definition (R3a).
 4. **Compatibility probe.** I applied candidate future changes to the expanded `item.answered` schema in memory and ran the project's Apache Avro checker (`kuizi_schemas.compat.check_pair`) in both directions. The output is in the appendix. Every addition in "Optional improvements" passes. Retyping or narrowing an existing field is refused, which is why the existing field shapes had to be right from the start.

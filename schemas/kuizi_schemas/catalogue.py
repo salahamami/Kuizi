@@ -20,6 +20,8 @@ ORIGINS = {"app", "server"}
 # session_seq are required per event in the catalogue (a notification can be opened outside a session).
 APP_ENVELOPE = {"client_ts", "device", "app_version"}
 TICKET = re.compile(r"T\d{3}")
+# When a model input exists: before the learner answers, or only once the attempt is submitted.
+KNOWN = {"presentation": "At presentation", "after_answer": "After the answer (one step later)"}
 MAX_KAFKA_DAYS = 30  # Kafka copies must expire within the 30-day erasure deadline (T018)
 MAX_WAREHOUSE_MONTHS = 24  # raw telemetry rule (T018)
 
@@ -71,6 +73,10 @@ class Catalogue:
     @property
     def ml_features(self) -> list[dict]:
         return list(self.raw.get("ml_features", []))
+
+    @property
+    def ml_review(self) -> str | None:
+        return self.raw.get("ml_review")
 
     @property
     def common_consumers(self) -> list[dict]:
@@ -245,11 +251,16 @@ def check_catalogue(catalogue: Catalogue, sources: Sources, paths: Paths) -> lis
         if not (paths.events / event.examples).is_file():
             problems.append(f"{where}.examples: {event.examples} does not exist")
 
+    review = raw.get("ml_review")
+    if review is not None and not (paths.root / str(review)).is_file():
+        problems.append(f"ml_review: {review} does not exist")
     for i, feature in enumerate(catalogue.ml_features):
         where = f"ml_features[{i}]"
-        if not isinstance(feature, dict) or set(feature) != {"feature", "models", "fields", "notes"}:
-            problems.append(f"{where}: needs exactly feature, models, fields and notes")
+        if not isinstance(feature, dict) or set(feature) != {"feature", "models", "fields", "known", "notes"}:
+            problems.append(f"{where}: needs exactly feature, models, fields, known and notes")
             continue
+        if feature["known"] not in KNOWN:
+            problems.append(f"{where} ({feature['feature']}): known must be one of {', '.join(sorted(KNOWN))}")
         for ref in feature["fields"]:
             event_name, _, path = str(ref).partition(":")
             if event_name not in sources.events:

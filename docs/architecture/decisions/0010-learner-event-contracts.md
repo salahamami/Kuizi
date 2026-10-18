@@ -1,9 +1,9 @@
-# 0009. Learner event contracts: Avro, one topic per event, BACKWARD_TRANSITIVE
+# 0010. Learner event contracts: Avro, one topic per event, BACKWARD_TRANSITIVE
 
 - Status: Proposed (the product owner accepts it by merging T023)
 - Date: 2026-10-18
 - Ticket: T023 (KK-43), Data Engineering agent
-- Catalogue: [`docs/data/event-catalogue.md`](../../data/event-catalogue.md) · sources: [`schemas/events/`](../../../schemas/events/) · tooling: [`schemas/README.md`](../../../schemas/README.md)
+- Catalogue: [`docs/data/event-catalogue.md`](../../data/event-catalogue.md) · ML review: [`docs/data/event-schema-ml-review.md`](../../data/event-schema-ml-review.md) · sources: [`schemas/events/`](../../../schemas/events/) · tooling: [`schemas/README.md`](../../../schemas/README.md)
 
 ## Context
 

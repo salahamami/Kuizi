@@ -126,3 +126,25 @@ def test_generated_page_lists_every_event_and_the_ml_table(catalogue, sources):
     for name in catalogue.events:
         assert f"### {name}" in page
     assert "## Knowledge-tracing inputs (for the ML sign-off)" in page
+
+
+def test_every_model_input_says_when_it_is_known(catalogue, sources, paths):
+    assert {f["known"] for f in catalogue.ml_features} == {"presentation", "after_answer"}
+    after = {f["feature"] for f in catalogue.ml_features if f["known"] == "after_answer"}
+    assert {"Elapsed time", "Hints used and hint level", "Confidence 1 to 5"} <= after
+    catalogue.raw["ml_features"][0]["known"] = "sometimes"
+    del catalogue.raw["ml_features"][1]["known"]
+    problems = check_catalogue(catalogue, sources, paths)
+    assert any("known must be one of after_answer, presentation" in p for p in problems)
+    assert any("needs exactly feature, models, fields, known and notes" in p for p in problems)
+
+
+def test_ml_review_link_must_exist(catalogue, sources, paths):
+    assert (paths.root / catalogue.ml_review).is_file()
+    assert "event-schema-ml-review.md" in render(catalogue, sources)
+    catalogue.raw["ml_review"] = "docs/data/missing-review.md"
+    assert "ml_review: docs/data/missing-review.md does not exist" in check_catalogue(catalogue, sources, paths)
+
+
+def test_item_answered_requires_the_sort_key(catalogue):
+    assert "session_seq" in catalogue.events["item.answered"].required_envelope

@@ -1,6 +1,6 @@
 # Event contracts (`schemas/`)
 
-The learner event schemas (T023, [ADR 0009](../docs/architecture/decisions/0009-learner-event-contracts.md)) and the Python tooling that checks, documents and registers them. Readable catalogue of every event, its owner, producer, consumers, privacy and retention: [`docs/data/event-catalogue.md`](../docs/data/event-catalogue.md).
+The learner event schemas (T023, [ADR 0010](../docs/architecture/decisions/0010-learner-event-contracts.md)) and the Python tooling that checks, documents and registers them. Readable catalogue of every event, its owner, producer, consumers, privacy and retention: [`docs/data/event-catalogue.md`](../docs/data/event-catalogue.md). The ML Engineering agent's review of what the knowledge-tracing models need, with the rules later tickets follow when they build features from these events: [`docs/data/event-schema-ml-review.md`](../docs/data/event-schema-ml-review.md).
 
 ```
 schemas/

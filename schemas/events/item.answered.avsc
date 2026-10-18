@@ -33,7 +33,7 @@
       "name": "presented_client_ts",
       "type": {"type": "long", "logicalType": "timestamp-millis"},
       "privacy": "personal",
-      "doc": "When the item was presented, by the device clock (equals envelope.client_ts of item.presented). Lag time is this value minus envelope.client_ts of the learner's previous item.answered."
+      "doc": "When the item was presented, by the device clock (equals envelope.client_ts of item.presented). Lag time is derived from it; the exact definition is in the data catalogue (knowledge-tracing inputs)."
     },
     {
       "name": "latency_ms",

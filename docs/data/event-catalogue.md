@@ -2,7 +2,7 @@
 
 # Learner event catalogue
 
-Every learner interaction Kuizi records, as a versioned Avro event on the Kafka API (T023, [ADR 0009](../architecture/decisions/0009-learner-event-contracts.md)). This page is generated from [`schemas/events/catalogue.yaml`](../../schemas/events/catalogue.yaml) and the schemas next to it: change those, then run `make schemas-docs`. How to add or change an event: [`schemas/README.md`](../../schemas/README.md).
+Every learner interaction Kuizi records, as a versioned Avro event on the Kafka API (T023, [ADR 0010](../architecture/decisions/0010-learner-event-contracts.md)). This page is generated from [`schemas/events/catalogue.yaml`](../../schemas/events/catalogue.yaml) and the schemas next to it: change those, then run `make schemas-docs`. How to add or change an event: [`schemas/README.md`](../../schemas/README.md).
 
 ## Conventions
 
@@ -56,28 +56,32 @@ Sensitive fields may only live in `AccommodationContext`; `make schemas-check` r
 
 What the knowledge-tracing models (ADR 0007: AKT proposed, DKT fallback, SAINT+ re-tested in T239) and the accommodation-aware work (T148) consume, and the event field that carries each input. Field references are checked against the schemas by `make schemas-check`.
 
-| Model input | Models | Event fields | Notes |
-| --- | --- | --- | --- |
-| Learner sequence and order | DKT, AKT, SAINT+, IRT | `item.answered:envelope.student_id`<br>`item.answered:envelope.client_ts`<br>`item.answered:envelope.session_seq` | Kafka key is student_id, so one learner's answers stay in order in the topic. Sequences sort by client_ts, then session_seq, then server_ts. |
-| Question (exercise) ID | AKT, SAINT+, IRT | `item.answered:item.item_id`<br>`item.answered:item.item_version` | AKT learns one Rasch difficulty per item, SAINT+ an item embedding, IRT a and b per item. The version separates edited items. |
-| Concepts (knowledge components) | DKT, AKT, SAINT+, BKT | `item.answered:item.kc_ids` | Primary concept first; tag weights are joined from the item bank (T036). The T041 adapter expands multi-concept items. |
-| Correctness label and partial credit | DKT, AKT, SAINT+, BKT, IRT | `item.answered:correct`<br>`item.answered:score` | correct is full credit; score from 0 to 1 carries partial credit (T221, T041). |
-| Elapsed time | SAINT+, AKT time experiment (T042) | `item.answered:latency_ms`<br>`item.answered:active_ms` | Known only after the answer, so it enters the model one step later (as kuizi_brain.models.SaintPlus does). active_ms excludes time in the background. |
-| Lag time | SAINT+, AKT time experiment (T042) | `item.answered:presented_client_ts`<br>`item.answered:envelope.client_ts` | lag(i) = presented_client_ts(i) minus envelope.client_ts of the learner's previous item.answered. Known at presentation. T028 and T048 must use this same definition. |
-| Hints used and hint level | SAINT+ decoder (T042), DKT features (T070) | `item.answered:hints_used`<br>`item.answered:max_hint_level`<br>`hint.requested:level`<br>`hint.shown:level` | Counted before each attempt, per presentation. |
-| Attempt number | DKT, AKT, SAINT+ | `item.answered:attempt` | Training keeps attempt 1 by default (like ASSISTments original == 1); later attempts are available. |
-| Confidence 1 to 5 | SAINT+ decoder (T042) | `item.answered:confidence_1_5` | Null when not asked; models need a missing value. |
-| Time multiplier (normalisation) | Accommodation-aware tracing (T148) | `item.answered:accommodation.time_multiplier`<br>`item.answered:accommodation.untimed` | Sensitive. Elapsed and lag time are divided by the multiplier; a null accommodation means 1.0. |
-| Assistive-mode embedding | Accommodation-aware tracing (T148) | `item.answered:accommodation.assistive_modes` | Sensitive. Empty list or null accommodation means no assistive technology. |
-| Listening time apart from thinking time | Accommodation-aware tracing (T148) | `item.answered:audio_playback_ms`<br>`tts.played:played_ms` | Kuizi's own audio on the item before the answer. Screen-reader speech is invisible to Kuizi. |
-| Timed out | AKT, SAINT+ | `item.answered:timed_out` | Lets training drop or flag forced submissions. |
-| Activity (placement, practice, review, mock Bac) | IRT cold start (T043), all models as a filter | `item.answered:item.activity` | Placement answers seed the IRT estimate; mock-Bac answers can be weighted apart. |
-| Subject and Bac section | All models (T033) | `item.answered:item.subject_id`<br>`item.answered:item.track_id` | Filled once T033 lands. |
-| Item language variant | Candidate feature | `item.answered:item.item_language` | French and Arabic variants of an item may differ in difficulty. |
-| Misconception code | Misconception diagnosis (T071), candidate feature | `item.answered:misconception_code` | From the answer evaluation service (T221). |
-| Hesitation and time to first action | Candidate features (T042, gated by T047) | `item.answered:first_action_ms`<br>`item.hesitation:idle_ms`<br>`item.hesitation:before_first_action` | No hesitation is emitted while Kuizi audio plays (T148). |
-| Interaction trace in simulations | Misconception diagnosis (T071) | `item.interaction:kind`<br>`item.interaction:value_from`<br>`item.interaction:value_to` | One event per gesture. |
-| Session and Focus context | Feature store (T030), send-time model (T154) | `session.start:envelope.session_id`<br>`session.end:duration_ms`<br>`focus.end:reason` | Session count and study windows. |
+**Known** says when an input exists. Inputs known only after the answer feed the predictions of later attempts, never the prediction of the attempt they come from (shifted one step), so the label never leaks.
+
+Reviewed by the ML Engineering agent: [ML review of the event schemas](event-schema-ml-review.md) (signed off with conditions, including rules for the tickets that build these features).
+
+| Model input | Models | Event fields | Known | Notes |
+| --- | --- | --- | --- | --- |
+| Learner sequence and order | DKT, AKT, SAINT+, IRT | `item.answered:envelope.student_id`<br>`item.answered:envelope.client_ts`<br>`item.answered:envelope.session_seq` | At presentation | Kafka key is student_id, so one learner's answers stay in order in the topic. Sequences sort by client_ts, then session_seq (required on item.answered), then server_ts; T048 inserts each answer by this key, not by Kafka offset, because offline answers arrive late. |
+| Question (exercise) ID | AKT, SAINT+, IRT | `item.answered:item.item_id`<br>`item.answered:item.item_version` | At presentation | AKT learns one Rasch difficulty per item, SAINT+ an item embedding, IRT a and b per item. The version separates edited items. |
+| Concepts (knowledge components) | DKT, AKT, SAINT+, BKT | `item.answered:item.kc_ids` | At presentation | Primary concept first; tag weights are joined from the item bank (T036). The T041 adapter expands multi-concept items. |
+| Correctness label and partial credit | DKT, AKT, SAINT+, BKT, IRT | `item.answered:correct`<br>`item.answered:score` | After the answer (one step later) | The label of every model, metric and the T047 gate is correct (full credit) on attempt 1. score, from 0 to 1, carries partial credit (T221) and is an input for later steps (wrong, partial, right), never the label. |
+| Elapsed time | SAINT+, AKT time experiment (T042) | `item.answered:latency_ms`<br>`item.answered:active_ms` | After the answer (one step later) | Use active_ms (time in the foreground), falling back to latency_ms when null, capped at 600 s. Known only after the answer, so it enters the model one step later. |
+| Lag time | SAINT+, AKT time experiment (T042) | `item.answered:presented_client_ts`<br>`item.answered:envelope.client_ts` | At presentation | lag(i) = presented_client_ts(i) minus the latest envelope.client_ts among the learner's item.answered events with client_ts at or before presented_client_ts(i), any attempt and any activity. Computed before the training filters (attempt 1, activity). Null for the learner's first item; negative values (clock skew) are clamped to 0. Device clocks only, never server_ts. T028 and T048 share one implementation of this definition. |
+| Hints used and hint level | SAINT+ decoder (T042), DKT features (T070) | `item.answered:hints_used`<br>`item.answered:max_hint_level`<br>`hint.requested:level`<br>`hint.shown:level` | After the answer (one step later) | Counted before each attempt, per presentation, tutor hints included. Shifted one step like elapsed time: the hints used before attempt i never feed the prediction of attempt i, because hint use strongly predicts failure and would leak the label. |
+| Attempt number | DKT, AKT, SAINT+ | `item.answered:attempt` | At presentation | Training keeps attempt 1 by default, like ASSISTments, whose correct is first-attempt correctness (original == 1 removes scaffolding sub-problems, not retries). Later attempts are inputs, never targets. |
+| Confidence 1 to 5 | SAINT+ decoder (T042) | `item.answered:confidence_1_5` | After the answer (one step later) | Given after answering; null when not asked, so models need a missing value. Shifted one step like elapsed time, so the label does not leak. |
+| Time multiplier (normalisation) | Accommodation-aware tracing (T148) | `item.answered:accommodation.time_multiplier`<br>`item.answered:accommodation.untimed` | At presentation | Sensitive. The multiplier applied to this item's timers; T148 uses it to normalise in-item time features (whether lag time is normalised too waits for the product owner, ML review question 4). A null accommodation means 1.0. |
+| Assistive-mode embedding | Accommodation-aware tracing (T148) | `item.answered:accommodation.assistive_modes` | At presentation | Sensitive. Empty list or null accommodation means no assistive technology. |
+| Listening time apart from thinking time | Accommodation-aware tracing (T148) | `item.answered:audio_playback_ms`<br>`tts.played:played_ms` | After the answer (one step later) | Kuizi's own audio on the item before the answer. Screen-reader speech is invisible to Kuizi. |
+| Timed out | AKT, SAINT+ | `item.answered:timed_out` | After the answer (one step later) | Lets training drop or flag forced submissions. |
+| Activity (placement, practice, review, mock Bac) | IRT cold start (T043), all models as a filter | `item.answered:item.activity` | At presentation | Placement answers seed the IRT estimate; mock-Bac answers can be weighted apart. |
+| Subject and Bac section | All models (T033) | `item.answered:item.subject_id`<br>`item.answered:item.track_id` | At presentation | Filled once T033 lands. |
+| Item language variant | Candidate feature | `item.answered:item.item_language` | At presentation | French and Arabic variants of an item may differ in difficulty. |
+| Misconception code | Misconception diagnosis (T071), candidate feature | `item.answered:misconception_code` | After the answer (one step later) | From the answer evaluation service (T221). |
+| Hesitation and time to first action | Candidate features (T042, gated by T047) | `item.answered:first_action_ms`<br>`item.hesitation:idle_ms`<br>`item.hesitation:before_first_action` | After the answer (one step later) | No hesitation is emitted while Kuizi audio plays (T148). |
+| Interaction trace in simulations | Misconception diagnosis (T071) | `item.interaction:kind`<br>`item.interaction:value_from`<br>`item.interaction:value_to` | After the answer (one step later) | One event per gesture. |
+| Session and Focus context | Feature store (T030), send-time model (T154) | `session.start:envelope.session_id`<br>`session.end:duration_ms`<br>`focus.end:reason` | At presentation | Session count and study windows, from earlier sessions. |
 
 ## Event details
 
@@ -193,7 +197,7 @@ One submitted answer to an item, graded on the server by the answer evaluation s
 
 - **Topic** `learner.item.answered.v1` · **subject** `learner.item.answered.v1-value` · **record** `kuizi.events.ItemAnswered`
 - **Owner** backend · **producer** Answer evaluation service (client fields come from the app's submit request) (T221, server event)
-- **Envelope fields that must be filled** `client_ts`, `session_id`, `device`, `app_version`
+- **Envelope fields that must be filled** `client_ts`, `session_id`, `session_seq`, `device`, `app_version`
 - **Retention** 7 days in Kafka, 24 months raw in the warehouse · **highest class** sensitive
 - **Example** [`schemas/events/examples/item.answered.json`](../../schemas/events/examples/item.answered.json)
 
@@ -212,8 +216,8 @@ Allowed to read the sensitive fields (nobody else may read or store them):
 
 | Service | Tickets | Uses |
 | --- | --- | --- |
-| Online sequence builder | T048, T148 | accommodation.* for accommodation-aware inference. |
-| Knowledge-tracing training, through the restricted warehouse role | T041, T042, T148 | Time features divided by time_multiplier; assistive-mode embedding. |
+| Online sequence builder | T048, T148 | accommodation.* for accommodation-aware inference; its cold rebuild from the warehouse also goes through the restricted role. |
+| Knowledge-tracing training, through the restricted warehouse role | T041, T042, T148, T239, T045 | Time features divided by time_multiplier; assistive-mode embedding. |
 | Champion/challenger gate | T047 | Fairness slices by accommodation type (aggregates only). |
 
 | Field | Type | Default | Class | Description |
@@ -222,7 +226,7 @@ Allowed to read the sensitive fields (nobody else may read or store them):
 | `item` | [ItemContext](#itemcontext) | required | personal | The item answered and its presentation_id. |
 | `accommodation` | [AccommodationContext](#accommodationcontext) or null | `null` | sensitive | Accommodations in force for this attempt; null when none or not consented. Sensitive: restricted readers only. |
 | `attempt` | int | required | personal | 1-based number of this submission within the presentation. Knowledge tracing uses attempt 1 by default. |
-| `presented_client_ts` | timestamp-millis | required | personal | When the item was presented, by the device clock (equals envelope.client_ts of item.presented). Lag time is this value minus envelope.client_ts of the learner's previous item.answered. |
+| `presented_client_ts` | timestamp-millis | required | personal | When the item was presented, by the device clock (equals envelope.client_ts of item.presented). Lag time is derived from it; the exact definition is in the data catalogue (knowledge-tracing inputs). |
 | `latency_ms` | long | required | personal | Milliseconds from the presentation of the item to this submission, by the device clock. The elapsed-time feature of knowledge tracing. |
 | `active_ms` | long or null | `null` | personal | Part of latency_ms during which the item was on screen with the app in the foreground. |
 | `first_action_ms` | long or null | `null` | personal | Milliseconds from the presentation to the learner's first gesture on the item (time to first click, T024); null if the learner answered without any recorded gesture. |
@@ -329,7 +333,7 @@ Allowed to read the sensitive fields (nobody else may read or store them):
 
 | Service | Tickets | Uses |
 | --- | --- | --- |
-| Knowledge-tracing training, through the restricted warehouse role | T041, T042, T148 | accommodation.* to normalise time features and to keep abandoned items fair. |
+| Knowledge-tracing training, through the restricted warehouse role | T041, T042, T148, T239, T045 | accommodation.* to normalise time features and to keep abandoned items fair. |
 | Champion/challenger gate | T047 | Fairness slices by accommodation type (aggregates only). |
 
 | Field | Type | Default | Class | Description |
@@ -593,7 +597,7 @@ Accommodations in force when the event happened, so knowledge tracing never read
 
 | Field | Type | Default | Class | Description |
 | --- | --- | --- | --- | --- |
-| `time_multiplier` | double | `1.0` | sensitive | Official time multiplier attested by the school (1.0, 1.33 or 1.5; FR-A14, T145). Models divide elapsed and lag time by it. |
+| `time_multiplier` | double | `1.0` | sensitive | Time multiplier applied to this item's timers and hint timers for this event (1.0, 1.33 or 1.5; FR-A14, T145), whether or not the school has attested it yet. Knowledge tracing uses it to normalise time features (T148). |
 | `untimed` | boolean | `false` | sensitive | True when the accommodation removes time limits altogether; time_multiplier is then ignored. |
 | `assistive_modes` | array of [AssistiveMode](#enums) | `[]` | sensitive | Assistive technologies in use (screen reader, magnifier, switch access, voice control). Empty when none. Feeds the assistive-mode embedding (T148). |
 

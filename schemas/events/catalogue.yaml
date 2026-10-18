@@ -130,7 +130,7 @@ events:
         uses: Exposure logging through routing_decision_id.
     sensitive_readers:
       - service: Knowledge-tracing training, through the restricted warehouse role
-        tickets: [T041, T042, T148]
+        tickets: [T041, T042, T148, T239, T045]
         uses: accommodation.* to normalise time features and to keep abandoned items fair.
       - service: Champion/challenger gate
         tickets: [T047]
@@ -213,15 +213,15 @@ events:
     sensitive_readers:
       - service: Online sequence builder
         tickets: [T048, T148]
-        uses: accommodation.* for accommodation-aware inference.
+        uses: accommodation.* for accommodation-aware inference; its cold rebuild from the warehouse also goes through the restricted role.
       - service: Knowledge-tracing training, through the restricted warehouse role
-        tickets: [T041, T042, T148]
+        tickets: [T041, T042, T148, T239, T045]
         uses: Time features divided by time_multiplier; assistive-mode embedding.
       - service: Champion/challenger gate
         tickets: [T047]
         uses: Fairness slices by accommodation type (aggregates only).
     retention: {kafka_days: 7, warehouse_raw_months: 24}
-    required_envelope: [client_ts, session_id, device, app_version]
+    required_envelope: [client_ts, session_id, session_seq, device, app_version]
     examples: examples/item.answered.json
 
   hint.requested:
@@ -483,86 +483,135 @@ events:
     required_envelope: [client_ts, session_id, session_seq, device, app_version]
     examples: examples/tts.played.json
 
-# What the knowledge-tracing models consume, and where each input comes from (for the ML sign-off,
-# acceptance criterion 3). Field references are <event>:<dotted path>; the check verifies each one.
+# What the knowledge-tracing models consume, and where each input comes from (acceptance criterion 3).
+# Reviewed and signed off with conditions by the ML Engineering agent: see ml_review below.
+# Field references are <event>:<dotted path>; the check verifies each one.
+# known: "presentation" when the input exists before the learner answers the item; "after_answer" when
+# it only exists once the attempt is submitted. After-answer inputs of attempt i only feed predictions
+# from attempt i+1 on (shifted one step, as kuizi_brain.models.SaintPlus does), so the label never leaks.
+ml_review: docs/data/event-schema-ml-review.md
 ml_features:
   - feature: Learner sequence and order
     models: [DKT, AKT, SAINT+, IRT]
     fields: ["item.answered:envelope.student_id", "item.answered:envelope.client_ts", "item.answered:envelope.session_seq"]
-    notes: Kafka key is student_id, so one learner's answers stay in order in the topic. Sequences sort by client_ts, then session_seq, then server_ts.
+    known: presentation
+    notes: >-
+      Kafka key is student_id, so one learner's answers stay in order in the topic. Sequences sort by
+      client_ts, then session_seq (required on item.answered), then server_ts; T048 inserts each answer by
+      this key, not by Kafka offset, because offline answers arrive late.
   - feature: Question (exercise) ID
     models: [AKT, SAINT+, IRT]
     fields: ["item.answered:item.item_id", "item.answered:item.item_version"]
+    known: presentation
     notes: AKT learns one Rasch difficulty per item, SAINT+ an item embedding, IRT a and b per item. The version separates edited items.
   - feature: Concepts (knowledge components)
     models: [DKT, AKT, SAINT+, BKT]
     fields: ["item.answered:item.kc_ids"]
+    known: presentation
     notes: Primary concept first; tag weights are joined from the item bank (T036). The T041 adapter expands multi-concept items.
   - feature: Correctness label and partial credit
     models: [DKT, AKT, SAINT+, BKT, IRT]
     fields: ["item.answered:correct", "item.answered:score"]
-    notes: correct is full credit; score from 0 to 1 carries partial credit (T221, T041).
+    known: after_answer
+    notes: >-
+      The label of every model, metric and the T047 gate is correct (full credit) on attempt 1. score,
+      from 0 to 1, carries partial credit (T221) and is an input for later steps (wrong, partial, right),
+      never the label.
   - feature: Elapsed time
     models: [SAINT+, AKT time experiment (T042)]
     fields: ["item.answered:latency_ms", "item.answered:active_ms"]
-    notes: Known only after the answer, so it enters the model one step later (as kuizi_brain.models.SaintPlus does). active_ms excludes time in the background.
+    known: after_answer
+    notes: >-
+      Use active_ms (time in the foreground), falling back to latency_ms when null, capped at 600 s.
+      Known only after the answer, so it enters the model one step later.
   - feature: Lag time
     models: [SAINT+, AKT time experiment (T042)]
     fields: ["item.answered:presented_client_ts", "item.answered:envelope.client_ts"]
-    notes: lag(i) = presented_client_ts(i) minus envelope.client_ts of the learner's previous item.answered. Known at presentation. T028 and T048 must use this same definition.
+    known: presentation
+    notes: >-
+      lag(i) = presented_client_ts(i) minus the latest envelope.client_ts among the learner's
+      item.answered events with client_ts at or before presented_client_ts(i), any attempt and any
+      activity. Computed before the training filters (attempt 1, activity). Null for the learner's
+      first item; negative values (clock skew) are clamped to 0. Device clocks only, never server_ts.
+      T028 and T048 share one implementation of this definition.
   - feature: Hints used and hint level
     models: [SAINT+ decoder (T042), DKT features (T070)]
     fields: ["item.answered:hints_used", "item.answered:max_hint_level", "hint.requested:level", "hint.shown:level"]
-    notes: Counted before each attempt, per presentation.
+    known: after_answer
+    notes: >-
+      Counted before each attempt, per presentation, tutor hints included. Shifted one step like elapsed
+      time: the hints used before attempt i never feed the prediction of attempt i, because hint use
+      strongly predicts failure and would leak the label.
   - feature: Attempt number
     models: [DKT, AKT, SAINT+]
     fields: ["item.answered:attempt"]
-    notes: Training keeps attempt 1 by default (like ASSISTments original == 1); later attempts are available.
+    known: presentation
+    notes: >-
+      Training keeps attempt 1 by default, like ASSISTments, whose correct is first-attempt correctness
+      (original == 1 removes scaffolding sub-problems, not retries). Later attempts are inputs, never
+      targets.
   - feature: Confidence 1 to 5
     models: [SAINT+ decoder (T042)]
     fields: ["item.answered:confidence_1_5"]
-    notes: Null when not asked; models need a missing value.
+    known: after_answer
+    notes: >-
+      Given after answering; null when not asked, so models need a missing value. Shifted one step like
+      elapsed time, so the label does not leak.
   - feature: Time multiplier (normalisation)
     models: [Accommodation-aware tracing (T148)]
     fields: ["item.answered:accommodation.time_multiplier", "item.answered:accommodation.untimed"]
-    notes: Sensitive. Elapsed and lag time are divided by the multiplier; a null accommodation means 1.0.
+    known: presentation
+    notes: >-
+      Sensitive. The multiplier applied to this item's timers; T148 uses it to normalise in-item time
+      features (whether lag time is normalised too waits for the product owner, ML review question 4).
+      A null accommodation means 1.0.
   - feature: Assistive-mode embedding
     models: [Accommodation-aware tracing (T148)]
     fields: ["item.answered:accommodation.assistive_modes"]
+    known: presentation
     notes: Sensitive. Empty list or null accommodation means no assistive technology.
   - feature: Listening time apart from thinking time
     models: [Accommodation-aware tracing (T148)]
     fields: ["item.answered:audio_playback_ms", "tts.played:played_ms"]
+    known: after_answer
     notes: Kuizi's own audio on the item before the answer. Screen-reader speech is invisible to Kuizi.
   - feature: Timed out
     models: [AKT, SAINT+]
     fields: ["item.answered:timed_out"]
+    known: after_answer
     notes: Lets training drop or flag forced submissions.
   - feature: Activity (placement, practice, review, mock Bac)
     models: [IRT cold start (T043), all models as a filter]
     fields: ["item.answered:item.activity"]
+    known: presentation
     notes: Placement answers seed the IRT estimate; mock-Bac answers can be weighted apart.
   - feature: Subject and Bac section
     models: [All models (T033)]
     fields: ["item.answered:item.subject_id", "item.answered:item.track_id"]
+    known: presentation
     notes: Filled once T033 lands.
   - feature: Item language variant
     models: [Candidate feature]
     fields: ["item.answered:item.item_language"]
+    known: presentation
     notes: French and Arabic variants of an item may differ in difficulty.
   - feature: Misconception code
     models: [Misconception diagnosis (T071), candidate feature]
     fields: ["item.answered:misconception_code"]
+    known: after_answer
     notes: From the answer evaluation service (T221).
   - feature: Hesitation and time to first action
     models: [Candidate features (T042, gated by T047)]
     fields: ["item.answered:first_action_ms", "item.hesitation:idle_ms", "item.hesitation:before_first_action"]
+    known: after_answer
     notes: No hesitation is emitted while Kuizi audio plays (T148).
   - feature: Interaction trace in simulations
     models: [Misconception diagnosis (T071)]
     fields: ["item.interaction:kind", "item.interaction:value_from", "item.interaction:value_to"]
+    known: after_answer
     notes: One event per gesture.
   - feature: Session and Focus context
     models: [Feature store (T030), send-time model (T154)]
     fields: ["session.start:envelope.session_id", "session.end:duration_ms", "focus.end:reason"]
-    notes: Session count and study windows.
+    known: presentation
+    notes: Session count and study windows, from earlier sessions.

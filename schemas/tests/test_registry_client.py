@@ -148,6 +148,9 @@ def test_register_checks_every_registered_version_even_when_the_subject_level_is
     """The subject exists at the registry's default level (BACKWARD). The new schema is compatible with
     the latest version only; the transitive pre-check still refuses it, before anything is registered."""
     shutil.copytree(paths.events, tmp_path / Paths.EVENTS_REL)
+    review = tmp_path / "docs" / "data" / "event-schema-ml-review.md"
+    review.parent.mkdir(parents=True)
+    shutil.copy(paths.root / "docs" / "data" / "event-schema-ml-review.md", review)
     path = tmp_path / Paths.EVENTS_REL / "session.end.avsc"
     original = json.loads(path.read_text())
     rank = {"name": "rank", "type": "int", "privacy": "none", "doc": "x"}

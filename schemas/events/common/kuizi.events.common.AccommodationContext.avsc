@@ -9,7 +9,7 @@
       "type": "double",
       "default": 1.0,
       "privacy": "sensitive",
-      "doc": "Official time multiplier attested by the school (1.0, 1.33 or 1.5; FR-A14, T145). Models divide elapsed and lag time by it."
+      "doc": "Time multiplier applied to this item's timers and hint timers for this event (1.0, 1.33 or 1.5; FR-A14, T145), whether or not the school has attested it yet. Knowledge tracing uses it to normalise time features (T148)."
     },
     {
       "name": "untimed",

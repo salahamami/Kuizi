@@ -109,12 +109,11 @@ jobs:
 
       - name: Gate - fail on any CRITICAL vulnerability or secret
         id: gate
-        env:
-          TAG: ${{ steps.ref.outputs.tag }}
         run: |
-          # Fixed or not: an unfixable CRITICAL needs another base image or a reviewed entry in
-          # .trivyignore (product owner approval, docs/dev/ci.md).
-          trivy image --skip-db-update --severity CRITICAL --exit-code 1 --format table "$TAG"
+          # Reads the report above (no second scan). Fixed or not: an unfixable CRITICAL needs
+          # another base image or a reviewed entry in .trivyignore (product owner approval,
+          # docs/dev/ci.md).
+          trivy convert --format table --severity CRITICAL --exit-code 1 trivy-report.json
 
       - name: Keep the vulnerability report
         if: ${{ !cancelled() }}

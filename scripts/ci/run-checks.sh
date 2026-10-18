@@ -24,7 +24,7 @@ run_lint() {
   echo "== Ruff ${ruff_version}: lint and format check"
   uvx "ruff@${ruff_version}" check .
   uvx "ruff@${ruff_version}" format --check .
-  while read -r path _coverage typecheck; do
+  while read -r path _coverage typecheck _services; do
     [ -n "$path" ] && [ "$typecheck" = true ] || continue
     echo "== mypy: ${path}"
     (cd "$path" && uv run --locked mypy)
@@ -51,10 +51,16 @@ run_tests() {
   need uv "see docs/dev/local-setup.md"
   echo "== CI scripts"
   python3 -m unittest discover -s scripts/ci
-  while read -r path coverage _typecheck; do
+  while read -r path coverage _typecheck services; do
     [ -n "$path" ] || continue
     echo "== pytest: ${path} (coverage gate ${coverage} %)"
-    (cd "$path" && uv run --locked pytest --cov --cov-fail-under="$coverage")
+    if [[ ",${services}," == *,postgres,* ]]; then
+      # As in CI, database tests must run: they use DATABASE_URL from .env (the local stack).
+      echo "   needs PostgreSQL: start the local stack first (make up)"
+      (cd "$path" && KUIZI_REQUIRE_POSTGRES=1 uv run --locked pytest --cov --cov-fail-under="$coverage")
+    else
+      (cd "$path" && uv run --locked pytest --cov --cov-fail-under="$coverage")
+    fi
   done <<< "$python_projects"
 
   if [ -z "$ts_packages" ]; then

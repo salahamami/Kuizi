@@ -5,8 +5,6 @@ Calibration: when the model says 70 %, are students right about 70 % of the time
 mastery percentages and a Bac grade estimate, so calibration matters as much as AUC.
 """
 
-import os  # NEGATIVE TEST: unused import, Ruff must fail
-
 import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score

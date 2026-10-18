@@ -30,14 +30,15 @@ run_lint() {
     (cd "$path" && uv run --locked mypy)
   done <<< "$python_projects"
 
-  if [ -z "$ts_packages" ]; then
-    echo "== No TypeScript package yet: Prettier, ESLint and tsc skipped"
+  if [ -z "$ts_packages" ] && ! command -v pnpm > /dev/null; then
+    echo "== No TypeScript package yet and no pnpm: Prettier, ESLint and tsc skipped"
     return
   fi
   need pnpm "Node.js 22, then: corepack enable"
+  echo "== TypeScript workspace: pnpm-lock.yaml up to date, Prettier"
   pnpm install --frozen-lockfile
-  echo "== Prettier"
   pnpm run format:check
+  [ -n "$ts_packages" ] || return 0
   while read -r _path name _coverage _contract; do
     echo "== ESLint and tsc: ${name}"
     pnpm --filter "${name}^..." run --if-present build

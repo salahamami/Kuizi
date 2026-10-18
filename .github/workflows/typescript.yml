@@ -1,6 +1,7 @@
 # Reusable TypeScript checks (T006, ADR 0008), called by ci.yml with the pnpm workspace packages
 # found by scripts/ci/discover.py. Every package has the scripts lint, typecheck, test and build;
 # test runs Vitest, and CI adds coverage with the package's gate. Same commands as `make lint/test`.
+# Workspace-wide checks (frozen lockfile, Prettier) run in ci.yml's "Repository checks".
 name: TypeScript
 
 on:
@@ -14,33 +15,8 @@ on:
 permissions: {}
 
 jobs:
-  workspace:
-    name: workspace (lockfile, Prettier)
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - name: Set up pnpm (version from package.json)
-        uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
-      - name: Set up Node.js (version from package.json, cache keyed on pnpm-lock.yaml)
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version-file: package.json
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
-      - name: Install (fails if pnpm-lock.yaml is out of date)
-        run: pnpm install --frozen-lockfile
-      - name: Format (prettier --check)
-        run: pnpm run format:check
-
   package:
     name: ${{ matrix.package.path }}
-    # No package yet: the job is skipped and CI still passes.
-    if: ${{ inputs.packages != '[]' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:

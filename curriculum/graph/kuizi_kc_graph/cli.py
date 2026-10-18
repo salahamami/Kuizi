@@ -96,9 +96,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     load = commands.add_parser("load", help="validate a seed file and write it to the database")
     load.add_argument("seed", type=Path)
-    load.add_argument(
-        "--replace", action="store_true", help="delete the graph already in the schema first"
-    )
+    load.add_argument("--replace", action="store_true", help="delete the graph already in the schema first")
     load.set_defaults(handler=cmd_load)
 
     export = commands.add_parser("export", help="write the graph as JSON (export.schema.json)")

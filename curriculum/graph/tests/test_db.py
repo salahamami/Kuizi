@@ -6,17 +6,17 @@ PostgreSQL is not reachable (`make up` starts it).
 
 from __future__ import annotations
 
+import itertools
 import json
 import threading
 import time
 
 import psycopg
 import pytest
-from psycopg import errors
-
 from kuizi_kc_graph import STARTER_SEED, db
 from kuizi_kc_graph.cli import main
 from kuizi_kc_graph.export import build_export, check_export
+from psycopg import errors
 
 pytestmark = pytest.mark.postgres
 
@@ -54,8 +54,7 @@ def add_track(conn: psycopg.Connection, track: str, chapters: dict[int, str]) ->
 
 def add_kc(conn: psycopg.Connection, kc_id: str, subject: str = "physics") -> None:
     conn.execute(
-        "INSERT INTO kc (id, subject_id, path, name_fr, name_ar)"
-        " VALUES (%s, %s, %s::ltree, %s, %s)",
+        "INSERT INTO kc (id, subject_id, path, name_fr, name_ar) VALUES (%s, %s, %s::ltree, %s, %s)",
         (kc_id, subject, kc_id, f"Notion {kc_id}", "مفهوم"),
     )
 
@@ -76,7 +75,7 @@ def chain(conn: psycopg.Connection, *kc_ids: str) -> None:
     add_subject(conn)
     for kc_id in kc_ids:
         add_kc(conn, kc_id)
-    for a, b in zip(kc_ids, kc_ids[1:], strict=False):
+    for a, b in itertools.pairwise(kc_ids):
         add_edge(conn, a, b)
 
 
@@ -86,9 +85,7 @@ def chain(conn: psycopg.Connection, *kc_ids: str) -> None:
 def test_migration_creates_the_store(conn, schema):
     tables = {
         row[0]
-        for row in conn.execute(
-            "SELECT table_name FROM information_schema.tables WHERE table_schema = %s", (schema,)
-        )
+        for row in conn.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = %s", (schema,))
     }
     assert GRAPH_TABLES | {"kc_graph_lock", "schema_migrations"} <= tables
     ltree_schema = conn.execute(
@@ -106,10 +103,12 @@ def test_migration_creates_the_store(conn, schema):
 
 def test_migration_refuses_to_run_in_public(database_url):
     sql_text = db.migration_files()[0].read_text(encoding="utf-8")
-    with psycopg.connect(database_url, autocommit=True, options="-c search_path=public") as conn:
-        with pytest.raises(errors.RaiseException, match="set search_path"):
-            with conn.transaction():
-                conn.execute(sql_text)
+    with (
+        psycopg.connect(database_url, autocommit=True, options="-c search_path=public") as conn,
+        pytest.raises(errors.RaiseException, match="set search_path"),
+        conn.transaction(),
+    ):
+        conn.execute(sql_text)
 
 
 # --- tracks share KCs (acceptance criterion 1) -----------------------------------------
@@ -130,8 +129,7 @@ def test_tracks_share_a_kc_with_their_own_chapter_and_exam_weight(conn):
         " VALUES ('tech-4', 'physics.waves.mechanical', 'physics', 'core', 9)"
     )
     rows = conn.execute(
-        "SELECT track_id, chapter_no, exam_weight FROM kc_track"
-        " WHERE kc_id = %s ORDER BY track_id",
+        "SELECT track_id, chapter_no, exam_weight FROM kc_track WHERE kc_id = %s ORDER BY track_id",
         ("physics.waves.mechanical",),
     ).fetchall()
     assert rows == [("sexp-4", 7, 0.125), ("tech-4", 9, None)]
@@ -158,20 +156,31 @@ def test_membership_rules(conn):
     )
     cases = [
         # core needs a chapter
-        (("sexp-4", "physics.elec.rc", "physics", "core", None, None, None, None),
-         errors.CheckViolation, "kc_track_core_has_chapter"),
+        (
+            ("sexp-4", "physics.elec.rc", "physics", "core", None, None, None, None),
+            errors.CheckViolation,
+            "kc_track_core_has_chapter",
+        ),
         # the chapter must exist in that track's programme
-        (("sexp-4", "physics.elec.rc", "physics", "core", 9, None, None, None),
-         errors.ForeignKeyViolation, None),
+        (("sexp-4", "physics.elec.rc", "physics", "core", 9, None, None, None), errors.ForeignKeyViolation, None),
         # an exam weight needs its source
-        (("sexp-4", "physics.elec.rc", "physics", "core", 1, 0.2, None, None),
-         errors.CheckViolation, "kc_track_weight_sourced"),
+        (
+            ("sexp-4", "physics.elec.rc", "physics", "core", 1, 0.2, None, None),
+            errors.CheckViolation,
+            "kc_track_weight_sourced",
+        ),
         # the membership's subject is the KC's subject
-        (("sexp-4", "maths.analysis.derivative", "physics", "prerequisite", None, None, None,
-          "maths"), errors.ForeignKeyViolation, None),
+        (
+            ("sexp-4", "maths.analysis.derivative", "physics", "prerequisite", None, None, None, "maths"),
+            errors.ForeignKeyViolation,
+            None,
+        ),
         # a prerequisite-scope KC says where it is taught
-        (("sexp-4", "maths.analysis.derivative", "maths", "prerequisite", None, None, None, None),
-         errors.CheckViolation, "kc_track_prerequisite_sourced"),
+        (
+            ("sexp-4", "maths.analysis.derivative", "maths", "prerequisite", None, None, None, None),
+            errors.CheckViolation,
+            "kc_track_prerequisite_sourced",
+        ),
     ]
     for values, error_class, constraint in cases:
         with pytest.raises(error_class) as caught:
@@ -181,8 +190,7 @@ def test_membership_rules(conn):
     conn.execute(insert, ("sexp-4", "physics.elec.rc", "physics", "core", 1, None, None, None))
     conn.execute(
         insert,
-        ("sexp-4", "maths.analysis.derivative", "maths", "prerequisite", None, None, None,
-         "Mathematics programme"),
+        ("sexp-4", "maths.analysis.derivative", "maths", "prerequisite", None, None, None, "Mathematics programme"),
     )
     assert conn.execute("SELECT count(*) FROM kc_track").fetchone() == (2,)
 
@@ -195,9 +203,7 @@ def test_kc_rules_and_ltree_subtrees(conn):
         "physics.mech.hooke",
     ):
         add_kc(conn, kc_id)
-    subtree = conn.execute(
-        "SELECT id FROM kc WHERE path <@ 'physics.elec.rlc'::ltree ORDER BY id"
-    ).fetchall()
+    subtree = conn.execute("SELECT id FROM kc WHERE path <@ 'physics.elec.rlc'::ltree ORDER BY id").fetchall()
     assert subtree == [("physics.elec.rlc.forced.resonance",), ("physics.elec.rlc.free",)]
     with pytest.raises(errors.CheckViolation) as caught:
         conn.execute(
@@ -230,13 +236,9 @@ def test_an_update_that_closes_a_cycle_is_rejected(conn):
     a, b, c, d = "physics.t.a", "physics.t.b", "physics.t.c", "physics.t.d"
     chain(conn, a, b, c, d)
     with pytest.raises(errors.CheckViolation):
-        conn.execute(
-            "UPDATE kc_edge SET to_kc_id = %s WHERE from_kc_id = %s AND to_kc_id = %s", (a, c, d)
-        )
+        conn.execute("UPDATE kc_edge SET to_kc_id = %s WHERE from_kc_id = %s AND to_kc_id = %s", (a, c, d))
     # Moving an edge without closing a cycle is fine.
-    conn.execute(
-        "UPDATE kc_edge SET from_kc_id = %s WHERE from_kc_id = %s AND to_kc_id = %s", (a, c, d)
-    )
+    conn.execute("UPDATE kc_edge SET from_kc_id = %s WHERE from_kc_id = %s AND to_kc_id = %s", (a, c, d))
 
 
 def test_sub_concept_edges_are_acyclic_and_types_are_checked_separately(conn):
@@ -277,9 +279,7 @@ def _wait_until_waiting_for_a_lock(url: str, pid: int, timeout: float = 10.0) ->
     deadline = time.monotonic() + timeout
     with psycopg.connect(url, autocommit=True) as observer:
         while time.monotonic() < deadline:
-            row = observer.execute(
-                "SELECT wait_event_type FROM pg_stat_activity WHERE pid = %s", (pid,)
-            ).fetchone()
+            row = observer.execute("SELECT wait_event_type FROM pg_stat_activity WHERE pid = %s", (pid,)).fetchone()
             if row and row[0] == "Lock":
                 return
             time.sleep(0.05)

@@ -7,7 +7,6 @@ import dataclasses
 
 import pytest
 import yaml
-
 from kuizi_kc_graph import STARTER_SEED
 from kuizi_kc_graph import graph as g
 from kuizi_kc_graph.cli import main
@@ -113,9 +112,7 @@ def problems_after(graph: Graph, change) -> list[str]:
 def test_a_prerequisite_cycle_is_reported(starter):
     problems = problems_after(
         starter,
-        lambda gr: gr.edges.append(
-            Edge("physics.elec.rc.time_constant", "physics.elec.rc.capacitor", "prerequisite")
-        ),
+        lambda gr: gr.edges.append(Edge("physics.elec.rc.time_constant", "physics.elec.rc.capacitor", "prerequisite")),
     )
     assert any("prerequisite edges form a cycle" in p for p in problems)
 
@@ -130,15 +127,11 @@ def test_a_self_loop_is_reported(starter):
 def test_a_missing_prerequisite_in_a_track_is_reported(starter):
     def drop(gr: Graph) -> None:
         gr.memberships = [
-            m
-            for m in gr.memberships
-            if not (m.track_id == "tech-4" and m.kc_id == "physics.elec.circuit_laws")
+            m for m in gr.memberships if not (m.track_id == "tech-4" and m.kc_id == "physics.elec.circuit_laws")
         ]
 
     problems = problems_after(starter, drop)
-    assert any(
-        p.startswith("track tech-4:") and "needs physics.elec.circuit_laws" in p for p in problems
-    )
+    assert any(p.startswith("track tech-4:") and "needs physics.elec.circuit_laws" in p for p in problems)
 
 
 def test_french_in_the_arabic_field_is_reported(starter):

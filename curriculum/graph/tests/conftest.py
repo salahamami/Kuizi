@@ -14,11 +14,10 @@ from typing import NoReturn
 
 import psycopg
 import pytest
-from psycopg import sql
-
 from kuizi_kc_graph import STARTER_SEED, db
 from kuizi_kc_graph.model import Graph
 from kuizi_kc_graph.seed import load_seed
+from psycopg import sql
 
 REQUIRE_POSTGRES = os.environ.get("KUIZI_REQUIRE_POSTGRES") == "1"
 

@@ -118,15 +118,9 @@ def build_export(
     for track_id in selected:
         track = all_tracks[track_id]
         programmes = []
-        for p in sorted(
-            (p for p in graph.programmes if p.track_id == track_id), key=lambda p: p.subject_id
-        ):
+        for p in sorted((p for p in graph.programmes if p.track_id == track_id), key=lambda p: p.subject_id):
             chapters = sorted(
-                (
-                    c
-                    for c in graph.chapters
-                    if c.track_id == track_id and c.subject_id == p.subject_id
-                ),
+                (c for c in graph.chapters if c.track_id == track_id and c.subject_id == p.subject_id),
                 key=lambda c: c.number,
             )
             programmes.append(
@@ -197,10 +191,7 @@ def build_export(
             }
             for k in kcs.values()
         ],
-        "edges": [
-            {"from": e.from_kc, "to": e.to_kc, "type": e.edge_type, "review_status": e.status}
-            for e in edges
-        ],
+        "edges": [{"from": e.from_kc, "to": e.to_kc, "type": e.edge_type, "review_status": e.status} for e in edges],
     }
     doc["graph_hash"] = content_hash(doc)
     return doc
@@ -215,10 +206,7 @@ def check_export(doc: dict[str, Any]) -> list[str]:
     """Problems with an export: JSON Schema first, then the references the schema cannot see."""
     validator = Draft202012Validator(load_export_schema())
     errors = sorted(validator.iter_errors(doc), key=lambda e: [str(p) for p in e.absolute_path])
-    problems = [
-        f"{'/'.join(str(p) for p in error.absolute_path) or '(root)'}: {error.message}"
-        for error in errors
-    ]
+    problems = [f"{'/'.join(str(p) for p in error.absolute_path) or '(root)'}: {error.message}" for error in errors]
     if problems:
         return problems
 
@@ -227,12 +215,11 @@ def check_export(doc: dict[str, Any]) -> list[str]:
         for key in ("prerequisites", "dependents", "parents", "children", "related"):
             problems += [f"KC {k['id']}: {key} names unknown KC {o}" for o in k[key] if o not in ids]
     for e in doc["edges"]:
-        problems += [f"edge {e['from']} -> {e['to']}: unknown KC {end}"
-                     for end in (e["from"], e["to"]) if end not in ids]
+        problems += [
+            f"edge {e['from']} -> {e['to']}: unknown KC {end}" for end in (e["from"], e["to"]) if end not in ids
+        ]
     for t in doc["tracks"]:
-        members = sorted(
-            k["id"] for k in doc["kcs"] if any(m["track"] == t["id"] for m in k["memberships"])
-        )
+        members = sorted(k["id"] for k in doc["kcs"] if any(m["track"] == t["id"] for m in k["memberships"]))
         order = t["topological_order"]
         if sorted(order) != members:
             problems.append(f"track {t['id']}: topological_order must list exactly its KCs")

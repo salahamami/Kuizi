@@ -8,7 +8,6 @@ from datetime import UTC, datetime
 
 import pytest
 from jsonschema import Draft202012Validator
-
 from kuizi_kc_graph.export import (
     ExportError,
     build_export,
@@ -115,9 +114,7 @@ def test_reviewed_only_export_of_the_starter_is_empty_but_valid(starter):
 def test_reviewed_only_keeps_reviewed_kcs_and_edges(starter):
     graph = copy.deepcopy(starter)
     reviewed = {"physics.elec.circuit_laws", "physics.elec.rc.capacitor"}
-    graph.kcs = [
-        dataclasses.replace(k, status="reviewed") if k.id in reviewed else k for k in graph.kcs
-    ]
+    graph.kcs = [dataclasses.replace(k, status="reviewed") if k.id in reviewed else k for k in graph.kcs]
     graph.edges = [
         dataclasses.replace(e, status="reviewed")
         if (e.from_kc, e.to_kc) == ("physics.elec.circuit_laws", "physics.elec.rc.capacitor")
@@ -140,8 +137,7 @@ def test_reviewed_only_keeps_reviewed_kcs_and_edges(starter):
 def test_retired_kcs_are_not_exported(starter):
     graph = copy.deepcopy(starter)
     graph.kcs = [
-        dataclasses.replace(k, status="retired") if k.id == "physics.elec.filters.active" else k
-        for k in graph.kcs
+        dataclasses.replace(k, status="retired") if k.id == "physics.elec.filters.active" else k for k in graph.kcs
     ]
     doc = build_export(graph, tracks=["tech-4"])
     assert check_export(doc) == []

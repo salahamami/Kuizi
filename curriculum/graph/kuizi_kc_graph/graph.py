@@ -42,7 +42,7 @@ def find_cycle(nodes: Iterable[str], edges: Iterable[tuple[str, str]]) -> list[s
         while stack:
             for child in stack[-1]:
                 if colour[child] == grey:
-                    return trail[trail.index(child):] + [child]
+                    return [*trail[trail.index(child) :], child]
                 if colour[child] == white:
                     colour[child] = grey
                     trail.append(child)

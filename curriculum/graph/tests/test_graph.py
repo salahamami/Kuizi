@@ -1,7 +1,6 @@
 """Graph algorithms (no database)."""
 
 import pytest
-
 from kuizi_kc_graph import graph as g
 
 NODES = ["a", "b", "c", "d"]

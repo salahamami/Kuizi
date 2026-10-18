@@ -124,8 +124,7 @@ class Graph:
             core = sum(m.scope == "core" for m in members)
             chapters = sum(c.track_id == track.id for c in self.chapters)
             lines.append(
-                f"{track.id}: {len(members)} KCs ({core} core,"
-                f" {len(members) - core} prerequisite), {chapters} chapters"
+                f"{track.id}: {len(members)} KCs ({core} core, {len(members) - core} prerequisite), {chapters} chapters"
             )
         return "\n".join(lines)
 
@@ -203,9 +202,7 @@ def validate_graph(graph: Graph) -> list[str]:
     for k in graph.kcs:
         what = f"KC {k.id}"
         if not KC_ID.match(k.id) or len(k.id) > MAX_KC_ID_LENGTH:
-            problems.append(
-                f"{what}: id must be dotted lowercase labels (at most {MAX_KC_ID_LENGTH} chars)"
-            )
+            problems.append(f"{what}: id must be dotted lowercase labels (at most {MAX_KC_ID_LENGTH} chars)")
         if k.subject_id not in subjects:
             problems.append(f"{what}: unknown subject {k.subject_id!r}")
         if k.id.split(".")[0] != k.subject_id:
@@ -242,10 +239,7 @@ def validate_graph(graph: Graph) -> list[str]:
         if m.scope == "prerequisite" and _blank(m.source_ref):
             problems.append(f"{what}: a prerequisite KC needs source_ref (where it is taught)")
         if m.chapter_no is not None and (m.track_id, m.subject_id, m.chapter_no) not in chapters:
-            problems.append(
-                f"{what}: chapter {m.chapter_no} is not in the {m.subject_id} programme"
-                f" of {m.track_id}"
-            )
+            problems.append(f"{what}: chapter {m.chapter_no} is not in the {m.subject_id} programme of {m.track_id}")
         if m.exam_weight is not None:
             if not 0 <= m.exam_weight <= 1:
                 problems.append(f"{what}: exam_weight must be between 0 and 1")
@@ -261,9 +255,7 @@ def validate_graph(graph: Graph) -> list[str]:
 
     # Edges
     problems += _duplicates([(e.from_kc, e.to_kc, e.edge_type) for e in graph.edges], "edge")
-    related = [
-        tuple(sorted((e.from_kc, e.to_kc))) for e in graph.edges if e.edge_type == "related"
-    ]
+    related = [tuple(sorted((e.from_kc, e.to_kc))) for e in graph.edges if e.edge_type == "related"]
     problems += _duplicates(related, "related edge (either direction)")
     for e in graph.edges:
         what = f"{e.edge_type} edge {e.from_kc} -> {e.to_kc}"
@@ -300,8 +292,6 @@ def validate_graph(graph: Graph) -> list[str]:
             totals[(m.track_id, m.subject_id)] += m.exam_weight
     for (track_id, subject_id), total in sorted(totals.items()):
         if total > 1 + 1e-9:
-            problems.append(
-                f"track {track_id}: {subject_id} exam weights add up to {total:.3f}, more than 1"
-            )
+            problems.append(f"track {track_id}: {subject_id} exam weights add up to {total:.3f}, more than 1")
 
     return problems

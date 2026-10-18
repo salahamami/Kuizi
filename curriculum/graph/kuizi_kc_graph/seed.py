@@ -28,8 +28,18 @@ SEED_FORMAT = "kuizi.kc-graph.seed"
 SEED_FORMAT_VERSION = 1
 TOP_KEYS = {"format", "format_version", "meta", "subjects", "tracks", "programmes", "kcs"}
 KC_KEYS = {
-    "id", "name", "path", "description", "difficulty_prior", "status",
-    "requires", "parents", "related", "chapters", "prerequisite_in", "source_ref",
+    "id",
+    "name",
+    "path",
+    "description",
+    "difficulty_prior",
+    "status",
+    "requires",
+    "parents",
+    "related",
+    "chapters",
+    "prerequisite_in",
+    "source_ref",
 }
 MEMBERSHIP_KEYS = {"chapter", "exam_weight", "exam_weight_source"}
 EDGE_KEYS = (("requires", "prerequisite"), ("parents", "sub_concept"), ("related", "related"))
@@ -141,9 +151,7 @@ def _parse_kc(item: dict, index: int, graph: Graph, problems: list[str]) -> None
     name_fr, name_ar = _bilingual(item.get("name"), f"{where} name", problems)
     description_fr = description_ar = None
     if item.get("description") is not None:
-        description_fr, description_ar = _bilingual(
-            item["description"], f"{where} description", problems
-        )
+        description_fr, description_ar = _bilingual(item["description"], f"{where} description", problems)
     prior = item.get("difficulty_prior")
     if prior is not None and not _is_number(prior):
         problems.append(f"{where}: difficulty_prior must be a number or null")
@@ -201,9 +209,7 @@ def _parse_kc(item: dict, index: int, graph: Graph, problems: list[str]) -> None
         )
 
     for track_id in _id_list(item, "prerequisite_in", where, problems):
-        graph.memberships.append(
-            Membership(track_id, kc_id, subject_id, "prerequisite", source_ref=source_ref)
-        )
+        graph.memberships.append(Membership(track_id, kc_id, subject_id, "prerequisite", source_ref=source_ref))
 
     for key, edge_type in EDGE_KEYS:
         for other in _id_list(item, key, where, problems):

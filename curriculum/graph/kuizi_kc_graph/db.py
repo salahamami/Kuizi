@@ -85,9 +85,7 @@ def check_schema_name(schema: str) -> str:
     return schema
 
 
-def connect(
-    url: str | None = None, *, schema: str = DEFAULT_SCHEMA, autocommit: bool = True
-) -> psycopg.Connection:
+def connect(url: str | None = None, *, schema: str = DEFAULT_SCHEMA, autocommit: bool = True) -> psycopg.Connection:
     """A connection whose search_path is `schema, public` for the whole session.
 
     The search_path is a connection option, so a rolled-back transaction cannot reset it.
@@ -112,9 +110,7 @@ def migrate(conn: psycopg.Connection, schema: str = DEFAULT_SCHEMA) -> list[str]
     applied: list[str] = []
     with conn.transaction():
         conn.execute(sql.SQL("CREATE SCHEMA IF NOT EXISTS {}").format(sql.Identifier(schema)))
-        conn.execute(
-            sql.SQL("SET LOCAL search_path TO {}, public").format(sql.Identifier(schema))
-        )
+        conn.execute(sql.SQL("SET LOCAL search_path TO {}, public").format(sql.Identifier(schema)))
         conn.execute(
             "CREATE TABLE IF NOT EXISTS schema_migrations ("
             " version text PRIMARY KEY,"
@@ -133,8 +129,7 @@ def migrate(conn: psycopg.Connection, schema: str = DEFAULT_SCHEMA) -> list[str]
 
 def graph_is_empty(conn: psycopg.Connection) -> bool:
     row = conn.execute(
-        "SELECT (SELECT count(*) FROM subject) + (SELECT count(*) FROM track)"
-        " + (SELECT count(*) FROM kc)"
+        "SELECT (SELECT count(*) FROM subject) + (SELECT count(*) FROM track) + (SELECT count(*) FROM kc)"
     ).fetchone()
     return row is not None and row[0] == 0
 
@@ -157,24 +152,19 @@ def load_graph(conn: psycopg.Connection, graph: Graph, *, replace: bool = False)
                 [(s.id, s.name_fr, s.name_ar) for s in graph.subjects],
             )
             cur.executemany(
-                "INSERT INTO track (id, section, year, name_fr, name_ar)"
-                " VALUES (%s, %s, %s, %s, %s)",
+                "INSERT INTO track (id, section, year, name_fr, name_ar) VALUES (%s, %s, %s, %s, %s)",
                 [(t.id, t.section, t.year, t.name_fr, t.name_ar) for t in graph.tracks],
             )
             cur.executemany(
                 "INSERT INTO programme (track_id, subject_id, title_fr, title_ar, source_ref)"
                 " VALUES (%s, %s, %s, %s, %s)",
-                [
-                    (p.track_id, p.subject_id, p.title_fr, p.title_ar, p.source_ref)
-                    for p in graph.programmes
-                ],
+                [(p.track_id, p.subject_id, p.title_fr, p.title_ar, p.source_ref) for p in graph.programmes],
             )
             cur.executemany(
                 "INSERT INTO chapter (track_id, subject_id, number, theme_fr, theme_ar,"
                 " title_fr, title_ar, source_ref) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
                 [
-                    (c.track_id, c.subject_id, c.number, c.theme_fr, c.theme_ar,
-                     c.title_fr, c.title_ar, c.source_ref)
+                    (c.track_id, c.subject_id, c.number, c.theme_fr, c.theme_ar, c.title_fr, c.title_ar, c.source_ref)
                     for c in graph.chapters
                 ],
             )
@@ -183,8 +173,17 @@ def load_graph(conn: psycopg.Connection, graph: Graph, *, replace: bool = False)
                 " description_ar, difficulty_prior, status)"
                 " VALUES (%s, %s, %s::ltree, %s, %s, %s, %s, %s, %s)",
                 [
-                    (k.id, k.subject_id, k.path, k.name_fr, k.name_ar, k.description_fr,
-                     k.description_ar, k.difficulty_prior, k.status)
+                    (
+                        k.id,
+                        k.subject_id,
+                        k.path,
+                        k.name_fr,
+                        k.name_ar,
+                        k.description_fr,
+                        k.description_ar,
+                        k.difficulty_prior,
+                        k.status,
+                    )
                     for k in graph.kcs
                 ],
             )
@@ -193,14 +192,21 @@ def load_graph(conn: psycopg.Connection, graph: Graph, *, replace: bool = False)
                 " exam_weight, exam_weight_source, source_ref)"
                 " VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
                 [
-                    (m.track_id, m.kc_id, m.subject_id, m.scope, m.chapter_no,
-                     m.exam_weight, m.exam_weight_source, m.source_ref)
+                    (
+                        m.track_id,
+                        m.kc_id,
+                        m.subject_id,
+                        m.scope,
+                        m.chapter_no,
+                        m.exam_weight,
+                        m.exam_weight_source,
+                        m.source_ref,
+                    )
                     for m in graph.memberships
                 ],
             )
             cur.executemany(
-                "INSERT INTO kc_edge (from_kc_id, to_kc_id, edge_type, status, note)"
-                " VALUES (%s, %s, %s, %s, %s)",
+                "INSERT INTO kc_edge (from_kc_id, to_kc_id, edge_type, status, note) VALUES (%s, %s, %s, %s, %s)",
                 [(e.from_kc, e.to_kc, e.edge_type, e.status, e.note) for e in graph.edges],
             )
 
@@ -212,13 +218,8 @@ def fetch_graph(conn: psycopg.Connection) -> Graph:
         return conn.execute(query).fetchall()
 
     return Graph(
-        subjects=[
-            Subject(*r) for r in rows("SELECT id, name_fr, name_ar FROM subject ORDER BY id")
-        ],
-        tracks=[
-            Track(*r)
-            for r in rows("SELECT id, section, year, name_fr, name_ar FROM track ORDER BY id")
-        ],
+        subjects=[Subject(*r) for r in rows("SELECT id, name_fr, name_ar FROM subject ORDER BY id")],
+        tracks=[Track(*r) for r in rows("SELECT id, section, year, name_fr, name_ar FROM track ORDER BY id")],
         programmes=[
             Programme(*r)
             for r in rows(

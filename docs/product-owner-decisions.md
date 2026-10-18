@@ -9,7 +9,7 @@
 | 1.1 | Merge the work into `main` | One pull request from `feat/sprint-2` into `main` brings everything (Sprint 1 and the Sprint 2 work); `main` is still empty | [compare](https://github.com/salahamami/Kuizi/compare/main...feat/sprint-2) |
 | 1.2 | Protect `main` | Require a pull request and the status check **CI result**; block force pushes and deletion | [`dev/ci.md`](dev/ci.md), section "Protect main" |
 | 1.3 | Brain model (ADR 0007) | AKT with Platt calibration, DKT as fallback (recommended by the ML agent), or DKT as champion until the pilot re-check (T239) | [ADR 0007](architecture/decisions/0007-knowledge-tracing-model.md) |
-| 1.4 | Accept ADRs 0008, 0009, 0010 | 0008 monorepo layout and toolchains; 0009 one Keycloak realm and a Kuizi Keycloak image with Java extensions; 0010 learner event contracts (Avro, one topic per event, BACKWARD_TRANSITIVE) | [`architecture/decisions/`](architecture/decisions/) |
+| 1.4 | Accept ADRs 0008, 0009, 0010 | 0008 monorepo layout and toolchains; 0009 one Keycloak realm and a Kuizi Keycloak image with Java extensions; 0010 learner event contracts (Avro, one topic per event, BACKWARD_TRANSITIVE; ML review signed off with conditions, all applied) | [`architecture/decisions/`](architecture/decisions/) |
 | 1.5 | Split T076 (13 points) before Sprint 3 | The working agreement splits anything at 13 before sprint entry; the frontend agent proposes the split | backlog |
 
 ## 2. New dependencies and services to approve

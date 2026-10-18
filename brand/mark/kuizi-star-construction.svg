@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30 -30 160 160" width="640" height="640" role="img">
+  <title>Kuizi star: construction grid</title>
+  <!--
+    Documentation diagram, not a logo file. Units match kuizi-star.svg (star in the 0..100 square).
+    - tracing-paper background, 8 x 8 grid at 12.5 units (line #DCE4EE)
+    - dashed outer box: clear space = 25 units (1/4 of the mark) on every side
+    - circle R = 50 (all 8 points), circle r = 38.268 (8 re-entrant vertices), dashed ink-2 #4A5B75
+    - square A (upright) and square B (on its point) outlined in cyan #0A6F8C
+    - axes and 45-degree diagonals in ink-2
+    - star filled with line #DCE4EE; rhombus counter (half-diagonal 12.5) outlined in night #0B1E3A
+  -->
+  <rect x="-30" y="-30" width="160" height="160" fill="#F3F6FA"/>
+  <g stroke="#DCE4EE" stroke-width="0.4" fill="none">
+    <path d="M0 0V100M12.5 0V100M25 0V100M37.5 0V100M50 0V100M62.5 0V100M75 0V100M87.5 0V100M100 0V100"/>
+    <path d="M0 0H100M0 12.5H100M0 25H100M0 37.5H100M0 50H100M0 62.5H100M0 75H100M0 87.5H100M0 100H100"/>
+  </g>
+  <path fill="#DCE4EE" fill-rule="evenodd" d="M50 0L64.645 14.645H85.355V35.355L100 50L85.355 64.645V85.355H64.645L50 100L35.355 85.355H14.645V64.645L0 50L14.645 35.355V14.645H35.355Z M50 37.5L37.5 50L50 62.5L62.5 50Z"/>
+  <g stroke="#4A5B75" stroke-width="0.35" fill="none">
+    <rect x="-25" y="-25" width="150" height="150" stroke-dasharray="2 2"/>
+    <circle cx="50" cy="50" r="50" stroke-dasharray="1.5 1.5"/>
+    <circle cx="50" cy="50" r="38.268" stroke-dasharray="1.5 1.5"/>
+    <path d="M50 -8V108M-8 50H108M8 8L92 92M92 8L8 92"/>
+  </g>
+  <g stroke="#0A6F8C" stroke-width="0.8" fill="none">
+    <rect x="14.645" y="14.645" width="70.711" height="70.711"/>
+    <path d="M50 0L100 50L50 100L0 50Z"/>
+  </g>
+  <path d="M50 37.5L62.5 50L50 62.5L37.5 50Z" fill="none" stroke="#0B1E3A" stroke-width="0.8"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>Kuizi</title>
+  <!-- PWA icon, purpose "any" (shown as is). Night #0B1E3A tile, corner radius 112, transparent corners.
+       Star cyan-light #4FD1F0, centre (256,256), R = 160 (62.5 %, as on iOS). Offsets 113.137 / 46.863,
+       rhombus half-diagonal 40. -->
+  <rect width="512" height="512" rx="112" fill="#0B1E3A"/>
+  <path fill="#4FD1F0" fill-rule="evenodd" d="M256 96L302.863 142.863H369.137V209.137L416 256L369.137 302.863V369.137H302.863L256 416L209.137 369.137H142.863V302.863L96 256L142.863 209.137V142.863H209.137Z M256 216L216 256L256 296L296 256Z"/>
+</svg>

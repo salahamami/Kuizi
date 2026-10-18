@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 142" width="430" height="142" role="img">
+  <title>كويزي</title>
+  <!-- Arabic lockup (right to left: the star comes first, on the right), for light backgrounds.
+       Logotype at x 0-298, y 8-142 (night #0B1E3A); gap 32; star at x 330-430, y 0-100 (cyan #0A6F8C).
+       Kaf top and baseline (y 8-92) are centred on the star's axis (y 50); tails hang below.
+       This is a separate artwork, not a mirrored Latin lockup. Clear space: 25 units on every side. -->
+  <g fill="#0B1E3A" transform="translate(0 8)">
+    <path d="M62 36H106V50H76V70H126L62 134H26A26 26 0 0 1 0 108V70H14V108A12 12 0 0 0 26 120H56L92 84H62Z"/>
+    <path d="M31 90L41 100L31 110L21 100Z M55 90L65 100L55 110L45 100Z"/>
+    <path d="M182 36H196V84H146L110 120H90L140 70H182Z"/>
+    <path d="M150 40L160 50L150 60L140 50Z"/>
+    <path d="M174 90L184 100L174 110L164 100Z M198 90L208 100L198 110L188 100Z"/>
+    <path fill-rule="evenodd" d="M254 0H298V84H260L224 120H204L240 84H212V36H260V70H284V14H268L254 0Z M226 50V70H246V50Z"/>
+  </g>
+  <path fill="#0A6F8C" fill-rule="evenodd" transform="translate(330 0)" d="M50 0L64.645 14.645H85.355V35.355L100 50L85.355 64.645V85.355H64.645L50 100L35.355 85.355H14.645V64.645L0 50L14.645 35.355V14.645H35.355Z M50 37.5L37.5 50L50 62.5L62.5 50Z"/>
+</svg>

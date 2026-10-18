@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "ticket": "T231",
+  "status": "draft: the brand guide stays draft until the Arabic type review and the trademark check are done (docs/design/brand-reviews.md)",
+  "rules": {
+    "renderer": "Any standards-compliant SVG renderer (resvg, rsvg-convert or Inkscape). Render the whole viewBox scaled uniformly to exactly width x height pixels; never crop, pad or stretch. Every source's viewBox has the same aspect ratio as its outputs.",
+    "background": "\"transparent\" keeps the alpha channel. A hex colour means: flatten onto that colour and save without an alpha channel (RGB PNG).",
+    "colour": "sRGB, 8 bits per channel. Do not convert colours; the hex values in the SVGs are the Cyanotype tokens.",
+    "optimise": "Lossless only (for example oxipng -o 4). No palette quantisation.",
+    "check_on": "Background to look at the PNG against when checking it visually. It is not painted into the file unless \"background\" says so.",
+    "paths": "Sources and outputs are relative to the repository root. Create missing folders."
+  },
+  "outputs": [
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-1024.png", "width": 1024, "height": 1024, "background": "#0B1E3A", "note": "App Store icon and Xcode single-size AppIcon (default appearance). Must have no alpha channel." },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-dark.svg", "output": "brand/export/ios/AppIcon-1024-dark.png", "width": 1024, "height": 1024, "background": "transparent", "check_on": "#1C1C1E", "note": "Xcode AppIcon, dark appearance (iOS 18+). Keep alpha." },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-tinted.svg", "output": "brand/export/ios/AppIcon-1024-tinted.png", "width": 1024, "height": 1024, "background": "#000000", "note": "Xcode AppIcon, tinted appearance (iOS 18+), grayscale." },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-20.png", "width": 20, "height": 20, "background": "#0B1E3A", "note": "iPad notification @1x (legacy asset catalogs only; Xcode 14+ derives sizes from the 1024)." },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-29.png", "width": 29, "height": 29, "background": "#0B1E3A", "note": "iPad settings @1x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-40.png", "width": 40, "height": 40, "background": "#0B1E3A", "note": "notification 20@2x, spotlight 40@1x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-58.png", "width": 58, "height": 58, "background": "#0B1E3A", "note": "settings 29@2x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-60.png", "width": 60, "height": 60, "background": "#0B1E3A", "note": "notification 20@3x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-76.png", "width": 76, "height": 76, "background": "#0B1E3A", "note": "iPad app 76@1x, 38@2x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-80.png", "width": 80, "height": 80, "background": "#0B1E3A", "note": "spotlight 40@2x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-87.png", "width": 87, "height": 87, "background": "#0B1E3A", "note": "settings 29@3x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-114.png", "width": 114, "height": 114, "background": "#0B1E3A", "note": "38@3x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-120.png", "width": 120, "height": 120, "background": "#0B1E3A", "note": "iPhone app 60@2x, spotlight 40@3x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-128.png", "width": 128, "height": 128, "background": "#0B1E3A", "note": "64@2x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-136.png", "width": 136, "height": 136, "background": "#0B1E3A", "note": "68@2x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-152.png", "width": 152, "height": 152, "background": "#0B1E3A", "note": "iPad app 76@2x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-167.png", "width": 167, "height": 167, "background": "#0B1E3A", "note": "iPad Pro app 83.5@2x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-180.png", "width": 180, "height": 180, "background": "#0B1E3A", "note": "iPhone app 60@3x" },
+    { "group": "ios", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/ios/AppIcon-192.png", "width": 192, "height": 192, "background": "#0B1E3A", "note": "64@3x" },
+
+    { "group": "android-legacy", "source": "brand/app-icon/android/kuizi-legacy-square.svg", "output": "brand/export/android/mipmap-mdpi/ic_launcher.png", "width": 48, "height": 48, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "android-legacy", "source": "brand/app-icon/android/kuizi-legacy-square.svg", "output": "brand/export/android/mipmap-hdpi/ic_launcher.png", "width": 72, "height": 72, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "android-legacy", "source": "brand/app-icon/android/kuizi-legacy-square.svg", "output": "brand/export/android/mipmap-xhdpi/ic_launcher.png", "width": 96, "height": 96, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "android-legacy", "source": "brand/app-icon/android/kuizi-legacy-square.svg", "output": "brand/export/android/mipmap-xxhdpi/ic_launcher.png", "width": 144, "height": 144, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "android-legacy", "source": "brand/app-icon/android/kuizi-legacy-square.svg", "output": "brand/export/android/mipmap-xxxhdpi/ic_launcher.png", "width": 192, "height": 192, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "android-legacy", "source": "brand/app-icon/android/kuizi-legacy-round.svg", "output": "brand/export/android/mipmap-mdpi/ic_launcher_round.png", "width": 48, "height": 48, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "android-legacy", "source": "brand/app-icon/android/kuizi-legacy-round.svg", "output": "brand/export/android/mipmap-hdpi/ic_launcher_round.png", "width": 72, "height": 72, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "android-legacy", "source": "brand/app-icon/android/kuizi-legacy-round.svg", "output": "brand/export/android/mipmap-xhdpi/ic_launcher_round.png", "width": 96, "height": 96, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "android-legacy", "source": "brand/app-icon/android/kuizi-legacy-round.svg", "output": "brand/export/android/mipmap-xxhdpi/ic_launcher_round.png", "width": 144, "height": 144, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "android-legacy", "source": "brand/app-icon/android/kuizi-legacy-round.svg", "output": "brand/export/android/mipmap-xxxhdpi/ic_launcher_round.png", "width": 192, "height": 192, "background": "transparent", "check_on": "#F3F6FA" },
+
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-foreground.svg", "output": "brand/export/android/mipmap-mdpi/ic_launcher_foreground.png", "width": 108, "height": 108, "background": "transparent", "check_on": "#0B1E3A", "note": "PNG fallback; the Android app should prefer vector drawables converted from the SVG layers." },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-foreground.svg", "output": "brand/export/android/mipmap-hdpi/ic_launcher_foreground.png", "width": 162, "height": 162, "background": "transparent", "check_on": "#0B1E3A" },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-foreground.svg", "output": "brand/export/android/mipmap-xhdpi/ic_launcher_foreground.png", "width": 216, "height": 216, "background": "transparent", "check_on": "#0B1E3A" },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-foreground.svg", "output": "brand/export/android/mipmap-xxhdpi/ic_launcher_foreground.png", "width": 324, "height": 324, "background": "transparent", "check_on": "#0B1E3A" },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-foreground.svg", "output": "brand/export/android/mipmap-xxxhdpi/ic_launcher_foreground.png", "width": 432, "height": 432, "background": "transparent", "check_on": "#0B1E3A" },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-background.svg", "output": "brand/export/android/mipmap-mdpi/ic_launcher_background.png", "width": 108, "height": 108, "background": "#0B1E3A" },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-background.svg", "output": "brand/export/android/mipmap-hdpi/ic_launcher_background.png", "width": 162, "height": 162, "background": "#0B1E3A" },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-background.svg", "output": "brand/export/android/mipmap-xhdpi/ic_launcher_background.png", "width": 216, "height": 216, "background": "#0B1E3A" },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-background.svg", "output": "brand/export/android/mipmap-xxhdpi/ic_launcher_background.png", "width": 324, "height": 324, "background": "#0B1E3A" },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-background.svg", "output": "brand/export/android/mipmap-xxxhdpi/ic_launcher_background.png", "width": 432, "height": 432, "background": "#0B1E3A" },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-monochrome.svg", "output": "brand/export/android/mipmap-mdpi/ic_launcher_monochrome.png", "width": 108, "height": 108, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-monochrome.svg", "output": "brand/export/android/mipmap-hdpi/ic_launcher_monochrome.png", "width": 162, "height": 162, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-monochrome.svg", "output": "brand/export/android/mipmap-xhdpi/ic_launcher_monochrome.png", "width": 216, "height": 216, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-monochrome.svg", "output": "brand/export/android/mipmap-xxhdpi/ic_launcher_monochrome.png", "width": 324, "height": 324, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "android-adaptive", "source": "brand/app-icon/android/kuizi-adaptive-monochrome.svg", "output": "brand/export/android/mipmap-xxxhdpi/ic_launcher_monochrome.png", "width": 432, "height": 432, "background": "transparent", "check_on": "#F3F6FA" },
+
+    { "group": "android-store", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/android/play-store-icon-512.png", "width": 512, "height": 512, "background": "#0B1E3A", "note": "Google Play listing icon: full square, Play applies the mask and shadow. Same artwork as the iOS master." },
+    { "group": "android-store", "source": "brand/social/play-feature-graphic.svg", "output": "brand/export/android/play-feature-graphic-1024x500.png", "width": 1024, "height": 500, "background": "#0B1E3A", "note": "Google Play feature graphic, no alpha." },
+
+    { "group": "web", "source": "brand/app-icon/web/favicon.svg", "output": "brand/export/web/favicon-16.png", "width": 16, "height": 16, "background": "transparent", "check_on": "#FFFFFF", "note": "Also check on #202124 (dark browser tab)." },
+    { "group": "web", "source": "brand/app-icon/web/favicon.svg", "output": "brand/export/web/favicon-32.png", "width": 32, "height": 32, "background": "transparent", "check_on": "#FFFFFF" },
+    { "group": "web", "source": "brand/app-icon/web/favicon.svg", "output": "brand/export/web/favicon-48.png", "width": 48, "height": 48, "background": "transparent", "check_on": "#FFFFFF" },
+    { "group": "web", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/web/apple-touch-icon.png", "width": 180, "height": 180, "background": "#0B1E3A", "note": "iOS rounds the corners itself; no alpha." },
+    { "group": "web", "source": "brand/app-icon/web/icon-any.svg", "output": "brand/export/web/icon-192.png", "width": 192, "height": 192, "background": "transparent", "check_on": "#F3F6FA", "note": "Web app manifest, purpose any." },
+    { "group": "web", "source": "brand/app-icon/web/icon-any.svg", "output": "brand/export/web/icon-512.png", "width": 512, "height": 512, "background": "transparent", "check_on": "#F3F6FA", "note": "Web app manifest, purpose any." },
+    { "group": "web", "source": "brand/app-icon/web/icon-maskable.svg", "output": "brand/export/web/icon-maskable-192.png", "width": 192, "height": 192, "background": "#0B1E3A", "note": "Web app manifest, purpose maskable." },
+    { "group": "web", "source": "brand/app-icon/web/icon-maskable.svg", "output": "brand/export/web/icon-maskable-512.png", "width": 512, "height": 512, "background": "#0B1E3A", "note": "Web app manifest, purpose maskable." },
+
+    { "group": "social", "source": "brand/social/og-image.svg", "output": "brand/export/social/og-image-1200x630.png", "width": 1200, "height": 630, "background": "#0B1E3A", "note": "Open Graph and X/Twitter large card." },
+    { "group": "social", "source": "brand/app-icon/ios/kuizi-ios-default.svg", "output": "brand/export/social/social-avatar-1080.png", "width": 1080, "height": 1080, "background": "#0B1E3A", "note": "Profile picture; survives a circular crop (star radius 337.5 of 540)." },
+
+    { "group": "logo", "source": "brand/mark/kuizi-star.svg", "output": "brand/export/logo/kuizi-star-512.png", "width": 512, "height": 512, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "logo", "source": "brand/mark/kuizi-star-dark.svg", "output": "brand/export/logo/kuizi-star-dark-512.png", "width": 512, "height": 512, "background": "transparent", "check_on": "#0B1E3A" },
+    { "group": "logo", "source": "brand/logo/kuizi-lockup-latin-light.svg", "output": "brand/export/logo/kuizi-lockup-latin-light@2x.png", "width": 718, "height": 200, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "logo", "source": "brand/logo/kuizi-lockup-latin-dark.svg", "output": "brand/export/logo/kuizi-lockup-latin-dark@2x.png", "width": 718, "height": 200, "background": "transparent", "check_on": "#0B1E3A" },
+    { "group": "logo", "source": "brand/logo/kuizi-lockup-latin-mono.svg", "output": "brand/export/logo/kuizi-lockup-latin-mono@2x.png", "width": 718, "height": 200, "background": "transparent", "check_on": "#FFFFFF" },
+    { "group": "logo", "source": "brand/logo/kuizi-lockup-arabic-light.svg", "output": "brand/export/logo/kuizi-lockup-arabic-light@2x.png", "width": 860, "height": 284, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "logo", "source": "brand/logo/kuizi-lockup-arabic-dark.svg", "output": "brand/export/logo/kuizi-lockup-arabic-dark@2x.png", "width": 860, "height": 284, "background": "transparent", "check_on": "#0B1E3A" },
+    { "group": "logo", "source": "brand/logo/kuizi-lockup-arabic-mono.svg", "output": "brand/export/logo/kuizi-lockup-arabic-mono@2x.png", "width": 860, "height": 284, "background": "transparent", "check_on": "#FFFFFF" },
+    { "group": "logo", "source": "brand/logo/kuizi-lockup-bilingual-light.svg", "output": "brand/export/logo/kuizi-lockup-bilingual-light@2x.png", "width": 1378, "height": 284, "background": "transparent", "check_on": "#F3F6FA" },
+    { "group": "logo", "source": "brand/logo/kuizi-lockup-bilingual-dark.svg", "output": "brand/export/logo/kuizi-lockup-bilingual-dark@2x.png", "width": 1378, "height": 284, "background": "transparent", "check_on": "#0B1E3A" },
+    { "group": "logo", "source": "brand/logo/kuizi-lockup-bilingual-mono.svg", "output": "brand/export/logo/kuizi-lockup-bilingual-mono@2x.png", "width": 1378, "height": 284, "background": "transparent", "check_on": "#FFFFFF" }
+  ],
+  "copies": [
+    { "source": "brand/app-icon/web/favicon.svg", "output": "brand/export/web/favicon.svg", "note": "Served as is: <link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\">" }
+  ],
+  "bundles": [
+    { "output": "brand/export/web/favicon.ico", "format": "ico", "inputs": ["brand/export/web/favicon-16.png", "brand/export/web/favicon-32.png", "brand/export/web/favicon-48.png"], "note": "Multi-size ICO for old browsers." }
+  ],
+  "previews": {
+    "note": "For the visual check before committing PNGs, render these sources on both backgrounds at the sizes listed and compare with docs/design/brand-guide.md.",
+    "items": [
+      { "source": "brand/mark/kuizi-star-construction.svg", "width": 640, "height": 640 },
+      { "source": "brand/logo/kuizi-wordmarks-construction.svg", "width": 1020, "height": 882 },
+      { "source": "brand/logo/kuizi-lockup-bilingual-light.svg", "star_heights_px": [24, 32, 48, 96], "size_rule": "width = 6.89 x star height, height = 1.42 x star height", "check_on": ["#F3F6FA", "#FFFFFF"] },
+      { "source": "brand/logo/kuizi-lockup-bilingual-dark.svg", "star_heights_px": [24, 32, 48, 96], "size_rule": "width = 6.89 x star height, height = 1.42 x star height", "check_on": ["#0B1E3A"] },
+      { "source": "brand/logo/kuizi-lockup-arabic-light.svg", "star_heights_px": [24, 32, 48, 96], "size_rule": "width = 4.30 x star height, height = 1.42 x star height", "check_on": ["#F3F6FA"], "note": "Also sent to the Arabic type designer (docs/design/brand-reviews.md, review A)." },
+      { "source": "brand/logo/kuizi-lockup-arabic-dark.svg", "star_heights_px": [24, 32, 48, 96], "size_rule": "width = 4.30 x star height, height = 1.42 x star height", "check_on": ["#0B1E3A"], "note": "Also sent to the Arabic type designer." },
+      { "source": "brand/logo/kuizi-lockup-latin-light.svg", "star_heights_px": [24, 32, 48, 96], "size_rule": "width = 3.59 x star height, height = star height", "check_on": ["#F3F6FA"] },
+      { "source": "brand/app-icon/ios/kuizi-ios-default.svg", "sizes": [29, 40, 60, 180], "mask": "iOS rounded square" },
+      { "source": "brand/app-icon/android/kuizi-adaptive-foreground.svg", "over": "brand/app-icon/android/kuizi-adaptive-background.svg", "sizes": [108, 432], "mask": ["circle 72 dp", "squircle 72 dp", "rounded square 72 dp"] }
+    ]
+  }
+}

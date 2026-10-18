@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>Kuizi</title>
+  <!-- PWA icon, purpose "maskable". Full-bleed night #0B1E3A; the platform crops it to its own shape.
+       Safe zone: circle of radius 204.8 (40 %) around the centre. Star cyan-light #4FD1F0, centre (256,256),
+       R = 128 (diameter 256), 76.8 inside the safe zone. Offsets 90.510 / 37.490, rhombus half-diagonal 32. -->
+  <rect width="512" height="512" fill="#0B1E3A"/>
+  <path fill="#4FD1F0" fill-rule="evenodd" d="M256 128L293.49 165.49H346.51V218.51L384 256L346.51 293.49V346.51H293.49L256 384L218.51 346.51H165.49V293.49L128 256L165.49 218.51V165.49H218.51Z M256 224L224 256L256 288L288 256Z"/>
+</svg>

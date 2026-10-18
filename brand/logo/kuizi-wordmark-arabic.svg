@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 298 134" width="298" height="134" role="img" color="#0B1E3A">
+  <title>كويزي</title>
+  <!--
+    Arabic logotype «كويزي» (Kuizi), geometric Kufi construction drawn as shapes (no font). Reads right to left.
+    Joining: [كو] kaf initial + waw final (joined) | [يز] ya initial + zay final (joined) | [ي] ya isolated.
+    Waw and zay never join to the left, hence three units.
+    Metrics shared with the Latin logotype: ascender y=0, tooth line y=36, baseline band y=70-84 (baseline y=84),
+    tails end y=120, ya bowl ends y=134. Stroke 14; 45-degree tails (horizontal width 20);
+    bowl corner radii 26/12 as in the Latin u; dots are rhombi (half-diagonal 10), the nuqta.
+    Units (left to right on the page): ya isolated x 0-126, ya-zay x 90-208, kaf-waw x 204-298.
+    Fill is currentColor (default night #0B1E3A).
+  -->
+  <g fill="currentColor">
+    <!-- ي isolated: head (top bar, stem), baseline bar, 45-degree side into a bowl, upturn on the left -->
+    <path d="M62 36H106V50H76V70H126L62 134H26A26 26 0 0 1 0 108V70H14V108A12 12 0 0 0 26 120H56L92 84H62Z"/>
+    <path d="M31 90L41 100L31 110L21 100Z M55 90L65 100L55 110L45 100Z"/>
+    <!-- يز: ya initial tooth (right) joined by the baseline to zay final (45-degree tail, dot above) -->
+    <path d="M182 36H196V84H146L110 120H90L140 70H182Z"/>
+    <path d="M150 40L160 50L150 60L140 50Z"/>
+    <path d="M174 90L184 100L174 110L164 100Z M198 90L208 100L198 110L188 100Z"/>
+    <!-- كو: kaf initial (stem with top bar leaning left, chamfered 45 degrees) joined to waw final (square head, 45-degree tail) -->
+    <path fill-rule="evenodd" d="M254 0H298V84H260L224 120H204L240 84H212V36H260V70H284V14H268L254 0Z M226 50V70H246V50Z"/>
+  </g>
+</svg>

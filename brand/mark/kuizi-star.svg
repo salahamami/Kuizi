@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img">
+  <title>Kuizi</title>
+  <!--
+    Kuizi star mark (najma with nuqta counter). Colour: cyan #0A6F8C, for light backgrounds.
+    Construction on a 100-unit square, centre (50,50), every point on a circle R = 50:
+    - square B (on its point): (50,0) (100,50) (50,100) (0,50)
+    - square A (upright): half-side 35.355 = 50/sqrt(2), corners (14.645,14.645) ... (85.355,85.355)
+    - star outline = union of A and B: 8 right-angle points, 8 re-entrant vertices on r = 38.268
+    - counter: rhombus (square B at 1/4 scale), half-diagonal 12.5: (50,37.5) (62.5,50) (50,62.5) (37.5,50)
+    Only 0, 45 and 90 degree edges. See docs/design/brand-guide.md.
+  -->
+  <path fill="#0A6F8C" fill-rule="evenodd" d="M50 0L64.645 14.645H85.355V35.355L100 50L85.355 64.645V85.355H64.645L50 100L35.355 85.355H14.645V64.645L0 50L14.645 35.355V14.645H35.355Z M50 37.5L37.5 50L50 62.5L62.5 50Z"/>
+</svg>

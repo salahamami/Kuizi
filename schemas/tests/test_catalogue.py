@@ -6,6 +6,7 @@ import copy
 
 import pytest
 import yaml
+
 from kuizi_schemas import Paths
 from kuizi_schemas.catalogue import CatalogueError, check_catalogue, highest_privacy, load_catalogue, record_name
 from kuizi_schemas.docs import doc_is_current, render

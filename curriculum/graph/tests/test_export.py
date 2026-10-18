@@ -8,6 +8,7 @@ from datetime import UTC, datetime
 
 import pytest
 from jsonschema import Draft202012Validator
+
 from kuizi_kc_graph.export import (
     ExportError,
     build_export,

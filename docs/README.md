@@ -5,7 +5,7 @@
 | [`product/`](product/overview.md) | Product overview, personas, advanced concepts | Product |
 | [`requirements/`](requirements/accessibility-focus-notifications.md) | Numbered functional and non-functional requirements | Product, Accessibility, DPO |
 | [`architecture/`](architecture/overview.md) | Architecture overview, Neural Core, decision records | Product owner with the architecture agents |
-| [`design/`](design/design-system.md) | Cyanotype design system, screen list, canvas link | Design / UX |
+| [`design/`](design/design-system.md) | Cyanotype design system, screen list, canvas link, [brand guide](design/brand-guide.md) (draft) and its [reviews](design/brand-reviews.md) | Design / UX |
 | [`backlog/`](backlog/README.md) | Full backlog, Jira import file, sync procedure, v1 sources | Product owner |
 | [`STATUS.md`](STATUS.md) | **Start here**: active sprint, decisions waiting for the product owner, next work | Main session, updated every session |
 | [`agents/`](agents/README.md), [`process/`](process/working-agreement.md) | The 14 agent roles and the working agreement (Definition of Ready and Done, review gates, branches, sprint rhythm) | Product owner |

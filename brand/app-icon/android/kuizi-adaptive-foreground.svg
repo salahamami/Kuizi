@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="108" height="108">
+  <title>Kuizi adaptive icon: foreground layer</title>
+  <!-- Android adaptive icon foreground layer, 108 x 108 dp, transparent.
+       Visible area 72 dp (18-90); safe zone circle diameter 66 dp (r 33 around (54,54)).
+       Star cyan-light #4FD1F0, centre (54,54), R = 24 dp (diameter 48 dp, 9 dp inside the safe zone on every side).
+       Offsets: A-square half-side 16.971, re-entrant 7.029, rhombus half-diagonal 6. -->
+  <path fill="#4FD1F0" fill-rule="evenodd" d="M54 30L61.029 37.029H70.971V46.971L78 54L70.971 61.029V70.971H61.029L54 78L46.971 70.971H37.029V61.029L30 54L37.029 46.971V37.029H46.971Z M54 48L48 54L54 60L60 54Z"/>
+</svg>

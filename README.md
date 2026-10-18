@@ -24,6 +24,7 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 | Brain walkthrough: 10 notebooks, EN + AR, and glossary | [`docs/brain/README.md`](docs/brain/README.md) |
 | Accessibility, Focus and notifications requirements | [`docs/requirements/accessibility-focus-notifications.md`](docs/requirements/accessibility-focus-notifications.md) |
 | Cyanotype design system and screens | [`docs/design/design-system.md`](docs/design/design-system.md) |
+| Brand guide (logo, app icons, voice), draft, and brand source files | [`docs/design/brand-guide.md`](docs/design/brand-guide.md), [`brand/`](brand/README.md) |
 | Bilingual concepts brief (EN + AR, PDF) | [`docs/deliverables/Kuizi-Concepts-EN-AR.pdf`](docs/deliverables/Kuizi-Concepts-EN-AR.pdf) |
 | History of changes | [`CHANGELOG.md`](CHANGELOG.md) |
 

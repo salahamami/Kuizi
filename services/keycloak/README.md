@@ -1,6 +1,6 @@
 # Kuizi Keycloak image
 
-Stock Keycloak (`quay.io/keycloak/keycloak:26.1.4`) plus Kuizi's extensions (T012, [ADR 0009](../../docs/architecture/decisions/0009-identity-single-realm-and-keycloak-image.md)). The local stack builds it on the first `make up`; the cloud uses the same image (T240). The realm itself lives in [`infra/local/keycloak/`](../../infra/local/keycloak/) and is explained in [`docs/dev/identity.md`](../../docs/dev/identity.md).
+Stock Keycloak (`quay.io/keycloak/keycloak:26.8.1`) plus Kuizi's extensions (T012, [ADR 0009](../../docs/architecture/decisions/0009-identity-single-realm-and-keycloak-image.md)). The local stack builds it on the first `make up`; the cloud uses the same image (T240). The realm itself lives in [`infra/local/keycloak/`](../../infra/local/keycloak/) and is explained in [`docs/dev/identity.md`](../../docs/dev/identity.md).
 
 | Path | What |
 | --- | --- |
@@ -49,4 +49,4 @@ Messages shown to users are in `src/main/resources/theme-resources/messages/` (F
 
 If the API is blocked on a network, two fallbacks exist: a self-hosted copy of the range data (the API URL setting), or Keycloak's built-in `passwordBlacklist` policy with a file of common passwords.
 
-Keycloak logs `pwnedPassword ... is implementing the internal SPI password-policy` at start-up: password policies are an internal extension point that may change in a major Keycloak upgrade. Upgrading Keycloak means changing `KEYCLOAK_VERSION` in the `Dockerfile` and `keycloak.version` in the `pom.xml` together, then rebuilding (the unit tests run in the build) and running `pnpm --filter @kuizi/auth test` against the new image.
+Keycloak logs `pwnedPassword ... is implementing the internal SPI password-policy` at start-up: password policies are an internal extension point that may change in a major Keycloak upgrade. Upgrading Keycloak means changing `KEYCLOAK_VERSION` in the `Dockerfile`, `keycloak.version` (and the bundled library versions) in the `pom.xml` and the image tag in `infra/local/compose.yaml` together, then rebuilding (the unit tests run in the build), re-importing the realm and running `pnpm --filter @kuizi/auth test` and `make smoke` against the new image. The upgrade migrates Keycloak's database; older images cannot start on it afterwards. The last upgrade, 26.1.4 to 26.8.1 (2026-10-18), removed 7 CRITICAL findings reported by Trivy.

@@ -2,7 +2,7 @@
 # `make up` builds it the first time (docker compose), so the PC needs no Java or Maven.
 # The same image moves to EKS with T240, where an optimised `kc.sh build` stage is added.
 # Keep KEYCLOAK_VERSION in step with keycloak.version in providers/*/pom.xml.
-ARG KEYCLOAK_VERSION=26.1.4
+ARG KEYCLOAK_VERSION=26.8.1
 ARG MAVEN_IMAGE=maven:3.9.9-eclipse-temurin-21
 
 FROM ${MAVEN_IMAGE} AS providers

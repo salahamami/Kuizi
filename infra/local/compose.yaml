@@ -112,7 +112,7 @@ services:
   # `make up`; bump the tag when services/keycloak changes. Realm and dev users are imported from
   # ./keycloak only when the realm does not exist yet (docs/dev/identity.md).
   keycloak:
-    image: kuizi/keycloak:26.1.4-kuizi.1
+    image: kuizi/keycloak:26.8.1-kuizi.1
     build: ../../services/keycloak
     pull_policy: never # built here, never pulled from a registry
     command: ["start-dev", "--import-realm"]

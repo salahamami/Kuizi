@@ -2,6 +2,24 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
+## 2026-10-18 — T234 agent operating model (Sprint 1, in review)
+
+### Added
+- `.claude/agents/`: 14 role briefs, one per `agent-*` label, written as Claude Code agent definitions: mission, what the role owns, tools and stack, role-specific done checks, what it must never do, when to ask the product owner, shared ground rules and the hand-back format. Each role gets only the tools it needs (document roles cannot run shell commands; no agent has Jira or repository-settings tools).
+- `docs/process/working-agreement.md`: who does what, Definition of Ready and Done, review gates, branch and pull-request rules, ADR process, sprint rhythm, how to start a task with an agent. `docs/agents/README.md` lists the roles.
+- `.github/pull_request_template.md` (Definition of Done checklist) and `.github/CODEOWNERS`.
+- `make check` (`scripts/check_repo.py`): checks the compose file, the briefs' front matter, that every `agent-*` label has a brief, and that the generated backlog is up to date, without changing any file. Written by the `qa-sdet` agent from its brief alone, as the test of the operating model.
+
+### Changed
+- T234 acceptance criteria: "staging" becomes "tested on the local stack" (ADR 0006), and branch protection is described as it can work while every agent pushes with the product owner's GitHub account (the product owner's merge is the approval; a required code-owner approval comes once agents use their own account).
+- `CLAUDE.md` points to the briefs and the working agreement and states that agents never merge, deploy or change settings.
+
+### Jira sync
+- KK-254: description updated, links to the briefs and the working agreement added, moved to *Revue en cours* with a comment.
+
+### Pending (product owner, on GitHub)
+- Protect `main`: Settings → Branches → rule for `main` with "Require a pull request before merging", "Block force pushes", "Restrict deletions" and no bypass. The connector cannot change repository settings.
+
 ## 2026-10-18 — T238 brain walkthrough (Sprint 1, in review)
 
 ### Added

@@ -1,0 +1,25 @@
+/* Kuizi login theme (T012). The parent theme draws 36 px controls; Kuizi needs touch targets of
+   at least 44 x 44 px (NFR-6). Logical properties only, so French and Arabic (RTL) behave alike. */
+.pf-v5-c-button,
+.pf-v5-c-form-control,
+.pf-v5-c-form-control > input,
+.pf-v5-c-form-control > select {
+  min-block-size: 44px;
+}
+
+/* Icon-only buttons (show password) are square targets. */
+.pf-v5-c-button.pf-m-control,
+.pf-v5-c-button.pf-m-plain {
+  min-inline-size: 44px;
+}
+
+.pf-v5-c-form-control > input,
+.pf-v5-c-form-control > select {
+  font-size: 1rem;
+}
+
+/* Checkbox rows ("sign out from other devices"): the whole row, label included, is the target. */
+.pf-v5-c-check {
+  min-block-size: 44px;
+  align-content: center;
+}

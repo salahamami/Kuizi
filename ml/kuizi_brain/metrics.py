@@ -52,5 +52,10 @@ def plot_reliability(ax, y, p, label, marker="o"):
 
 
 def report(name, y, p):
-    return {"model": name, "AUC": round(auc(y, p), 4), "accuracy": round(accuracy(y, p), 4),
-            "ECE": round(expected_calibration_error(y, p), 4), "answers": len(y)}
+    return {
+        "model": name,
+        "AUC": round(auc(y, p), 4),
+        "accuracy": round(accuracy(y, p), 4),
+        "ECE": round(expected_calibration_error(y, p), 4),
+        "answers": len(y),
+    }

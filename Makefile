@@ -5,7 +5,9 @@ COMPOSE := docker compose -f infra/local/compose.yaml --env-file .env
 
 .DEFAULT_GOAL := help
 
-.PHONY: help up up-llm down reset status smoke check logs ml-setup ml-lab
+.PHONY: help up up-llm down reset status smoke check lint test logs ml-setup ml-lab
+.PHONY: graph-setup graph-load graph-export graph-test
+.PHONY: schemas-setup schemas-check schemas-test schemas-docs schemas-register
 
 help: ## List the commands
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-10s %s\n", $$1, $$2}'
@@ -48,6 +50,12 @@ smoke: .env ## Check that every service really works (write and read data)
 check: ## Check the repository is consistent before handing work back
 	@python3 scripts/check_repo.py
 
+lint: ## Run the CI linters on every project (Ruff, mypy, Prettier, ESLint, tsc)
+	@scripts/ci/run-checks.sh lint
+
+test: ## Run the CI unit tests with their coverage gates on every project
+	@scripts/ci/run-checks.sh test
+
 logs: ## Follow the logs of every service
 	$(COMPOSE) --profile llm logs -f --tail=50
 
@@ -57,8 +65,17 @@ ml-setup: ## Install the Python environment for the brain (needs uv)
 ml-lab: ## Open JupyterLab in the brain environment
 	cd ml && uv run jupyter lab
 
-# Event schemas (T023): Avro contracts in schemas/events, their tooling in schemas/ (needs uv).
-.PHONY: schemas-setup schemas-check schemas-test schemas-docs schemas-register
+graph-setup: ## Install the concept-graph tooling (needs uv)
+	cd curriculum/graph && uv sync
+
+graph-load: ## Create the concept-graph tables and load the starter Physics graph (needs make up)
+	cd curriculum/graph && uv run kuizi-kc-graph migrate && uv run kuizi-kc-graph load seed/physics_starter.yaml --replace
+
+graph-export: ## Export the concept graph to curriculum/graph/out/kc_graph.json
+	cd curriculum/graph && uv run kuizi-kc-graph export --out out/kc_graph.json
+
+graph-test: ## Run the concept-graph tests (database tests need make up)
+	cd curriculum/graph && uv run pytest
 
 schemas-setup: ## Install the event-schema tooling (needs uv)
 	cd schemas && uv sync

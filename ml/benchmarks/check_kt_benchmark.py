@@ -19,7 +19,7 @@ import pandas as pd
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import kt_benchmark as kb  # noqa: E402
+import kt_benchmark as kb
 
 MODELS = ["dkt", "sakt", "saint", "akt", "saint_plus", "saint_plus_notime"]
 
@@ -36,16 +36,20 @@ def check_windows():
         # evaluation: each answer except a student's first, exactly once
         W = kb.build_windows(df, L, stride=L // 2)
         t = W["target"]
-        got = sorted(zip(W["student"][t].tolist(), W["pos"][t].tolist()))
+        got = sorted(zip(W["student"][t].tolist(), W["pos"][t].tolist(), strict=True))
         want = sorted((s, i) for s, g in df.groupby("student") for i in range(1, len(g)))
         assert got == want, f"evaluation windows, L={L}"
         ctx = torch.arange(L).expand_as(W["pos"])[t]
         assert bool((ctx >= torch.minimum(W["pos"][t], torch.tensor(L // 2))).all()), f"history, L={L}"
         # training: every answer after the first of its window
         W = kb.build_windows(df, L)
-        got = sorted(zip(W["student"][W["target"]].tolist(), W["pos"][W["target"]].tolist()))
-        want = sorted((s, i) for s, g in df.groupby("student") for i in range(1, len(g))
-                      if i % L and min(len(g), (i // L + 1) * L) - (i // L) * L >= 2)
+        got = sorted(zip(W["student"][W["target"]].tolist(), W["pos"][W["target"]].tolist(), strict=True))
+        want = sorted(
+            (s, i)
+            for s, g in df.groupby("student")
+            for i in range(1, len(g))
+            if i % L and min(len(g), (i // L + 1) * L) - (i // L) * L >= 2
+        )
         assert got == want, f"training windows, L={L}"
     print("1. windows: every test answer predicted once, with at least half a window of history")
 
@@ -53,9 +57,14 @@ def check_windows():
 def check_causality():
     n_items, n_kc, L = 30, 7, 20
     g = torch.Generator().manual_seed(0)
-    b = {"item": torch.randint(1, n_items + 1, (2, L), generator=g), "kc": torch.randint(1, n_kc + 1, (2, L), generator=g),
-         "correct": torch.randint(0, 2, (2, L), generator=g), "elapsed": torch.rand(2, L, generator=g),
-         "lag": torch.rand(2, L, generator=g), "mask": torch.ones(2, L, dtype=torch.bool)}
+    b = {
+        "item": torch.randint(1, n_items + 1, (2, L), generator=g),
+        "kc": torch.randint(1, n_kc + 1, (2, L), generator=g),
+        "correct": torch.randint(0, 2, (2, L), generator=g),
+        "elapsed": torch.rand(2, L, generator=g),
+        "lag": torch.rand(2, L, generator=g),
+        "mask": torch.ones(2, L, dtype=torch.bool),
+    }
     for name in MODELS:
         torch.manual_seed(0)
         m = kb.make_model(name, n_items, n_kc, L).eval()
@@ -96,14 +105,24 @@ def check_batches():
 def check_calibration_and_gate():
     rng = np.random.default_rng(2)
     p = rng.uniform(0.05, 0.95, 4000)
-    y = (rng.uniform(size=4000) < p ** 0.6).astype(int)          # miscalibrated on purpose
+    y = (rng.uniform(size=4000) < p**0.6).astype(int)  # miscalibrated on purpose
     a, b = kb.fit_platt(y, p)
     q = kb.apply_platt(p, a, b)
     assert a > 0 and abs(kb.kb_metrics.auc(y, q) - kb.kb_metrics.auc(y, p)) < 1e-12
     assert kb.kb_metrics.expected_calibration_error(y, q) < kb.kb_metrics.expected_calibration_error(y, p)
-    runs = pd.DataFrame([(m, f, auc, ece) for f in range(3) for m, auc, ece in
-                         [("dkt", 0.75, 0.01), ("good", 0.756, 0.015), ("small", 0.753, 0.01), ("uncal", 0.77, 0.03)]],
-                        columns=["model", "fold", "auc", "ece"]).assign(dataset="d", max_len=100)
+    runs = pd.DataFrame(
+        [
+            (m, f, auc, ece)
+            for f in range(3)
+            for m, auc, ece in [
+                ("dkt", 0.75, 0.01),
+                ("good", 0.756, 0.015),
+                ("small", 0.753, 0.01),
+                ("uncal", 0.77, 0.03),
+            ]
+        ],
+        columns=["model", "fold", "auc", "ece"],
+    ).assign(dataset="d", max_len=100)
     slices = runs.assign(slice="all")[["dataset", "model", "max_len", "fold", "slice", "auc"]]
     gate = kb.gate_vs_baseline(runs, slices, "d", 100).set_index("challenger").passes_t047_gate
     assert gate["good"] and not gate["small"] and not gate["uncal"], gate.to_dict()

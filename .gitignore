@@ -12,6 +12,11 @@ node_modules/
 dist/
 coverage/
 .pnpm-store/
+# Test and coverage reports (T006)
+.coverage
+.coverage.*
+coverage.xml
+junit.xml
+# Tool caches
 .pytest_cache/
 .ruff_cache/
-.coverage

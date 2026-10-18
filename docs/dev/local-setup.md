@@ -30,7 +30,7 @@ cd kuizi
 make up
 ```
 
-The first `make up` downloads about 4 GB of images, so it takes a few minutes. After that it starts in under a minute. It creates your `.env` file from `.env.example`, starts every service and waits until each one is healthy.
+The first `make up` downloads about 4 GB of images and builds the Kuizi Keycloak image (about 2 more minutes), so it takes a few minutes. After that it starts in under a minute. It creates your `.env` file from `.env.example`, starts every service and waits until each one is healthy.
 
 Check that everything really works:
 
@@ -55,7 +55,7 @@ make ml-lab     # opens JupyterLab in your browser
 | Kafka API (Redpanda) | `localhost:19092`, schema registry `localhost:18081` | Amazon MSK (T021) |
 | Redis | `localhost:6379` | ElastiCache (T026) |
 | S3 storage (SeaweedFS) | `localhost:8333` | Amazon S3 (T213) |
-| Keycloak (sign-in) | http://localhost:8080/admin (user `admin`, password in `.env`) | Keycloak on EKS (T012) |
+| Keycloak (sign-in) | http://localhost:8080/admin (user `admin`, password in `.env`), realm `kuizi` with synthetic dev users: see [identity.md](identity.md) | Keycloak on EKS (T012) |
 | MLflow (brain experiments) | http://localhost:5050 | MLflow on EKS (T218) |
 | LiteLLM gateway, optional | `localhost:4000`, start with `make up-llm` | LiteLLM on EKS (T059) |
 
@@ -69,6 +69,8 @@ Application code reads the connection settings from `.env` (`DATABASE_URL`, `KAF
 | `make status` | Show each service and its address |
 | `make smoke` | Test that every service works |
 | `make check` | Check the repository is consistent (compose file, agent briefs, backlog); run it before handing work back |
+| `make lint` | Run the CI linters on every project (Ruff, mypy, Prettier, ESLint, tsc); see [CI](ci.md) |
+| `make test` | Run the unit tests with the CI coverage gates on every project |
 | `make logs` | Follow the logs (Ctrl+C to stop) |
 | `make down` | Stop everything, keep the data |
 | `make reset` | Delete all local data and start from zero |

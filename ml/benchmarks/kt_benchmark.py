@@ -91,8 +91,8 @@ MODES = {
     },
     "full": {
         "folds": [0, 1, 2],
-        "max_epochs": 12,
-        "patience": 2,
+        "max_epochs": 20,
+        "patience": 3,
         "assist2009": {"max_students": None, "lengths": [50, 100, 200], "main_length": 100,
                        "models": MODELS, "main_only_models": ["saint_plus_notime"]},
         "simulated": {"n_students": 600, "answers_per_student": 120, "lengths": [100],
@@ -233,11 +233,31 @@ def build_windows(df: pd.DataFrame, max_len: int, stride: int | None = None, fai
     return t
 
 
-def batches(windows: dict, batch_size: int, shuffle: bool, seed: int = 0):
+def batches(windows: dict, batch_size: int, shuffle: bool, seed: int = 0, megabatch: int = 50):
+    """Batches of windows of similar length, so little time is spent on padding.
+
+    Most students have short histories (median 24 answers on ASSISTments 2009), so a randomly
+    drawn batch is almost always padded to the full window length. Training therefore groups by
+    length as Hugging Face's `group_by_length` does: shuffle, cut into megabatches of
+    `megabatch` batches, sort each megabatch by length, cut it into batches, shuffle the batch
+    order. Evaluation simply sorts by length; predictions do not depend on batching, because
+    padding is on the right and every model is causal (checked in the T040 hand-back).
+    """
     n = windows["mask"].shape[0]
-    order = torch.randperm(n, generator=torch.Generator().manual_seed(seed)) if shuffle else torch.arange(n)
-    for i in range(0, n, batch_size):
-        idx = order[i:i + batch_size]
+    lengths = windows["mask"].sum(1)
+    if shuffle:
+        g = torch.Generator().manual_seed(seed)
+        order = torch.randperm(n, generator=g)
+        groups = []
+        for i in range(0, n, batch_size * megabatch):
+            idx = order[i:i + batch_size * megabatch]
+            idx = idx[torch.argsort(lengths[idx], descending=True, stable=True)]
+            groups.extend(idx[j:j + batch_size] for j in range(0, len(idx), batch_size))
+        groups = [groups[k] for k in torch.randperm(len(groups), generator=g).tolist()]
+    else:
+        order = torch.argsort(lengths, descending=True, stable=True)
+        groups = [order[i:i + batch_size] for i in range(0, n, batch_size)]
+    for idx in groups:
         b = {k: v[idx] for k, v in windows.items()}
         # trim trailing padding shared by the whole batch (right padding + causal models = safe)
         real = int(b["mask"].sum(1).max())
@@ -382,6 +402,28 @@ def scores(y, p) -> dict:
             "ece": kb_metrics.expected_calibration_error(y, p), "n_predictions": int(len(y))}
 
 
+def fit_platt(y, p) -> tuple[float, float]:
+    """Platt scaling: P' = sigmoid(a * logit(P) + b), fitted on validation students by maximum
+    likelihood. Two numbers per model; a > 0 keeps the ranking, so AUC does not change."""
+    z = torch.logit(torch.as_tensor(p, dtype=torch.float64).clamp(1e-6, 1 - 1e-6))
+    t = torch.as_tensor(y, dtype=torch.float64)
+    ab = torch.tensor([1.0, 0.0], dtype=torch.float64, requires_grad=True)
+    opt = torch.optim.LBFGS([ab], lr=0.5, max_iter=200, line_search_fn="strong_wolfe")
+
+    def closure():
+        opt.zero_grad()
+        loss = F.binary_cross_entropy_with_logits(ab[0] * z + ab[1], t)
+        loss.backward()
+        return loss
+    opt.step(closure)
+    return float(ab[0]), float(ab[1])
+
+
+def apply_platt(p, a: float, b: float) -> np.ndarray:
+    z = np.log(np.clip(p, 1e-6, 1 - 1e-6)) - np.log1p(-np.clip(p, 1e-6, 1 - 1e-6))
+    return 1 / (1 + np.exp(-(a * z + b)))
+
+
 def run_job(job: dict) -> dict:
     """Train one model on one fold and length, test it, return metrics. Runs in a worker process."""
     torch.set_num_threads(job["threads"])
@@ -400,6 +442,13 @@ def run_job(job: dict) -> dict:
     torch.manual_seed(seed)
     model = make_model(job["model"], n_items, n_kc, L)
     opt = torch.optim.Adam(model.parameters(), lr=HYPER["lr"])
+    clip = job.get("clip", HYPER["clip"])
+    # Every answer weighs the same, as with random batches: batches are grouped by length (see
+    # batches()), so the loss is summed over the batch and divided by the average number of
+    # predicted answers per batch instead of averaged within the batch. A plain mean would give
+    # an answer in a batch of short histories many times the weight of one in a long history.
+    n_batches = -(-W_train["mask"].shape[0] // HYPER["batch_size"])
+    answers_per_batch = float(W_train["mask"][:, 1:].sum()) / n_batches
     best_auc, best_state, best_epoch, history = -1.0, None, 0, []
     t_train = time.time()
     for epoch in range(job["max_epochs"]):
@@ -408,16 +457,21 @@ def run_job(job: dict) -> dict:
         for b in batches(W_train, HYPER["batch_size"], shuffle=True, seed=seed * 1000 + epoch):
             p, extra = model(b)
             sel = b["mask"][:, 1:]
-            loss = bce(p[sel], b["correct"][:, 1:][sel]) + extra
+            bce_sum = F.binary_cross_entropy(p[sel].clamp(1e-6, 1 - 1e-6), b["correct"][:, 1:][sel].float(),
+                                             reduction="sum")
+            loss = bce_sum / answers_per_batch + extra
             opt.zero_grad()
             loss.backward()
-            nn.utils.clip_grad_norm_(model.parameters(), HYPER["clip"])
+            if clip:
+                nn.utils.clip_grad_norm_(model.parameters(), clip)
             opt.step()
-            total += float(loss.detach()) * int(sel.sum())
+            total += float(bce_sum.detach())
             count += int(sel.sum())
         v = predict(model, W_valid)
         v_auc = kb_metrics.auc(v["y"], v["p"])
         history.append({"epoch": epoch + 1, "train_loss": total / count, "valid_auc": v_auc})
+        print(f"    {job['dataset']} {job['model']} L={L} fold {job['fold']} epoch {epoch + 1}: "
+              f"train loss {total / count:.4f}, valid AUC {v_auc:.4f} ({time.time() - t_train:.0f} s)", flush=True)
         if v_auc > best_auc:
             best_auc, best_epoch = v_auc, epoch + 1
             best_state = {k: t.detach().clone() for k, t in model.state_dict().items()}
@@ -426,8 +480,15 @@ def run_job(job: dict) -> dict:
     train_s = time.time() - t_train
     model.load_state_dict(best_state)
     pred = predict(model, W_test)
+    # post-hoc calibration on the validation students (T042 needs ECE <= 0.05)
+    v = predict(model, W_valid)
+    platt_a, platt_b = fit_platt(v["y"], v["p"])
+    pred["p_platt"] = apply_platt(pred["p"], platt_a, platt_b)
     res = {k: job[k] for k in ("dataset", "model", "max_len", "fold", "seed", "mode")}
     res.update(scores(pred["y"], pred["p"]))
+    cal = scores(pred["y"], pred["p_platt"])
+    res.update({"auc_platt": cal["auc"], "accuracy_platt": cal["accuracy"], "ece_platt": cal["ece"],
+                "platt_a": platt_a, "platt_b": platt_b})
     res.update({"valid_auc": best_auc, "best_epoch": best_epoch, "epochs_run": len(history),
                 "train_seconds": round(train_s, 1), "job_seconds": round(time.time() - t0, 1),
                 "parameters": count_parameters(model), "n_items": n_items, "n_kc": n_kc,
@@ -437,9 +498,11 @@ def run_job(job: dict) -> dict:
     for name, m in slice_masks(pred, job["dataset"]).items():
         if m.sum() > 0 and len(np.unique(pred["y"][m])) == 2:
             slices.append({**{k: res[k] for k in ("dataset", "model", "max_len", "fold")},
-                           "slice": name, **scores(pred["y"][m], pred["p"][m])})
-    calib = kb_metrics.calibration_table(pred["y"], pred["p"])
-    calib = calib.assign(**{k: res[k] for k in ("dataset", "model", "max_len", "fold")}).to_dict("records")
+                           "slice": name, **scores(pred["y"][m], pred["p"][m]),
+                           "ece_platt": kb_metrics.expected_calibration_error(pred["y"][m], pred["p_platt"][m])})
+    keys = {k: res[k] for k in ("dataset", "model", "max_len", "fold")}
+    calib = (kb_metrics.calibration_table(pred["y"], pred["p"]).assign(calibration="none", **keys).to_dict("records")
+             + kb_metrics.calibration_table(pred["y"], pred["p_platt"]).assign(calibration="platt", **keys).to_dict("records"))
     return {"run": res, "slices": slices, "calibration": calib, "history": history}
 
 
@@ -569,8 +632,9 @@ def mlflow_log(mlflow, out: dict, provenance: dict):
                          "data_sha256": provenance["data_sha256"].get(r["dataset"], "synthetic"),
                          **{f"code_{k}": str(v) for k, v in provenance["code"].items()},
                          **{f"env_{k}": str(v) for k, v in provenance["environment"].items()}})
-        mlflow.log_metrics({k: float(r[k]) for k in ("auc", "accuracy", "ece", "valid_auc", "best_epoch",
-                                                       "train_seconds", "parameters", "n_predictions")})
+        mlflow.log_metrics({k: float(r[k]) for k in ("auc", "accuracy", "ece", "ece_platt", "accuracy_platt",
+                                                       "platt_a", "platt_b", "valid_auc", "best_epoch",
+                                                       "train_seconds", "parameters", "n_predictions") if k in r})
         for s in out["slices"]:
             key = "".join(ch if ch.isalnum() else "_" for ch in s["slice"]).strip("_")
             mlflow.log_metrics({f"slice_{key}_auc": s["auc"], f"slice_{key}_ece": s["ece"]})
@@ -586,14 +650,15 @@ GATE = {"auc_gain": 0.005, "slice_drop": 0.01, "ece_worse": 0.01}
 
 
 def gate_vs_baseline(runs: pd.DataFrame, slices: pd.DataFrame, dataset: str, max_len: int,
-                     baseline: str = "dkt") -> pd.DataFrame:
+                     baseline: str = "dkt", ece_col: str = "ece") -> pd.DataFrame:
     """T047 rule, on fold-paired differences against the baseline: a challenger is better only if
-    mean AUC gain >= +0.005, no slice AUC down by more than 0.01, ECE not worse by more than 0.01."""
+    mean AUC gain >= +0.005, no slice AUC down by more than 0.01, ECE not worse by more than 0.01.
+    ece_col="ece_platt" applies the rule to both models after Platt scaling."""
     r = runs[(runs.dataset == dataset) & (runs.max_len == max_len)]
-    if baseline not in set(r.model):
+    if baseline not in set(r.model) or ece_col not in r:
         return pd.DataFrame()
     auc = r.pivot_table(index="fold", columns="model", values="auc")
-    ece = r.pivot_table(index="fold", columns="model", values="ece")
+    ece = r.pivot_table(index="fold", columns="model", values=ece_col)
     s = slices[(slices.dataset == dataset) & (slices.max_len == max_len)]
     s_auc = s.pivot_table(index=["slice", "fold"], columns="model", values="auc") if len(s) else None
     rows = []
@@ -610,7 +675,7 @@ def gate_vs_baseline(runs: pd.DataFrame, slices: pd.DataFrame, dataset: str, max
                 worst_slice, worst = per_slice.idxmin(), float(per_slice.min())
         passed = (d_auc.mean() >= GATE["auc_gain"]) and not (worst < -GATE["slice_drop"]) \
             and (d_ece.mean() <= GATE["ece_worse"])
-        rows.append({"dataset": dataset, "max_len": max_len, "challenger": model, "baseline": baseline,
+        rows.append({"dataset": dataset, "max_len": max_len, "ece_metric": ece_col, "challenger": model, "baseline": baseline,
                      "folds": len(folds), "delta_auc_mean": d_auc.mean(),
                      "delta_auc_std": d_auc.std(ddof=1) if len(folds) > 1 else np.nan,
                      "delta_ece_mean": d_ece.mean(), "worst_slice": worst_slice, "worst_slice_delta_auc": worst,
@@ -620,9 +685,10 @@ def gate_vs_baseline(runs: pd.DataFrame, slices: pd.DataFrame, dataset: str, max
 
 def summarise(runs: pd.DataFrame) -> pd.DataFrame:
     g = runs.groupby(["dataset", "model", "max_len"])
+    extra = {"ece_platt_mean": ("ece_platt", "mean"), "ece_platt_std": ("ece_platt", "std")} if "ece_platt" in runs else {}
     out = g.agg(folds=("fold", "nunique"), auc_mean=("auc", "mean"), auc_std=("auc", "std"),
                 accuracy_mean=("accuracy", "mean"), accuracy_std=("accuracy", "std"),
-                ece_mean=("ece", "mean"), ece_std=("ece", "std"), best_epoch_mean=("best_epoch", "mean"),
+                ece_mean=("ece", "mean"), ece_std=("ece", "std"), **extra, best_epoch_mean=("best_epoch", "mean"),
                 train_seconds_mean=("train_seconds", "mean"), parameters=("parameters", "first"))
     return out.reset_index()
 
@@ -631,8 +697,8 @@ def summarise(runs: pd.DataFrame) -> pd.DataFrame:
 # Main
 # ---------------------------------------------------------------------------
 
-def plan_jobs(mode: str, threads: int) -> list[dict]:
-    cfg = MODES[mode]
+def plan_jobs(mode: str, threads: int, cfg: dict | None = None) -> list[dict]:
+    cfg = cfg or MODES[mode]
     jobs = []
     for dataset in ("assist2009", "simulated"):
         dcfg = cfg[dataset]
@@ -675,24 +741,37 @@ def main(argv=None):
     ap.add_argument("--mlflow", choices=["auto", "server", "off"], default="auto")
     ap.add_argument("--out", type=Path, default=RESULTS_DIR)
     ap.add_argument("--skip-latency", action="store_true")
+    ap.add_argument("--datasets", nargs="+", choices=["assist2009", "simulated"],
+                    help="run only these datasets of the mode")
+    ap.add_argument("--lengths", nargs="+", type=int, help="run only these window lengths of the mode")
+    ap.add_argument("--tag", help="suffix for the result files (default: derived from --datasets/--lengths)")
     args = ap.parse_args(argv)
 
     t_start = time.time()
     args.out.mkdir(parents=True, exist_ok=True)
-    prefix = f"t040_{args.mode}"
-    cfg = MODES[args.mode]
+    cfg = json.loads(json.dumps(MODES[args.mode]))          # deep copy; JSON turns int keys into str
+    cfg["latency_iters"] = MODES[args.mode]["latency_iters"]
+    tag = args.tag
+    for dataset in ("assist2009", "simulated"):
+        if cfg[dataset] and args.datasets and dataset not in args.datasets:
+            cfg[dataset] = None
+        if cfg[dataset] and args.lengths:
+            cfg[dataset]["lengths"] = [L for L in cfg[dataset]["lengths"] if L in args.lengths]
+    if tag is None and (args.datasets or args.lengths):
+        tag = "-".join((args.datasets or []) + [f"L{L}" for L in (args.lengths or [])])
+    prefix = f"t040_{args.mode}" + (f"_{tag}" if tag else "")
     data_sha = {"assist2009": sha256_file(kb_data.download_assist2009())}
     provenance = {"ticket": "T040", "mode": args.mode, "started": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
                   "config": {k: v for k, v in cfg.items()}, "hyperparameters": HYPER,
                   "fold_seed": FOLD_SEED, "n_folds": N_FOLDS, "data_sha256": data_sha,
                   "data_sources": DATA_SOURCES, "code": code_version(), "environment": environment(),
-                  "workers": args.workers, "threads_per_worker": args.threads,
+                  "workers": args.workers, "threads_per_worker": args.threads, "tag": tag,
                   "assist2017": "not used: the official source (sites.google.com/view/assistmentsdatamining/dataset) "
                                 "gives the file only after an email sign-up and acceptance of terms of use "
                                 "(no redistribution, declared purpose, publish code); needs the product owner's decision",
                   "ednet": "not used: no reachable official source and CC BY-NC 4.0 licence"}
     mlflow = mlflow_setup(args.mlflow)
-    jobs = plan_jobs(args.mode, args.threads)
+    jobs = plan_jobs(args.mode, args.threads, cfg)
     print(f"{len(jobs)} training runs, {args.workers} workers x {args.threads} threads, mode {args.mode}")
 
     results = []
@@ -714,8 +793,10 @@ def main(argv=None):
     if not args.skip_latency:
         print("CPU inference latency (no training running)")
         for dataset in ("assist2009",):
-            n_items, n_kc = vocab_sizes(dataset, args.mode)
             dcfg = cfg[dataset]
+            if not dcfg:
+                continue
+            n_items, n_kc = vocab_sizes(dataset, args.mode)
             for L in dcfg["lengths"]:
                 for model in dcfg["models"]:
                     for batch, iters in cfg["latency_iters"].items():
@@ -737,7 +818,8 @@ def main(argv=None):
         dcfg = cfg[dataset]
         if dcfg:
             for L in dcfg["lengths"]:
-                gates.append(gate_vs_baseline(runs, slices, dataset, L))
+                for ece_col in ("ece", "ece_platt"):
+                    gates.append(gate_vs_baseline(runs, slices, dataset, L, ece_col=ece_col))
     gates = pd.concat(gates) if gates else pd.DataFrame()
     gates.to_csv(args.out / f"{prefix}_gate.csv", index=False, float_format="%.5f")
     provenance.update({"finished": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
@@ -749,8 +831,8 @@ def main(argv=None):
     if args.mode == "quick":
         print("\nQUICK MODE: a smoke test on a small sample with 2 epochs. Do not compare models on these numbers.")
     print("\nAUC / ECE (mean and standard deviation over folds)")
-    print(summary[["dataset", "model", "max_len", "folds", "auc_mean", "auc_std", "ece_mean", "ece_std",
-                   "accuracy_mean"]].round(4).to_string(index=False))
+    print(summary[[c for c in ["dataset", "model", "max_len", "folds", "auc_mean", "auc_std", "ece_mean", "ece_std",
+                               "ece_platt_mean", "accuracy_mean"] if c in summary]].round(4).to_string(index=False))
     if len(gates):
         print("\nT047 gate against DKT (fold-paired)")
         print(gates.round(4).to_string(index=False))

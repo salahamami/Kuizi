@@ -2,6 +2,27 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
+## 2026-10-18 — T040 knowledge-tracing benchmark (Sprint 1, in review)
+
+Done by the `ml-engineering` agent; reviewed by the main session (self-checks rerun, results files and ADR checked).
+
+### Added
+- `ml/benchmarks/`: `kt_benchmark.py` (5-fold split by student, quick and full modes, Platt calibration, T047 gate, CPU latency, MLflow logging), `check_kt_benchmark.py` (self-checks), `t040_benchmark.ipynb` (tables and charts from the saved results), `results/` and a README.
+- ADR 0007 (Proposed): AKT with Platt calibration and 100-answer windows as the production knowledge-tracing model, DKT as the fallback. The product owner decides.
+
+### Findings (ASSISTments 2009, 3 folds of 726 unseen students, windows of 100)
+- AUC: AKT 0.768 ± 0.003, DKT 0.756 ± 0.002, SAKT 0.719, SAINT 0.699, SAINT+ 0.699. CPU latency at batch 1: AKT 3.8 ms, DKT 0.4 ms.
+- AKT beats DKT by +0.012 AUC with no slice worse, but fails the T047 gate on raw calibration (ECE 0.040 vs 0.005); it passes after Platt calibration.
+- SAINT+'s time features add +0.0008 AUC; windows longer than 50 answers do not help.
+- On simulated students AKT also leads (0.680 vs 0.656); no model shows an extra-time gap larger than its spread, which rules out a large unfairness but does not prove fairness.
+- ASSISTments 2017 needs a sign-up and acceptance of terms by the product owner; not used. GPU latency waits for the cloud (S8+).
+
+### Jira sync
+- KK-60 moved to *Revue en cours* with a comment.
+
+### Pending decision (product owner)
+- Accept ADR 0007 or keep DKT as champion until T239. If accepted, the backlog and Jira change for E05's goal, T041, T042 (AKT instead of SAINT+), T046 (serve AKT and DKT, GPU latency moved from T040), T049, and the architecture overview.
+
 ## 2026-10-18 — T234 agent operating model (Sprint 1, in review)
 
 ### Added

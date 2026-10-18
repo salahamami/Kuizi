@@ -2,6 +2,22 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
+## 2026-10-18 — T238 brain walkthrough (Sprint 1, in review)
+
+### Added
+- `ml/notebooks/`: ten notebooks, each in English and Arabic, from the concept graph to SAINT+ and fairness. Every code cell names its concept and the production ticket that will build it. All ten run end to end on CPU; the longest (07, SAINT+) takes about 5 minutes on 4 cores.
+- `ml/kuizi_brain/`: small teaching library: Bac Physics concept slice with French and Arabic names, ASSISTments 2009 loader (fingerprint-checked download), Bac Physics student simulator with known true mastery and accommodations, IRT with Bayesian cold start and adaptive placement, BKT, DKT, SAINT+, mastery probes with attention, AUC and calibration.
+- `docs/brain/README.md` (index, data and licences) and `docs/brain/glossary.md` (57 terms in English, Arabic and French).
+
+### Findings worth carrying into T040
+- On ASSISTments 2009 (students never seen in training): BKT AUC 0.726, DKT 0.756, SAINT+ 0.710. On the simulator: DKT 0.662, SAINT+ 0.624, ceiling 0.742. This matches published benchmarks: SAINT-type models need very large datasets. T040 and T239 should decide the production model on data, and DKT must stay in the benchmark.
+- Time features did not help SAINT+ on the simulator (0.624 with, 0.645 without); T040 should test them on real data.
+- A speed-only mastery signal underestimates students with extra time (bias −0.022 against +0.005 for the others); dividing time by the multiplier reduces it to −0.006 (T148).
+- Splitting by answer instead of by student inflates IRT's AUC from 0.630 to 0.746 (leakage): T040 must split by student.
+
+### Jira sync
+- KK-258 moved to *Revue en cours* with a comment; the review session with the product owner closes it.
+
 ## 2026-10-17 — Sprint 1 starts now
 
 The product owner decided not to wait for November: Sprint 1 started on 2026-10-17 and ends on 2026-10-30. Every sprint moves two weeks earlier, so S2 starts 2026-11-02, the pilot (S12) runs 2027-03-22 to 2027-04-02, go-live (S18) 2027-06-14 to 2027-06-25, and S20 ends 2027-07-23. Scope, points and sprint contents are unchanged.

@@ -13,6 +13,7 @@ Kuizi is an adaptive tutor for Tunisian Baccalauréat students (Physics, Maths, 
 | Requirements | `docs/requirements/` | Numbered IDs (FR-*, NFR-*) referenced by tickets |
 | Architecture | `docs/architecture/overview.md`, decisions in `docs/architecture/decisions/` | Any structural change gets an ADR |
 | Design | `docs/design/design-system.md` (Cyanotype) + design canvas (link inside) | UI follows the tokens and accessibility rules |
+| Agent roles and working agreement | `.claude/agents/` (one brief per role), `docs/agents/README.md`, `docs/process/working-agreement.md` | Hand each ticket to the agent of its `agent-*` label; follow the Definition of Ready and Done |
 
 ## Always keep Jira updated
 
@@ -39,4 +40,5 @@ Never leave the repo and Jira out of sync at the end of a session. If Jira canno
 ## Git
 
 - Work on a branch, never commit straight to `main`. Conventional commit messages (`feat:`, `fix:`, `docs:`, `chore:`).
+- Agents never merge, deploy or change repository or cloud settings; the product owner merges every pull request (template in `.github/pull_request_template.md`).
 - Do not commit secrets, credentials or real student data.

@@ -3803,9 +3803,9 @@ Set up how the product owner and the role agents work from sprint 1 (ADR 0005). 
 
 h3. Acceptance Criteria
 * Each of the 14 agent roles has a written brief in the repository, linked from the Jira board
-* Branch protection on main requires the product owner's approval; an agent cannot merge or deploy to production on its own
+* Branch protection on main accepts changes only through pull requests, which the product owner merges; agents never merge or deploy (a rule in every brief now, enforced by a required code-owner approval once agents push with their own GitHub account)
 * Agents use least-privilege credentials and only synthetic or anonymised data; no agent can reach production student data
-* Definition of Ready and Done are published, and an agent given only its brief and a ticket ships a small change to staging in one session
+* Definition of Ready and Done are published, and an agent given only its brief and a ticket delivers a small change in one session, tested on the local stack, through a pull request the product owner merges
 
 h3. Context
 * Epic: Observability, Quality & Release Readiness

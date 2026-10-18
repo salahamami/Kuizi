@@ -1,0 +1,75 @@
+{
+  "type": "record",
+  "name": "NotificationSent",
+  "namespace": "kuizi.events",
+  "doc": "A notification left Kuizi on one channel: the orchestrator (T152) handed it to the delivery layer (T089). One event per channel. Carries the copy template, never the message text or the recipient's address.",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context; a server event, so client fields are null."
+    },
+    {
+      "name": "notification_id",
+      "type": { "type": "string", "logicalType": "uuid" },
+      "privacy": "pseudonymous",
+      "doc": "Notification ID, as in notification.decided."
+    },
+    {
+      "name": "channel",
+      "type": "kuizi.events.common.NotificationChannel",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Channel used."
+    },
+    {
+      "name": "category",
+      "type": "kuizi.events.common.NotificationCategory",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Category of the message."
+    },
+    {
+      "name": "priority",
+      "type": "kuizi.events.common.PriorityClass",
+      "default": "UNKNOWN",
+      "privacy": "none",
+      "doc": "Priority class (FR-N2)."
+    },
+    {
+      "name": "recipient_role",
+      "type": "kuizi.events.common.RecipientRole",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "The learner or a parent."
+    },
+    {
+      "name": "template_id",
+      "type": "string",
+      "privacy": "none",
+      "doc": "Copy template in the message library (T158)."
+    },
+    {
+      "name": "template_version",
+      "type": ["null", "int"],
+      "default": null,
+      "privacy": "none",
+      "doc": "Version of the copy template."
+    },
+    {
+      "name": "digest",
+      "type": "boolean",
+      "default": false,
+      "privacy": "none",
+      "doc": "True when the message is a digest of deferred messages (FR-N3)."
+    },
+    {
+      "name": "in_protected_window",
+      "type": "boolean",
+      "default": false,
+      "privacy": "personal",
+      "doc": "True when sent during quiet hours, class hours, a Focus session or an exam-week night. Must be false unless priority is ESSENTIAL; T161 alerts on any other case."
+    }
+  ]
+}

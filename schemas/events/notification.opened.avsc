@@ -1,0 +1,47 @@
+{
+  "type": "record",
+  "name": "NotificationOpened",
+  "namespace": "kuizi.events",
+  "doc": "The recipient opened a notification: tapped it, opened it from the in-app inbox (T210) or followed its link.",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context; student_id is the learner the notification is about, also when a parent opens it."
+    },
+    {
+      "name": "notification_id",
+      "type": { "type": "string", "logicalType": "uuid" },
+      "privacy": "pseudonymous",
+      "doc": "Notification ID, as in notification.decided and notification.sent."
+    },
+    {
+      "name": "channel",
+      "type": "kuizi.events.common.NotificationChannel",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Channel the notification arrived on."
+    },
+    {
+      "name": "category",
+      "type": "kuizi.events.common.NotificationCategory",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Category of the message."
+    },
+    {
+      "name": "surface",
+      "type": {
+        "type": "enum",
+        "name": "NotificationSurface",
+        "doc": "Where the notification was opened.",
+        "symbols": ["UNKNOWN", "SYSTEM_NOTIFICATION", "INBOX", "EMAIL_LINK", "SMS_LINK"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "From the operating system's notification, the in-app inbox, or a link in an email or SMS."
+    }
+  ]
+}

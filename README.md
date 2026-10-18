@@ -21,6 +21,7 @@ Kuizi helps Tunisian Baccalauréat students reach the grade they aim for. It tra
 | Jira import file and sync procedure | [`docs/backlog/README.md`](docs/backlog/README.md) |
 | Architecture and decisions | [`docs/architecture/`](docs/architecture/overview.md) |
 | Neural Core (knowledge-tracing engine) | [`docs/architecture/neural-core.md`](docs/architecture/neural-core.md) |
+| Learner event catalogue and Avro schemas (telemetry contracts) | [`docs/data/event-catalogue.md`](docs/data/event-catalogue.md), [`schemas/`](schemas/README.md) |
 | Brain walkthrough: 10 notebooks, EN + AR, and glossary | [`docs/brain/README.md`](docs/brain/README.md) |
 | Accessibility, Focus and notifications requirements | [`docs/requirements/accessibility-focus-notifications.md`](docs/requirements/accessibility-focus-notifications.md) |
 | Cyanotype design system and screens | [`docs/design/design-system.md`](docs/design/design-system.md) |

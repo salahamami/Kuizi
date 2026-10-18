@@ -1,0 +1,41 @@
+{
+  "type": "record",
+  "name": "SessionStart",
+  "namespace": "kuizi.events",
+  "doc": "A learning session started in an app. envelope.session_id is the new session's ID.",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context."
+    },
+    {
+      "name": "entry_point",
+      "type": {
+        "type": "enum",
+        "name": "SessionEntryPoint",
+        "doc": "How the learner arrived.",
+        "symbols": ["UNKNOWN", "DIRECT", "DAILY_PLAN", "NOTIFICATION", "DEEP_LINK", "ASSIGNMENT"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "How the session began: opening the app, the daily plan, a notification, a shared link or a teacher assignment."
+    },
+    {
+      "name": "notification_id",
+      "type": ["null", { "type": "string", "logicalType": "uuid" }],
+      "default": null,
+      "privacy": "pseudonymous",
+      "doc": "Notification that opened the session, when entry_point is NOTIFICATION (T161 attributes sessions to messages)."
+    },
+    {
+      "name": "offline",
+      "type": "boolean",
+      "default": false,
+      "privacy": "personal",
+      "doc": "True when the session started without a network connection; its events reach Kafka when the app reconnects (T083)."
+    }
+  ]
+}

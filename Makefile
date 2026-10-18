@@ -7,6 +7,7 @@ COMPOSE := docker compose -f infra/local/compose.yaml --env-file .env
 
 .PHONY: help up up-llm down reset status smoke check lint test logs ml-setup ml-lab
 .PHONY: graph-setup graph-load graph-export graph-test
+.PHONY: schemas-setup schemas-check schemas-test schemas-docs schemas-register
 
 help: ## List the commands
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-10s %s\n", $$1, $$2}'
@@ -75,3 +76,18 @@ graph-export: ## Export the concept graph to curriculum/graph/out/kc_graph.json
 
 graph-test: ## Run the concept-graph tests (database tests need make up)
 	cd curriculum/graph && uv run pytest
+
+schemas-setup: ## Install the event-schema tooling (needs uv)
+	cd schemas && uv sync
+
+schemas-check: ## Check event schemas, catalogue, examples, generated page and compatibility
+	cd schemas && uv run kuizi-schemas check
+
+schemas-test: .env ## Run the event-schema tests (the registry tests need make up)
+	cd schemas && uv run pytest
+
+schemas-docs: ## Regenerate docs/data/event-catalogue.md from the schemas and catalogue
+	cd schemas && uv run kuizi-schemas docs
+
+schemas-register: .env ## Register the event schemas in the local schema registry (needs make up)
+	cd schemas && uv run kuizi-schemas register

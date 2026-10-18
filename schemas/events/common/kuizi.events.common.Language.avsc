@@ -1,0 +1,8 @@
+{
+  "type": "enum",
+  "name": "Language",
+  "namespace": "kuizi.events.common",
+  "doc": "Language of the interface or of a piece of content: French or Arabic.",
+  "symbols": ["UNKNOWN", "FR", "AR"],
+  "default": "UNKNOWN"
+}

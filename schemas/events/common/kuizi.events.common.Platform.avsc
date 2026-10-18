@@ -1,0 +1,8 @@
+{
+  "type": "enum",
+  "name": "Platform",
+  "namespace": "kuizi.events.common",
+  "doc": "Which Kuizi app produced the event. UNKNOWN for server-side events and for values an older reader does not know.",
+  "symbols": ["UNKNOWN", "WEB", "IOS", "ANDROID"],
+  "default": "UNKNOWN"
+}

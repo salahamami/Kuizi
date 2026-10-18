@@ -1,0 +1,8 @@
+{
+  "type": "enum",
+  "name": "InputModality",
+  "namespace": "kuizi.events.common",
+  "doc": "Physical input channel of the action behind the event. Assistive devices report the channel they emulate (a switch that sends key presses is KEYBOARD); the assistive technology itself is only recorded, as sensitive data, in AccommodationContext.assistive_modes.",
+  "symbols": ["UNKNOWN", "POINTER", "TOUCH", "KEYBOARD", "VOICE", "STYLUS"],
+  "default": "UNKNOWN"
+}

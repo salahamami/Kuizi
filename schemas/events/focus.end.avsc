@@ -1,0 +1,53 @@
+{
+  "type": "record",
+  "name": "FocusEnd",
+  "namespace": "kuizi.events",
+  "doc": "A Focus session ended, completed or stopped early (stopping early carries no penalty, FR-F5).",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context; focus_session_id is the session that ended."
+    },
+    {
+      "name": "planned_minutes",
+      "type": "int",
+      "privacy": "personal",
+      "doc": "Length chosen at focus.start."
+    },
+    {
+      "name": "duration_ms",
+      "type": "long",
+      "privacy": "personal",
+      "doc": "Milliseconds from focus.start to the end."
+    },
+    {
+      "name": "reason",
+      "type": {
+        "type": "enum",
+        "name": "FocusEndReason",
+        "doc": "Why the Focus session ended.",
+        "symbols": ["UNKNOWN", "COMPLETED", "STOPPED_EARLY", "INTERRUPTED", "APP_CLOSED"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "COMPLETED at the planned time, STOPPED_EARLY by the learner, INTERRUPTED by an essential notification or the device, APP_CLOSED."
+    },
+    {
+      "name": "items_answered",
+      "type": "int",
+      "default": 0,
+      "privacy": "personal",
+      "doc": "Number of item.answered events during the Focus session."
+    },
+    {
+      "name": "break_prompted",
+      "type": "boolean",
+      "default": false,
+      "privacy": "personal",
+      "doc": "True when the app offered a break at the end (FR-F4)."
+    }
+  ]
+}

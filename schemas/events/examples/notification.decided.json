@@ -1,0 +1,56 @@
+[
+  {
+    "envelope": {
+      "event_id": "5408fc8d-3cef-4c40-be36-2e4bd41cdb62",
+      "student_id": "b9d8249e-215b-4892-9bab-1eec87b3d90e",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": null,
+      "server_ts": 1793742000000,
+      "session_id": null,
+      "session_seq": null,
+      "focus_session_id": null,
+      "device": null,
+      "app_version": null,
+      "ui_language": "AR",
+      "input_modality": "UNKNOWN"
+    },
+    "notification_id": "374ebe5a-9ef9-4bda-ac03-a513a86cf7b4",
+    "category": "REVIEW_DUE",
+    "priority": "USEFUL",
+    "recipient_role": "STUDENT",
+    "decision": "DEFER",
+    "reason": "QUIET_HOURS",
+    "deferred_until": 1793772000000,
+    "template_id": "review-due-gentle",
+    "template_version": 3,
+    "requester": "spaced-repetition",
+    "decision_ms": 12
+  },
+  {
+    "envelope": {
+      "event_id": "becce65a-eb32-40a6-a477-9bd28ba48374",
+      "student_id": "4a37fa2d-f2d7-440f-8785-9faeecc3f80c",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": null,
+      "server_ts": 1793742060000,
+      "session_id": null,
+      "session_seq": null,
+      "focus_session_id": null,
+      "device": null,
+      "app_version": null,
+      "ui_language": "FR",
+      "input_modality": "UNKNOWN"
+    },
+    "notification_id": "620e900c-f20a-46ce-99b0-696397bae876",
+    "category": "ACCOUNT_SECURITY",
+    "priority": "ESSENTIAL",
+    "recipient_role": "PARENT",
+    "decision": "SEND_NOW",
+    "reason": "ALLOWED",
+    "deferred_until": null,
+    "template_id": "new-device-sign-in",
+    "template_version": 1,
+    "requester": "identity",
+    "decision_ms": 9
+  }
+]

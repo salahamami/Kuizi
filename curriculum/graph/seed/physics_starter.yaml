@@ -1,0 +1,806 @@
+# Starter Physics KC graph for the Tunisian Bac, 4e année (T032, Jira KK-52).
+#
+# STATUS: STARTER, TO REVIEW. It covers every chapter of the 4e année physics programme of
+# the Mathématiques, Sciences expérimentales and Sciences techniques sections, with a few
+# KCs per chapter. T035 completes it (about 400 KCs) and a Tunisian physics teacher checks
+# it (ADR 0005). Every KC and edge loads with status to_review; nothing here may reach
+# students before that review.
+#
+# PLACEHOLDERS, on purpose:
+#   - exam_weight: none is set. No source gave per-concept weights; T035 measures them on
+#     ten years of Bac papers. The export shows null.
+#   - difficulty_prior: none is set; it comes from item calibration (T043, T044).
+#   - Arabic names: Kuizi's own wording, to be checked by the teacher with the French ones.
+#
+# SOURCES (details and rights in docs/curriculum/kc-graph.md):
+#   - CNP textbooks "Physique, 4ème année de l'enseignement secondaire" for the
+#     Mathématiques, Sciences expérimentales and Sciences techniques sections
+#     (dir. A. Baatout, Centre National Pédagogique). Their forewords say they follow the
+#     official programme published in September 2009. We read the tables of contents and
+#     the objectives and prerequisites page of each chapter; we record chapter titles and
+#     page numbers only. KC names are our own wording; no textbook text is reproduced.
+#   - The 12 concepts of the brain walkthrough (ml/kuizi_brain/graph.py), marked
+#     "brain: <id>" below.
+#
+# FORMAT (kuizi.kc-graph.seed, version 1), read by `kuizi-kc-graph validate | load`:
+#   subjects, tracks, programmes (with their chapters), then kcs. On each KC:
+#     id               stable id = subject.domain.concept..., lowercase; never reused
+#     name             fr and ar, both mandatory
+#     path             ltree path, defaults to the id
+#     requires         prerequisites: KCs that must be known before this one
+#     parents          KCs this one is a sub-concept of
+#     related          symmetric links (analogies)
+#     chapters         core membership: track -> chapter number in that track's programme
+#                      (or {chapter, exam_weight, exam_weight_source})
+#     prerequisite_in  tracks where the KC is needed but taught elsewhere (earlier year or
+#                      another subject); source_ref then says where
+#     source_ref       where the KC is taught, or a finer reference
+#   A track must hold every prerequisite of its KCs; `validate` checks it.
+
+format: kuizi.kc-graph.seed
+format_version: 1
+
+meta:
+  title: Starter Physics KC graph, Tunisian Bac 4e année
+  status: starter
+  review: to_review
+  completed_by: T035
+  exam_weights: placeholder
+  difficulty_priors: placeholder
+
+subjects:
+  - id: physics
+    name:
+      fr: "Physique"
+      ar: "الفيزياء"
+  - id: maths
+    name:
+      fr: "Mathématiques"
+      ar: "الرياضيات"
+
+tracks:
+  - id: math-4
+    section: math
+    year: 4
+    name:
+      fr: "4e année secondaire, section Mathématiques"
+      ar: "السنة الرابعة ثانوي، شعبة الرياضيات"
+  - id: sexp-4
+    section: sexp
+    year: 4
+    name:
+      fr: "4e année secondaire, section Sciences expérimentales"
+      ar: "السنة الرابعة ثانوي، شعبة العلوم التجريبية"
+  - id: tech-4
+    section: tech
+    year: 4
+    name:
+      fr: "4e année secondaire, section Sciences techniques"
+      ar: "السنة الرابعة ثانوي، شعبة العلوم التقنية"
+
+programmes:
+  - track: math-4
+    subject: physics
+    title:
+      fr: "Physique, 4e année Mathématiques"
+      ar: "الفيزياء، السنة الرابعة رياضيات"
+    source_ref: "Official 4e année Mathématiques physics programme, read from the CNP textbook 'Physique, 4ème année de l'enseignement secondaire, Mathématiques' (dir. A. Baatout), table of contents p. 4-5. Its foreword cites the 4e Sciences expérimentales programme of September 2009: confirm against the official Mathématiques text in T035."
+    chapters:
+      - number: 1
+        theme: {fr: "Évolution de systèmes", ar: "تطوّر الأنظمة"}
+        title: {fr: "Le condensateur ; le dipôle RC", ar: "المكثّف؛ ثنائي القطب RC"}
+        source_ref: "CNP Physique 4e Mathématiques, chapter 1, p. 11 (objectives p. 10)"
+      - number: 2
+        theme: {fr: "Évolution de systèmes", ar: "تطوّر الأنظمة"}
+        title: {fr: "La bobine ; le dipôle RL", ar: "الوشيعة؛ ثنائي القطب RL"}
+        source_ref: "CNP Physique 4e Mathématiques, chapter 2, p. 43"
+      - number: 3
+        theme: {fr: "Évolution de systèmes", ar: "تطوّر الأنظمة"}
+        title: {fr: "Oscillations électriques libres", ar: "الذبذبات الكهربائية الحرة"}
+        source_ref: "CNP Physique 4e Mathématiques, chapter 3, p. 79"
+      - number: 4
+        theme: {fr: "Évolution de systèmes", ar: "تطوّر الأنظمة"}
+        title: {fr: "Oscillations électriques forcées en régime sinusoïdal", ar: "الذبذبات الكهربائية القسرية في النظام الجيبي"}
+        source_ref: "CNP Physique 4e Mathématiques, chapter 4, p. 111"
+      - number: 5
+        theme: {fr: "Évolution de systèmes", ar: "تطوّر الأنظمة"}
+        title: {fr: "Oscillations libres d'un pendule élastique", ar: "الذبذبات الحرة لنوّاس مرن"}
+        source_ref: "CNP Physique 4e Mathématiques, chapter 5, p. 139"
+      - number: 6
+        theme: {fr: "Évolution de systèmes", ar: "تطوّر الأنظمة"}
+        title: {fr: "Oscillations forcées d'un pendule élastique en régime sinusoïdal", ar: "الذبذبات القسرية لنوّاس مرن في النظام الجيبي"}
+        source_ref: "CNP Physique 4e Mathématiques, chapter 6, p. 163"
+      - number: 7
+        theme: {fr: "Ondes", ar: "الموجات"}
+        title: {fr: "Ondes mécaniques progressives", ar: "الموجات الميكانيكية المتنقلة"}
+        source_ref: "CNP Physique 4e Mathématiques, chapter 7, p. 185 (objectives p. 184)"
+      - number: 8
+        theme: {fr: "Ondes", ar: "الموجات"}
+        title: {fr: "Nature ondulatoire de la lumière", ar: "الطبيعة الموجية للضوء"}
+        source_ref: "CNP Physique 4e Mathématiques, chapter 8, p. 219 (objectives p. 218; running title 'Interactions onde-matière', adds reflection and refraction of mechanical waves)"
+      - number: 9
+        theme: {fr: "Physique atomique et nucléaire", ar: "الفيزياء الذرية والنووية"}
+        title: {fr: "Spectre atomique", ar: "الطيف الذري"}
+        source_ref: "CNP Physique 4e Mathématiques, chapter 9, p. 249 (objectives p. 248)"
+      - number: 10
+        theme: {fr: "Physique atomique et nucléaire", ar: "الفيزياء الذرية والنووية"}
+        title: {fr: "Le noyau atomique", ar: "النواة الذرية"}
+        source_ref: "CNP Physique 4e Mathématiques, chapter 10, p. 273"
+      - number: 11
+        theme: {fr: "Physique atomique et nucléaire", ar: "الفيزياء الذرية والنووية"}
+        title: {fr: "Réactions nucléaires", ar: "التفاعلات النووية"}
+        source_ref: "CNP Physique 4e Mathématiques, chapter 11, p. 287"
+
+  - track: sexp-4
+    subject: physics
+    title:
+      fr: "Physique, 4e année Sciences expérimentales"
+      ar: "الفيزياء، السنة الرابعة علوم تجريبية"
+    source_ref: "Official 4e année Sciences expérimentales physics programme (published September 2009), read from the CNP textbook 'Physique, 4ème année de l'enseignement secondaire, Sciences expérimentales' (dir. A. Baatout, updated and adapted edition), foreword p. 3 and table of contents p. 4-5."
+    chapters:
+      - number: 1
+        theme: {fr: "Évolution de systèmes", ar: "تطوّر الأنظمة"}
+        title: {fr: "Le condensateur ; le dipôle RC", ar: "المكثّف؛ ثنائي القطب RC"}
+        source_ref: "CNP Physique 4e Sciences expérimentales, chapter 1, p. 11 (objectives p. 10)"
+      - number: 2
+        theme: {fr: "Évolution de systèmes", ar: "تطوّر الأنظمة"}
+        title: {fr: "La bobine ; le dipôle RL", ar: "الوشيعة؛ ثنائي القطب RL"}
+        source_ref: "CNP Physique 4e Sciences expérimentales, chapter 2, p. 43 (objectives p. 42)"
+      - number: 3
+        theme: {fr: "Évolution de systèmes", ar: "تطوّر الأنظمة"}
+        title: {fr: "Oscillations électriques libres", ar: "الذبذبات الكهربائية الحرة"}
+        source_ref: "CNP Physique 4e Sciences expérimentales, chapter 3, p. 79 (objectives p. 78)"
+      - number: 4
+        theme: {fr: "Évolution de systèmes", ar: "تطوّر الأنظمة"}
+        title: {fr: "Oscillations électriques forcées en régime sinusoïdal", ar: "الذبذبات الكهربائية القسرية في النظام الجيبي"}
+        source_ref: "CNP Physique 4e Sciences expérimentales, chapter 4, p. 111 (objectives p. 110)"
+      - number: 5
+        theme: {fr: "Évolution de systèmes", ar: "تطوّر الأنظمة"}
+        title: {fr: "Oscillations libres d'un pendule élastique", ar: "الذبذبات الحرة لنوّاس مرن"}
+        source_ref: "CNP Physique 4e Sciences expérimentales, chapter 5, p. 145 (objectives p. 144)"
+      - number: 6
+        theme: {fr: "Évolution de systèmes", ar: "تطوّر الأنظمة"}
+        title: {fr: "Oscillations forcées d'un pendule élastique en régime sinusoïdal", ar: "الذبذبات القسرية لنوّاس مرن في النظام الجيبي"}
+        source_ref: "CNP Physique 4e Sciences expérimentales, chapter 6, p. 169 (objectives p. 168)"
+      - number: 7
+        theme: {fr: "Ondes", ar: "الموجات"}
+        title: {fr: "Ondes mécaniques progressives", ar: "الموجات الميكانيكية المتنقلة"}
+        source_ref: "CNP Physique 4e Sciences expérimentales, chapter 7, p. 191 (objectives p. 190)"
+      - number: 8
+        theme: {fr: "Ondes", ar: "الموجات"}
+        title: {fr: "Nature ondulatoire de la lumière", ar: "الطبيعة الموجية للضوء"}
+        source_ref: "CNP Physique 4e Sciences expérimentales, chapter 8, p. 227 (objectives p. 226)"
+      - number: 9
+        theme: {fr: "Physique atomique et nucléaire", ar: "الفيزياء الذرية والنووية"}
+        title: {fr: "Spectre atomique", ar: "الطيف الذري"}
+        source_ref: "CNP Physique 4e Sciences expérimentales, chapter 9, p. 247 (objectives p. 246)"
+      - number: 10
+        theme: {fr: "Physique atomique et nucléaire", ar: "الفيزياء الذرية والنووية"}
+        title: {fr: "Le noyau atomique", ar: "النواة الذرية"}
+        source_ref: "CNP Physique 4e Sciences expérimentales, chapter 10, p. 271 (objectives p. 270)"
+      - number: 11
+        theme: {fr: "Physique atomique et nucléaire", ar: "الفيزياء الذرية والنووية"}
+        title: {fr: "Réactions nucléaires", ar: "التفاعلات النووية"}
+        source_ref: "CNP Physique 4e Sciences expérimentales, chapter 11, p. 285 (objectives p. 284)"
+
+  - track: tech-4
+    subject: physics
+    title:
+      fr: "Physique, 4e année Sciences techniques"
+      ar: "الفيزياء، السنة الرابعة علوم تقنية"
+    source_ref: "Official 4e année Sciences techniques physics programme (published September 2009), read from the CNP textbook 'Physique, 4ème année de l'enseignement secondaire, Sciences techniques' (dir. A. Baatout), foreword p. 3 and table of contents p. 4-5."
+    chapters:
+      - number: 1
+        theme: {fr: "Évolution de systèmes électriques", ar: "تطوّر الأنظمة الكهربائية"}
+        title: {fr: "Le condensateur ; le dipôle RC", ar: "المكثّف؛ ثنائي القطب RC"}
+        source_ref: "CNP Physique 4e Sciences techniques, chapter 1, p. 11"
+      - number: 2
+        theme: {fr: "Évolution de systèmes électriques", ar: "تطوّر الأنظمة الكهربائية"}
+        title: {fr: "La bobine ; le dipôle RL", ar: "الوشيعة؛ ثنائي القطب RL"}
+        source_ref: "CNP Physique 4e Sciences techniques, chapter 2, p. 43"
+      - number: 3
+        theme: {fr: "Évolution de systèmes électriques", ar: "تطوّر الأنظمة الكهربائية"}
+        title: {fr: "Oscillations électriques libres", ar: "الذبذبات الكهربائية الحرة"}
+        source_ref: "CNP Physique 4e Sciences techniques, chapter 3, p. 77"
+      - number: 4
+        theme: {fr: "Évolution de systèmes électriques", ar: "تطوّر الأنظمة الكهربائية"}
+        title: {fr: "Oscillations forcées en régime sinusoïdal", ar: "الذبذبات القسرية في النظام الجيبي"}
+        source_ref: "CNP Physique 4e Sciences techniques, chapter 4, p. 105"
+      - number: 5
+        theme: {fr: "Évolution d'un système mécanique", ar: "تطوّر نظام ميكانيكي"}
+        title: {fr: "Oscillations libres d'un pendule élastique", ar: "الذبذبات الحرة لنوّاس مرن"}
+        source_ref: "CNP Physique 4e Sciences techniques, chapter 5, p. 131"
+      - number: 6
+        theme: {fr: "Évolution d'un système mécanique", ar: "تطوّر نظام ميكانيكي"}
+        title: {fr: "Oscillations forcées d'un pendule élastique en régime sinusoïdal", ar: "الذبذبات القسرية لنوّاس مرن في النظام الجيبي"}
+        source_ref: "CNP Physique 4e Sciences techniques, chapter 6, p. 153"
+      - number: 7
+        theme: {fr: "Filtres électriques", ar: "المرشّحات الكهربائية"}
+        title: {fr: "Les filtres électriques", ar: "المرشّحات الكهربائية"}
+        source_ref: "CNP Physique 4e Sciences techniques, chapter 7, p. 173 (objectives p. 172)"
+      - number: 8
+        theme: {fr: "Filtres électriques", ar: "المرشّحات الكهربائية"}
+        title: {fr: "Exemples de filtres électriques", ar: "أمثلة من المرشّحات الكهربائية"}
+        source_ref: "CNP Physique 4e Sciences techniques, chapter 8, p. 191 (objectives p. 190)"
+      - number: 9
+        theme: {fr: "Ondes mécaniques", ar: "الموجات الميكانيكية"}
+        title: {fr: "Ondes mécaniques progressives", ar: "الموجات الميكانيكية المتنقلة"}
+        source_ref: "CNP Physique 4e Sciences techniques, chapter 9, p. 229"
+
+kcs:
+  # ---------------------------------------------------------------------------------------
+  # Prerequisites taught in mathematics (scope prerequisite in every physics track).
+  # T111 builds the Maths graph and may refine these KCs.
+  # ---------------------------------------------------------------------------------------
+  - id: maths.geometry.vectors          # brain: vect
+    name:
+      fr: "Vecteurs et repères"
+      ar: "الأشعة والمعالم"
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Mathematics, earlier secondary years; used by kinematics and Fresnel constructions. To align with the Maths graph (T111)."
+
+  - id: maths.analysis.derivative       # brain: deriv
+    name:
+      fr: "Dérivées"
+      ar: "الاشتقاق"
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Mathematics programme (dérivation). To align with the Maths graph (T111)."
+
+  - id: maths.analysis.exponential
+    name:
+      fr: "Fonction exponentielle"
+      ar: "الدالة الأسية"
+    requires: [maths.analysis.derivative]
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Mathematics programme (fonction exponentielle). To align with the Maths graph (T111)."
+
+  - id: maths.analysis.logarithm
+    name:
+      fr: "Fonctions logarithmes (népérien et décimal)"
+      ar: "الدوال اللوغاريتمية (النيبيري والعشري)"
+    requires: [maths.analysis.derivative]
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Mathematics programme (fonctions logarithmes); used by radioactive decay and gains in decibels. To align with the Maths graph (T111)."
+
+  - id: maths.analysis.ode1             # brain: eqdiff
+    name:
+      fr: "Équations différentielles du premier ordre y' = ay + b"
+      ar: "المعادلات التفاضلية من الرتبة الأولى y' = ay + b"
+    requires: [maths.analysis.derivative, maths.analysis.exponential]
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Mathematics programme (équations différentielles). To align with the Maths graph (T111)."
+
+  - id: maths.analysis.ode2
+    name:
+      fr: "Équation différentielle y'' + ω²y = 0"
+      ar: "المعادلة التفاضلية y'' + ω²y = 0"
+    requires: [maths.analysis.derivative]
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Mathematics programme (équations différentielles); its general solution is a prerequisite of chapter 5 in the CNP 4e physics textbooks. To align with the Maths graph (T111)."
+
+  # ---------------------------------------------------------------------------------------
+  # Physics prerequisites from earlier years (named in the chapters' prerequisite pages).
+  # ---------------------------------------------------------------------------------------
+  - id: physics.found.periodic
+    name:
+      fr: "Phénomène périodique : période et fréquence"
+      ar: "الظاهرة الدورية: الدور والتواتر"
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Prerequisite of chapters 3 and 7 in the CNP 4e textbooks; taught in an earlier year (year and chapter to confirm in T035)."
+
+  - id: physics.found.sinusoidal
+    name:
+      fr: "Grandeur sinusoïdale : amplitude, pulsation et phase initiale"
+      ar: "المقدار الجيبي: الوسع والنبض والطور الابتدائي"
+    requires: [physics.found.periodic]
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Prerequisite of chapters 4 and 7 in the CNP 4e textbooks; taught in an earlier year (to confirm in T035)."
+
+  - id: physics.elec.circuit_laws
+    name:
+      fr: "Lois des circuits : loi des mailles, loi des nœuds, loi d'Ohm"
+      ar: "قوانين الدارات الكهربائية: قانون الحلقات وقانون العقد وقانون أوم"
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Prerequisite of chapter 1 in the CNP 4e textbooks; taught in an earlier year (to confirm in T035)."
+
+  - id: physics.elec.magnetic_field
+    name:
+      fr: "Champ magnétique ; champ créé par un solénoïde"
+      ar: "الحقل المغناطيسي؛ الحقل المحدث بوشيعة طويلة"
+    requires: [maths.geometry.vectors]
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Prerequisite of chapter 2 in the CNP 4e textbooks; taught in an earlier year (to confirm in T035)."
+
+  - id: physics.mech.kinematics         # brain: cinem
+    name:
+      fr: "Cinématique du point"
+      ar: "حركية النقطة المادية"
+    requires: [maths.geometry.vectors, maths.analysis.derivative]
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Physics, earlier secondary year (cinématique); needed by the dynamics of chapter 5 and by wave celerity. To confirm in T035."
+
+  - id: physics.mech.newton2            # brain: newton
+    name:
+      fr: "Relation fondamentale de la dynamique (deuxième loi de Newton)"
+      ar: "العلاقة الأساسية للتحريك (القانون الثاني لنيوتن)"
+    requires: [physics.mech.kinematics]
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Prerequisite of chapter 5 in the CNP 4e textbooks; taught in an earlier year (to confirm in T035)."
+
+  - id: physics.mech.energy             # brain: energie
+    name:
+      fr: "Travail et énergie : énergie cinétique, énergie potentielle élastique"
+      ar: "العمل والطاقة: الطاقة الحركية والطاقة الكامنة المرنة"
+    requires: [physics.mech.newton2]
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Prerequisite of chapter 5 in the CNP 4e textbooks; taught in an earlier year (to confirm in T035)."
+
+  - id: physics.mech.hooke
+    name:
+      fr: "Loi de Hooke : tension d'un ressort"
+      ar: "قانون هوك: توتّر نابض"
+    prerequisite_in: [math-4, sexp-4, tech-4]
+    source_ref: "Prerequisite of chapter 5 in the CNP 4e textbooks; taught in an earlier year (to confirm in T035)."
+
+  - id: physics.optics.descartes
+    name:
+      fr: "Réflexion et réfraction de la lumière : lois de Descartes"
+      ar: "انعكاس الضوء وانكساره: قانونا ديكارت"
+    prerequisite_in: [math-4]
+    source_ref: "Prerequisite of chapter 8 in the CNP 4e Mathématiques textbook; taught in an earlier year (to confirm in T035)."
+
+  - id: physics.atom.structure
+    name:
+      fr: "Structure de l'atome et du noyau : nucléons, isotopes, nombre de masse et nombre de charge"
+      ar: "بنية الذرة والنواة: النويّات والنظائر والعدد الكتلي وعدد الشحنة"
+    prerequisite_in: [math-4, sexp-4]
+    source_ref: "Prerequisite of chapters 10 and 11 in the CNP 4e textbooks; taught in an earlier year (to confirm in T035)."
+
+  - id: physics.elec.opamp
+    name:
+      fr: "Amplificateur opérationnel idéal"
+      ar: "المضخّم العملياتي المثالي"
+    requires: [physics.elec.circuit_laws]
+    prerequisite_in: [tech-4]
+    source_ref: "Prerequisite of chapter 8 in the CNP 4e Sciences techniques textbook; taught in an earlier year (to confirm in T035)."
+
+  # ---------------------------------------------------------------------------------------
+  # Chapter 1: Le condensateur ; le dipôle RC (all three tracks)
+  # ---------------------------------------------------------------------------------------
+  - id: physics.elec.rc                 # brain: rc
+    name:
+      fr: "Le condensateur ; le dipôle RC"
+      ar: "المكثّف؛ ثنائي القطب RC"
+    chapters: {math-4: 1, sexp-4: 1, tech-4: 1}
+
+  - id: physics.elec.rc.capacitor
+    name:
+      fr: "Condensateur : charge q, capacité C et relation q = C·u"
+      ar: "المكثّف: الشحنة q والسعة C والعلاقة q = C·u"
+    parents: [physics.elec.rc]
+    requires: [physics.elec.circuit_laws]
+    chapters: {math-4: 1, sexp-4: 1, tech-4: 1}
+
+  - id: physics.elec.rc.ode
+    name:
+      fr: "Charge et décharge d'un condensateur : équation différentielle du dipôle RC"
+      ar: "شحن مكثّف وتفريغه: المعادلة التفاضلية لثنائي القطب RC"
+    parents: [physics.elec.rc]
+    requires: [physics.elec.rc.capacitor, physics.elec.circuit_laws, maths.analysis.ode1]
+    chapters: {math-4: 1, sexp-4: 1, tech-4: 1}
+
+  - id: physics.elec.rc.time_constant
+    name:
+      fr: "Constante de temps τ = RC"
+      ar: "ثابت الزمن τ = RC"
+    parents: [physics.elec.rc]
+    requires: [physics.elec.rc.ode]
+    chapters: {math-4: 1, sexp-4: 1, tech-4: 1}
+
+  - id: physics.elec.rc.energy
+    name:
+      fr: "Énergie emmagasinée dans un condensateur"
+      ar: "الطاقة المخزّنة في مكثّف"
+    parents: [physics.elec.rc]
+    requires: [physics.elec.rc.capacitor]
+    chapters: {math-4: 1, sexp-4: 1, tech-4: 1}
+
+  # ---------------------------------------------------------------------------------------
+  # Chapter 2: La bobine ; le dipôle RL (all three tracks)
+  # ---------------------------------------------------------------------------------------
+  - id: physics.elec.rl                 # brain: rl
+    name:
+      fr: "La bobine ; le dipôle RL"
+      ar: "الوشيعة؛ ثنائي القطب RL"
+    chapters: {math-4: 2, sexp-4: 2, tech-4: 2}
+
+  - id: physics.elec.rl.induction
+    name:
+      fr: "Induction électromagnétique ; loi de Lenz"
+      ar: "التحريض الكهرومغناطيسي؛ قانون لنز"
+    parents: [physics.elec.rl]
+    requires: [physics.elec.magnetic_field]
+    chapters: {math-4: 2, sexp-4: 2, tech-4: 2}
+
+  - id: physics.elec.rl.self_induction
+    name:
+      fr: "Auto-induction : inductance L et tension u = ri + L·di/dt"
+      ar: "التحريض الذاتي: الذاتية L والتوتر u = ri + L·di/dt"
+    parents: [physics.elec.rl]
+    requires: [physics.elec.rl.induction, maths.analysis.derivative]
+    chapters: {math-4: 2, sexp-4: 2, tech-4: 2}
+
+  - id: physics.elec.rl.ode
+    name:
+      fr: "Réponse d'un dipôle RL à un échelon de tension : équation différentielle"
+      ar: "استجابة ثنائي القطب RL لرتبة توتر: المعادلة التفاضلية"
+    parents: [physics.elec.rl]
+    requires: [physics.elec.rl.self_induction, physics.elec.circuit_laws, maths.analysis.ode1]
+    chapters: {math-4: 2, sexp-4: 2, tech-4: 2}
+
+  - id: physics.elec.rl.time_constant
+    name:
+      fr: "Constante de temps τ = L/R"
+      ar: "ثابت الزمن τ = L/R"
+    parents: [physics.elec.rl]
+    requires: [physics.elec.rl.ode]
+    related: [physics.elec.rc.time_constant]
+    chapters: {math-4: 2, sexp-4: 2, tech-4: 2}
+
+  - id: physics.elec.rl.energy
+    name:
+      fr: "Énergie emmagasinée dans une bobine"
+      ar: "الطاقة المخزّنة في وشيعة"
+    parents: [physics.elec.rl]
+    requires: [physics.elec.rl.self_induction]
+    chapters: {math-4: 2, sexp-4: 2, tech-4: 2}
+
+  # ---------------------------------------------------------------------------------------
+  # Chapter 3: Oscillations électriques libres (all three tracks)
+  # ---------------------------------------------------------------------------------------
+  - id: physics.elec.rlc.free           # brain: rlc
+    name:
+      fr: "Oscillations électriques libres"
+      ar: "الذبذبات الكهربائية الحرة"
+    chapters: {math-4: 3, sexp-4: 3, tech-4: 3}
+
+  - id: physics.elec.rlc.free.ode
+    name:
+      fr: "Équation différentielle des oscillations libres d'un circuit RLC série"
+      ar: "المعادلة التفاضلية للذبذبات الحرة في دارة RLC على التوالي"
+    parents: [physics.elec.rlc.free]
+    requires: [physics.elec.rc.capacitor, physics.elec.rl.self_induction, physics.elec.circuit_laws]
+    chapters: {math-4: 3, sexp-4: 3, tech-4: 3}
+
+  - id: physics.elec.rlc.free.regimes
+    name:
+      fr: "Régimes pseudo-périodique et apériodique ; amortissement par la résistance"
+      ar: "النظامان شبه الدوري واللادوري؛ التخامد بسبب المقاومة"
+    parents: [physics.elec.rlc.free]
+    requires: [physics.elec.rlc.free.ode, physics.found.periodic]
+    chapters: {math-4: 3, sexp-4: 3, tech-4: 3}
+
+  - id: physics.elec.rlc.free.lc
+    name:
+      fr: "Oscillations libres non amorties (LC) : période propre T₀ = 2π√(LC)"
+      ar: "الذبذبات الحرة غير المتخامدة (LC): الدور الذاتي T₀ = 2π√(LC)"
+    parents: [physics.elec.rlc.free]
+    requires: [physics.elec.rlc.free.ode, maths.analysis.ode2, physics.found.sinusoidal]
+    chapters: {math-4: 3, sexp-4: 3, tech-4: 3}
+
+  - id: physics.elec.rlc.free.energy
+    name:
+      fr: "Énergie totale d'un oscillateur électrique : conservation (LC) et dissipation (RLC)"
+      ar: "الطاقة الكلية لمذبذب كهربائي: انحفاظها (LC) وتبدّدها (RLC)"
+    parents: [physics.elec.rlc.free]
+    requires: [physics.elec.rc.energy, physics.elec.rl.energy, physics.elec.rlc.free.lc]
+    chapters: {math-4: 3, sexp-4: 3, tech-4: 3}
+
+  # ---------------------------------------------------------------------------------------
+  # Chapter 4: Oscillations électriques forcées en régime sinusoïdal (all three tracks)
+  # ---------------------------------------------------------------------------------------
+  - id: physics.elec.rlc.forced         # brain: forcees (electrical part)
+    name:
+      fr: "Oscillations électriques forcées en régime sinusoïdal"
+      ar: "الذبذبات الكهربائية القسرية في النظام الجيبي"
+    chapters: {math-4: 4, sexp-4: 4, tech-4: 4}
+
+  - id: physics.elec.rlc.forced.response
+    name:
+      fr: "Excitateur et résonateur : amplitude et déphasage en régime sinusoïdal forcé"
+      ar: "المثير والرنّان: الوسع وفرق الطور في النظام الجيبي القسري"
+    parents: [physics.elec.rlc.forced]
+    requires: [physics.elec.rlc.free.ode, physics.found.sinusoidal]
+    chapters: {math-4: 4, sexp-4: 4, tech-4: 4}
+
+  - id: physics.elec.rlc.forced.impedance
+    name:
+      fr: "Impédance d'un circuit RLC série ; construction de Fresnel"
+      ar: "ممانعة دارة RLC على التوالي؛ إنشاء فرينل"
+    parents: [physics.elec.rlc.forced]
+    requires: [physics.elec.rlc.forced.response, maths.geometry.vectors]
+    chapters: {math-4: 4, sexp-4: 4, tech-4: 4}
+
+  - id: physics.elec.rlc.forced.resonance
+    name:
+      fr: "Résonance d'intensité et résonance de charge ; facteur de surtension"
+      ar: "رنين الشدة ورنين الشحنة؛ معامل التوتر الزائد"
+    parents: [physics.elec.rlc.forced]
+    requires: [physics.elec.rlc.forced.impedance, physics.elec.rlc.free.lc]
+    chapters: {math-4: 4, sexp-4: 4, tech-4: 4}
+
+  - id: physics.elec.rlc.forced.power
+    name:
+      fr: "Puissance moyenne et facteur de puissance"
+      ar: "القدرة المتوسطة ومعامل القدرة"
+    parents: [physics.elec.rlc.forced]
+    requires: [physics.elec.rlc.forced.impedance]
+    chapters: {math-4: 4, sexp-4: 4, tech-4: 4}
+
+  # ---------------------------------------------------------------------------------------
+  # Chapter 5: Oscillations libres d'un pendule élastique (all three tracks)
+  # ---------------------------------------------------------------------------------------
+  - id: physics.mech.oscillations.free  # brain: osc_meca
+    name:
+      fr: "Oscillations libres d'un pendule élastique"
+      ar: "الذبذبات الحرة لنوّاس مرن"
+    chapters: {math-4: 5, sexp-4: 5, tech-4: 5}
+
+  - id: physics.mech.oscillations.free.ode
+    name:
+      fr: "Équation différentielle du pendule élastique ; période propre T₀ = 2π√(m/k)"
+      ar: "المعادلة التفاضلية للنوّاس المرن؛ الدور الذاتي T₀ = 2π√(m/k)"
+    parents: [physics.mech.oscillations.free]
+    requires: [physics.mech.newton2, physics.mech.hooke, maths.analysis.ode2, physics.found.sinusoidal]
+    related: [physics.elec.rlc.free.lc]
+    chapters: {math-4: 5, sexp-4: 5, tech-4: 5}
+
+  - id: physics.mech.oscillations.free.damping
+    name:
+      fr: "Oscillations amorties : régimes pseudo-périodique, apériodique et critique"
+      ar: "الذبذبات المتخامدة: الأنظمة شبه الدوري واللادوري والحرج"
+    parents: [physics.mech.oscillations.free]
+    requires: [physics.mech.oscillations.free.ode]
+    related: [physics.elec.rlc.free.regimes]
+    chapters: {math-4: 5, sexp-4: 5, tech-4: 5}
+
+  - id: physics.mech.oscillations.free.energy
+    name:
+      fr: "Énergie mécanique d'un pendule élastique : conservation et non-conservation"
+      ar: "الطاقة الميكانيكية لنوّاس مرن: انحفاظها وعدم انحفاظها"
+    parents: [physics.mech.oscillations.free]
+    requires: [physics.mech.oscillations.free.ode, physics.mech.energy]
+    related: [physics.elec.rlc.free.energy]
+    chapters: {math-4: 5, sexp-4: 5, tech-4: 5}
+
+  # ---------------------------------------------------------------------------------------
+  # Chapter 6: Oscillations forcées d'un pendule élastique (all three tracks)
+  # ---------------------------------------------------------------------------------------
+  - id: physics.mech.oscillations.forced  # brain: forcees (mechanical part)
+    name:
+      fr: "Oscillations forcées d'un pendule élastique en régime sinusoïdal"
+      ar: "الذبذبات القسرية لنوّاس مرن في النظام الجيبي"
+    chapters: {math-4: 6, sexp-4: 6, tech-4: 6}
+
+  - id: physics.mech.oscillations.forced.analogy
+    name:
+      fr: "Analogie formelle électrique–mécanique"
+      ar: "التماثل الشكلي بين الأنظمة الكهربائية والميكانيكية"
+    parents: [physics.mech.oscillations.forced]
+    requires: [physics.elec.rlc.forced.resonance, physics.mech.oscillations.free.damping]
+    chapters: {math-4: 6, sexp-4: 6, tech-4: 6}
+
+  - id: physics.mech.oscillations.forced.resonance
+    name:
+      fr: "Résonance d'élongation et résonance de vitesse ; influence de l'amortissement"
+      ar: "رنين المطال ورنين السرعة؛ تأثير التخامد"
+    parents: [physics.mech.oscillations.forced]
+    requires: [physics.mech.oscillations.forced.analogy, physics.mech.oscillations.free.damping]
+    related: [physics.elec.rlc.forced.resonance]
+    chapters: {math-4: 6, sexp-4: 6, tech-4: 6}
+
+  # ---------------------------------------------------------------------------------------
+  # Ondes mécaniques progressives: chapter 7 (math-4, sexp-4), chapter 9 (tech-4)
+  # ---------------------------------------------------------------------------------------
+  - id: physics.waves.mechanical        # brain: ondes
+    name:
+      fr: "Ondes mécaniques progressives"
+      ar: "الموجات الميكانيكية المتنقلة"
+    chapters: {math-4: 7, sexp-4: 7, tech-4: 9}
+
+  - id: physics.waves.mechanical.propagation
+    name:
+      fr: "Propagation d'une onde : ondes transversales et longitudinales, transport d'énergie sans transport de matière"
+      ar: "انتشار موجة: الموجات العرضية والطولية، انتقال الطاقة دون انتقال المادة"
+    parents: [physics.waves.mechanical]
+    chapters: {math-4: 7, sexp-4: 7, tech-4: 9}
+
+  - id: physics.waves.mechanical.celerity
+    name:
+      fr: "Célérité d'une onde ; influence du milieu de propagation"
+      ar: "سرعة انتشار موجة؛ تأثير وسط الانتشار"
+    parents: [physics.waves.mechanical]
+    requires: [physics.waves.mechanical.propagation, physics.mech.kinematics]
+    chapters: {math-4: 7, sexp-4: 7, tech-4: 9}
+
+  - id: physics.waves.mechanical.sinusoidal
+    name:
+      fr: "Onde progressive sinusoïdale : équation horaire d'un point, aspect du milieu, double périodicité (T et λ)"
+      ar: "الموجة المتنقلة الجيبية: المعادلة الزمنية لنقطة، مظهر الوسط، الدورية المزدوجة (T وλ)"
+    parents: [physics.waves.mechanical]
+    requires: [physics.waves.mechanical.celerity, physics.found.sinusoidal]
+    chapters: {math-4: 7, sexp-4: 7, tech-4: 9}
+
+  # ---------------------------------------------------------------------------------------
+  # Chapter 8: Nature ondulatoire de la lumière (math-4, sexp-4)
+  # ---------------------------------------------------------------------------------------
+  - id: physics.waves.light
+    name:
+      fr: "Nature ondulatoire de la lumière"
+      ar: "الطبيعة الموجية للضوء"
+    chapters: {math-4: 8, sexp-4: 8}
+
+  - id: physics.waves.light.diffraction
+    name:
+      fr: "Diffraction des ondes mécaniques et lumineuses ; influence du rapport λ/a"
+      ar: "حيود الموجات الميكانيكية والضوئية؛ تأثير النسبة λ/a"
+    parents: [physics.waves.light]
+    requires: [physics.waves.mechanical.sinusoidal]
+    chapters: {math-4: 8, sexp-4: 8}
+
+  - id: physics.waves.light.dispersion
+    name:
+      fr: "Dispersion de la lumière : lumière blanche, radiations monochromatiques, milieu dispersif"
+      ar: "تبدّد الضوء: الضوء الأبيض والإشعاعات أحادية اللون والوسط المبدّد"
+    parents: [physics.waves.light]
+    requires: [physics.waves.mechanical.sinusoidal]
+    chapters: {math-4: 8, sexp-4: 8}
+
+  # Only in the Mathématiques edition of chapter 8 (objectives p. 218 of its textbook).
+  - id: physics.waves.reflection_refraction
+    name:
+      fr: "Réflexion et réfraction d'une onde mécanique"
+      ar: "انعكاس موجة ميكانيكية وانكسارها"
+    requires: [physics.waves.mechanical.sinusoidal, physics.optics.descartes]
+    chapters: {math-4: 8}
+
+  # ---------------------------------------------------------------------------------------
+  # Chapter 9: Spectre atomique (math-4, sexp-4)
+  # ---------------------------------------------------------------------------------------
+  - id: physics.atom.spectrum
+    name:
+      fr: "Spectre atomique"
+      ar: "الطيف الذري"
+    chapters: {math-4: 9, sexp-4: 9}
+
+  - id: physics.atom.spectrum.quantization
+    name:
+      fr: "Quantification de l'énergie de l'atome ; niveaux d'énergie de l'atome d'hydrogène"
+      ar: "تكمية طاقة الذرة؛ مستويات طاقة ذرة الهيدروجين"
+    parents: [physics.atom.spectrum]
+    requires: [physics.atom.structure]
+    chapters: {math-4: 9, sexp-4: 9}
+
+  - id: physics.atom.spectrum.photon
+    name:
+      fr: "Émission et absorption d'un photon : ΔE = h·ν"
+      ar: "إصدار فوتون وامتصاصه: ΔE = h·ν"
+    parents: [physics.atom.spectrum]
+    requires: [physics.atom.spectrum.quantization, physics.waves.light.dispersion]
+    chapters: {math-4: 9, sexp-4: 9}
+
+  - id: physics.atom.spectrum.spectra
+    name:
+      fr: "Spectres d'émission et d'absorption : identification d'un élément chimique"
+      ar: "طيفا الإصدار والامتصاص: التعرّف على عنصر كيميائي"
+    parents: [physics.atom.spectrum]
+    requires: [physics.atom.spectrum.photon, physics.waves.light.dispersion]
+    chapters: {math-4: 9, sexp-4: 9}
+
+  # ---------------------------------------------------------------------------------------
+  # Chapter 10: Le noyau atomique (math-4, sexp-4)
+  # ---------------------------------------------------------------------------------------
+  - id: physics.nuclear.nucleus
+    name:
+      fr: "Le noyau atomique"
+      ar: "النواة الذرية"
+    chapters: {math-4: 10, sexp-4: 10}
+
+  - id: physics.nuclear.nucleus.mass_energy
+    name:
+      fr: "Équivalence masse–énergie E = mc² ; unités u et MeV/c²"
+      ar: "التكافؤ كتلة–طاقة E = mc²؛ الوحدتان u وMeV/c²"
+    parents: [physics.nuclear.nucleus]
+    requires: [physics.atom.structure]
+    chapters: {math-4: 10, sexp-4: 10}
+
+  - id: physics.nuclear.nucleus.binding_energy
+    name:
+      fr: "Défaut de masse, énergie de liaison par nucléon et stabilité des noyaux"
+      ar: "النقص الكتلي وطاقة الربط لكل نويّة واستقرار النوى"
+    parents: [physics.nuclear.nucleus]
+    requires: [physics.nuclear.nucleus.mass_energy]
+    chapters: {math-4: 10, sexp-4: 10}
+
+  # ---------------------------------------------------------------------------------------
+  # Chapter 11: Réactions nucléaires (math-4, sexp-4)
+  # ---------------------------------------------------------------------------------------
+  - id: physics.nuclear.reactions
+    name:
+      fr: "Réactions nucléaires"
+      ar: "التفاعلات النووية"
+    chapters: {math-4: 11, sexp-4: 11}
+
+  - id: physics.nuclear.reactions.radioactivity
+    name:
+      fr: "Radioactivité α, β⁻, β⁺ et γ : équations des réactions spontanées"
+      ar: "النشاط الإشعاعي α وβ⁻ وβ⁺ وγ: معادلات التفاعلات التلقائية"
+    parents: [physics.nuclear.reactions]
+    requires: [physics.atom.structure, physics.nuclear.nucleus.binding_energy]
+    chapters: {math-4: 11, sexp-4: 11}
+
+  - id: physics.nuclear.reactions.decay_law
+    name:
+      fr: "Loi de décroissance radioactive, période radioactive et activité"
+      ar: "قانون التناقص الإشعاعي وعمر النصف والنشاط"
+    parents: [physics.nuclear.reactions]
+    requires: [physics.nuclear.reactions.radioactivity, maths.analysis.exponential, maths.analysis.logarithm]
+    chapters: {math-4: 11, sexp-4: 11}
+
+  - id: physics.nuclear.reactions.fission_fusion
+    name:
+      fr: "Réactions provoquées : fission et fusion, énergie libérée"
+      ar: "التفاعلات المفتعلة: الانشطار والاندماج والطاقة المحرّرة"
+    parents: [physics.nuclear.reactions]
+    requires: [physics.nuclear.reactions.radioactivity, physics.nuclear.nucleus.binding_energy]
+    chapters: {math-4: 11, sexp-4: 11}
+
+  # ---------------------------------------------------------------------------------------
+  # Chapters 7 and 8 of Sciences techniques: Filtres électriques (tech-4 only)
+  # ---------------------------------------------------------------------------------------
+  - id: physics.elec.filters
+    name:
+      fr: "Les filtres électriques"
+      ar: "المرشّحات الكهربائية"
+    chapters: {tech-4: 7}
+
+  - id: physics.elec.filters.transfer
+    name:
+      fr: "Filtre électrique : entrée, sortie et fonction de transfert T"
+      ar: "المرشّح الكهربائي: المدخل والمخرج ودالة التحويل T"
+    parents: [physics.elec.filters]
+    requires: [physics.found.sinusoidal, physics.elec.circuit_laws]
+    chapters: {tech-4: 7}
+
+  - id: physics.elec.filters.gain
+    name:
+      fr: "Gain en décibels et courbe de réponse d'un filtre"
+      ar: "الكسب بالديسيبل ومنحنى استجابة مرشّح"
+    parents: [physics.elec.filters]
+    requires: [physics.elec.filters.transfer, maths.analysis.logarithm]
+    chapters: {tech-4: 7}
+
+  - id: physics.elec.filters.bandwidth
+    name:
+      fr: "Fréquence de coupure et bande passante à −3 dB"
+      ar: "تواتر القطع والمجال الممرّر عند −3 dB"
+    parents: [physics.elec.filters]
+    requires: [physics.elec.filters.gain]
+    chapters: {tech-4: 7}
+
+  # Sub-concepts of the filters KC, taught in chapter 8 "Exemples de filtres électriques".
+  - id: physics.elec.filters.passive
+    name:
+      fr: "Filtres passifs : passe-bas, passe-haut et passe-bande (RC, RLC)"
+      ar: "المرشّحات الخاملة: ممرّر المنخفضات وممرّر المرتفعات وممرّر النطاق (RC وRLC)"
+    parents: [physics.elec.filters]
+    requires: [physics.elec.filters.bandwidth, physics.elec.rlc.forced.impedance, physics.elec.rlc.forced.resonance]
+    chapters: {tech-4: 8}
+
+  - id: physics.elec.filters.active
+    name:
+      fr: "Filtres actifs à amplificateur opérationnel"
+      ar: "المرشّحات النشيطة ذات المضخّم العملياتي"
+    parents: [physics.elec.filters]
+    requires: [physics.elec.filters.passive, physics.elec.opamp]
+    chapters: {tech-4: 8}

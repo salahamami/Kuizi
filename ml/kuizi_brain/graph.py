@@ -102,8 +102,9 @@ def draw(mastery=None, ax=None, graph=PHYSICS_KCS, threshold=0.6):
     for kc, (_, _, pre) in graph.items():
         for p in pre:
             (x0, y0), (x1, y1) = pos[p], pos[kc]
-            ax.annotate("", xy=(x1 - 0.32, y1), xytext=(x0 + 0.32, y0),
-                        arrowprops=dict(arrowstyle="->", color="#555", lw=1))
+            ax.annotate(
+                "", xy=(x1 - 0.32, y1), xytext=(x0 + 0.32, y0), arrowprops=dict(arrowstyle="->", color="#555", lw=1)
+            )
     for kc, (x, y) in pos.items():
         label = graph[kc][0]
         style = dict(boxstyle="round,pad=0.3", fc="#e8f0fb", ec="#1f4e8c", lw=1.2)

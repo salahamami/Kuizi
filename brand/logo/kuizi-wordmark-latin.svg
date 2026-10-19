@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 227 84" width="227" height="84" role="img" color="#0B1E3A">
+  <title>Kuizi</title>
+  <!--
+    Latin logotype "kuizi", lowercase, drawn as shapes (no font).
+    Metrics: ascender y=0, x-height y=28, baseline y=84 (x-height 56). Stroke 14.
+    Only 0/45/90-degree edges and circular arcs (u bowl: outer r 26, inner r 12, centre (86,58)).
+    i dots are rhombi (half-diagonal 10), the same nuqta as the star's counter.
+    Glyph spans: k 0-52, u 60-112, i 125-139 (dot 122-142), z 151-199, i 210-224 (dot 207-227).
+    Fill is currentColor (default night #0B1E3A).
+  -->
+  <g fill="currentColor">
+    <path d="M0 0H14V44L30 28H50L23 55L52 84H32L14 66V84H0Z"/>
+    <path d="M60 28H74V58A12 12 0 0 0 98 58V28H112V84H98V81.065A26 26 0 0 1 60 58Z"/>
+    <path d="M125 28H139V84H125Z M132 0L142 10L132 20L122 10Z"/>
+    <path d="M151 28H197V42L169 70H199V84H151V70L179 42H151Z"/>
+    <path d="M210 28H224V84H210Z M217 0L227 10L217 20L207 10Z"/>
+  </g>
+</svg>

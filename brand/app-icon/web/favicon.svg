@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <title>Kuizi</title>
+  <!-- Favicon (also the source of favicon-16/32/48 PNGs). Night #0B1E3A tile, corner radius 6, so it reads on
+       light and dark browser tabs. Star cyan-light #4FD1F0, centre (16,16), R = 12, with the micro counter
+       (rhombus half-diagonal 4 = R/3) so it stays open at 16 px. Offsets 8.485 / 3.515. -->
+  <rect width="32" height="32" rx="6" fill="#0B1E3A"/>
+  <path fill="#4FD1F0" fill-rule="evenodd" d="M16 4L19.515 7.515H24.485V12.485L28 16L24.485 19.515V24.485H19.515L16 28L12.485 24.485H7.515V19.515L4 16L7.515 12.485V7.515H12.485Z M16 12L12 16L16 20L20 16Z"/>
+</svg>

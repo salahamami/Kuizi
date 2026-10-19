@@ -12,6 +12,8 @@ Prints one ok/FAIL line per check and exits 1 if any check fails:
   4. The backlog generator runs cleanly and the generated files in the repository match its
      output. It runs on a temporary copy of tools/backlog and docs/backlog, so this check
      never changes your files.
+  5. Every third-party action in .github/workflows/ is pinned to a full commit SHA (a tag can be
+     moved to other code; T006), and docker:// actions to an image digest.
 
 Standard library only: system Python has no PyYAML, so the simple front matter is parsed by hand.
 """
@@ -155,11 +157,34 @@ def check_generator(root):
     return f"generated files up to date; {totals}"
 
 
+def check_pinned_actions(root):
+    workflows = sorted((root / ".github/workflows").glob("*.y*ml"))
+    problems, count = [], 0
+    for path in workflows:
+        for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+            match = re.match(r"\s*(?:-\s+)?uses:\s*['\"]?([^\s'\"#]+)", line)
+            if not match or match.group(1).startswith("./"):
+                continue  # local actions and reusable workflows live in this repository
+            ref = match.group(1)
+            count += 1
+            if ref.startswith("docker://"):
+                pinned = re.search(r"@sha256:[0-9a-f]{64}$", ref)
+            else:
+                pinned = re.fullmatch(r"[\w.-]+/[\w./-]+@[0-9a-f]{40}", ref)
+            if not pinned:
+                problems.append(f"{path.relative_to(root)}:{number}: {ref} is not pinned to a full commit SHA "
+                                "(or image digest); keep the version as a comment, e.g. @<sha> # v1.2.3")
+    if problems:
+        raise CheckFailed("\n".join(problems))
+    return f"{count} third-party action references in {len(workflows)} workflows"
+
+
 CHECKS = [
     ("Local stack compose file is valid", check_compose),
     ("Agent briefs have name, description and tools; name matches the file", check_briefs),
     ("Every agent-* label has a brief and every brief owns tickets", check_labels),
     ("Backlog generator runs cleanly", check_generator),
+    ("Workflow actions are pinned to a commit SHA", check_pinned_actions),
 ]
 
 

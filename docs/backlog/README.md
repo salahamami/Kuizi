@@ -7,10 +7,10 @@ The repository is the source of truth for the backlog. Jira project **`KK`** (te
 | File | Role | Edit? |
 | --- | --- | --- |
 | `source/APL_Production_Backlog_v1.md`, `.docx`, `source/APL_jira_import_v1.csv` | v1 backlog as received (13 epics, 132 tickets, 1,041 points) | Never |
-| `../../tools/backlog/additions.py` | Everything added or changed after v1: epics E14–E20, tickets T133–T240, changes to v1 tickets, agent roles, Neural Core mapping | Yes, this is where changes go |
+| `../../tools/backlog/additions.py` | Everything added or changed after v1: epics E14–E20, tickets T133–T241, v1 tickets split before sprint entry (`SPLITS`), changes to v1 tickets, agent roles, Neural Core mapping | Yes, this is where changes go |
 | `../../tools/backlog/build_backlog.py` | Generator | Only to change output formats |
 | `jira_keys.csv` | Backlog ID → Jira key (`E05,KK-5`, `T103,KK-134`) | Yes, add a row whenever an issue is created in Jira |
-| `APL_Full_Backlog.md` | Full readable backlog v2 (20 epics, 240 tickets, 1,636 points), with Jira keys | Generated |
+| `APL_Full_Backlog.md` | Full readable backlog v2 (20 epics, 241 tickets, 1,636 points), with Jira keys | Generated |
 | `APL_jira_import_full.csv` | Jira CSV import file, same columns as v1 plus agent-role and persona labels | Generated |
 | `apl_backlog.json` | Input for the API sync (Markdown descriptions, labels, links, Jira keys) | Generated |
 
@@ -27,19 +27,21 @@ The script fails if a ticket ID is duplicated, a dependency points to an unknown
 Project name **Kuizi Adaptive Bac Platform** (renamed from `Kuizi_KPI` on 2026-10-17). Loaded on 2026-10-16 through the Atlassian connector:
 
 - 20 epics, KK-1 to KK-20, in backlog order (E05 is KK-5).
-- 240 tickets, KK-21 to KK-260, each a child of its epic. Keys follow `20 + ticket number`, except T104–T114 (KK-123 to KK-133) and T103 (KK-134). `jira_keys.csv` has every key.
-- "Blocks" links reproduce every *Blocked by* in the backlog (440 links), plus 17 obsolete links still to be removed by hand (see `CHANGELOG.md`, "Pending Jira sync").
+- 241 tickets, KK-21 to KK-261, each a child of its epic. Keys follow `20 + ticket number`, except T104–T114 (KK-123 to KK-133), T103 (KK-134) and T241 (KK-261). `jira_keys.csv` has every key.
+- "Blocks" links reproduce every *Blocked by* in the backlog (442 links), plus 17 obsolete links still to be removed by hand (see `CHANGELOG.md`, "Pending Jira sync").
 - The gap review of the same day added T211–T236 (KK-231 to KK-256): foundations, safeguarding, teacher and school-admin tools, mobile quality and content operations.
 - The Neural Core infographic sits in a comment on KK-5.
 - On 2026-10-17, after Backlog, Sprints and Estimation were turned on, the 20 sprints were created, every ticket was put in its sprint and given its story-point estimate (field `Story point estimate`, `customfield_10016`; the board estimates by it). Each sprint's goal names its phase and the three epics carrying the most points in it.
 - The same day the delivery model changed to role agents with one product owner (ADR 0005): every ticket's `team-*` label became `agent-*`, its description says "Agent role", and the product owner is the assignee on all 236 tickets.
 - Still on 2026-10-17, the plan became local-first (ADR 0006): T237–T240 were added (KK-257 to KK-260), 143 tickets moved sprint, their labels and descriptions were regenerated, 17 epic descriptions and 17 sprint goals were updated. The sprint plan comes from `tools/backlog/replan.py`.
+- On 2026-10-18 Sprint 1 was started (it began 2026-10-17); its four tickets are in *Revue en cours*. The five Sprint 2 tickets (KK-26, KK-32, KK-43, KK-52, KK-251) were worked ahead the same day and are also in *Revue en cours*, still in APL Sprint 2. Each reviewed ticket has a comment saying how its acceptance criteria were verified and what waits for the product owner.
+- Also on 2026-10-18, T076 (13 points, Sprint 3) was split before sprint entry: T076 became the 8-point app foundation and T241 (KK-261, 5 points, Sprint 3) took the shared UI package and Storybook; T241 blocks T174. The 13 tickets blocked by T076 got their descriptions refreshed (new T076 title), and E09's scope line says 13 tickets.
 
 | Sprint | Jira sprint ID | Start | End | Tickets | Points |
 | --- | --- | --- | --- | --- | --- |
 | APL Sprint 1 | 440 | 2026-10-17 | 2026-10-30 | 4 | 21 |
 | APL Sprint 2 | 441 | 2026-11-02 | 2026-11-13 | 5 | 29 |
-| APL Sprint 3 | 442 | 2026-11-16 | 2026-11-27 | 10 | 65 |
+| APL Sprint 3 | 442 | 2026-11-16 | 2026-11-27 | 11 | 65 |
 | APL Sprint 4 | 443 | 2026-11-30 | 2026-12-11 | 10 | 79 |
 | APL Sprint 5 | 444 | 2026-12-14 | 2026-12-25 | 11 | 90 |
 | APL Sprint 6 | 445 | 2026-12-28 | 2027-01-08 | 12 | 74 |

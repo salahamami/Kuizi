@@ -110,6 +110,9 @@ def build():
 
     for tid, lines in A.CHANGES.items():
         by_id[tid]["changes"] = list(lines)
+    for tid, split in A.SPLITS.items():
+        by_id[tid].update({k: v for k, v in split.items() if k != "change"})
+        by_id[tid]["changes"].append(split["change"])
     for tid, sprint in A.SPRINT_OVERRIDES.items():
         by_id[tid]["sprint"] = sprint
     for tid, extra in A.EXTRA_BLOCKERS.items():

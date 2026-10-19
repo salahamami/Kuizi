@@ -1,0 +1,52 @@
+{
+  "type": "record",
+  "name": "HintRequested",
+  "namespace": "kuizi.events",
+  "doc": "A hint was asked for on an item, by the learner, by a hint timer (scaled by the time multiplier, T070) or by the tutor.",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context."
+    },
+    {
+      "name": "item",
+      "type": "kuizi.events.common.ItemContext",
+      "privacy": "personal",
+      "doc": "The item and its presentation_id."
+    },
+    {
+      "name": "level",
+      "type": "int",
+      "privacy": "personal",
+      "doc": "Hint level asked for: 1 Socratic question, 2 conceptual nudge, 3 worked step, 4 full solution (T070)."
+    },
+    {
+      "name": "trigger",
+      "type": {
+        "type": "enum",
+        "name": "HintTrigger",
+        "doc": "Who or what asked for the hint.",
+        "symbols": ["UNKNOWN", "STUDENT", "TIMER", "TUTOR"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "STUDENT pressed the hint button, TIMER is time-based escalation, TUTOR is the Socratic tutor offering one."
+    },
+    {
+      "name": "offset_ms",
+      "type": "long",
+      "privacy": "personal",
+      "doc": "Milliseconds between the presentation of the item and the request."
+    },
+    {
+      "name": "attempts_before",
+      "type": "int",
+      "default": 0,
+      "privacy": "personal",
+      "doc": "Answers already submitted in this presentation (level 4 needs at least 2, T070)."
+    }
+  ]
+}

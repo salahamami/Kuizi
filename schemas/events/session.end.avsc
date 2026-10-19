@@ -1,0 +1,47 @@
+{
+  "type": "record",
+  "name": "SessionEnd",
+  "namespace": "kuizi.events",
+  "doc": "A learning session ended. When the app is closed without warning, the app sends it on next launch with reason UNKNOWN or APP_BACKGROUND.",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context."
+    },
+    {
+      "name": "reason",
+      "type": {
+        "type": "enum",
+        "name": "SessionEndReason",
+        "doc": "Why the session ended.",
+        "symbols": ["UNKNOWN", "USER_EXIT", "IDLE_TIMEOUT", "APP_BACKGROUND", "SIGN_OUT"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Why the session ended."
+    },
+    {
+      "name": "duration_ms",
+      "type": "long",
+      "privacy": "personal",
+      "doc": "Milliseconds from session.start to the end."
+    },
+    {
+      "name": "active_ms",
+      "type": ["null", "long"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "Part of duration_ms with the app in the foreground."
+    },
+    {
+      "name": "items_answered",
+      "type": "int",
+      "default": 0,
+      "privacy": "personal",
+      "doc": "Number of item.answered events in the session."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "record",
+  "name": "Device",
+  "namespace": "kuizi.events.common",
+  "doc": "Coarse description of the device. Deliberately minimal: no device or advertising identifier, user-agent string, IP address, model name, screen size or location, so a device cannot be fingerprinted from telemetry.",
+  "fields": [
+    {
+      "name": "platform",
+      "type": "kuizi.events.common.Platform",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "App that produced the event: web, iOS or Android."
+    },
+    {
+      "name": "form_factor",
+      "type": "kuizi.events.common.FormFactor",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Phone, tablet or desktop."
+    }
+  ]
+}

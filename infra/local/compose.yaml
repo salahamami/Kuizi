@@ -108,8 +108,13 @@ services:
         condition: service_healthy
 
   # Keycloak on EKS in the cloud (T012). Development realm "kuizi" with the platform roles.
+  # The image is stock Keycloak plus Kuizi's providers (services/keycloak), built on the first
+  # `make up`; bump the tag when services/keycloak changes. Realm and dev users are imported from
+  # ./keycloak only when the realm does not exist yet (docs/dev/identity.md).
   keycloak:
-    image: quay.io/keycloak/keycloak:26.1.4
+    image: kuizi/keycloak:26.8.1-kuizi.1
+    build: ../../services/keycloak
+    pull_policy: never # built here, never pulled from a registry
     command: ["start-dev", "--import-realm"]
     environment:
       KC_DB: postgres
@@ -120,6 +125,9 @@ services:
       KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       KC_HEALTH_ENABLED: "true"
       KC_HOSTNAME: http://localhost:${KEYCLOAK_PORT:-8080}
+      # Read by the realm import (${KEYCLOAK_GOOGLE_CLIENT_ID:} in kuizi-realm.json); empty = Google stays off.
+      KEYCLOAK_GOOGLE_CLIENT_ID: ${KEYCLOAK_GOOGLE_CLIENT_ID:-}
+      KEYCLOAK_GOOGLE_CLIENT_SECRET: ${KEYCLOAK_GOOGLE_CLIENT_SECRET:-}
     ports:
       - "${KEYCLOAK_PORT:-8080}:8080"
     volumes:

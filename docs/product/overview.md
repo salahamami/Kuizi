@@ -25,7 +25,7 @@ Every action is recorded → the model updates what the student knows → the ro
 
 | Concept | What it does | Epic / tickets |
 | --- | --- | --- |
-| Deep knowledge tracing (SAINT+) | Predicts the chance of failing each concept from the whole interaction history | E05 · T040–T049 |
+| Deep knowledge tracing (proposed AKT, DKT fallback; ADR 0007) | Predicts the chance of failing each concept from the whole interaction history | E05 · T040–T049 |
 | Cold start (IRT + 12-question placement) | First estimate before enough history | T043, T175 |
 | Granular telemetry | Answers, hesitation, slider moves, confidence 1–5 | E03 · T023–T026 |
 | Explainable predictions | Attention weights show what weighs on a concept | T049, T177 |

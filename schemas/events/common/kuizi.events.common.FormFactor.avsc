@@ -1,0 +1,8 @@
+{
+  "type": "enum",
+  "name": "FormFactor",
+  "namespace": "kuizi.events.common",
+  "doc": "Size class of the device, as the app sees it. No model name, screen size or device identifier is ever recorded.",
+  "symbols": ["UNKNOWN", "PHONE", "TABLET", "DESKTOP"],
+  "default": "UNKNOWN"
+}

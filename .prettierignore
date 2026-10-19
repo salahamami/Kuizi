@@ -1,0 +1,15 @@
+# Prettier formats TypeScript, JavaScript and JSON in the workspace only.
+*.md
+*.yaml
+*.yml
+*.ipynb
+pnpm-lock.yaml
+ml/
+docs/
+infra/
+brand/
+tools/
+scripts/
+**/dist/
+**/coverage/
+.claude/worktrees/

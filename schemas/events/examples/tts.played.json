@@ -1,0 +1,39 @@
+[
+  {
+    "envelope": {
+      "event_id": "0e8f4045-f2e6-4649-bd94-6b64ce121a66",
+      "student_id": "b9d8249e-215b-4892-9bab-1eec87b3d90e",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": 1793774424500,
+      "server_ts": 1793774424680,
+      "session_id": "039a7b88-71cf-42e3-8473-24943126b9c3",
+      "session_seq": 3,
+      "focus_session_id": null,
+      "device": {
+        "platform": "ANDROID",
+        "form_factor": "PHONE"
+      },
+      "app_version": "0.3.1",
+      "ui_language": "AR",
+      "input_modality": "TOUCH"
+    },
+    "content_type": "ITEM_STEM",
+    "content_ref": "phys.elec.rlc.resonance.q0007",
+    "item": {
+      "item_id": "phys.elec.rlc.resonance.q0007",
+      "item_version": 1,
+      "kc_ids": ["elec.rlc.resonance"],
+      "subject_id": "physics",
+      "track_id": "mathematiques",
+      "item_language": "AR",
+      "presentation_id": "05032a7e-6bd6-4ed6-bf8c-b6d1b5c318e9",
+      "activity": "MOCK_BAC"
+    },
+    "language": "AR",
+    "duration_ms": 14000,
+    "played_ms": 14000,
+    "completed": true,
+    "trigger": "AUTO",
+    "rate": 1.0
+  }
+]

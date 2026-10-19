@@ -4,6 +4,8 @@ Cyanotype is Kuizi's visual language: an engineer's technical drawing (blueprint
 
 **Design canvas** (all screens, clickable in Play mode): https://claude.ai/artifact/QQuDDhSGx24T1LW3Kn43wi — page "Kuizi — Application".
 
+**Brand** (logo, eight-point star mark, app icons, illustration style, voice and tone in FR and AR): [`brand-guide.md`](brand-guide.md), with source files in [`../../brand/`](../../brand/README.md). The guide is a draft until the reviews in [`brand-reviews.md`](brand-reviews.md) are done (T231).
+
 ## Colour tokens
 
 | Token | Hex | Role |

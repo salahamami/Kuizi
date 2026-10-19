@@ -1,0 +1,25 @@
+[
+  {
+    "envelope": {
+      "event_id": "cb8a6e0e-b507-4a79-9e90-983fc8a7b600",
+      "student_id": "4a37fa2d-f2d7-440f-8785-9faeecc3f80c",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": 1793719560000,
+      "server_ts": 1793719560180,
+      "session_id": "045f21da-1563-43d8-9463-75dce47682e6",
+      "session_seq": 14,
+      "focus_session_id": null,
+      "device": {
+        "platform": "WEB",
+        "form_factor": "DESKTOP"
+      },
+      "app_version": "0.3.0",
+      "ui_language": "FR",
+      "input_modality": "POINTER"
+    },
+    "reason": "USER_EXIT",
+    "duration_ms": 1560000,
+    "active_ms": 1490000,
+    "items_answered": 9
+  }
+]

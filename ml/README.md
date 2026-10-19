@@ -9,6 +9,8 @@ make ml-lab     # opens JupyterLab
 
 Start with the [brain walkthrough](../docs/brain/README.md): ten notebooks in `notebooks/`, built on the small library in `kuizi_brain/`. The model benchmark (T040) is in [`benchmarks/`](benchmarks/README.md).
 
+Tests for `kuizi_brain` are in `tests/` (synthetic data, CPU, under a minute): `make test`, or `uv run pytest --cov` from `ml/`. CI runs them on every pull request with a 75 % coverage gate ([CI guide](../docs/dev/ci.md)).
+
 Experiments are logged to the local MLflow server (`MLFLOW_TRACKING_URI` in `.env`, started by `make up`).
 
-Only public datasets (ASSISTments, EdNet) and synthetic data go here. Never put real student data in this folder or in a notebook.
+Only public datasets with a licence that allows our use (today ASSISTments 2009; EdNet is excluded because its CC BY-NC licence forbids commercial use) and synthetic data go here. Never put real student data in this folder or in a notebook.

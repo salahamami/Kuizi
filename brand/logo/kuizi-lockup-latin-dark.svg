@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 359 100" width="359" height="100" role="img">
+  <title>Kuizi</title>
+  <!-- Latin lockup, for dark backgrounds (night #0B1E3A). Star cyan-light #4FD1F0 (9.3:1),
+       logotype tracing-paper #F3F6FA (15.4:1). Same geometry as kuizi-lockup-latin-light.svg. -->
+  <path fill="#4FD1F0" fill-rule="evenodd" d="M50 0L64.645 14.645H85.355V35.355L100 50L85.355 64.645V85.355H64.645L50 100L35.355 85.355H14.645V64.645L0 50L14.645 35.355V14.645H35.355Z M50 37.5L37.5 50L50 62.5L62.5 50Z"/>
+  <g fill="#F3F6FA" transform="translate(132 8)">
+    <path d="M0 0H14V44L30 28H50L23 55L52 84H32L14 66V84H0Z"/>
+    <path d="M60 28H74V58A12 12 0 0 0 98 58V28H112V84H98V81.065A26 26 0 0 1 60 58Z"/>
+    <path d="M125 28H139V84H125Z M132 0L142 10L132 20L122 10Z"/>
+    <path d="M151 28H197V42L169 70H199V84H151V70L179 42H151Z"/>
+    <path d="M210 28H224V84H210Z M217 0L227 10L217 20L207 10Z"/>
+  </g>
+</svg>

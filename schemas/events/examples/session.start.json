@@ -1,0 +1,46 @@
+[
+  {
+    "envelope": {
+      "event_id": "5e7db530-96d0-4bff-890a-0e01c8796571",
+      "student_id": "4a37fa2d-f2d7-440f-8785-9faeecc3f80c",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": 1793718000000,
+      "server_ts": 1793718000180,
+      "session_id": "045f21da-1563-43d8-9463-75dce47682e6",
+      "session_seq": 1,
+      "focus_session_id": null,
+      "device": {
+        "platform": "WEB",
+        "form_factor": "DESKTOP"
+      },
+      "app_version": "0.3.0",
+      "ui_language": "FR",
+      "input_modality": "POINTER"
+    },
+    "entry_point": "DAILY_PLAN",
+    "notification_id": null,
+    "offline": false
+  },
+  {
+    "envelope": {
+      "event_id": "39c3162b-cf3f-49d9-a99e-2a6405fb1adf",
+      "student_id": "b9d8249e-215b-4892-9bab-1eec87b3d90e",
+      "tenant_id": "tenant-synthetic-lycee-pilote",
+      "client_ts": 1793774401500,
+      "server_ts": 1793774401680,
+      "session_id": "039a7b88-71cf-42e3-8473-24943126b9c3",
+      "session_seq": 1,
+      "focus_session_id": null,
+      "device": {
+        "platform": "ANDROID",
+        "form_factor": "PHONE"
+      },
+      "app_version": "0.3.1",
+      "ui_language": "AR",
+      "input_modality": "TOUCH"
+    },
+    "entry_point": "NOTIFICATION",
+    "notification_id": "374ebe5a-9ef9-4bda-ac03-a513a86cf7b4",
+    "offline": false
+  }
+]

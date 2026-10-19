@@ -1,0 +1,97 @@
+{
+  "type": "record",
+  "name": "TtsPlayed",
+  "namespace": "kuizi.events",
+  "doc": "Kuizi read something aloud with its own speech service (read-aloud, T140, T141). Emitted when playback stops. Carries a reference to what was read, never the text. Speech produced by the learner's own screen reader is not visible to Kuizi and is never recorded.",
+  "fields": [
+    {
+      "name": "envelope",
+      "type": "kuizi.events.common.Envelope",
+      "privacy": "personal",
+      "doc": "Shared event context."
+    },
+    {
+      "name": "content_type",
+      "type": {
+        "type": "enum",
+        "name": "SpeechContent",
+        "doc": "What kind of content was read.",
+        "symbols": [
+          "UNKNOWN",
+          "ITEM_STEM",
+          "ITEM_CHOICE",
+          "HINT",
+          "TUTOR_MESSAGE",
+          "FEEDBACK",
+          "SIMULATION_DESCRIPTION",
+          "NOTIFICATION",
+          "OTHER"
+        ],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Kind of content read aloud."
+    },
+    {
+      "name": "content_ref",
+      "type": ["null", "string"],
+      "default": null,
+      "privacy": "none",
+      "doc": "ID of what was read: item, choice, hint or tutor message ID. Never the text."
+    },
+    {
+      "name": "item",
+      "type": ["null", "kuizi.events.common.ItemContext"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "Item being read, when the audio belongs to an item; null otherwise."
+    },
+    {
+      "name": "language",
+      "type": "kuizi.events.common.Language",
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "Language of the audio."
+    },
+    {
+      "name": "duration_ms",
+      "type": "long",
+      "privacy": "none",
+      "doc": "Full length of the audio in milliseconds."
+    },
+    {
+      "name": "played_ms",
+      "type": "long",
+      "privacy": "personal",
+      "doc": "Milliseconds actually played before playback stopped."
+    },
+    {
+      "name": "completed",
+      "type": "boolean",
+      "default": false,
+      "privacy": "personal",
+      "doc": "True when the audio played to the end."
+    },
+    {
+      "name": "trigger",
+      "type": {
+        "type": "enum",
+        "name": "SpeechTrigger",
+        "doc": "What started the playback.",
+        "symbols": ["UNKNOWN", "USER", "AUTO"],
+        "default": "UNKNOWN"
+      },
+      "default": "UNKNOWN",
+      "privacy": "personal",
+      "doc": "USER pressed play; AUTO is automatic read-aloud from the comfort profile."
+    },
+    {
+      "name": "rate",
+      "type": ["null", "double"],
+      "default": null,
+      "privacy": "personal",
+      "doc": "Playback speed chosen by the learner, 1.0 being normal."
+    }
+  ]
+}

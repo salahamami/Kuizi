@@ -1,0 +1,130 @@
+# Reusable Python checks (T006, ADR 0008): one job per uv project, called by ci.yml with the
+# projects found by scripts/ci/discover.py. Same commands as `make lint` and `make test`.
+name: Python
+
+on:
+  workflow_call:
+    inputs:
+      projects:
+        description: 'JSON list from scripts/ci/discover.py, for example [{"path": "ml", "id": "ml", "coverage": 75, "typecheck": false, "services": [], "fetch_depth": 1, "checks": []}]'
+        required: true
+        type: string
+
+permissions: {}
+
+jobs:
+  check:
+    name: ${{ matrix.project.path }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJSON(inputs.projects) }}
+    defaults:
+      run:
+        working-directory: ${{ matrix.project.path }}
+    env:
+      # Values reach the scripts through the environment, never pasted into them.
+      PROJECT_PATH: ${{ matrix.project.path }}
+      COVERAGE_MIN: ${{ matrix.project.coverage }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          # 1 = this commit only; 0 = the whole history ([tool.kuizi.ci] full-history = true)
+          fetch-depth: ${{ matrix.project.fetch_depth }}
+
+      - name: Set up uv (cache keyed on uv.lock)
+        uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: "0.11.32"
+          enable-cache: true
+          cache-dependency-glob: ${{ matrix.project.path }}/uv.lock
+          cache-suffix: ${{ matrix.project.id }}
+          cache-python: true
+
+      - name: Lint (ruff check)
+        run: |
+          ruff_version="$(sed -n 's/^required-version = "==\(.*\)"$/\1/p' "${GITHUB_WORKSPACE}/ruff.toml")"
+          echo "RUFF_VERSION=${ruff_version}" >> "$GITHUB_ENV"
+          uvx "ruff@${ruff_version}" check --output-format=github .
+
+      - name: Format (ruff format --check)
+        if: ${{ !cancelled() }}
+        run: uvx "ruff@${RUFF_VERSION}" format --check .
+
+      - name: Install (uv sync --locked)
+        id: sync
+        if: ${{ !cancelled() }}
+        run: uv sync --locked
+
+      - name: Start PostgreSQL (the local stack's pgvector image, with ltree)
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' && contains(matrix.project.services, 'postgres') }}
+        env:
+          # Same image as infra/local/compose.yaml, pinned by digest. Throwaway credentials,
+          # valid only inside this job.
+          POSTGRES_IMAGE: pgvector/pgvector:pg16@sha256:7b822b0aac60967beb1ea5e576b8602c94c300a157d187f385ae3e0da199b90a
+        run: |
+          docker run -d --name kuizi-ci-postgres -p 127.0.0.1:5432:5432 \
+            -e POSTGRES_USER=kuizi -e POSTGRES_PASSWORD=kuizi-ci-only -e POSTGRES_DB=kuizi "$POSTGRES_IMAGE"
+          # Ask over TCP inside the container: the server started during initialisation only
+          # listens on a socket, so this succeeds once the final server is up.
+          for _ in $(seq 1 60); do
+            if docker exec kuizi-ci-postgres pg_isready -h 127.0.0.1 -U kuizi -d kuizi -q; then break; fi
+            sleep 1
+          done
+          docker exec kuizi-ci-postgres psql -h 127.0.0.1 -U kuizi -d kuizi -v ON_ERROR_STOP=1 -tAc \
+            "SELECT 'PostgreSQL ' || current_setting('server_version') || ', ltree ' || default_version
+             FROM pg_available_extensions WHERE name = 'ltree'" \
+            || { docker logs kuizi-ci-postgres; exit 1; }
+          {
+            echo "DATABASE_URL=postgresql://kuizi:kuizi-ci-only@127.0.0.1:5432/kuizi"
+            echo "KUIZI_REQUIRE_POSTGRES=1" # database tests fail instead of skipping
+          } >> "$GITHUB_ENV"
+
+      - name: Type check (mypy)
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' && matrix.project.typecheck }}
+        run: uv run --locked mypy
+
+      - name: Unit tests with coverage (gate ${{ matrix.project.coverage }} %)
+        id: test
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' }}
+        run: |
+          status=0
+          uv run --locked pytest --cov --cov-report=term-missing:skip-covered --cov-report=xml:coverage.xml \
+            --junitxml=junit.xml --cov-fail-under="${COVERAGE_MIN}" || status=$?
+          if [ "$status" -eq 5 ]; then
+            echo "::error::No tests found in ${PROJECT_PATH}: every Python project needs pytest tests (docs/dev/ci.md)."
+          fi
+          if [ -f .coverage ]; then
+            { echo "### Coverage: ${PROJECT_PATH} (gate ${COVERAGE_MIN} %)"; echo
+              uv run --locked coverage report --format=markdown; } >> "$GITHUB_STEP_SUMMARY" || true
+          fi
+          exit "$status"
+
+      - name: Project checks ([tool.kuizi.ci] checks)
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' && join(matrix.project.checks, '') != '' }}
+        env:
+          CHECKS: ${{ toJSON(matrix.project.checks) }}
+        run: |
+          status=0
+          while IFS= read -r command; do
+            echo "::group::${command}"
+            uv run --locked bash -euo pipefail -c "$command" || status=1
+            echo "::endgroup::"
+          done < <(jq -r '.[]' <<< "$CHECKS")
+          exit "$status"
+
+      - name: Keep the test and coverage reports
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: python-${{ matrix.project.id }}-reports
+          path: |
+            ${{ matrix.project.path }}/coverage.xml
+            ${{ matrix.project.path }}/junit.xml
+          if-no-files-found: ignore
+          retention-days: 14

@@ -57,6 +57,30 @@ check "S3: unsigned requests are refused" bash -c "
 check "Keycloak: realm '$KEYCLOAK_REALM' publishes its OpenID configuration" \
   curl -sf "$KEYCLOAK_URL/realms/$KEYCLOAK_REALM/.well-known/openid-configuration"
 
+# T012: a synthetic dev user gets a 15-minute access token with the tenant_id and roles claims.
+keycloak_dev_token() {
+  curl -sf -d client_id=kuizi-dev-cli -d grant_type=password -d scope=openid \
+    -d username=dev-student -d password=dev-student-local-only \
+    "$KEYCLOAK_URL/realms/$KEYCLOAK_REALM/protocol/openid-connect/token" |
+  python3 -c '
+import base64, json, sys
+token = json.load(sys.stdin)
+part = token["access_token"].split(".")[1]
+claims = json.loads(base64.urlsafe_b64decode(part + "=" * (-len(part) % 4)))
+assert claims["exp"] - claims["iat"] == 900, "access token should live 900 s"
+assert claims.get("tenant_id") == "demo-school-a", "tenant_id claim missing"
+assert claims.get("roles") == ["student"], "roles claim missing"
+'
+}
+check "Keycloak: dev user token has tenant_id and roles, lives 15 min" keycloak_dev_token
+
+# T012: the login page in Arabic is right to left.
+keycloak_login_rtl() {
+  curl -sf "$KEYCLOAK_URL/realms/$KEYCLOAK_REALM/protocol/openid-connect/auth?client_id=kuizi-web&response_type=code&scope=openid&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&code_challenge=E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM&code_challenge_method=S256&ui_locales=ar" |
+  grep -q '<html[^>]*dir="rtl"'
+}
+check "Keycloak: Arabic login page is right to left" keycloak_login_rtl
+
 check "MLflow: log a run" \
   "${COMPOSE[@]}" exec -T mlflow python -c "
 import mlflow

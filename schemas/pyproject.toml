@@ -1,0 +1,48 @@
+[project]
+name = "kuizi-schemas"
+version = "0.1.0"
+description = "Kuizi event contracts (T023): Avro schemas, data catalogue and the tooling that validates, documents and registers them."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastavro>=1.9",   # MIT: parse, validate and serialise Avro
+    "avro>=1.12",      # Apache-2.0: the reference schema-compatibility checker
+    "pyyaml>=6.0",     # MIT: read the data catalogue
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-cov>=5.0",
+    "ruff>=0.7",
+]
+
+[project.scripts]
+kuizi-schemas = "kuizi_schemas.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["kuizi_schemas"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+    "registry: needs the local schema registry (make up); skipped when it is not reachable unless KUIZI_REQUIRE_REGISTRY=1",
+]
+
+[tool.coverage.run]
+source = ["kuizi_schemas"]
+
+[tool.coverage.report]
+fail_under = 85
+
+# CI (T006, docs/dev/ci.md): the compatibility check compares every schema with all its committed
+# versions, so CI checks out the whole history; `make schemas-check` runs after the tests, and
+# refuses to pass on a shallow clone.
+[tool.kuizi.ci]
+full-history = true
+checks = ["kuizi-schemas check --require-full-history"]

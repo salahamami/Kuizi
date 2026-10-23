@@ -60,3 +60,5 @@ Buttons (primary cyan, secondary outlined night, remediation amber), mono chips 
 | 07 | Progress, leaderboard by gain, certificates | T180 |
 | 08 | Teacher space: class heatmap and alerts | T095, T146 |
 | 09 | Parent space in Arabic (right to left) | T097, T160 |
+
+Page **"Version finale"** of the canvas holds screens redrawn as they will ship: Cyanotype tokens, the T231 brand, components as the proposed kits build them (shadcn/ui on Radix and Tailwind for the web, React Aria for complex widgets), working French and Arabic (right to left). First screen: **04 · Labo** on web (live pendulum simulation, answer choices, confidence 1–5, tutor hint ladder) and on phone (Arabic, tutor as a bottom sheet).

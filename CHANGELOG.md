@@ -2,6 +2,12 @@
 
 All notable changes to the Kuizi plan, backlog and documentation.
 
+## 2026-10-23 — UI kits proposed; final Lab design on the canvas
+
+- Proposed UI kits (decision waiting for the product owner, see `docs/product-owner-decisions.md`): shadcn/ui on Radix and Tailwind for the web, React Aria Components for complex widgets (ordering, sliders, drag and drop), Material 3 for Android, Apple's iOS UI Kit for iPhone; Lucide, MathLive and KaTeX as add-ons. Cyanotype stays the look.
+- Design canvas: new page "Version finale" with screen 04 · Labo as it will ship, on web (French and Arabic switch, live pendulum simulation whose period follows T₀ = 2π√(L/g), answer choices, confidence 1–5, tutor hint ladder that opens level 3) and on phone (Arabic first, tutor as a bottom sheet). `docs/design/design-system.md` says so.
+- No backlog or Jira change.
+
 ## 2026-10-18 — T076 split before Sprint 3 (new ticket T241)
 
 T076 was 13 points, and the conventions split anything at 13 before sprint entry.

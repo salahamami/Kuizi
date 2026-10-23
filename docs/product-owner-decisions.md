@@ -15,6 +15,7 @@
 
 | Area | Dependency or service | Licence | Ticket |
 | --- | --- | --- | --- |
+| UI kits (proposed) | shadcn/ui (Radix + Tailwind) for the web, React Aria Components for complex widgets, Material 3 for Android, Apple iOS UI Kit for iPhone; add-ons Lucide icons, MathLive, KaTeX. Preview: canvas page "Version finale" (04 · Labo) | MIT, Apache-2.0, free kits | T076, T241, T174, T220, E16 |
 | Identity | `jose` (token checks in `@kuizi/auth`) | MIT | T012 |
 | Identity | Java 21 and Maven, only inside the Keycloak image build | GPL-2.0 with classpath exception (JDK), Apache-2.0 (Maven) | T012 |
 | Events | `fastavro`, `avro`, `PyYAML` | MIT, Apache-2.0, MIT | T023 |

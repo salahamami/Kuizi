@@ -4,6 +4,7 @@
 Schedules every ticket into a sprint, keeping the original order as priority:
 - the Sprint 1 tickets, the pilot (T108, S12) and everything from S18 on stay where they are;
 - cloud tickets (additions.CLOUD_TICKETS) start in S8 at the earliest;
+- Bac phase 2 tickets (additions.BAC_PHASE2, ADR 0011) are left out: they have no sprint;
 - a ticket never comes before a ticket that blocks it (same sprint only where the plan already allowed it);
 - no sprint goes over its capacity (a ramp for S1-S5, then the 134-point ceiling).
 
@@ -35,6 +36,9 @@ MAX_PULL = int(sys.argv[1]) if len(sys.argv) > 1 else 1
 
 def main():
     _, tickets, by_id = B.build()
+    # Bac phase 2 (ADR 0011) stays in the backlog without a sprint.
+    later = set(A.BAC_PHASE2)
+    tickets = [t for t in tickets if t["id"] not in later]
     original = {t["id"]: t["sprint"] for t in tickets}
     pinned = dict(PINNED)
     pinned.update({t["id"]: t["sprint"] for t in tickets if t["sprint"] > LAST_FLEXIBLE_SPRINT})

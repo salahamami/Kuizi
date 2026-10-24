@@ -889,6 +889,14 @@ SPLITS = {
     ),
 }
 
+# ADR 0011 (2026-10-24): Kuizi starts with 6e année and 7e-9e année de base, all concours subjects,
+# live before the June 2027 concours; the Bac becomes phase 2. Re-scoped tickets and epics replace the
+# fields they give (a change line records why); BAC_PHASE2 tickets stay in the backlog without a sprint.
+REWRITES = {}
+EPIC_REWRITES = {}
+BAC_PHASE = "Phase 7 — Bac (after go-live)"
+BAC_PHASE2 = []
+
 # Changes to v1 tickets: extra acceptance criteria appended to their description.
 CHANGES = {
     "T013": ["A separate, revocable consent covers accommodation data (E14, T151)"],

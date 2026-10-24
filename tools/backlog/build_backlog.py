@@ -31,7 +31,7 @@ JIRA_KEYS = ROOT / "docs/backlog/jira_keys.csv"
 JIRA_PROJECT = "KK"
 JIRA_BROWSE = "https://kuizi.atlassian.net/browse/"
 SPRINT_START = "2026-10-19"  # S1 actually started on Saturday 2026-10-17
-PHASE_ORDER = ["Phase 0", "Phase 1", "Phase 2", "Phase 3", "Phase 4", "Phase 5", "Phase 6"]
+PHASE_ORDER = ["Phase 0", "Phase 1", "Phase 2", "Phase 3", "Phase 4", "Phase 5", "Phase 6", "Phase 7"]
 PERSONAS = [
     (r"^As a (maths |sciences |sciences-techniques |éco/gestion |new |dyslexic |screen-reader |blind or low-vision |iPad )?student or parent", ["student", "parent"]),
     (r"^As an? (maths |sciences |sciences-techniques |éco/gestion |new |dyslexic |anxious |iPad )?student", ["student"]),
@@ -134,6 +134,13 @@ def build():
                  changes=[], source="v2")
         tickets.append(t)
         by_id[t["id"]] = t
+    # Re-scoped epics and tickets (ADR 0011: 6e-9e first, Bac in phase 2).
+    for eid, fields in A.EPIC_REWRITES.items():
+        epic_by_id[eid].update(fields)
+    for tid, rewrite in A.REWRITES.items():
+        by_id[tid].update({k: v for k, v in rewrite.items() if k != "change"})
+        if rewrite.get("change"):
+            by_id[tid]["changes"].append(rewrite["change"])
 
     # Local-first re-plan (ADR 0006): swapped dependencies, then the re-planned sprints.
     for tid, swaps in A.LOCAL_FIRST_SWAPS.items():
@@ -148,6 +155,10 @@ def build():
     for t in tickets:
         if t["epic"] in v1_epics:
             t["fix_version"] = sprint_phase[t["sprint"]]
+    # Bac phase 2: kept in the backlog, not scheduled in S1-S20 (sprint 0).
+    for tid in A.BAC_PHASE2:
+        by_id[tid]["sprint"] = 0
+        by_id[tid]["fix_version"] = A.BAC_PHASE
 
     # Integrity checks.
     ids = [t["id"] for t in tickets]
@@ -158,6 +169,9 @@ def build():
             assert b in by_id, f"{t['id']} blocked by unknown {b}"
         assert t["epic"] in epic_by_id, f"{t['id']} has unknown epic {t['epic']}"
         assert t["points"] in (1, 2, 3, 5, 8, 13), f"{t['id']} has non-Fibonacci points"
+        if t["sprint"]:
+            late = [x for x in t["blocked"] if not by_id[x]["sprint"]]
+            assert not late, f"{t['id']} (S{t['sprint']}) is blocked by Bac phase 2 tickets {late}"
 
     blocks = defaultdict(list)
     for t in tickets:
@@ -184,7 +198,7 @@ def wiki_description(t, by_id):
     if t["changes"]:
         lines += ["", "h3. Addendum changes (v2)"] + [f"* {c}" for c in t["changes"]]
     lines += ["", "h3. Context", f"* Epic: {t['epic_name']}", f"* Phase: {t['fix_version']}",
-              f"* Target sprint: APL Sprint {t['sprint']}", f"* Agent role: {t['team']}"]
+              f"* Target sprint: {sprint_name(t)}", f"* Agent role: {t['team']}"]
     if t["personas"]:
         lines.append(f"* Personas: {', '.join(t['personas'])}")
     if t["blocked"]:
@@ -199,7 +213,7 @@ def markdown_description(t, by_id):
     if t["changes"]:
         lines += ["", "**Addendum changes (v2)**", ""] + [f"- {c}" for c in t["changes"]]
     lines += ["", "**Context**", "", f"- Backlog ID: {t['id']}", f"- Epic: {t['epic']} {t['epic_name']}",
-              f"- Phase: {t['fix_version']}", f"- Target sprint: APL Sprint {t['sprint']}",
+              f"- Phase: {t['fix_version']}", f"- Target sprint: {sprint_name(t)}",
               f"- Agent role: {t['team']}"]
     if t["personas"]:
         lines.append(f"- Personas: {', '.join(t['personas'])}")
@@ -217,6 +231,14 @@ def epic_description(e, markdown=False):
                       f"{bullet}{e['tickets']} tickets, {e['points']} story points",
                       f"{bullet}Sprints {e['sprint_range']} ({e['phase']})",
                       f"{bullet}Component: {e['component']}"])
+
+
+def sprint_name(t):
+    return f"APL Sprint {t['sprint']}" if t["sprint"] else "not scheduled (Bac phase 2, after go-live)"
+
+
+def sprint_key(t):
+    return (t["sprint"] or 99, int(t["id"][1:]))
 
 
 def agent_label(team):
@@ -240,7 +262,7 @@ def write_csv(epics, tickets, by_id):
         for t in tickets:
             labels = t["labels"] + [f"persona-{p}" for p in t["personas"]] + [agent_label(t["team"])]
             w.writerow([t["id"], t["type"], t["summary"], wiki_description(t, by_id), t["priority"], t["points"],
-                        "", t["epic_name"], t["epic"], t["component"], f"APL Sprint {t['sprint']}",
+                        "", t["epic_name"], t["epic"], t["component"], f"APL Sprint {t['sprint']}" if t["sprint"] else "",
                         t["fix_version"], t["team"]] + labels + [""] * (n_labels - len(labels))
                        + t["blocked"] + [""] * (n_blocked - len(t["blocked"])))
 
@@ -262,7 +284,7 @@ def write_json(epics, tickets, by_id, keys):
                   for e in epics],
         "issues": [dict(id=t["id"], jira_key=keys.get(t["id"]), type=t["type"], epic=t["epic"],
                         summary=t["summary"], priority=t["priority"],
-                        points=t["points"], sprint=f"APL Sprint {t['sprint']}", component=t["component"],
+                        points=t["points"], sprint=f"APL Sprint {t['sprint']}" if t["sprint"] else None, component=t["component"],
                         team=t["team"], phase=t["fix_version"],
                         labels=t["labels"] + [f"persona-{p}" for p in t["personas"]] + [agent_label(t["team"]),
                                                                                        f"apl-{t['id'].lower()}"],
@@ -370,6 +392,10 @@ def write_markdown(epics, tickets, by_id, keys):
         start, end = sprint_dates(n)
         ep = ", ".join(sorted({t["epic"] for t in mine}, key=lambda x: int(x[1:])))
         out.append(f"| S{n} | {start} – {end} | {len(mine)} | {sum(t['points'] for t in mine)} | {ep} |")
+    later = [t for t in tickets if not t["sprint"]]
+    if later:
+        ep = ", ".join(sorted({t["epic"] for t in later}, key=lambda x: int(x[1:])))
+        out.append(f"| Bac phase 2 | after go-live, not scheduled | {len(later)} | {sum(t['points'] for t in later)} | {ep} |")
     out.append("")
 
     out.append("## 4. Epic summary\n")
@@ -397,14 +423,14 @@ def write_markdown(epics, tickets, by_id, keys):
         out.append(f"**Definition of done.** {e['dod']}\n")
         out.append("| ID | Jira | Type | Summary | Pts | Priority | Sprint | Agent role | Blocked by |\n"
                    "| --- | --- | --- | --- | --- | --- | --- | --- | --- |")
-        for t in sorted(mine, key=lambda t: (t["sprint"], int(t["id"][1:]))):
+        for t in sorted(mine, key=sprint_key):
             out.append(f"| {t['id']} | {jira(t['id'])} | {t['type']} | {t['summary']} | {t['points']} | "
-                       f"{t['priority']} | S{t['sprint']} | {t['team']} | {', '.join(t['blocked']) or '—'} |")
+                       f"{t['priority']} | {'S' + str(t['sprint']) if t['sprint'] else 'Bac phase 2'} | {t['team']} | {', '.join(t['blocked']) or '—'} |")
         out.append("")
-        for t in sorted(mine, key=lambda t: (t["sprint"], int(t["id"][1:]))):
+        for t in sorted(mine, key=sprint_key):
             out.append(f"#### {t['id']} · {t['summary']}\n")
             meta = (f"*Jira {keys.get(t['id'], 'not synced')} · {t['type']} · {t['points']} pts · {t['priority']} · "
-                    f"APL Sprint {t['sprint']} · {t['team']}")
+                    f"{sprint_name(t)} · {t['team']}")
             if t["personas"]:
                 meta += f" · personas: {', '.join(t['personas'])}"
             out.append(meta + f" · labels: {', '.join(t['labels'])}*\n")

@@ -16,7 +16,7 @@ How the product owner and the agents work together (Definition of Ready and Done
 | `product-curriculum` | `agent-product-curriculum` | Concept graphs, items, content operations, subject expansion | files, web research | [brief](../../.claude/agents/product-curriculum.md) |
 | `mobile` | `agent-mobile` | Native iOS and Android apps, store compliance | files, shell | [brief](../../.claude/agents/mobile.md) |
 | `accessibility` | `agent-accessibility` | Accessibility baseline, screen-reader journeys, audits, gate | files, shell | [brief](../../.claude/agents/accessibility.md) |
-| `design-ux` | `agent-design-ux` | Brand, Cyanotype screens, usability, content design | files | [brief](../../.claude/agents/design-ux.md) |
+| `design-ux` | `agent-design-ux` | Senior product designer: research, experience vision, journeys, prototypes tested with children, Cyanotype craft, brand and content design | files, shell (renders and screenshots its work), web | [brief](../../.claude/agents/design-ux.md) |
 | `growth-marketing` | `agent-growth-marketing` | Marketing site, lifecycle messages, store listings, launch | files, web research | [brief](../../.claude/agents/growth-marketing.md) |
 | `customer-success-support` | `agent-customer-success-support` | Help center, support desk, teacher and school training | files | [brief](../../.claude/agents/customer-success-support.md) |
 | `legal-dpo` | `agent-legal-dpo` | Drafts of legal and privacy documents (signed by counsel) | files, web research | [brief](../../.claude/agents/legal-dpo.md) |

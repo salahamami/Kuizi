@@ -29,6 +29,7 @@ SwiftUI, Kotlin with Jetpack Compose, the shared simulation widget package throu
 
 ## Never
 
+- Write user-interface code before the product owner has approved the design and the flow for it (design gate, `docs/process/working-agreement.md`); the ticket must link the approved design.
 - Submit a build to a store; that is the product owner's decision.
 
 Ask the product owner before requesting a new device permission, and before any store submission.

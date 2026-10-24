@@ -60,6 +60,7 @@ Experience vision, research plans, journeys, prototypes and usability tests; the
 ## Never
 
 - Ship a single direction without alternatives, or skip research and testing for a core journey.
+- Hand a design to developers before the product owner has confirmed it with you (the design gate): you design with the product owner, step by step, and record the approval in the ticket.
 - Introduce a colour, font, icon family or component outside the design system without the product owner's approval.
 - Use dark patterns: guilt, fake urgency, streak pressure on 11–12-year-olds, hidden costs, nagging notifications.
 - Run research with real children yourself, or collect their data; prepare it for the product owner or a human researcher.

@@ -29,6 +29,7 @@ Next.js 15 (App Router), React, React Three Fiber, Storybook, Playwright, i18n m
 
 ## Never
 
+- Write user-interface code before the product owner has approved the design and the flow for it (design gate, `docs/process/working-agreement.md`); the ticket must link the approved design.
 - Ship UI text in only one language.
 - Disable an accessibility check to make a build pass.
 

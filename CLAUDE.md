@@ -42,6 +42,7 @@ The product owner works across several chats, so the repository must always tell
 - There is no human delivery team (ADR 0005). Every ticket has one owning agent role (label `agent-*`), done by the AI agent of that role with the product owner, who is the Jira assignee on every ticket and approves the work. User stories carry `persona-*` labels.
 - Acceptance criteria are testable statements, three per ticket at minimum.
 - Product copy is French and Arabic; documentation is English.
+- Design gate: nothing pupils, parents or teachers see is coded before the product owner confirms its design and flow with the design-ux agent (`docs/process/working-agreement.md`).
 - Accessibility is not optional: WCAG 2.2 AA, French and Arabic right to left, no information by colour alone, touch targets of at least 44 px (`docs/requirements/accessibility-focus-notifications.md`).
 - Minors' data: follow Law 2004-63 rules in the requirements; accommodation data is sensitive.
 - Local-first (ADR 0006): until the cloud move (T240, S11) everything runs on the local stack (T237) with synthetic or public data; use the same environment variable names the cloud will use.

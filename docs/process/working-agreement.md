@@ -22,6 +22,7 @@ A ticket can start when:
 3. Designs, data formats and documents it needs exist, or creating them is part of the ticket.
 4. It has an owning agent role (label `agent-*`) and fits in the sprint (points ≤ 8 when possible, never 13 unsplit).
 5. Anything touching personal, minors' or accommodation data names the rule it follows in `docs/requirements/`.
+6. **Design gate.** A ticket that builds something pupils, parents or teachers see (a screen, a flow, a notification, an email) starts only when the product owner has confirmed its design and its flow, worked out together with the design-ux agent: the journey, the screens in Arabic and French at phone and desktop width, and the states. The ticket links the approved design (canvas artboard or prototype) and the date of the approval. No user-interface code is written before that.
 
 If one point is missing, the agent stops and says what is needed instead of guessing.
 
@@ -41,6 +42,7 @@ A ticket is done when:
 
 - Every merge into `main`.
 - Every release or deployment, and every store submission.
+- Every design and user flow before it is built (the design gate in the Definition of Ready).
 - Anything students, parents or teachers will read: product copy, notifications, tutor prompts.
 - Anything touching personal data, minors' data, consent or accommodations.
 - Any new vendor, paid service, dependency licence or cloud resource.

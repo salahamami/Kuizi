@@ -147,7 +147,7 @@ None of these had changed the rules as of 2026-10-24. Kuizi's item model should 
 
 ### 3.1 Status
 
-- **Held in 2026:** written papers on 22, 23 and 24 June 2026 [S10, S19]. Results were announced on 6 July 2026 [S13], earlier than the 10 July first scheduled [S10].
+- **Held in 2026:** written papers on 22, 23 and 24 June 2026, as set in the calendar the Ministry published on 26 December 2025 [S24, S10, S19]. Results were announced on 6 July 2026 [S13], earlier than the 10 July first scheduled [S10].
 - **Planned for 2027:** 21, 22 and 23 June 2027, with results on Friday 9 July 2027 (Ministry calendar of 1 October 2026) [S17, S18].
 - **Reform:** none announced. Searches in French and Arabic found no abolition or format change. The Le Temps analysis of the 2026 results calls for revised teaching methods, not a new exam [S32].
 
@@ -375,3 +375,4 @@ Accessed 2026-10-24.
 - [S50] webdo, 2026-08, "Réforme de l'éducation : le Conseil supérieur, dès lundi, dans sa phase opérationnelle": <https://www.webdo.tn/fr/actualite/national/reforme-de-leducation-le-conseil-superieur-des-lundi-dans-sa-phase-operationnelle/402626/>
 - [S51] Arabic Wikipedia, "التعليم في تونس" (hours table without sources; used only to flag a claim): <https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85_%D9%81%D9%8A_%D8%AA%D9%88%D9%86%D8%B3>
 - [S52] Tunisie Numérique, 2026-04-16, "Au Parlement, l'encadrement du privé et le renforcement de l'anglais à l'examen" (bill n° 117 of 2025): <https://www.tunisienumerique.com/au-parlement-lencadrement-du-prive-et-le-renforcement-de-langlais-a-lexamen/>
+- [S53] Blog pédagogique (H. Bouhouch and M. Akrout), 2016-06-20, "Le Concours d'Entrée aux Collèges Pilotes" (paper structures, based on the 2008 arrêté and a Ministry document): <http://bouhouchakrout.blogspot.com/2016/06/le-concours-dentree-aux-colleges-pilotes_20.html>

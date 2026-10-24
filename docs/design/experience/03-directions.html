@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuizi, design step 1: three directions for the pupil's "Today" screen</title>
+<!--
+  Kuizi design step 1 (kickoff). Three directions for the pupil's "Today" screen, phone 390 x 844, Arabic (RTL) and French.
+  Status: draft for the product owner (design gate). Product copy is a draft; Arabic copy needs native review.
+  Open in a browser with an internet connection (Google Fonts). Everything else is inline.
+  Colour scales are generated in OKLCH by the design agent; contrast ratios are computed from the hex values (WCAG 2.2).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;600&family=IBM+Plex+Sans+Arabic:wght@400;600&family=IBM+Plex+Sans:wght@400;600&family=Readex+Pro:wght@400;600&family=Alexandria:wght@400;700&display=swap">
+<style>
+:root{
+  --papier-1:#FDFBF5; --papier-2:#F8F5EF; --papier-3:#F1EDE6; --papier-4:#E9E6DE; --papier-5:#E1DED6; --papier-6:#D7D3CC; --papier-7:#C7C4BC; --papier-8:#AFACA5; --papier-9:#8A867D; --papier-10:#7B776F; --papier-11:#67635B; --papier-12:#24211C;
+  --encre-1:#FCFDFE; --encre-2:#F5F8FE; --encre-3:#E9F1FE; --encre-4:#DCE9FE; --encre-5:#CEE0FF; --encre-6:#BDD5FF; --encre-7:#A8C5F9; --encre-8:#88ACEF; --encre-9:#1B4BA9; --encre-10:#0C3C99; --encre-11:#204896; --encre-12:#0C2351;
+  --calcaire-1:#F7FCFE; --calcaire-2:#F2F7F9; --calcaire-3:#E9EFF2; --calcaire-4:#E1E7EB; --calcaire-5:#D9DFE2; --calcaire-6:#CED5D8; --calcaire-7:#BFC5C8; --calcaire-8:#A7ADB0; --calcaire-9:#81878B; --calcaire-10:#72797C; --calcaire-11:#5E6468; --calcaire-12:#1E2225;
+  --lagune-1:#FBFDFE; --lagune-2:#F1F9FC; --lagune-3:#E3F3FA; --lagune-4:#D4EDF6; --lagune-5:#C4E5F1; --lagune-6:#B2DBEA; --lagune-7:#99CEE0; --lagune-8:#71B8D0; --lagune-9:#026E89; --lagune-10:#045F76; --lagune-11:#055367; --lagune-12:#022E3A;
+  --soleil-1:#FFFDF8; --soleil-2:#FCF7EE; --soleil-3:#F8F0DC; --soleil-4:#F3E7CA; --soleil-5:#EEDDB6; --soleil-6:#E6D2A1; --soleil-7:#DBC184; --soleil-8:#CAA852; --soleil-9:#F8C20D; --soleil-10:#E5B30B; --soleil-11:#7B5F05; --soleil-12:#3B2B00;
+  --ardoise-1:#FAFBFF; --ardoise-2:#F5F5FB; --ardoise-3:#EDEDF3; --ardoise-4:#E5E5EC; --ardoise-5:#DDDDE4; --ardoise-6:#D3D3D9; --ardoise-7:#C3C3CA; --ardoise-8:#ABACB2; --ardoise-9:#85858D; --ardoise-10:#76777E; --ardoise-11:#626269; --ardoise-12:#212126;
+  --iris-1:#FCFCFF; --iris-2:#F7F7FE; --iris-3:#EEEFFE; --iris-4:#E5E5FE; --iris-5:#DADBFF; --iris-6:#CECFFE; --iris-7:#BCBDFE; --iris-8:#A2A0FE; --iris-9:#5A3BD5; --iris-10:#4E28C4; --iris-11:#4D36B3; --iris-12:#261861;
+  --succes-1:#FAFEFB; --succes-2:#F3FAF4; --succes-3:#E6F5E9; --succes-4:#D8EFDD; --succes-5:#CAE8D0; --succes-6:#B9DFC2; --succes-7:#A3D2AE; --succes-8:#7FBE90; --succes-9:#037E3F; --succes-10:#046D36; --succes-11:#036732; --succes-12:#013316;
+  --attention-1:#FFFCFA; --attention-2:#FEF6EF; --attention-3:#FCEEDE; --attention-4:#F9E4CD; --attention-5:#F5D9BB; --attention-6:#EFCDA6; --attention-7:#E6BC8B; --attention-8:#D7A05F; --attention-9:#F7A224; --attention-10:#E69301; --attention-11:#825100; --attention-12:#422701;
+  --danger-1:#FEFCFC; --danger-2:#FEF6F4; --danger-3:#FEEBE9; --danger-4:#FEE0DC; --danger-5:#FFD3CD; --danger-6:#FFC3BB; --danger-7:#FCADA3; --danger-8:#F18C81; --danger-9:#C9302D; --danger-10:#B7191C; --danger-11:#A22523; --danger-12:#510708;
+}
+/* ---------- Document (the board around the phones). Neutral on purpose: it must not compete with the directions. ---------- */
+*{box-sizing:border-box}
+body{margin:0;background:#F3F3F1;color:#1D1D1B;font:400 16px/1.55 'IBM Plex Sans','IBM Plex Sans Arabic',system-ui,sans-serif}
+.doc{max-width:1360px;margin:0 auto;padding:48px 40px 96px}
+.doc h1{font-size:32px;line-height:1.2;font-weight:600;margin:0 0 8px}
+.doc h2{font-size:24px;line-height:1.25;font-weight:600;margin:0 0 8px}
+.doc h3{font-size:16px;line-height:1.4;font-weight:600;margin:24px 0 8px}
+.doc p,.doc li{max-width:72ch}
+.doc p{margin:0 0 12px}
+.doc ul{margin:0 0 12px;padding-inline-start:20px}
+.doc small,.doc .muted{color:#5E5E5A}
+.doc a{color:#1B4BA9}
+.lede{font-size:20px;line-height:1.5;color:#3A3A37;max-width:64ch}
+.meta-table{border-collapse:collapse;margin:16px 0 0;font-size:14px}
+.meta-table td{padding:4px 16px 4px 0;vertical-align:top}
+.meta-table td:first-child{color:#5E5E5A;white-space:nowrap}
+section.block{margin-top:64px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px}
+.toggles{position:sticky;top:0;z-index:5;background:#F3F3F1;padding:12px 0;margin-top:24px;display:flex;gap:16px;align-items:center;border-bottom:1px solid #DDDDD8}
+.toggles label{display:inline-flex;align-items:center;gap:8px;font-size:14px;min-height:44px;cursor:pointer}
+.toggles input{width:20px;height:20px}
+/* Board */
+.board{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px}
+.board figure{margin:0}
+.board figcaption{font-size:14px;color:#5E5E5A;margin-top:8px}
+.board .pair{display:flex;gap:16px}
+.board .pair .phone-wrap{zoom:.5}
+.row-phones{display:flex;gap:24px;flex-wrap:wrap;margin:24px 0 8px}
+.row-phones figure{margin:0}
+.row-phones figcaption{font-size:14px;color:#5E5E5A;margin-top:8px;max-width:312px}
+.phone-wrap{zoom:.8;border-radius:40px;overflow:hidden;box-shadow:0 0 0 1px rgb(0 0 0 / .08),0 16px 48px rgb(0 0 0 / .10);width:390px;height:844px}
+.direction{border-top:1px solid #DDDDD8;padding-top:48px}
+.direction .idea{font-size:20px;line-height:1.5;color:#3A3A37;max-width:64ch;margin:0 0 8px}
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:32px 48px;margin-top:32px}
+.spec h3{margin-top:0}
+.swatches{display:flex;margin:4px 0 4px}
+.swatches span{flex:1;height:32px;position:relative}
+.swatch-label{display:flex;justify-content:space-between;font-size:12px;color:#5E5E5A;margin-bottom:12px}
+.scale-name{font-size:14px;font-weight:600;margin-top:12px}
+.scale-name small{font-weight:400}
+table.contrast{border-collapse:collapse;font-size:14px;width:100%;margin-top:8px}
+table.contrast th,table.contrast td{text-align:start;padding:4px 8px 4px 0;border-bottom:1px solid #E4E4E0;vertical-align:top}
+table.contrast td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.specimen{background:#fff;border-radius:8px;padding:16px 24px;margin-top:8px}
+.specimen p{margin:0 0 8px;max-width:none}
+.icon-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
+.icon-row span{display:inline-flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:#5E5E5A;width:72px}
+.icon-row svg{width:24px;height:24px;color:#1D1D1B}
+.icon-row .lu{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.icon-row .ph{fill:currentColor}
+table.compare{border-collapse:collapse;width:100%;font-size:15px;margin-top:16px;background:#fff}
+table.compare th,table.compare td{text-align:start;padding:12px 16px;border-bottom:1px solid #E4E4E0;vertical-align:top}
+table.compare thead th{font-weight:600;background:#EAEAE6}
+.reco{background:#fff;border-radius:8px;padding:32px 40px;margin-top:24px}
+.reco h2{margin-bottom:16px}
+.note{font-size:14px;color:#5E5E5A}
+
+/* ---------- Phone: shared mechanics (not a direction) ---------- */
+.phone{width:390px;height:844px;display:flex;flex-direction:column;overflow:hidden;position:relative;background:var(--bg);color:var(--fg);text-align:start;-webkit-font-smoothing:antialiased}
+.phone *{box-sizing:border-box;margin:0}
+.phone button,.phone a{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-decoration:none;text-align:inherit}
+.phone :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.phone .ic{width:24px;height:24px;flex:none}
+.phone .ic16{width:16px;height:16px}
+.phone .ic20{width:20px;height:20px}
+.phone .lu{fill:none;stroke:currentColor;stroke-width:var(--stroke,1.5);stroke-linecap:round;stroke-linejoin:round}
+.phone .ph{fill:currentColor}
+.sb{height:48px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 32px;font:600 14px/1 'IBM Plex Sans',sans-serif;color:var(--fg)}
+.sb svg{display:block}
+.home{height:24px;flex:none;display:flex;align-items:center;justify-content:center}
+.home i{display:block;width:128px;height:4px;border-radius:2px;background:var(--fg)}
+.math{font-family:'IBM Plex Sans',sans-serif;display:inline-flex;align-items:center;gap:12px;white-space:nowrap;unicode-bidi:isolate;direction:ltr}
+.math i{font-family:'IBM Plex Sans',serif;font-style:italic}
+.frac{display:inline-flex;flex-direction:column;align-items:center;line-height:1}
+.frac .bar{display:block;align-self:stretch;height:2px;background:currentColor;margin:4px 0}
+.phone [lang=ar],.phone[lang=ar]{letter-spacing:0}
+.visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- Direction A: Cahier ---------- */
+.dir-a{--bg:var(--papier-2);--fg:var(--papier-12);--fg2:var(--papier-11);--rule:var(--papier-6);--edge:var(--papier-9);--brand:var(--encre-9);--brand-press:var(--encre-10);--brand-text:var(--encre-11);--tint:var(--encre-4);--focus:var(--encre-11);--stroke:1.5;
+  font-family:'IBM Plex Sans','IBM Plex Sans Arabic',sans-serif}
+.dir-a[lang=ar]{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif}
+.dir-a.hc{--bg:#FFFFFF;--fg2:var(--papier-12);--rule:var(--papier-9);--edge:var(--papier-12);--brand:var(--encre-12);--brand-text:var(--encre-12);--focus:var(--encre-12);--tint:var(--encre-5);--stroke:2}
+.dir-a .a-top{height:64px;flex:none;display:flex;align-items:center;justify-content:space-between;padding-inline:24px 12px}
+.dir-a .logo{width:24px;height:24px;fill:var(--brand);display:block;flex:none}
+.dir-a .help{display:inline-flex;align-items:center;gap:8px;height:48px;padding-inline:12px;border-radius:8px;font-size:14px;font-weight:600}
+.dir-a .a-main{flex:1;min-height:0;padding:8px 24px 0;display:flex;flex-direction:column}
+.dir-a .dateline{font-size:14px;line-height:20px;color:var(--fg2)}
+.dir-a .title{font-family:'Markazi Text',serif;font-weight:600;font-size:40px;line-height:44px;margin-top:8px;color:var(--fg)}
+.dir-a[lang=ar] .title{font-size:44px;line-height:64px;margin-top:4px}
+.dir-a[lang=ar] .title.long{line-height:56px}
+.dir-a .why{font-size:16px;line-height:24px;color:var(--fg2);margin-top:12px}
+.dir-a[lang=ar] .why{line-height:28px;margin-top:8px}
+.dir-a .preview{display:flex;align-items:center;gap:24px;margin-top:24px;color:var(--brand-text)}
+.dir-a .preview svg{display:block}
+.dir-a .preview .math{font-size:20px;color:var(--fg)}
+.dir-a .preview .math .op{color:var(--fg2)}
+.dir-a .steps{list-style:none;padding:0;margin-top:24px;border-top:1px solid var(--rule)}
+.dir-a .steps li{display:flex;align-items:center;gap:12px;height:40px;border-bottom:1px solid var(--rule);font-size:16px}
+.dir-a .num{width:24px;height:24px;border-radius:12px;border:1.5px solid var(--brand-text);color:var(--brand-text);display:inline-grid;place-items:center;font:600 14px/1 'IBM Plex Sans',sans-serif;flex:none}
+.dir-a .step{flex:1}
+.dir-a .dur{color:var(--fg2);font-size:14px}
+.dir-a .cta{margin-top:24px;height:48px;border-radius:8px;background:var(--brand);color:#fff;display:flex;align-items:center;gap:12px;padding-inline:24px 16px;font-size:16px;font-weight:600;width:100%}
+.dir-a .cta .grow{flex:1}
+.dir-a .cta .cta-dur{font-weight:400}
+.dir-a .other{height:48px;color:var(--brand-text);font-weight:600;font-size:16px;align-self:flex-start;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px;margin-top:4px}
+.dir-a .week{flex:none;display:flex;align-items:center;gap:12px;padding:0 24px;height:48px;font-size:14px;color:var(--fg2)}
+.dir-a .week .grow{flex:1}
+.dir-a .week>span{white-space:nowrap}
+.dir-a .dots{display:inline-flex;gap:8px}
+.dir-a .dot{width:20px;height:20px;border-radius:10px;border:2px solid var(--edge);display:inline-grid;place-items:center;color:#fff}
+.dir-a .dot.done{background:var(--brand);border-color:var(--brand)}
+.dir-a .dot.tonight{border-color:var(--brand);border-width:2px;box-shadow:inset 0 0 0 3px var(--bg),inset 0 0 0 20px var(--tint)}
+.dir-a .nav{flex:none;height:64px;display:flex;border-top:1px solid var(--rule)}
+.dir-a .nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:14px;line-height:20px;color:var(--fg2)}
+.dir-a .nav a[aria-current]{color:var(--brand-text);font-weight:600;box-shadow:inset 0 2px 0 var(--brand)}
+
+/* ---------- Direction B: Ligne ---------- */
+.dir-b{--bg:var(--calcaire-2);--surface:#FFFFFF;--fg:var(--calcaire-12);--fg2:var(--calcaire-11);--rule:var(--calcaire-6);--edge:var(--calcaire-9);--brand:var(--lagune-9);--brand-text:var(--lagune-11);--tint:var(--lagune-3);--tint-fg:var(--lagune-12);--sun:var(--soleil-9);--focus:var(--lagune-11);
+  font-family:'Readex Pro',sans-serif}
+.dir-b.hc{--bg:#FFFFFF;--fg2:var(--calcaire-12);--rule:var(--calcaire-9);--edge:var(--calcaire-12);--brand:var(--lagune-12);--brand-text:var(--lagune-12);--focus:var(--lagune-12)}
+.dir-b.hc .card{box-shadow:none;border:2px solid var(--calcaire-12)}
+.dir-b .b-top{height:64px;flex:none;display:flex;align-items:center;justify-content:space-between;padding-inline:24px 12px}
+.dir-b .who{display:flex;align-items:center;gap:12px}
+.dir-b .logo{width:24px;height:24px;fill:var(--brand);display:block;flex:none}
+.dir-b .hello{font-size:20px;line-height:28px;font-weight:600}
+.dir-b .help{display:inline-flex;align-items:center;gap:8px;height:48px;padding-inline:12px;border-radius:16px;font-size:14px;font-weight:600}
+.dir-b .line{list-style:none;margin:0;padding:8px 24px 0;flex:1;min-height:0}
+.dir-b .line>li{position:relative;display:grid;grid-template-columns:32px 72px 1fr;column-gap:12px;align-items:center;min-height:40px}
+.dir-b .line>li::before{content:"";position:absolute;inset-inline-start:14px;top:0;bottom:0;width:4px;background:var(--brand)}
+.dir-b .line>li.next::before,.dir-b .line>li.today::after{background:none;border-inline-start:3px dashed var(--edge);width:0;inset-inline-start:15px}
+.dir-b .line>li:first-child::before{top:50%}
+.dir-b .line>li:last-child::before{bottom:50%}
+.dir-b .line>li.today::before{bottom:auto;height:40px}
+.dir-b .line>li.today::after{content:"";position:absolute;top:40px;bottom:0}
+.dir-b .node{grid-column:1;width:32px;height:32px;display:grid;place-items:center;position:relative;z-index:1}
+.dir-b .node i{display:grid;place-items:center}
+.dir-b .done .node i{width:24px;height:24px;border-radius:12px;background:var(--brand);color:#fff}
+.dir-b .rest .node i{width:12px;height:12px;border-radius:6px;background:var(--bg);border:2px solid var(--edge)}
+.dir-b .next .node i{width:20px;height:20px;border-radius:10px;background:var(--bg);border:3px solid var(--edge)}
+.dir-b .today .node{align-self:start;margin-top:24px}
+.dir-b .today .node i{width:24px;height:24px;background:var(--sun);border:2px solid var(--fg);transform:rotate(45deg);border-radius:4px}
+.dir-b .day{font-size:14px;line-height:20px;color:var(--fg2)}
+.dir-b .what{font-size:16px;line-height:24px}
+.dir-b .done .what,.dir-b .rest .what{color:var(--fg2)}
+.dir-b .card{grid-column:2 / -1;background:var(--surface);border-radius:24px;padding:24px;margin:8px 0;box-shadow:0 8px 24px rgb(30 34 37 / .08),0 1px 2px rgb(30 34 37 / .08)}
+.dir-b .kicker{font-size:14px;line-height:20px;color:var(--brand-text);font-weight:600}
+.dir-b .head{display:flex;gap:16px;align-items:center;justify-content:space-between}
+.dir-b .title{margin-top:8px}
+.dir-b .title{font-size:24px;line-height:32px;font-weight:600}
+.dir-b[lang=ar] .title{line-height:40px}
+.dir-b .why{font-size:16px;line-height:24px;color:var(--fg2);margin-top:8px}
+.dir-b[lang=ar] .why{line-height:28px}
+.dir-b .metaline{display:flex;align-items:center;gap:8px;font-size:14px;line-height:20px;color:var(--fg2);margin-top:16px}
+.dir-b .cta{margin-top:16px;width:100%;height:48px;border-radius:16px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:16px}
+.dir-b .other{width:100%;height:48px;color:var(--brand-text);font-weight:600;font-size:16px;text-align:center;margin-top:4px}
+.dir-b .illus{flex:none;display:block}
+.dir-b .nav{flex:none;height:64px;display:flex;background:var(--surface);border-top:1px solid var(--rule)}
+.dir-b .nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:14px;line-height:20px;color:var(--fg2)}
+.dir-b .nav .pill{width:64px;height:32px;border-radius:16px;display:grid;place-items:center}
+.dir-b .nav a[aria-current]{color:var(--fg);font-weight:600}
+.dir-b .nav a[aria-current] .pill{background:var(--tint);color:var(--tint-fg)}
+.dir-b.hc .nav a[aria-current] .pill{background:var(--lagune-12);color:#fff}
+.dir-b .homebar{background:var(--surface)}
+
+/* ---------- Direction C: Elan ---------- */
+.dir-c{--bg:var(--ardoise-2);--fg:var(--ardoise-12);--fg2:var(--ardoise-11);--rule:var(--ardoise-6);--edge:var(--ardoise-9);--brand:var(--iris-9);--brand-text:var(--iris-11);--tile:var(--iris-9);--tile-fg:#FFFFFF;--tile-fg2:var(--iris-3);--focus:var(--iris-11);
+  font-family:'Alexandria',sans-serif}
+.dir-c.hc{--bg:#FFFFFF;--fg2:var(--ardoise-12);--rule:var(--ardoise-9);--edge:var(--ardoise-12);--brand:var(--iris-12);--brand-text:var(--iris-12);--tile:var(--iris-12);--tile-fg2:#FFFFFF;--focus:var(--iris-12)}
+.dir-c .c-top{height:64px;flex:none;display:flex;align-items:center;justify-content:space-between;padding-inline:24px 12px}
+.dir-c .who{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.dir-c .help,.dir-c .bars{white-space:nowrap}
+.dir-c .logo{width:24px;height:24px;fill:var(--brand);display:block;flex:none}
+.dir-c .who>div{min-width:0}
+.dir-c .hello{font-size:20px;line-height:28px;font-weight:700}
+.dir-c .help{display:inline-flex;align-items:center;gap:8px;height:48px;padding-inline:12px;border-radius:24px;font-size:14px;font-weight:700}
+.dir-c .c-main{flex:1;min-height:0;padding:8px 16px 0;display:flex;flex-direction:column}
+.dir-c .tile{display:flex;flex-direction:column;background:var(--tile);color:var(--tile-fg);border-radius:32px;padding:24px;height:448px;width:100%}
+.dir-c .tile-top{display:flex;justify-content:space-between;align-items:center;font-size:14px;line-height:20px;color:var(--tile-fg2);font-weight:400}
+.dir-c .tile-top span{display:inline-flex;align-items:center;gap:8px}
+.dir-c .hero{flex:1;display:flex;align-items:center;justify-content:center}
+.dir-c .hero .math{font-size:48px;font-weight:400;color:#fff;gap:24px}
+.dir-c .hero .frac .bar{height:3px;margin:8px 0}
+.dir-c .hero .op{color:var(--tile-fg2)}
+.dir-c .title{display:block;font-size:32px;line-height:40px;font-weight:700}
+.dir-c[lang=ar] .title{line-height:48px}
+.dir-c .steps{display:block;font-size:16px;line-height:24px;color:var(--tile-fg2);margin-top:8px}
+.dir-c .go{margin-top:24px;height:64px;border-radius:32px;background:#fff;color:var(--iris-12);display:flex;align-items:center;justify-content:space-between;padding-inline:24px;font-size:20px;font-weight:700}
+.dir-c .why{margin-top:24px;font-size:16px;line-height:24px;color:var(--fg2);padding-inline:8px}
+.dir-c[lang=ar] .why{line-height:28px}
+.dir-c .why b{color:var(--fg);font-weight:700}
+.dir-c .bottomrow{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-inline:8px}
+.dir-c .other{height:48px;display:inline-flex;align-items:center;gap:8px;color:var(--brand-text);font-weight:700;font-size:16px}
+.dir-c .bars{display:flex;align-items:center;gap:4px;font-size:14px;line-height:20px;color:var(--fg2)}
+.dir-c .bars>span{margin-inline-start:8px}
+.dir-c .bars i{display:block;width:16px;height:8px;border-radius:4px;border:2px solid var(--edge)}
+.dir-c .bars i.done{background:var(--brand);border-color:var(--brand)}
+.dir-c .nav{flex:none;height:64px;display:flex}
+.dir-c .nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:14px;line-height:20px;color:var(--fg2)}
+.dir-c .nav a[aria-current]{color:var(--brand-text);font-weight:700}
+.dir-c .nav a[aria-current] .ic{color:var(--brand)}
+
+@media (prefers-reduced-motion:no-preference){
+  .phone .cta,.phone .tile,.phone .go{transition:transform 150ms cubic-bezier(.2,0,0,1)}
+  .phone .cta:active,.phone .tile:active{transform:scale(.98)}
+}
+@media (max-width:700px){
+  .doc{padding:24px 16px 64px}
+  .phone-wrap{zoom:.8}
+  .board .pair .phone-wrap{zoom:.42}
+}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+<!-- Lucide icons v0.460.0, ISC licence, https://lucide.dev ; Phosphor icons core 2.1.1, MIT licence, https://phosphoricons.com -->
+<symbol id="lu-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /></symbol>
+<symbol id="lu-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /></symbol>
+<symbol id="lu-book-open" viewBox="0 0 24 24"><path d="M12 7v14" /> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></symbol>
+<symbol id="lu-calendar-days" viewBox="0 0 24 24"><path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /> <path d="M8 14h.01" /> <path d="M12 14h.01" /> <path d="M16 14h.01" /> <path d="M8 18h.01" /> <path d="M12 18h.01" /> <path d="M16 18h.01" /></symbol>
+<symbol id="lu-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></symbol>
+<symbol id="lu-circle-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></symbol>
+<symbol id="lu-circle-user-round" viewBox="0 0 24 24"><path d="M18 20a6 6 0 0 0-12 0" /> <circle cx="12" cy="10" r="4" /> <circle cx="12" cy="12" r="10" /></symbol>
+<symbol id="lu-clock-3" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <polyline points="12 6 12 12 16.5 12" /></symbol>
+<symbol id="lu-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" /> <circle cx="12" cy="12" r="3" /></symbol>
+<symbol id="lu-flag" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /> <line x1="4" x2="4" y1="22" y2="15" /></symbol>
+<symbol id="lu-house" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol>
+<symbol id="lu-life-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m4.93 4.93 4.24 4.24" /> <path d="m14.83 9.17 4.24-4.24" /> <path d="m14.83 14.83 4.24 4.24" /> <path d="m9.17 14.83-4.24 4.24" /> <circle cx="12" cy="12" r="4" /></symbol>
+<symbol id="lu-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></symbol>
+<symbol id="lu-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></symbol>
+<symbol id="lu-mountain" viewBox="0 0 24 24"><path d="m8 3 4 8 5-5 5 15H2L8 3z" /></symbol>
+<symbol id="lu-pencil-line" viewBox="0 0 24 24"><path d="M12 20h9" /> <path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z" /> <path d="m15 5 3 3" /></symbol>
+<symbol id="lu-rotate-ccw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /> <path d="M3 3v5h5" /></symbol>
+<symbol id="lu-sprout" viewBox="0 0 24 24"><path d="M7 20h10" /> <path d="M10 20c5.5-2.5.8-6.4 3-10" /> <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" /> <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" /></symbol>
+<symbol id="ph-arrow-counter-clockwise-bold" viewBox="0 0 256 256"><path d="M228,128a100,100,0,0,1-98.66,100H128a99.39,99.39,0,0,1-68.62-27.29,12,12,0,0,1,16.48-17.45,76,76,0,1,0-1.57-109c-.13.13-.25.25-.39.37L54.89,92H72a12,12,0,0,1,0,24H24a12,12,0,0,1-12-12V56a12,12,0,0,1,24,0V76.72L57.48,57.06A100,100,0,0,1,228,128Z"/></symbol>
+<symbol id="ph-arrow-counter-clockwise-fill" viewBox="0 0 256 256"><path d="M224,128a96,96,0,0,1-94.71,96H128A95.38,95.38,0,0,1,62.1,197.8a8,8,0,0,1,11-11.63A80,80,0,1,0,71.43,71.39a3.07,3.07,0,0,1-.26.25L60.63,81.29l17,17A8,8,0,0,1,72,112H24a8,8,0,0,1-8-8V56A8,8,0,0,1,29.66,50.3L49.31,70,60.25,60A96,96,0,0,1,224,128Z"/></symbol>
+<symbol id="ph-arrow-counter-clockwise-regular" viewBox="0 0 256 256"><path d="M224,128a96,96,0,0,1-94.71,96H128A95.38,95.38,0,0,1,62.1,197.8a8,8,0,0,1,11-11.63A80,80,0,1,0,71.43,71.39a3.07,3.07,0,0,1-.26.25L44.59,96H72a8,8,0,0,1,0,16H24a8,8,0,0,1-8-8V56a8,8,0,0,1,16,0V85.8L60.25,60A96,96,0,0,1,224,128Z"/></symbol>
+<symbol id="ph-arrow-left-bold" viewBox="0 0 256 256"><path d="M228,128a12,12,0,0,1-12,12H69l51.52,51.51a12,12,0,0,1-17,17l-72-72a12,12,0,0,1,0-17l72-72a12,12,0,0,1,17,17L69,116H216A12,12,0,0,1,228,128Z"/></symbol>
+<symbol id="ph-arrow-left-fill" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H120v64a8,8,0,0,1-13.66,5.66l-72-72a8,8,0,0,1,0-11.32l72-72A8,8,0,0,1,120,56v64h96A8,8,0,0,1,224,128Z"/></symbol>
+<symbol id="ph-arrow-left-regular" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/></symbol>
+<symbol id="ph-arrow-right-bold" viewBox="0 0 256 256"><path d="M224.49,136.49l-72,72a12,12,0,0,1-17-17L187,140H40a12,12,0,0,1,0-24H187L135.51,64.48a12,12,0,0,1,17-17l72,72A12,12,0,0,1,224.49,136.49Z"/></symbol>
+<symbol id="ph-arrow-right-fill" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72A8,8,0,0,1,136,200V136H40a8,8,0,0,1,0-16h96V56a8,8,0,0,1,13.66-5.66l72,72A8,8,0,0,1,221.66,133.66Z"/></symbol>
+<symbol id="ph-arrow-right-regular" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></symbol>
+<symbol id="ph-books-bold" viewBox="0 0 256 256"><path d="M235.57,193.73,202.38,35.93a20,20,0,0,0-23.76-15.48L131.81,30.51a19.82,19.82,0,0,0-11,6.65A20,20,0,0,0,104,28H56A20,20,0,0,0,36,48V208a20,20,0,0,0,20,20h48a20,20,0,0,0,20-20V90.25l25.62,121.82A20,20,0,0,0,169.15,228a20.27,20.27,0,0,0,4.23-.45l46.81-10.06A20.1,20.1,0,0,0,235.57,193.73ZM148.19,88.65l39-8.38,2.53,12-39,8.38Zm7.46,35.5,39-8.38,9.16,43.58-39,8.38Zm24.06-79.39,2.53,12-39,8.38-2.53-12ZM60,88h40v80H60Zm40-36V64H60V52ZM60,204V192h40v12Zm112.29-.76-2.53-12,39-8.38,2.53,12Z"/></symbol>
+<symbol id="ph-books-fill" viewBox="0 0 256 256"><path d="M231.65,194.55,198.46,36.75a16,16,0,0,0-19-12.39L132.65,34.42a16.08,16.08,0,0,0-12.3,19l33.19,157.8A16,16,0,0,0,169.16,224a16.25,16.25,0,0,0,3.38-.36l46.81-10.06A16.09,16.09,0,0,0,231.65,194.55ZM136,50.15c0-.06,0-.09,0-.09l46.8-10,3.33,15.87L139.33,66Zm10,47.38-3.35-15.9,46.82-10.06,3.34,15.9Zm70,100.41-46.8,10-3.33-15.87L212.67,182,216,197.85C216,197.91,216,197.94,216,197.94ZM104,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V48A16,16,0,0,0,104,32ZM56,48h48V64H56Zm48,160H56V192h48v16Z"/></symbol>
+<symbol id="ph-books-regular" viewBox="0 0 256 256"><path d="M231.65,194.55,198.46,36.75a16,16,0,0,0-19-12.39L132.65,34.42a16.08,16.08,0,0,0-12.3,19l33.19,157.8A16,16,0,0,0,169.16,224a16.25,16.25,0,0,0,3.38-.36l46.81-10.06A16.09,16.09,0,0,0,231.65,194.55ZM136,50.15c0-.06,0-.09,0-.09l46.8-10,3.33,15.87L139.33,66Zm6.62,31.47,46.82-10.05,3.34,15.9L146,97.53Zm6.64,31.57,46.82-10.06,13.3,63.24-46.82,10.06ZM216,197.94l-46.8,10-3.33-15.87L212.67,182,216,197.85C216,197.91,216,197.94,216,197.94ZM104,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V48A16,16,0,0,0,104,32ZM56,48h48V64H56Zm0,32h48v96H56Zm48,128H56V192h48v16Z"/></symbol>
+<symbol id="ph-calendar-dots-bold" viewBox="0 0 256 256"><path d="M208,28H188V24a12,12,0,0,0-24,0v4H92V24a12,12,0,0,0-24,0v4H48A20,20,0,0,0,28,48V208a20,20,0,0,0,20,20H208a20,20,0,0,0,20-20V48A20,20,0,0,0,208,28ZM68,52a12,12,0,0,0,24,0h72a12,12,0,0,0,24,0h16V76H52V52ZM52,204V100H204V204Zm92-76a16,16,0,1,1-16-16A16,16,0,0,1,144,128Zm48,0a16,16,0,1,1-16-16A16,16,0,0,1,192,128ZM96,176a16,16,0,1,1-16-16A16,16,0,0,1,96,176Zm48,0a16,16,0,1,1-16-16A16,16,0,0,1,144,176Zm48,0a16,16,0,1,1-16-16A16,16,0,0,1,192,176Z"/></symbol>
+<symbol id="ph-calendar-dots-fill" viewBox="0 0 256 256"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM84,184a12,12,0,1,1,12-12A12,12,0,0,1,84,184Zm44,0a12,12,0,1,1,12-12A12,12,0,0,1,128,184Zm0-40a12,12,0,1,1,12-12A12,12,0,0,1,128,144Zm44,40a12,12,0,1,1,12-12A12,12,0,0,1,172,184Zm0-40a12,12,0,1,1,12-12A12,12,0,0,1,172,144Zm36-64H48V48H72v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24Z"/></symbol>
+<symbol id="ph-calendar-dots-regular" viewBox="0 0 256 256"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-68-76a12,12,0,1,1-12-12A12,12,0,0,1,140,132Zm44,0a12,12,0,1,1-12-12A12,12,0,0,1,184,132ZM96,172a12,12,0,1,1-12-12A12,12,0,0,1,96,172Zm44,0a12,12,0,1,1-12-12A12,12,0,0,1,140,172Zm44,0a12,12,0,1,1-12-12A12,12,0,0,1,184,172Z"/></symbol>
+<symbol id="ph-check-bold" viewBox="0 0 256 256"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></symbol>
+<symbol id="ph-check-fill" viewBox="0 0 256 256"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM205.66,85.66l-96,96a8,8,0,0,1-11.32,0l-40-40a8,8,0,0,1,11.32-11.32L104,164.69l90.34-90.35a8,8,0,0,1,11.32,11.32Z"/></symbol>
+<symbol id="ph-check-regular" viewBox="0 0 256 256"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></symbol>
+<symbol id="ph-clock-bold" viewBox="0 0 256 256"><path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm68-84a12,12,0,0,1-12,12H128a12,12,0,0,1-12-12V72a12,12,0,0,1,24,0v44h44A12,12,0,0,1,196,128Z"/></symbol>
+<symbol id="ph-clock-fill" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm56,112H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z"/></symbol>
+<symbol id="ph-clock-regular" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></symbol>
+<symbol id="ph-eye-bold" viewBox="0 0 256 256"><path d="M251,123.13c-.37-.81-9.13-20.26-28.48-39.61C196.63,57.67,164,44,128,44S59.37,57.67,33.51,83.52C14.16,102.87,5.4,122.32,5,123.13a12.08,12.08,0,0,0,0,9.75c.37.82,9.13,20.26,28.49,39.61C59.37,198.34,92,212,128,212s68.63-13.66,94.48-39.51c19.36-19.35,28.12-38.79,28.49-39.61A12.08,12.08,0,0,0,251,123.13Zm-46.06,33C183.47,177.27,157.59,188,128,188s-55.47-10.73-76.91-31.88A130.36,130.36,0,0,1,29.52,128,130.45,130.45,0,0,1,51.09,99.89C72.54,78.73,98.41,68,128,68s55.46,10.73,76.91,31.89A130.36,130.36,0,0,1,226.48,128,130.45,130.45,0,0,1,204.91,156.12ZM128,84a44,44,0,1,0,44,44A44.05,44.05,0,0,0,128,84Zm0,64a20,20,0,1,1,20-20A20,20,0,0,1,128,148Z"/></symbol>
+<symbol id="ph-eye-fill" viewBox="0 0 256 256"><path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,168a40,40,0,1,1,40-40A40,40,0,0,1,128,168Z"/></symbol>
+<symbol id="ph-eye-regular" viewBox="0 0 256 256"><path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"/></symbol>
+<symbol id="ph-flag-pennant-bold" viewBox="0 0 256 256"><path d="M243.94,92.67l-184-64A12,12,0,0,0,44,40V216a12,12,0,0,0,24,0V176.53l175.94-61.2a12,12,0,0,0,0-22.66ZM68,151.12V56.88L203.47,104Z"/></symbol>
+<symbol id="ph-flag-pennant-fill" viewBox="0 0 256 256"><path d="M248,104a8,8,0,0,1-5.37,7.56L64,173.69V216a8,8,0,0,1-16,0V40a8,8,0,0,1,10.63-7.56l184,64A8,8,0,0,1,248,104Z"/></symbol>
+<symbol id="ph-flag-pennant-regular" viewBox="0 0 256 256"><path d="M242.63,96.44l-184-64A8,8,0,0,0,48,40V216a8,8,0,0,0,16,0V173.69l178.63-62.13a8,8,0,0,0,0-15.12ZM64,156.75V51.25L215.65,104Z"/></symbol>
+<symbol id="ph-house-bold" viewBox="0 0 256 256"><path d="M222.14,105.85l-80-80a20,20,0,0,0-28.28,0l-80,80A19.86,19.86,0,0,0,28,120v96a12,12,0,0,0,12,12h64a12,12,0,0,0,12-12V164h24v52a12,12,0,0,0,12,12h64a12,12,0,0,0,12-12V120A19.86,19.86,0,0,0,222.14,105.85ZM204,204H164V152a12,12,0,0,0-12-12H104a12,12,0,0,0-12,12v52H52V121.65l76-76,76,76Z"/></symbol>
+<symbol id="ph-house-fill" viewBox="0 0 256 256"><path d="M224,120v96a8,8,0,0,1-8,8H160a8,8,0,0,1-8-8V164a4,4,0,0,0-4-4H108a4,4,0,0,0-4,4v52a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V120a16,16,0,0,1,4.69-11.31l80-80a16,16,0,0,1,22.62,0l80,80A16,16,0,0,1,224,120Z"/></symbol>
+<symbol id="ph-house-regular" viewBox="0 0 256 256"><path d="M219.31,108.68l-80-80a16,16,0,0,0-22.62,0l-80,80A15.87,15.87,0,0,0,32,120v96a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V160h32v56a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V120A15.87,15.87,0,0,0,219.31,108.68ZM208,208H160V152a8,8,0,0,0-8-8H104a8,8,0,0,0-8,8v56H48V120l80-80,80,80Z"/></symbol>
+<symbol id="ph-lifebuoy-bold" viewBox="0 0 256 256"><path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm44.25,135.28a51.89,51.89,0,0,0,0-54.56l23-23a83.84,83.84,0,0,1,0,100.56ZM100,128a28,28,0,1,1,28,28A28,28,0,0,1,100,128Zm78.28-67.25-23,23a51.89,51.89,0,0,0-54.56,0l-23-23a83.84,83.84,0,0,1,100.56,0Zm-117.53,17,23,23a51.89,51.89,0,0,0,0,54.56l-23,23a83.84,83.84,0,0,1,0-100.56Zm17,117.53,23-23a51.89,51.89,0,0,0,54.56,0l23,23a83.84,83.84,0,0,1-100.56,0Z"/></symbol>
+<symbol id="ph-lifebuoy-fill" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM96,128a32,32,0,1,1,32,32A32,32,0,0,1,96,128Zm88.28-67.6L155.79,88.9a47.84,47.84,0,0,0-55.58,0L71.72,60.4a87.83,87.83,0,0,1,112.56,0ZM71.72,195.6l28.49-28.5a47.84,47.84,0,0,0,55.58,0l28.49,28.5a87.83,87.83,0,0,1-112.56,0Z"/></symbol>
+<symbol id="ph-lifebuoy-regular" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm39.1,131.79a47.84,47.84,0,0,0,0-55.58l28.5-28.49a87.83,87.83,0,0,1,0,112.56ZM96,128a32,32,0,1,1,32,32A32,32,0,0,1,96,128Zm88.28-67.6L155.79,88.9a47.84,47.84,0,0,0-55.58,0L71.72,60.4a87.83,87.83,0,0,1,112.56,0ZM60.4,71.72l28.5,28.49a47.84,47.84,0,0,0,0,55.58L60.4,184.28a87.83,87.83,0,0,1,0-112.56ZM71.72,195.6l28.49-28.5a47.84,47.84,0,0,0,55.58,0l28.49,28.5a87.83,87.83,0,0,1-112.56,0Z"/></symbol>
+<symbol id="ph-moon-bold" viewBox="0 0 256 256"><path d="M236.37,139.4a12,12,0,0,0-12-3A84.07,84.07,0,0,1,119.6,31.59a12,12,0,0,0-15-15A108.86,108.86,0,0,0,49.69,55.07,108,108,0,0,0,136,228a107.09,107.09,0,0,0,64.93-21.69,108.86,108.86,0,0,0,38.44-54.94A12,12,0,0,0,236.37,139.4Zm-49.88,47.74A84,84,0,0,1,68.86,69.51,84.93,84.93,0,0,1,92.27,48.29Q92,52.13,92,56A108.12,108.12,0,0,0,200,164q3.87,0,7.71-.27A84.79,84.79,0,0,1,186.49,187.14Z"/></symbol>
+<symbol id="ph-moon-fill" viewBox="0 0 256 256"><path d="M235.54,150.21a104.84,104.84,0,0,1-37,52.91A104,104,0,0,1,32,120,103.09,103.09,0,0,1,52.88,57.48a104.84,104.84,0,0,1,52.91-37,8,8,0,0,1,10,10,88.08,88.08,0,0,0,109.8,109.8,8,8,0,0,1,10,10Z"/></symbol>
+<symbol id="ph-moon-regular" viewBox="0 0 256 256"><path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"/></symbol>
+<symbol id="ph-mountains-bold" viewBox="0 0 256 256"><path d="M160,80a32,32,0,1,0-32-32A32,32,0,0,0,160,80Zm0-40a8,8,0,1,1-8,8A8,8,0,0,1,160,40Zm94.32,153.88L199.76,101.8A19.85,19.85,0,0,0,182.55,92h0a19.83,19.83,0,0,0-17.2,9.8l-18.7,31.55-37.42-63.5a20,20,0,0,0-34.46,0L1.66,193.91A12,12,0,0,0,12,212H244a12,12,0,0,0,10.32-18.12ZM92,87.87,108.57,116H75.43ZM33,188l28.28-48h61.44L151,188Zm145.86,0L160.56,157l22-37.1L222.94,188Z"/></symbol>
+<symbol id="ph-mountains-fill" viewBox="0 0 256 256"><path d="M254.88,195.92l-54.56-92.08A15.87,15.87,0,0,0,186.55,96h0a15.85,15.85,0,0,0-13.76,7.84l-15.64,26.39a4,4,0,0,0,0,4.07l26.8,45.47a8.13,8.13,0,0,1-1.89,10.55,8,8,0,0,1-11.8-2.26L101.79,71.88a16,16,0,0,0-27.58,0L1.11,195.94a8,8,0,0,0,1,9.52A8.23,8.23,0,0,0,8.23,208H247.77a8.29,8.29,0,0,0,6.09-2.55A8,8,0,0,0,254.88,195.92ZM64.43,120,88,80l23.57,40ZM140,52a24,24,0,1,1,24,24A24,24,0,0,1,140,52Z"/></symbol>
+<symbol id="ph-mountains-regular" viewBox="0 0 256 256"><path d="M164,80a28,28,0,1,0-28-28A28,28,0,0,0,164,80Zm0-40a12,12,0,1,1-12,12A12,12,0,0,1,164,40Zm90.88,155.92-54.56-92.08A15.87,15.87,0,0,0,186.55,96h0a15.85,15.85,0,0,0-13.76,7.84L146.63,148l-44.84-76.1a16,16,0,0,0-27.58,0L1.11,195.94A8,8,0,0,0,8,208H248a8,8,0,0,0,6.88-12.08ZM88,80l23.57,40H64.43ZM22,192l33-56h66l18.74,31.8,0,0L154,192Zm150.57,0-16.66-28.28L186.55,112,234,192Z"/></symbol>
+<symbol id="ph-pencil-simple-line-bold" viewBox="0 0 256 256"><path d="M230.15,70.54,185.46,25.86a20,20,0,0,0-28.28,0L33.86,149.17A19.86,19.86,0,0,0,28,163.31V208a20,20,0,0,0,20,20H216a12,12,0,0,0,0-24H125L230.15,98.83A20,20,0,0,0,230.15,70.54ZM91,204H52V165l84-84,39,39ZM192,103,153,64l18.34-18.34,39,39Z"/></symbol>
+<symbol id="ph-pencil-simple-line-fill" viewBox="0 0 256 256"><path d="M227.32,73.37,182.63,28.69a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H216a8,8,0,0,0,0-16H115.32l112-112A16,16,0,0,0,227.32,73.37ZM192,108.69,147.32,64l24-24L216,84.69Z"/></symbol>
+<symbol id="ph-pencil-simple-line-regular" viewBox="0 0 256 256"><path d="M227.32,73.37,182.63,28.69a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H216a8,8,0,0,0,0-16H115.32l112-112A16,16,0,0,0,227.32,73.37ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.69,147.32,64l24-24L216,84.69Z"/></symbol>
+<symbol id="ph-plant-bold" viewBox="0 0 256 256"><path d="M255.62,51.65a12,12,0,0,0-11.27-11.27c-53.27-3.13-96.2,13.36-114.84,44.14-12.14,20-12.56,44.17-1.46,67.3a75.14,75.14,0,0,0-12.28,23l-12.66-12.66c7.19-16.77,6.43-34.11-2.4-48.69C86.73,90.36,54.89,78,15.55,80.27A12,12,0,0,0,4.28,91.55C2,130.89,14.36,162.73,37.45,176.71a49.76,49.76,0,0,0,26,7.27,57.54,57.54,0,0,0,22.7-4.87L112,205v23a12,12,0,0,0,24,0V198.51a51.63,51.63,0,0,1,9.49-29.95,76.82,76.82,0,0,0,32.1,7.39,64.91,64.91,0,0,0,33.89-9.46C242.25,147.85,258.76,104.92,255.62,51.65ZM49.88,156.18c-13.19-8-21.18-27.46-21.83-52.13,24.67.65,44.14,8.64,52.13,21.83a26,26,0,0,1,3.63,17L72.48,131.51a12,12,0,0,0-17,17l11.34,11.34A26.27,26.27,0,0,1,49.88,156.18ZM199.05,146c-10.66,6.45-23,7.67-35.81,3.76l37.25-37.24a12,12,0,0,0-17-17l-37.25,37.24C142.37,120,143.59,107.61,150,97c12.7-21,42.65-33,81.32-33H232C232.14,103,220.14,133.18,199.05,146Z"/></symbol>
+<symbol id="ph-plant-fill" viewBox="0 0 256 256"><path d="M205.41,159.07a60.9,60.9,0,0,1-31.83,8.86,71.71,71.71,0,0,1-27.36-5.66A55.55,55.55,0,0,0,136,194.51V224a8,8,0,0,1-8.53,8,8.18,8.18,0,0,1-7.47-8.25V211.31L81.38,172.69A52.5,52.5,0,0,1,63.44,176a45.82,45.82,0,0,1-23.92-6.67C17.73,156.09,6,125.62,8.27,87.79a8,8,0,0,1,7.52-7.52c37.83-2.23,68.3,9.46,81.5,31.25A46,46,0,0,1,103.74,140a4,4,0,0,1-6.89,2.43l-19.2-20.1a8,8,0,0,0-11.31,11.31l53.88,55.25c.06-.78.13-1.56.21-2.33a68.56,68.56,0,0,1,18.64-39.46l50.59-53.46a8,8,0,0,0-11.31-11.32l-49,51.82a4,4,0,0,1-6.78-1.74c-4.74-17.48-2.65-34.88,6.4-49.82,17.86-29.48,59.42-45.26,111.18-42.22a8,8,0,0,1,7.52,7.52C250.67,99.65,234.89,141.21,205.41,159.07Z"/></symbol>
+<symbol id="ph-plant-regular" viewBox="0 0 256 256"><path d="M247.63,47.89a8,8,0,0,0-7.52-7.52c-51.76-3-93.32,12.74-111.18,42.22-11.8,19.49-11.78,43.16-.16,65.74a71.34,71.34,0,0,0-14.17,27L98.33,159c7.82-16.33,7.52-33.35-1-47.49-13.2-21.79-43.67-33.47-81.5-31.25a8,8,0,0,0-7.52,7.52c-2.23,37.83,9.46,68.3,31.25,81.5A45.82,45.82,0,0,0,63.44,176,54.58,54.58,0,0,0,87,170.33l25,25V224a8,8,0,0,0,16,0V194.51a55.61,55.61,0,0,1,12.27-35,73.91,73.91,0,0,0,33.31,8.4,60.9,60.9,0,0,0,31.83-8.86C234.89,141.21,250.67,99.65,247.63,47.89ZM47.81,155.6C32.47,146.31,23.79,124.32,24,96c28.32-.24,50.31,8.47,59.6,23.81,4.85,8,5.64,17.33,2.46,26.94L61.65,122.34a8,8,0,0,0-11.31,11.31l24.41,24.41C65.14,161.24,55.82,160.45,47.81,155.6Zm149.31-10.22c-13.4,8.11-29.15,8.73-45.15,2l53.69-53.7a8,8,0,0,0-11.31-11.31L140.65,136c-6.76-16-6.15-31.76,2-45.15,13.94-23,47-35.82,89.33-34.83C232.94,98.34,220.14,131.44,197.12,145.38Z"/></symbol>
+<symbol id="ph-user-circle-bold" viewBox="0 0 256 256"><path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20ZM79.57,196.57a60,60,0,0,1,96.86,0,83.72,83.72,0,0,1-96.86,0ZM100,120a28,28,0,1,1,28,28A28,28,0,0,1,100,120ZM194,179.94a83.48,83.48,0,0,0-29-23.42,52,52,0,1,0-74,0,83.48,83.48,0,0,0-29,23.42,84,84,0,1,1,131.9,0Z"/></symbol>
+<symbol id="ph-user-circle-fill" viewBox="0 0 256 256"><path d="M172,120a44,44,0,1,1-44-44A44.05,44.05,0,0,1,172,120Zm60,8A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88.09,88.09,0,0,0-91.47-87.93C77.43,41.89,39.87,81.12,40,128.25a87.65,87.65,0,0,0,22.24,58.16A79.71,79.71,0,0,1,84,165.1a4,4,0,0,1,4.83.32,59.83,59.83,0,0,0,78.28,0,4,4,0,0,1,4.83-.32,79.71,79.71,0,0,1,21.79,21.31A87.62,87.62,0,0,0,216,128Z"/></symbol>
+<symbol id="ph-user-circle-regular" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"/></symbol>
+</svg>
+<div class="doc">
+  <header>
+    <p class="muted">Kuizi · design step 1 (kickoff) · draft for the product owner · 2026-10-24</p>
+    <h1>Today, three ways</h1>
+    <p class="lede">Three genuinely different directions for the pupil's home screen, on a phone (390 × 844), each in Arabic (right to left) and French. Pick one, or tell me what to mix. My recommendation is at the end.</p>
+    <table class="meta-table">
+      <tr><td>Who</td><td>Lina, 11, 6e (band A), Thursday 20:10, after dinner, on her mother's phone. Adam, 14, 9e (band B), in the concours season (Thursday 6 May 2027).</td></tr>
+      <tr><td>Job of the screen</td><td>In three seconds: know tonight's one mission and start it. Everything else steps back.</td></tr>
+      <tr><td>Read with</td><td><a href="01-vision.md">01-vision.md</a> (principles 1–7) and <a href="02-journeys.md">02-journeys.md</a> (screen C10).</td></tr>
+      <tr><td>Status</td><td>Draft. Product copy is a draft; <strong>Arabic copy needs native review</strong>. Illustrations are placeholders. Nothing here has been shown to children.</td></tr>
+    </table>
+  </header>
+
+  <div class="toggles" role="group" aria-label="Display options">
+    <label><input type="checkbox" id="hc-toggle"> High contrast</label>
+    <span class="note">Screenshots of every phone are in <code>screens/</code>.</span>
+  </div>
+
+  <section class="block" aria-labelledby="ref-h">
+    <h2 id="ref-h">Your reference, turned into principles</h2>
+    <p>You pointed to Claude Code and <a href="https://claude.com/fr/programs/startups">claude.com/fr/programs/startups</a> as clean, with a good vision and calm workflows. I studied the page at 1440 px and 390 px. These are the principles behind it, written so that a learning product for 11–15-year-olds can use them without borrowing its look.</p>
+    <table class="compare">
+      <thead><tr><th scope="col">Principle</th><th scope="col">What the reference does</th><th scope="col">What it means for Kuizi's Today</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Restraint</th><td>A warm off-white page, near-black text. Secondary text is grey, not another colour. The one accent is kept for the logo; buttons are near-black or outlined.</td><td>Warm neutrals carry the screen. One brand hue, for identity and the single primary action. Secondary text by tone (step 11), never by a new colour.</td></tr>
+        <tr><th scope="row">Generous whitespace</th><td>Sections a full screen apart on desktop; on the phone, hairline rules and wide gaps instead of boxes.</td><td>Today holds one thing. Air instead of cards; ruled lines separate rows.</td></tr>
+        <tr><th scope="row">Editorial hierarchy</th><td>A large, light serif headline over a quiet sans. A small kicker above each headline. Hierarchy from size and tone, not from colour.</td><td>The mission written as a sentence in a display face (a Naskh for Arabic). Kicker: "Jeudi soir · Maths". Body in the interface sans.</td></tr>
+        <tr><th scope="row">Simple, purposeful illustration</th><td>One small monoline drawing per section marks its topic.</td><td>One spot drawing per screen that carries the notion (two breads for fractions), commissioned in one style.</td></tr>
+        <tr><th scope="row">One idea per section</th><td>Kicker, headline, one paragraph, one action.</td><td>One idea per screen: tonight's mission. The week is a quiet note in the margin.</td></tr>
+        <tr><th scope="row">Calm, clear flows</th><td>Few calls to action; secondary actions as outlined or text buttons; slow, gentle reveals.</td><td>One filled button; alternatives as text links; motion of 150–250 ms; nothing competes.</td></tr>
+      </tbody>
+    </table>
+    <h3>What we do not take</h3>
+    <ul>
+      <li>Anthropic's colours, typefaces, mark and illustrations. Kuizi keeps its star, its own palette and an Arabic-first type pairing.</li>
+      <li>The centred hero. Arabic-first screens are aligned to the start edge, and long centred lines are harder for young readers.</li>
+      <li>Photography and video of people: no photos of minors (MR-M2), and video costs prepaid data.</li>
+      <li>Headlines that fade in from light grey as you scroll: while they fade, the grey words are below 4.5:1, which fails WCAG for children with low vision.</li>
+    </ul>
+    <p><strong>How the three directions measure up.</strong> A is the calm, editorial direction built on these principles, adapted to children: it follows all six. B follows restraint and one idea, but adds a second hue, a shadowed card and more shapes. C is furthest away: one idea and a clear flow, but a large saturated surface breaks restraint and calm.</p>
+  </section>
+
+  <section class="block" aria-labelledby="board-h">
+    <h2 id="board-h">Side by side</h2>
+    <p class="muted">Lina's Thursday evening, Arabic then French, in each direction.</p>
+    <div class="board" id="board"></div>
+  </section>
+
+  <section class="block" aria-labelledby="shared-h">
+    <h2 id="shared-h">What all three share (not up for debate in this step)</h2>
+    <div class="cols">
+      <div>
+        <h3>On the screen, and why each element earns its place</h3>
+        <ul>
+          <li><strong>One mission</strong>: subject, notion, one sentence of why, three steps, a duration. The only primary action starts it (principle 2).</li>
+          <li><strong>"Une autre matière ce soir"</strong>: autonomy without a catalogue. Band A gets two suggestions; band B can pick any subject.</li>
+          <li><strong>The week</strong> as a goal of evenings that never resets to zero. No streak (MR-S5), no score, no percentage (MR-P3), no ranking (MR-S1).</li>
+          <li><strong>"Besoin d'aide" / «أحتاج مساعدة»</strong> in the top bar of every pupil screen: the safeguarding button with helplines (MR-G2). Homework help lives inside exercises, under a different name ("Un indice").</li>
+          <li><strong>Three tabs only</strong>: Aujourd'hui, Mes progrès, Moi. "What your parents see" lives in Moi (MR-F3).</li>
+          <li><strong>The concours</strong> appears as "week 3 of 8" in band B's season view, never as a day counter (MR-S9).</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Not on the screen, on purpose</h3>
+        <ul>
+          <li>No streak flames, badges, coins or mascot (principle 3, MR-T4).</li>
+          <li>No subject colours: subjects are named, not colour-coded, so the screen keeps one brand hue.</li>
+          <li>No notification bell: band A gets no pushes by default (MR-N1).</li>
+          <li>No predicted grade, no "you are behind", no comparison with classmates.</li>
+        </ul>
+        <h3>Craft rules applied to every phone</h3>
+        <ul>
+          <li>Spacing only from 4, 8, 12, 16, 24, 32, 48, 64 px. Touch targets 48 px (help, links, tabs, buttons).</li>
+          <li>At most five type sizes and two weights per direction; Arabic in its own face and line height, never letter-spaced.</li>
+          <li>Neutrals carry the interface; one brand scale; B adds one marker hue for "you are here", always with a shape.</li>
+          <li>Maths, digits and the drawings of the physical world stay left to right inside Arabic. Arrows and the layout mirror.</li>
+          <li>Every state has a shape or words as well as a colour. Contrast is computed below for each direction.</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Semantic colours (shared, not used on Today)</h3>
+    <p class="muted">Success, attention and danger exist for meaning only (a saved answer, an account problem), always with an icon and words. "Not yet" in an exercise is never red.</p>
+    <div id="semantic-swatches"></div>
+    <table class="contrast"><caption class="visually-hidden">Contrast checks</caption><thead><tr><th scope="col">Pair (WCAG 2.2)</th><th scope="col">Ratio</th><th scope="col">Needs</th><th scope="col">Result</th></tr></thead><tbody><tr><td><strong>succes text:</strong> succes 11 on white <span class="muted">#036732 on #FFFFFF</span></td><td class="num">7.0:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>succes on tint:</strong> succes 12 on succes 3 <span class="muted">#013316 on #E6F5E9</span></td><td class="num">12.5:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>attention text:</strong> attention 11 on white <span class="muted">#825100 on #FFFFFF</span></td><td class="num">6.7:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>attention on tint:</strong> attention 12 on attention 3 <span class="muted">#422701 on #FCEEDE</span></td><td class="num">12.1:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>danger text:</strong> danger 11 on white <span class="muted">#A22523 on #FFFFFF</span></td><td class="num">7.4:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>danger on tint:</strong> danger 12 on danger 3 <span class="muted">#510708 on #FEEBE9</span></td><td class="num">13.2:1</td><td class="num">7:1</td><td>Pass</td></tr></tbody></table>
+  </section>
+
+  <section class="block direction" id="dir-a" aria-labelledby="a-h">
+    <h2 id="a-h">A. Cahier: the evening page</h2>
+    <p class="idea">Tonight's mission written as a sentence on a calm page, like the first line of a good school notebook. Typography does the work. One ink colour, no boxes. This is the calm, editorial direction built on the principles of your reference, adapted to children.</p>
+    <div class="row-phones" data-row="a"></div>
+    <div class="spec">
+      <div>
+        <h3>Why this direction</h3>
+        <p>Tunisian pupils write in blue ink in their <em>cahiers</em>, and teachers correct in red. Kuizi takes the ink and leaves the red pen behind: a mistake gets an ink note, never a red mark. The mission is a sentence, because a coach speaks; it is not a widget.</p>
+        <p>A Naskh display face (Markazi Text) makes the Arabic look like it belongs, the way it looks in a good textbook, not translated. The interface text stays in IBM Plex Sans Arabic, kept from v1. The week's evenings are ink dots in the margin. Notebook ruling separates the three steps, so there are no boxes.</p>
+        <p><strong>Serves most:</strong> 2 one next step, 3 calm, 5 Arabic first. <strong>Less:</strong> 4, because progress is quiet here.</p>
+        <h3>An 11-year-old and a 15-year-old</h3>
+        <p><strong>Lina (11):</strong> calm, readable, grown-up in a way that flatters her. The drawing of two breads makes fractions concrete. Risk: without good illustration it looks like homework.</p>
+        <p><strong>Adam (14):</strong> serious and respectful; the most "not for kids" of the three without being cold. The season line ("Révisions Neuvième · semaine 3 sur 8") replaces the countdown.</p>
+        <h3>Risks</h3>
+        <ul><li>The least instant delight. It needs a good illustrator and fine typography, or it looks plain.</li><li>A serif display face may feel old-fashioned to some teenagers. To test.</li></ul>
+      </div>
+      <div>
+        <h3>Palette</h3>
+        <div id="pal-a"></div>
+        <p class="note">The brand would move from v1 cyan to ink blue (encre 9, #1B4BA9). That is a brand decision (T231).</p>
+        <table class="contrast"><caption class="visually-hidden">Contrast checks</caption><thead><tr><th scope="col">Pair (WCAG 2.2)</th><th scope="col">Ratio</th><th scope="col">Needs</th><th scope="col">Result</th></tr></thead><tbody><tr><td><strong>Body text:</strong> papier 12 on papier 2 <span class="muted">#24211C on #F8F5EF</span></td><td class="num">14.7:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>Secondary text:</strong> papier 11 on papier 2 <span class="muted">#67635B on #F8F5EF</span></td><td class="num">5.5:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>Required UI boundary:</strong> papier 9 on papier 2 <span class="muted">#8A867D on #F8F5EF</span></td><td class="num">3.3:1</td><td class="num">3:1</td><td>Pass</td></tr><tr><td><strong>Primary button label:</strong> white on encre 9 <span class="muted">#FFFFFF on #1B4BA9</span></td><td class="num">8.0:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>Brand text and active tab:</strong> encre 11 on papier 2 <span class="muted">#204896 on #F8F5EF</span></td><td class="num">7.9:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>High contrast, body:</strong> papier 12 on white <span class="muted">#24211C on #FFFFFF</span></td><td class="num">16.0:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>High contrast, button:</strong> white on encre 12 <span class="muted">#FFFFFF on #0C2351</span></td><td class="num">15.3:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>High contrast, brand text:</strong> encre 11 on white <span class="muted">#204896 on #FFFFFF</span></td><td class="num">8.6:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>Tint panel text:</strong> encre 12 on encre 3 <span class="muted">#0C2351 on #E9F1FE</span></td><td class="num">13.4:1</td><td class="num">7:1</td><td>Pass</td></tr></tbody></table>
+        <h3>Type</h3>
+        <div class="specimen">
+          <p dir="rtl" lang="ar" style="font:600 44px/64px 'Markazi Text',serif">الليلة نقارن بين الكسور.</p>
+          <p dir="rtl" lang="ar" style="font:400 16px/28px 'IBM Plex Sans Arabic',sans-serif">يوم الاثنين، كانت الكسور ذات المقام نفسه سهلة. الليلة، المقامات مختلفة.</p>
+          <p style="font:600 40px/44px 'Markazi Text',serif">Ce soir, on compare des fractions.</p>
+          <p style="font:400 16px/24px 'IBM Plex Sans',sans-serif">Lundi, les fractions de même dénominateur étaient faciles pour toi.</p>
+        </div>
+        <p class="note">Display: Markazi Text 600 (Arabic 44/64, Latin 40/44; the Arabic is set larger because its letters are smaller on the body). Interface: IBM Plex Sans Arabic and IBM Plex Sans 400 and 600, at 14, 16 and 20. Both are on Google Fonts under the SIL Open Font Licence.</p>
+        <h3>Icons</h3>
+        <p>Lucide, 24 px (16 and 20 in dense rows), 1.5 px stroke to match the ink line.</p>
+        <div class="icon-row" data-icons="lu"></div>
+        <h3>Illustration</h3>
+        <p>Monoline ink drawings, 1.5 px, in one colour. Parts that carry meaning are inked solid (7.4:1 on paper), never a pale tint that would fall below 3:1. They show everyday Tunisian objects that carry the notion: a <em>tabouna</em> cut into parts for fractions, a market balance for equations, an olive branch for SVT. Children drawn as they are (skin tones, hijab or not, glasses, a wheelchair). Commissioned from a Tunisian illustrator. The drawings here are geometric placeholders.</p>
+        <h3>Motion</h3>
+        <p>When an evening is done, its dot fills like ink soaking into paper (200 ms, ease-out) and the tick draws itself (150 ms). Reduced motion: the dot is simply filled.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block direction" id="dir-b" aria-labelledby="b-h">
+    <h2 id="b-h">B. Ligne: the week as a line</h2>
+    <p class="idea">The week drawn as a transit line. Evenings already done are stations passed; tonight is where you are, marked with the brand's nuqta; tomorrow is the next stop.</p>
+    <div class="row-phones" data-row="b"></div>
+    <div class="spec">
+      <div>
+        <h3>Why this direction</h3>
+        <p>It makes progress visible in space: the most "felt" progress of the three. It uses the brand's own grammar: the nuqta (the rhombus at the heart of the star) becomes "you are here", and the line is the "way forward from any concept" of the brand idea. It keeps the v1 cyan (lagune 9, #026E89, next to v1's #0A6F8C).</p>
+        <p>The same component scales to the concours: in band B's season view the line holds the week's subjects and Saturday's practice paper, and the revision plan (C30) is the same line drawn in weeks.</p>
+        <p><strong>Serves most:</strong> 4 effort you can see, 2. <strong>Less:</strong> 3, because there are more elements on screen.</p>
+        <h3>An 11-year-old and a 15-year-old</h3>
+        <p><strong>Lina (11):</strong> the most fun and the clearest picture of "my week". She can see that Wednesday was a rest day and nothing broke.</p>
+        <p><strong>Adam (14):</strong> risks feeling like a children's game. The band B version earns its place by showing the real week of revision, practice paper included.</p>
+        <h3>Risks</h3>
+        <ul><li>Closest to well-known gamified "paths". It must stay a straight transit line with labelled stations, never a winding trail of bubbles.</li><li>More to build and to make accessible: the line must be a real list for screen readers, and it mirrors in Arabic.</li><li>The marker yellow is only 1.6:1 on the page, so it always carries a dark outline and the rhombus shape.</li></ul>
+      </div>
+      <div>
+        <h3>Palette</h3>
+        <div id="pal-b"></div>
+        <p class="note">Keeps the v1 brand hue. Soleil is used only for the "you are here" marker, always with its outline.</p>
+        <table class="contrast"><caption class="visually-hidden">Contrast checks</caption><thead><tr><th scope="col">Pair (WCAG 2.2)</th><th scope="col">Ratio</th><th scope="col">Needs</th><th scope="col">Result</th></tr></thead><tbody><tr><td><strong>Body text:</strong> calcaire 12 on calcaire 2 <span class="muted">#1E2225 on #F2F7F9</span></td><td class="num">14.8:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>Secondary text:</strong> calcaire 11 on calcaire 2 <span class="muted">#5E6468 on #F2F7F9</span></td><td class="num">5.6:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>Required UI boundary:</strong> calcaire 9 on calcaire 2 <span class="muted">#81878B on #F2F7F9</span></td><td class="num">3.4:1</td><td class="num">3:1</td><td>Pass</td></tr><tr><td><strong>Primary button label:</strong> white on lagune 9 <span class="muted">#FFFFFF on #026E89</span></td><td class="num">5.8:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>Brand text and active tab:</strong> lagune 11 on calcaire 2 <span class="muted">#055367 on #F2F7F9</span></td><td class="num">8.0:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>High contrast, body:</strong> calcaire 12 on white <span class="muted">#1E2225 on #FFFFFF</span></td><td class="num">16.0:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>High contrast, button:</strong> white on lagune 12 <span class="muted">#FFFFFF on #022E3A</span></td><td class="num">14.4:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>High contrast, brand text:</strong> lagune 11 on white <span class="muted">#055367 on #FFFFFF</span></td><td class="num">8.6:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>Today marker label:</strong> calcaire 12 on soleil 9 <span class="muted">#1E2225 on #F8C20D</span></td><td class="num">9.7:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>Today marker outline:</strong> calcaire 12 on calcaire 1 <span class="muted">#1E2225 on #F7FCFE</span></td><td class="num">15.5:1</td><td class="num">3:1</td><td>Pass</td></tr><tr><td><strong>Card on page:</strong> white card text calcaire 12 on white <span class="muted">#1E2225 on #FFFFFF</span></td><td class="num">16.0:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>Active tab pill:</strong> lagune 12 on lagune 3 <span class="muted">#022E3A on #E3F3FA</span></td><td class="num">12.7:1</td><td class="num">7:1</td><td>Pass</td></tr></tbody></table>
+        <h3>Type</h3>
+        <div class="specimen">
+          <p dir="rtl" lang="ar" style="font:600 24px/40px 'Readex Pro',sans-serif">مقارنة الكسور</p>
+          <p dir="rtl" lang="ar" style="font:400 16px/28px 'Readex Pro',sans-serif">يوم الاثنين كان المقام نفسه سهلًا. الليلة المقامات مختلفة.</p>
+          <p style="font:600 24px/32px 'Readex Pro',sans-serif">Comparer des fractions</p>
+          <p style="font:400 16px/24px 'Readex Pro',sans-serif">Lundi, c'était facile avec le même dénominateur.</p>
+        </div>
+        <p class="note">Readex Pro 400 and 600, one family for both scripts, at 14, 16, 20 and 24. It extends Lexend, already chosen for reading support in the comfort profile (FR-A7). SIL Open Font Licence.</p>
+        <h3>Icons</h3>
+        <p>Phosphor, 24 px: regular for inactive items, fill for the active tab.</p>
+        <div class="icon-row" data-icons="ph"></div>
+        <h3>Illustration</h3>
+        <p>Flat geometric shapes on the star's 0/45/90° grid, no outlines, lagune tones with at most one soleil accent. People as simple flat figures with varied skin tones, with or without hijab, glasses. Settings: a desk at home, the bus, the souk. The shapes here are placeholders.</p>
+        <h3>Motion</h3>
+        <p>After a mission, the marker travels along the line to the next station (250 ms, standard easing) and the station it leaves fills in. Reduced motion: no travel, the new state appears.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block direction" id="dir-c" aria-labelledby="c-h">
+    <h2 id="c-h">C. Élan: one big thing</h2>
+    <p class="idea">Tonight's mission is one big tile: tap anywhere on it to start. The first problem of the evening is the picture.</p>
+    <div class="row-phones" data-row="c"></div>
+    <div class="spec">
+      <div>
+        <h3>Why this direction</h3>
+        <p>The most direct answer to "what do I do now?": the whole tile is the button, 358 × 448 px. The maths itself is the hero image, so no decorative illustration is needed, and the left-to-right formula inside right-to-left text is shown with pride rather than hidden.</p>
+        <p>Violet is the one hue that collides with none of the semantic colours, so the brand can never be mistaken for "success" or "danger".</p>
+        <p><strong>Serves most:</strong> 2 one next step, very strongly. <strong>Less:</strong> 3, because a large saturated surface is not calm; and 4.</p>
+        <h3>An 11-year-old and a 15-year-old</h3>
+        <p><strong>Adam (14):</strong> fast and confident, "an app for me", close to the sports and music apps he already uses.</p>
+        <p><strong>Lina (11):</strong> clear to tap, but the big block of colour and the few words may feel cold, and a formula as the first thing she sees can feel like a test before she has started.</p>
+        <h3>Risks</h3>
+        <ul><li>A large saturated surface at 21:00 in a dark room is tiring: the v1 "dark panel" problem in another colour.</li><li>Little room for the "why", which is what makes a coach a coach.</li><li>Without fine craft it slides into a generic fitness-app look.</li></ul>
+      </div>
+      <div>
+        <h3>Palette</h3>
+        <div id="pal-c"></div>
+        <p class="note">The brand would move from cyan to violet (iris 9, #5A3BD5). That is a brand decision (T231).</p>
+        <table class="contrast"><caption class="visually-hidden">Contrast checks</caption><thead><tr><th scope="col">Pair (WCAG 2.2)</th><th scope="col">Ratio</th><th scope="col">Needs</th><th scope="col">Result</th></tr></thead><tbody><tr><td><strong>Body text:</strong> ardoise 12 on ardoise 2 <span class="muted">#212126 on #F5F5FB</span></td><td class="num">14.8:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>Secondary text:</strong> ardoise 11 on ardoise 2 <span class="muted">#626269 on #F5F5FB</span></td><td class="num">5.6:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>Required UI boundary:</strong> ardoise 9 on ardoise 2 <span class="muted">#85858D on #F5F5FB</span></td><td class="num">3.4:1</td><td class="num">3:1</td><td>Pass</td></tr><tr><td><strong>Primary button label:</strong> white on iris 9 <span class="muted">#FFFFFF on #5A3BD5</span></td><td class="num">7.0:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>Brand text and active tab:</strong> iris 11 on ardoise 2 <span class="muted">#4D36B3 on #F5F5FB</span></td><td class="num">7.8:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>High contrast, body:</strong> ardoise 12 on white <span class="muted">#212126 on #FFFFFF</span></td><td class="num">16.0:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>High contrast, button:</strong> white on iris 12 <span class="muted">#FFFFFF on #261861</span></td><td class="num">15.2:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>High contrast, brand text:</strong> iris 11 on white <span class="muted">#4D36B3 on #FFFFFF</span></td><td class="num">8.4:1</td><td class="num">7:1</td><td>Pass</td></tr><tr><td><strong>Tile text:</strong> white on iris 9 <span class="muted">#FFFFFF on #5A3BD5</span></td><td class="num">7.0:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>Tile secondary:</strong> iris 3 on iris 9 <span class="muted">#EEEFFE on #5A3BD5</span></td><td class="num">6.1:1</td><td class="num">4.5:1</td><td>Pass</td></tr><tr><td><strong>Tile button label:</strong> iris 12 on white <span class="muted">#261861 on #FFFFFF</span></td><td class="num">15.2:1</td><td class="num">7:1</td><td>Pass</td></tr></tbody></table>
+        <h3>Type</h3>
+        <div class="specimen">
+          <p dir="rtl" lang="ar" style="font:700 32px/48px 'Alexandria',sans-serif">مقارنة الكسور</p>
+          <p dir="rtl" lang="ar" style="font:400 16px/28px 'Alexandria',sans-serif">يوم الاثنين كان المقام نفسه سهلًا. الليلة المقامات مختلفة.</p>
+          <p style="font:700 32px/40px 'Alexandria',sans-serif">Comparer des fractions</p>
+          <p style="font:400 16px/24px 'Alexandria',sans-serif">Lundi, c'était facile avec le même dénominateur.</p>
+        </div>
+        <p class="note">Alexandria 400 and 700, one family for both scripts, at 14, 16, 20, 32 and 48 (the hero maths). Geometric with a Kufic influence, which echoes the geometric Kufi of the logotype. SIL Open Font Licence.</p>
+        <h3>Icons</h3>
+        <p>Phosphor Bold, 24 px.</p>
+        <div class="icon-row" data-icons="phb"></div>
+        <h3>Illustration</h3>
+        <p>None in the product interface: the content is the picture. Subjects get bold geometric marks built from the nuqta. Illustration lives in marketing only.</p>
+        <h3>Motion</h3>
+        <p>On press the tile settles to 98 % (150 ms), then grows into the first question (a shared-element transition, 250 ms). Reduced motion: a cross-fade.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="cmp-h">
+    <h2 id="cmp-h">Against the principles</h2>
+    <table class="compare">
+      <thead><tr><th scope="col">Principle (01-vision.md)</th><th scope="col">A. Cahier</th><th scope="col">B. Ligne</th><th scope="col">C. Élan</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">1 Safe and honest</th><td colspan="3">Equal: help button, no scores, no countdown and no ranking are shared by all three.</td></tr>
+        <tr><th scope="row">2 One next step</th><td>Strong: a sentence and one button.</td><td>Good: the card is clear, but the line competes a little.</td><td>Strongest: the whole tile is the button.</td></tr>
+        <tr><th scope="row">3 Calm by default</th><td>Strongest: paper, ink, no boxes.</td><td>Medium: more shapes and two hues.</td><td>Weakest: a large saturated surface.</td></tr>
+        <tr><th scope="row">4 Effort you can see</th><td>Medium: ink dots in the margin.</td><td>Strongest: the line shows the week.</td><td>Medium: small bars.</td></tr>
+        <tr><th scope="row">5 Arabic first</th><td>Strongest: a Naskh display face, as in textbooks.</td><td>Good: Readex is clear in both scripts.</td><td>Good: Kufi-like, heavy at large sizes.</td></tr>
+        <tr><th scope="row">6 Parents in ten seconds</th><td>Its sentence-first style transfers directly to the parent summary.</td><td>The line works for the parent's week too.</td><td>Least transferable: tiles don't summarise.</td></tr>
+        <tr><th scope="row">7 Grows up, every phone</th><td>Strong: text-first, light on data and on 2 GB phones; density scales with age.</td><td>Medium: more drawing; the playful look ages fast.</td><td>Medium: right for 15, cold for 11.</td></tr>
+        <tr><th scope="row">Your reference (calm, editorial, very clean)</th><td>Closest: restraint, whitespace, an editorial display face, one drawing, one idea, one button.</td><td>Partly: restraint and one idea hold; a second hue, a shadowed card and more shapes.</td><td>Furthest: one idea and a clear flow, but a large saturated surface breaks restraint and calm.</td></tr>
+        <tr><th scope="row">Build and accessibility risk</th><td>Lowest</td><td>Highest</td><td>Low</td></tr>
+        <tr><th scope="row">Brand continuity</th><td>Cyan becomes ink blue</td><td>Keeps cyan</td><td>Cyan becomes violet</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="block" aria-labelledby="reco-h">
+    <div class="reco">
+      <h2 id="reco-h">Recommendation: A, Cahier, with two borrowings</h2>
+      <ol>
+        <li><strong>Calm is the scarcest thing for this audience.</strong> Eleven-year-olds facing a selective exam (about 11 % of Sixième candidates admitted in 2026) need the product to lower the temperature. A does that with paper, ink and one sentence.</li>
+        <li><strong>Arabic first you can see.</strong> A Naskh display face makes the Arabic version the original, not the translation, which is what families of pupils taught maths in Arabic will expect.</li>
+        <li><strong>It grows from 11 to 15 without a "kids theme".</strong> Band A gets more illustration and audio; band B gets denser text. Same structure.</li>
+        <li><strong>Cheapest to build, to make accessible and to run</strong> on a 2 GB Android with a prepaid data plan: mostly text, few graphics.</li>
+        <li><strong>A brand story parents can retell:</strong> "Kuizi writes in ink and never uses the red pen."</li>
+        <li><strong>It follows the reference you chose</strong> on all six principles (restraint, whitespace, editorial hierarchy, purposeful illustration, one idea, calm flow) while staying Kuizi: its own star, ink palette, Arabic-first type and a child's reading level.</li>
+      </ol>
+      <p><strong>Borrow from B:</strong> the line, for the revision plan screen (C30), where seeing weeks as stations is genuinely useful. <strong>Borrow from C:</strong> make the whole mission block one large tappable target, not just the button.</p>
+      <p><strong>What would change my mind:</strong> if, in step 2, 6e pupils choose B over A clearly in a preference test ("which one would you open tonight?") and A scores below 4 of 5 on the face scale, A must gain warmth (illustration, the line as the week) before it is built. I propose testing A and B side by side with five pupils per band.</p>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="notes-h">
+    <h2 id="notes-h">Notes</h2>
+    <ul>
+      <li>All names are synthetic. Dates follow the Ministry calendar of 1 October 2026 (curriculum study). The examples assume maths notation in Latin letters, left to right, inside Arabic text; this is unconfirmed until a maths teacher checks the CNP textbooks (curriculum study, section 2.1).</li>
+      <li>Fonts: Google Fonts, SIL Open Font Licence. Icons: Lucide (ISC) and Phosphor (MIT), inlined. No new dependency is added to the product by this file; choosing a typeface or an icon family for the product is the product owner's decision.</li>
+      <li>Digits are Western (0–9) in both languages, as proposed in the brand guide (decision 7, still open).</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+/* Content: one object per variant. Arabic needs native review. */
+const STAR = 'M50 0L64.645 14.645H85.355V35.355L100 50L85.355 64.645V85.355H64.645L50 100L35.355 85.355H14.645V64.645L0 50L14.645 35.355V14.645H35.355Z M50 37.5L37.5 50L50 62.5L62.5 50Z';
+const C = {
+  ar6: { id:'ar-6e', lang:'ar', dir:'rtl', band:'A', time:'20:10', brand:'كويزي', help:'أحتاج مساعدة', hello:'مساء الخير يا لينا',
+    dateline:'الخميس مساءً · رياضيات', titleA:'الليلة نقارن بين الكسور.', titleShort:'مقارنة الكسور',
+    why:'يوم الاثنين، كانت الكسور ذات المقام نفسه سهلة. الليلة، المقامات مختلفة.',
+    whyShort:'يوم الاثنين كان المقام نفسه سهلًا. الليلة المقامات مختلفة.', whyLabel:'لماذا الليلة؟',
+    steps:[['تذكير قصير','دقيقتان'],['8 تمارين','10 دقائق'],['تحدٍّ في الختام','3 دقائق']],
+    stepsInline:'تذكير · 8 تمارين · تحدٍّ', stepsCount:'3 مراحل', duration:'15 دقيقة', cta:'لنبدأ', ctaFull:'لنبدأ مهمّة الليلة، حوالي 15 دقيقة',
+    other:'مادّة أخرى الليلة', subject:'رياضيات', kicker:'الليلة · رياضيات',
+    weekLabel:'هذا الأسبوع', weekText:'2 من 4 أمسيات', weekDone:2, weekGoal:4, weekTonight:3,
+    nav:['اليوم','تقدّمي','أنا'], kind:'frac', mathLabel:'ثلثان أم ثلاثة أرباع: أيّهما أكبر؟',
+    line:[['الاثنين','رياضيات · كسور','done'],['الثلاثاء','عربية · قراءة','done'],['الأربعاء','راحة','rest'],['الخميس','','today'],['الجمعة','إيقاظ علمي · الماء','next']] },
+  fr6: { id:'fr-6e', lang:'fr', dir:'ltr', band:'A', time:'20:10', brand:'Kuizi', help:"Besoin d’aide", hello:'Bonsoir Lina',
+    dateline:'Jeudi soir · Maths', titleA:'Ce soir, on compare des fractions.', titleShort:'Comparer des fractions',
+    why:'Lundi, avec le même dénominateur, c’était facile. Ce soir, les dénominateurs sont différents.',
+    whyShort:"Lundi, c’était facile avec le même dénominateur. Ce soir, ils sont différents.", whyLabel:'Pourquoi ce soir ?',
+    steps:[['Petit rappel','2 min'],['8 exercices','10 min'],['Un défi pour finir','3 min']],
+    stepsInline:'Rappel · 8 exercices · 1 défi', stepsCount:'3 étapes', duration:'15 min', cta:'Commencer', ctaFull:'Commencer la mission de ce soir, environ 15 minutes',
+    other:'Une autre matière ce soir', subject:'Maths', kicker:'Ce soir · Maths',
+    weekLabel:'Cette semaine', weekText:'2 soirées sur 4', weekDone:2, weekGoal:4, weekTonight:3,
+    nav:["Aujourd’hui",'Mes progrès','Moi'], kind:'frac', mathLabel:'deux tiers ou trois quarts : lequel est le plus grand ?',
+    line:[['Lundi','Maths · fractions','done'],['Mardi','Arabe · lecture','done'],['Mercredi','Repos','rest'],['Jeudi','','today'],['Vendredi','Éveil scientifique · l’eau','next']] },
+  ar9: { id:'ar-9e', lang:'ar', dir:'rtl', band:'B', time:'20:40', brand:'كويزي', help:'أحتاج مساعدة', hello:'مساء الخير يا آدم',
+    dateline:'مراجعة النوفيام · الأسبوع 3 من 8', titleA:'الليلة: معادلات الدرجة الأولى.', titleShort:'المعادلات من الدرجة الأولى',
+    why:'يوم الثلاثاء، تسبّبت الإشارات السالبة في بعض الأخطاء. نراجعها، ثم تمرين من نوع النوفيام.',
+    whyShort:'يوم الثلاثاء، أربكتنا الإشارات السالبة. نراجعها الليلة.', whyLabel:'لماذا الليلة؟',
+    steps:[['تذكير مركّز','3 دقائق'],['6 تمارين','12 دقيقة'],['تمرين من نوع النوفيام','10 دقائق']],
+    stepsInline:'تذكير · 6 تمارين · تمرين نموذجي', stepsCount:'3 مراحل', duration:'25 دقيقة', cta:'لنبدأ', ctaFull:'لنبدأ مهمّة الليلة، حوالي 25 دقيقة',
+    other:'اختيار مادّة أخرى', subject:'رياضيات', kicker:'الليلة · رياضيات',
+    weekLabel:'هذا الأسبوع', weekText:'3 من 5 حصص', weekDone:3, weekGoal:5, weekTonight:4,
+    nav:['اليوم','التقدّم','أنا'], kind:'eq', mathLabel:'ثلاثة x ناقص سبعة يساوي أحد عشر',
+    line:[['الاثنين','علوم الحياة والأرض · التغذية','done'],['الثلاثاء','رياضيات · المعادلات','done'],['الأربعاء','عربية · الإنشاء','done'],['الخميس','','today'],['الجمعة','فرنسية · دراسة نصّ','next'],['السبت','امتحان تجريبي · رياضيات','next']] },
+  fr9: { id:'fr-9e', lang:'fr', dir:'ltr', band:'B', time:'20:40', brand:'Kuizi', help:"Besoin d’aide", hello:'Bonsoir Adam',
+    dateline:'Révisions Neuvième · semaine 3 sur 8', titleA:'Ce soir : équations du premier degré.', titleShort:'Équations du premier degré',
+    why:'Mardi, les signes négatifs ont causé des erreurs. On les reprend, puis un exercice type Neuvième.',
+    whyShort:'Mardi, les signes négatifs ont posé problème. On les reprend.', whyLabel:'Pourquoi ce soir ?',
+    steps:[['Rappel ciblé','3 min'],['6 exercices','12 min'],['Un exercice type Neuvième','10 min']],
+    stepsInline:'Rappel · 6 exercices · 1 exercice type', stepsCount:'3 étapes', duration:'25 min', cta:'Commencer', ctaFull:'Commencer la mission de ce soir, environ 25 minutes',
+    other:'Choisir une autre matière', subject:'Maths', kicker:'Ce soir · Maths',
+    weekLabel:'Cette semaine', weekText:'3 séances sur 5', weekShort:'3 sur 5', weekDone:3, weekGoal:5, weekTonight:4,
+    nav:["Aujourd’hui",'Progrès','Moi'], kind:'eq', mathLabel:'3 x moins 7 égale 11',
+    line:[['Lundi','SVT · la nutrition','done'],['Mardi','Maths · équations','done'],['Mercredi','Arabe · rédaction','done'],['Jeudi','','today'],['Vendredi','Français · étude de texte','next'],['Samedi','Examen blanc de maths','next']] },
+};
+
+const lu = (id, cls = '') => `<svg class="ic lu ${cls}" aria-hidden="true" focusable="false"><use href="#lu-${id}"/></svg>`;
+const ph = (id, cls = '') => `<svg class="ic ph ${cls}" aria-hidden="true" focusable="false"><use href="#ph-${id}"/></svg>`;
+const logo = (c) => `<svg class="logo" viewBox="0 0 100 100" role="img" aria-label="${c.brand}"><path fill-rule="evenodd" d="${STAR}"/></svg>`;
+const statusBar = (c) => `<div class="sb" dir="ltr" aria-hidden="true"><span>${c.time}</span><svg width="56" height="12" viewBox="0 0 56 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="28" y="1" width="24" height="10" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="31" y="4" width="14" height="4" rx="1"/><rect x="53" y="4" width="2" height="4" rx="1"/></svg></div>`;
+const home = (extra = '') => `<div class="home ${extra}" aria-hidden="true"><i></i></div>`;
+const frac = (n, d) => `<span class="frac"><span>${n}</span><span class="bar"></span><span>${d}</span></span>`;
+const math = (c) => c.kind === 'frac'
+  ? `<span class="math" role="math" aria-label="${c.mathLabel}">${frac(2, 3)}<span class="op">?</span>${frac(3, 4)}</span>`
+  : `<span class="math" role="math" aria-label="${c.mathLabel}"><span>3<i>x</i> − 7 = 11</span></span>`;
+const arrowLu = (c) => lu(c.dir === 'rtl' ? 'arrow-left' : 'arrow-right');
+const arrowPh = (c, w) => ph(`${c.dir === 'rtl' ? 'arrow-left' : 'arrow-right'}-${w}`);
+
+/* Placeholder drawings. The physical world never mirrors, so they stay left to right. */
+function sector(cx, cy, r, a0, a1) { const p = (a) => [cx + r * Math.sin(a), cy - r * Math.cos(a)]; const [x0, y0] = p(a0), [x1, y1] = p(a1); return `M${cx} ${cy}L${x0.toFixed(2)} ${y0.toFixed(2)}A${r} ${r} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)}Z`; }
+function pie(cx, cy, r, parts, filled, fill, stroke, sw) {
+  let s = ''; for (let i = 0; i < parts; i++) { s += `<path d="${sector(cx, cy, r, i * 2 * Math.PI / parts, (i + 1) * 2 * Math.PI / parts)}" fill="${i < filled ? fill : 'none'}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round"/>`; } return s;
+}
+function inkPie(cx, cy, r, parts, filled) {
+  let s = '';
+  for (let i = 0; i < filled; i++) s += `<path d="${sector(cx, cy, r, i * 2 * Math.PI / parts, (i + 1) * 2 * Math.PI / parts)}" fill="currentColor" stroke="var(--bg)" stroke-width="2" stroke-linejoin="round"/>`;
+  for (let i = filled; i < parts; i++) s += `<path d="${sector(cx, cy, r, i * 2 * Math.PI / parts, (i + 1) * 2 * Math.PI / parts)}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>`;
+  return s + `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="currentColor" stroke-width="1.5"/>`;
+}
+function illusA(c) {
+  if (c.kind === 'frac') return `<svg width="144" height="64" viewBox="0 0 144 64" dir="ltr" aria-hidden="true">${inkPie(32, 32, 28, 3, 2)}${inkPie(112, 32, 28, 4, 3)}</svg>`;
+  return `<svg width="144" height="64" viewBox="0 0 144 64" dir="ltr" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M72 16V56M56 56H88M24 16H120"/><circle cx="72" cy="12" r="4" fill="var(--bg)"/><path d="M24 16L12 40M24 16L36 40M120 16L108 40M120 16L132 40"/><path d="M10 40H38A14 8 0 0 1 10 40Z" fill="var(--tint)"/><path d="M106 40H134A14 8 0 0 1 106 40Z" fill="var(--tint)"/></svg>`;
+}
+function illusB(c) {
+  if (c.kind === 'frac') return `<svg class="illus" width="48" height="48" viewBox="0 0 64 64" dir="ltr" aria-hidden="true"><rect width="64" height="64" rx="16" fill="var(--lagune-3)"/>${pie(32, 32, 20, 4, 3, 'var(--lagune-9)', 'var(--lagune-3)', 2).replace(/fill="none"/g, 'fill="var(--lagune-6)"')}</svg>`;
+  return `<svg class="illus" width="48" height="48" viewBox="0 0 64 64" dir="ltr" aria-hidden="true"><rect width="64" height="64" rx="16" fill="var(--lagune-3)"/><path d="M32 22L40 48H24Z" fill="var(--lagune-9)"/><rect x="12" y="18" width="40" height="4" rx="2" fill="var(--lagune-9)"/><path d="M8 30H24A8 8 0 0 1 8 30Z" fill="var(--lagune-6)"/><path d="M40 30H56A8 8 0 0 1 40 30Z" fill="var(--lagune-6)"/><rect x="11" y="22" width="2" height="8" fill="var(--lagune-9)"/><rect x="51" y="22" width="2" height="8" fill="var(--lagune-9)"/></svg>`;
+}
+
+function renderA(c) {
+  const dots = Array.from({ length: c.weekGoal }, (_, i) => i < c.weekDone ? `<span class="dot done">${lu('check', 'ic16')}</span>` : (i === c.weekTonight - 1 ? `<span class="dot tonight"></span>` : `<span class="dot"></span>`)).join('');
+  return `${statusBar(c)}
+  <header class="a-top">${logo(c)}<button class="help" type="button">${lu('life-buoy')}<span>${c.help}</span></button></header>
+  <main class="a-main">
+    <p class="dateline">${c.dateline}</p>
+    <h1 class="title${c.titleA.length > 28 ? ' long' : ''}">${c.titleA}</h1>
+    <p class="why">${c.why}</p>
+    <div class="preview">${illusA(c)}${math(c)}</div>
+    <ol class="steps">${c.steps.map((s, i) => `<li><span class="num">${i + 1}</span><span class="step">${s[0]}</span><span class="dur">${s[1]}</span></li>`).join('')}</ol>
+    <button class="cta" type="button" aria-label="${c.ctaFull}"><span class="grow">${c.cta}</span><span class="cta-dur">${c.duration}</span>${arrowLu(c)}</button>
+    <button class="other" type="button">${c.other}</button>
+  </main>
+  <section class="week" aria-label="${c.weekLabel}: ${c.weekText}"><span>${c.weekLabel}</span><span class="dots" aria-hidden="true">${dots}</span><span class="grow"></span><span>${c.weekShort || c.weekText}</span></section>
+  <nav class="nav" aria-label="Navigation">
+    <a href="#" aria-current="page">${lu('house')}<span>${c.nav[0]}</span></a>
+    <a href="#">${lu('sprout')}<span>${c.nav[1]}</span></a>
+    <a href="#">${lu('circle-user-round')}<span>${c.nav[2]}</span></a>
+  </nav>${home()}`;
+}
+
+function renderB(c) {
+  const items = c.line.map(([day, what, state]) => {
+    if (state === 'today') return `<li class="today"><span class="node"><i></i></span>
+      <div class="card"><div class="head"><p class="kicker">${c.kicker}</p>${illusB(c)}</div>
+        <h1 class="title">${c.titleShort}</h1>
+        <p class="why">${c.whyShort}</p>
+        <p class="metaline">${ph('clock-regular', 'ic20')}<span>${c.duration} · ${c.stepsCount}</span></p>
+        <button class="cta" type="button" aria-label="${c.ctaFull}">${c.cta}${arrowPh(c, 'bold')}</button>
+        <button class="other" type="button">${c.other}</button>
+      </div></li>`;
+    const icon = state === 'done' ? ph('check-bold', 'ic16') : '';
+    const sr = state === 'done' ? (c.lang === 'ar' ? 'تمّ' : 'fait') : state === 'rest' ? '' : (c.lang === 'ar' ? 'قادم' : 'à venir');
+    return `<li class="${state}"><span class="node"><i>${icon}</i></span><span class="day">${day}</span><span class="what">${what}${sr ? `<span class="visually-hidden">, ${sr}</span>` : ''}</span></li>`;
+  }).join('');
+  return `${statusBar(c)}
+  <header class="b-top"><div class="who">${logo(c)}<p class="hello">${c.hello}</p></div><button class="help" type="button">${ph('lifebuoy-regular')}<span>${c.help}</span></button></header>
+  <ol class="line" aria-label="${c.weekLabel}: ${c.weekText}">${items}</ol>
+  <nav class="nav" aria-label="Navigation">
+    <a href="#" aria-current="page"><span class="pill">${ph('house-fill')}</span><span>${c.nav[0]}</span></a>
+    <a href="#"><span class="pill">${ph('plant-regular')}</span><span>${c.nav[1]}</span></a>
+    <a href="#"><span class="pill">${ph('user-circle-regular')}</span><span>${c.nav[2]}</span></a>
+  </nav>${home('homebar')}`;
+}
+
+function renderC(c) {
+  const bars = Array.from({ length: c.weekGoal }, (_, i) => `<i class="${i < c.weekDone ? 'done' : ''}"></i>`).join('');
+  return `${statusBar(c)}
+  <header class="c-top"><div class="who">${logo(c)}<div><p class="hello">${c.hello}</p><span class="bars" role="img" aria-label="${c.weekLabel}: ${c.weekText}">${bars}<span aria-hidden="true">${c.weekText}</span></span></div></div><button class="help" type="button">${ph('lifebuoy-bold')}<span>${c.help}</span></button></header>
+  <main class="c-main">
+    <button class="tile" type="button" aria-label="${c.ctaFull}: ${c.titleShort}">
+      <span class="tile-top"><span>${ph('books-bold', 'ic20')}${c.subject}</span><span>${ph('clock-bold', 'ic20')}${c.duration}</span></span>
+      <span class="hero">${math(c)}</span>
+      <span class="title">${c.titleShort}</span>
+      <span class="steps">${c.stepsInline}</span>
+      <span class="go">${c.cta}${arrowPh(c, 'bold')}</span>
+    </button>
+    <p class="why"><b>${c.whyLabel}</b> ${c.whyShort}</p>
+    <div class="bottomrow"><button class="other" type="button">${ph('books-bold', 'ic20')}${c.other}</button></div>
+  </main>
+  <nav class="nav" aria-label="Navigation">
+    <a href="#" aria-current="page">${ph('house-fill')}<span>${c.nav[0]}</span></a>
+    <a href="#">${ph('plant-bold')}<span>${c.nav[1]}</span></a>
+    <a href="#">${ph('user-circle-bold')}<span>${c.nav[2]}</span></a>
+  </nav>${home()}`;
+}
+
+const R = { a: renderA, b: renderB, c: renderC };
+const NAMES = { a: 'a-cahier', b: 'b-ligne', c: 'c-elan' };
+function phone(d, key) {
+  const c = C[key];
+  return `<div class="phone-wrap"><div class="phone dir-${d}" dir="${c.dir}" lang="${c.lang}" data-shot="${NAMES[d]}-${c.id}">${R[d](c)}</div></div>`;
+}
+const CAPS = { ar6: '6e, band A, Arabic', fr6: '6e, band A, French', ar9: '9e, band B, concours season, Arabic', fr9: '9e, band B, concours season, French' };
+for (const d of ['a', 'b', 'c']) {
+  document.querySelector(`[data-row="${d}"]`).innerHTML = ['ar6', 'fr6', 'ar9', 'fr9'].map(k => `<figure>${phone(d, k)}<figcaption>${CAPS[k]}</figcaption></figure>`).join('');
+}
+document.getElementById('board').innerHTML = ['a', 'b', 'c'].map(d => `<figure><div class="pair">${phone(d, 'ar6').replace('data-shot', 'data-board')}${phone(d, 'fr6').replace('data-shot', 'data-board')}</div><figcaption>${{ a: 'A. Cahier', b: 'B. Ligne', c: 'C. Élan' }[d]}</figcaption></figure>`).join('');
+
+/* Palette swatches, read from the CSS variables */
+const cs = getComputedStyle(document.documentElement);
+function swatchRow(name, label) {
+  const steps = Array.from({ length: 12 }, (_, i) => cs.getPropertyValue(`--${name}-${i + 1}`).trim());
+  return `<p class="scale-name">${label} <small>· ${name}</small></p><div class="swatches" role="img" aria-label="${label}, 12 steps from ${steps[0]} to ${steps[11]}">${steps.map((h, i) => `<span style="background:${h}" title="${name} ${i + 1}: ${h}"></span>`).join('')}</div><div class="swatch-label" aria-hidden="true"><span>1 ${steps[0]}</span><span>9 ${steps[8]}</span><span>12 ${steps[11]}</span></div>`;
+}
+document.getElementById('pal-a').innerHTML = swatchRow('papier', 'Neutral, warm paper (hue 85)') + swatchRow('encre', 'Brand, ink blue (hue 262)');
+document.getElementById('pal-b').innerHTML = swatchRow('calcaire', 'Neutral, cool limestone (hue 230)') + swatchRow('lagune', 'Brand, lagoon cyan (hue 222)') + swatchRow('soleil', 'Marker only, sun (hue 88)');
+document.getElementById('pal-c').innerHTML = swatchRow('ardoise', 'Neutral, slate (hue 285)') + swatchRow('iris', 'Brand, iris violet (hue 284)');
+document.getElementById('semantic-swatches').innerHTML = swatchRow('succes', 'Success (hue 152)') + swatchRow('attention', 'Attention (hue 70)') + swatchRow('danger', 'Danger (hue 27)');
+
+/* Icon specimens */
+const ICONS = { lu: [['life-buoy', 'help'], ['house', 'today'], ['sprout', 'progress'], ['circle-user-round', 'me'], ['check', 'done'], ['arrow-right', 'start']],
+  ph: [['lifebuoy-regular', 'help'], ['house-fill', 'today'], ['plant-regular', 'progress'], ['user-circle-regular', 'me'], ['check-bold', 'done'], ['clock-regular', 'duration']],
+  phb: [['lifebuoy-bold', 'help'], ['house-fill', 'today'], ['plant-bold', 'progress'], ['user-circle-bold', 'me'], ['books-bold', 'subject'], ['clock-bold', 'duration']] };
+document.querySelectorAll('[data-icons]').forEach(el => { const k = el.dataset.icons; el.innerHTML = ICONS[k].map(([id, l]) => `<span><svg class="${k === 'lu' ? 'lu' : 'ph'}" aria-hidden="true"><use href="#${k === 'lu' ? 'lu' : 'ph'}-${id}"/></svg>${l}</span>`).join(''); });
+
+/* High-contrast toggle */
+document.getElementById('hc-toggle').addEventListener('change', e => document.querySelectorAll('.phone').forEach(p => p.classList.toggle('hc', e.target.checked)));
+</script>
+</body>
+</html>

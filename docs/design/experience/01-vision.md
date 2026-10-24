@@ -128,12 +128,29 @@ The product owner's critique is right: the v1 canvas reads as a generic SaaS tem
 
 `03-directions.html` shows three new directions. Whichever is chosen becomes **Cyanotype v2** (renamed if the direction no longer fits the name), and the brand guide's colour and type sections change with it. That is a brand decision for the product owner.
 
-## 8. Questions for the product owner (to move to step 2)
+## 8. The product owner's reference: principles, not the look
+
+The product owner named Claude Code and [claude.com/fr/programs/startups](https://claude.com/fr/programs/startups) as "clean, good vision and workflows". I studied the page at 1440 px and 390 px. We take its principles, not its brand: no Anthropic colours, typefaces, mark or illustrations.
+
+| Principle | What the reference does | What it becomes in Kuizi |
+| --- | --- | --- |
+| Restraint | Warm off-white page, near-black text, secondary text in grey; one accent, kept for the logo | Warm neutrals carry the screen; one brand hue for identity and the single primary action; secondary text by tone |
+| Generous whitespace | Sections far apart; hairline rules instead of boxes on the phone | One thing per screen; air and ruled lines instead of cards |
+| Editorial hierarchy | Large, light serif headline over a quiet sans; a small kicker above each headline | The mission as a sentence in a display face (a Naskh for Arabic), a kicker such as "Jeudi soir · Maths", the interface in a sans |
+| Purposeful illustration | One small monoline drawing per section | One commissioned spot drawing per screen that carries the notion |
+| One idea per section | Kicker, headline, one paragraph, one action | One idea per screen: tonight's mission |
+| Calm, clear flows | Few calls to action; outlined or text secondary actions | One filled button; text links for alternatives; short motion |
+
+**What we do not take:** the centred hero (Arabic-first screens align to the start edge, and long centred lines are harder for young readers), photography and video of people (no photos of minors, MR-M2; data cost), and headlines that fade in from light grey (the faded words fall below 4.5:1).
+
+**How the directions measure up:** A "Cahier" is the calm, editorial direction built on these principles, adapted to children. B follows restraint and one idea, but adds a second hue, a shadowed card and more shapes. C is furthest: one idea and a clear flow, but a large saturated surface breaks restraint and calm.
+
+## 9. Questions for the product owner (to move to step 2)
 
 Please answer in the ticket or in chat. Short answers are fine.
 
 1. **Vision and principles.** Does the parent paragraph say what you want Kuizi to be? Do you accept the seven principles and their order (safety first, then one next step, then calm)?
-2. **Direction.** Which direction in `03-directions.html` do you want to take into step 2: A "Cahier" (my recommendation), B "Ligne", C "Élan", or a mix? What do you dislike in the one you choose?
+2. **Direction.** Which direction in `03-directions.html` do you want to take into step 2: A "Cahier" (my recommendation, and the one built on your reference), B "Ligne", C "Élan", or a mix? What do you dislike in the one you choose? Did section 8 capture what you like in your reference?
 3. **Brand colour.** Direction A moves the brand from cyan to ink blue; B keeps cyan; C moves to violet. May the brand colour change, or must it stay cyan?
 4. **No countdown.** May we show the concours as "week 3 of 8" in pupil screens, with the exam date only on the parent's side and in exam practice (MR-S9)? Or do you want a day count for band B (13–15) only, as an opt-in?
 5. **Practice-paper marks.** In exam-format practice, may band B see a mark out of 20 for the paper, while band A sees only which exercises went well? (A predicted grade stays off for everyone, MR-P3.)

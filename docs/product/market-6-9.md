@@ -13,7 +13,7 @@
 - **Estimate** means Kuizi's own calculation; the formula is shown next to it. Estimates are not facts and must not be quoted publicly.
 - **Confidence**: **High** = official figure (INS, Ministry of Education, Journal officiel) or a ministry figure that several outlets report identically. **Medium** = one press report of an official figure, or a credible organisation's survey. **Low** = a statement with no published method, promotional content, or our own extrapolation.
 - Names used in Tunisia: the 6e concours is called *la Sixième* (مناظرة السيزيام, officially مناظرة الدخول إلى المدارس الإعدادية النموذجية). The 9e exam is called *la Neuvième* (مناظرة النوفيام), or the DFEEB, the diploma that ends basic education. Both exams are **optional**.
-- Most sources are Tunisian press articles quoting the ministry. A parents' association says the ministry has not published up-to-date statistics on its own site for some time, so official figures mostly reach the public through the press. Figures can differ slightly from one outlet to another. Where they do, both are given.
+- Most sources are Tunisian press articles quoting the ministry: we found no recent official statistical yearbook with figures per grade. Figures can differ slightly from one outlet to another. Where they do, both are given.
 
 ## Summary
 
@@ -32,7 +32,7 @@
 | Share of the grade that registers | about 31% of 6e pupils, 18% of 9e pupils | 2026 | High | [1] [5] |
 | Private schools' share of pupils | 8.5% of primary pupils, 8.7% of collège and lycée pupils | 2021-22 | High | [18] |
 | Private schools' share of primary pupils | about 8–10% | 2024-26 | Medium | [19] [31] |
-| Pupils who take private lessons | 67% in primary, 61% in collège | 2023 | Medium (sample from Monastir) | [25] |
+| Pupils who take private lessons | 67% in primary, 61% in collège | 2023 | Medium (method not given in the press coverage) | [25] |
 | Average spend on private lessons | 94 TND/month per primary pupil, 74 TND/month per collège pupil | 2023 | Medium | [25] |
 | Official price of paid lessons inside public schools | 30 TND/month (primary) and 35 TND/month (collège) per subject, for 4 sessions of 2 hours | 2023 rule, still applied in 2025-26 | High | [26] [33] |
 | Market price of a collège group lesson | 20–30 TND per session (2024); 80–90 TND per subject per month, all levels (2026) | 2024, 2026 | Medium | [27] [29] |
@@ -44,7 +44,7 @@
 ### Recommendation in five points
 
 1. **Position Kuizi as the coach that shows, concept by concept, what to practise next**, all year from 6e to 9e, with a concours mode for families who choose the Sixième or the Neuvième. Sell to parents. Never promise admission: only about 11% of the pupils who sat the Sixième in 2026 were admitted to a collège pilote.
-2. **Start with the Sixième, in maths and *éveil scientifique* (early science)**. It is the larger exam (about 62,000 candidates a year against 32,000), it fits what the Kuizi brain already does, and we found no paid Tunisian product that adapts practice at this level. Taught in Arabic (maths and sciences are taught in Arabic up to 9e). Add the Neuvième next. Arabic, French and English are three of the five subjects in both exams; they need a content partner or a later phase.
+2. **Start with the Sixième, in maths and *éveil scientifique* (early science)**. It is the larger exam (about 62,000 candidates a year against 32,000), it fits what the Kuizi brain already does, and we found no paid Tunisian product that adapts practice at this level. The content must be in Arabic, because maths and sciences are taught in Arabic up to 9e. Add the Neuvième next. Arabic, French and English are three of the five subjects in both exams; they need a content partner or a later phase.
 3. **Price tests:** a free tier (diagnostic and a little daily practice), **25 TND a month** (also test 19 and 29), a **Concours Pass at 129 TND** for January to June (also test 99 and 149), and **199 TND a year**. For private schools, **30–50 TND per pupil per year**. Free solidarity places, given out through schools and associations so that Kuizi never collects income data. These prices sit below the official in-school lesson (35 TND per subject per month) and below two months of average private-lesson spending.
 4. **Channels and payment:** private schools first (811 private primary schools and 601 private collèges and lycées), parent-facing Facebook and YouTube content (never ads aimed at under-18s), and parents' and consumer associations. Sell on the web with Tunisian payment rails (Flouci, D17/e-Dinar, domestic cards), school invoices and prepaid codes. Most Tunisian cards cannot pay app-store subscriptions in foreign currency.
 5. **Timing:** with the current roadmap, the launch (Sprint 18, which starts on 2027-06-14) falls in the week of the 2027 exams, after that year's buying season. Proposal for the product owner: a free pilot, with parents' consent, in February–June 2027 with a few partner private schools, then a paid launch at the September 2027 rentrée, before the concours registration window (late October to November 2027).
@@ -84,7 +84,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | 2022 | 57,367 (56% girls) | — | 39.04% | 3,400 | — | [14] [6] |
 | 2023 | 56,893 | — | — | — | — | [10] |
-| 2024 | 59,062 | 59,072 | 39.67% (23,405) | 3,850 | 3,680 (4,339 scored 15 or more) | [10] [11] [6] |
+| 2024 | 59,062 | 59,072 | 39.67% (23,405) | 3,850 | 3,680 (4,339 scored 15 or more) | [10] [11] [12] [6] |
 | 2025 | 64,079 | 51,584 | 34.32% (17,703) | 3,850 | 2,683 in the first results; on 14 July 2025 the minister admitted every pupil with 14/20 or more (we found no final total) | [6] [7] |
 | 2026 | 62,450 before the exam / 62,497 in the results | 49,661 | 35.66% (17,710) | 3,850 | 5,317 | [1] [2] |
 
@@ -119,7 +119,7 @@ What the tables show:
 - **Schools:**
   - 811 authorised private primary schools in September 2025, up from 774 in 2024 [22].
   - 601 authorised private collèges and lycées on 13 September 2025, up from 584 in December 2024 [21].
-  - Both are concentrated in Greater Tunis and the Sahel: Tunis 1 and 2 had 125 private primary schools, and Sousse had 50 private collèges and lycées [21] [22].
+  - Both are concentrated around Tunis and in Sousse: Tunis 1 and 2 had 125 private primary schools, Ben Arous 82 and Ariana 66; Tunis 1 had 56 private collèges and lycées, Sousse 50 and Ben Arous 45 [21] [22].
 - **Fees:** two examples for 2025-26 put private primary tuition at 9,095 TND (Sfax) and 11,000 TND (Sousse) a year, or 13,000–15,700 TND with canteen and other services [20]. Confidence: Low (two examples, not a survey).
 - **What it means:** private schools teach about one pupil in ten or twelve. They are concentrated in the urban, connected, paying segment that Kuizi should reach first, and a school can sign one contract for a whole 6e class.
 
@@ -147,17 +147,18 @@ What the tables show:
 | Pupils in 6e–9e taking private lessons | about 484,000 | 203,508 × 67% + 570,655 × 61% [25] | Low |
 | Yearly spend on private lessons in 6e–9e | **about 386 M TND** at 2023 prices | 6e: 203,508 × 67% × 94 TND × 10 months ≈ 128 M; 7e–9e: 570,655 × 61% × 74 TND × 10 months ≈ 258 M [25] | Low |
 
-- **Sanity check:** applying the same FTDES rates to all of primary (1,161,638 pupils) and to lycée (532,150 pupils at 80% and 120 TND) gives about 1.50 bn TND in total. FTDES published 1.468 bn TND, so the method is consistent with FTDES. It also inherits FTDES's bias: the rates come from a sample in Monastir, a coastal and better-off region, in 2023. Prices rose 15–20% in 2026 alone, according to a consumer organisation [29].
+- **Sanity check:** applying the same FTDES rates to all of primary (1,161,638 pupils) and to lycée (532,150 pupils at 80% and 120 TND) gives about 1.50 bn TND in total. FTDES published 1.468 bn TND, so the method is consistent with FTDES. It also inherits FTDES's limits: the press coverage gives no sample size or method, and the prices date from 2023. Prices rose 15–20% in 2026 alone, according to a consumer organisation [29].
 - **Illustration, not a forecast:** if 1%, 3% or 5% of the 94,454 concours registrants bought a 129 TND Concours Pass, Kuizi would have about 945, 2,834 or 4,723 paying families, earning about 122,000, 366,000 or 609,000 TND a season. The year-round market is several times larger than the concours market.
 
 ## 2. Willingness to pay
 
 ### 2.1 How many families pay, and how much
 
-- **FTDES study, September 2023** [25]. Share of pupils taking private lessons: 67% in primary, 61% in collège, 80% in lycée. Average monthly cost: 94 TND per primary pupil, 74 TND per collège pupil, 120 TND per lycée pupil. National total: 1.468 bn TND over ten months. The sample came from Monastir, according to FTDES member Mounir Hssine. Confidence: Medium. This is the only published, quantified study we found.
+- **FTDES study, September 2023** [25]. Share of pupils taking private lessons: 67% in primary, 61% in collège, 80% in lycée. Average monthly cost: 94 TND per primary pupil, 74 TND per collège pupil, 120 TND per lycée pupil. National total: 1.468 bn TND over ten months. The press coverage gives no sample size or method; the report itself should be read before any public use. Confidence: Medium. This is the only published, quantified study we found.
 - **INS household survey 2021** [34]. Households reported spending 81 TND per person per year on education, 1.5% of their budget (84 TND and 2.2% in 2015). The survey ran from March 2021 to March 2022, during COVID. This is far below the FTDES figures. Our reading, not established: informal cash payments for private lessons are under-reported in household surveys.
 - **Statements in 2026** (Low confidence; no method published):
   - The president of the Association tunisienne des parents et des élèves estimates 300–600 TND per pupil per month, up to 2,000 TND in extreme cases, and 1.5–3 bn TND for the market. These figures are mostly about exam classes [30] [31].
+  - For Bac pupils, La Presse reported up to about 1,000 TND per pupil, and 1,000–2,000 TND during the revision period [32]. This shows how far spending rises in exam years; 6e–9e spending is much lower.
   - The Organisation tunisienne pour l'orientation du consommateur (OTOC) reports prices up 15–20% in a year: 80–90 TND per subject per month during the school year, and 150–200 TND per subject during revision periods [29].
 - **Who buys:** demand rises with household wealth and with family size (Rahmouni and Saidi, using the INS household survey) [58]. In five MENA countries including Tunisia, it also rises with the pupil's age, the parents' education and urban residence (Fakih, Haimoun and Sleiman) [59].
 - Tutoring is described as "a compulsory step" at every level, in public and private schools alike. Parents blame the quality of school; teachers blame disengaged parents [27].
@@ -230,7 +231,7 @@ What the tables show:
 
 - Tutoring is near universal and driven by doubts about school quality [27]. Better-off, urban and more educated families buy more [58] [59].
 - Teachers are the main providers of tutoring. The rules forbid public-school teachers to give private lessons outside their schools, but this is widely ignored [27] [33]. A member of parliament is drafting a bill to ban private lessons altogether (announced in May 2026; not yet filed) [30].
-- Official information reaches families through ministry platforms (six.education.tn and neuf.education.tn for registration), results by SMS, the press, and radio interviews (Jawhara FM, Diwan FM, Mosaïque FM) [5] [30] [54].
+- Official information reaches families through ministry platforms (six.education.tn and neuf.education.tn for registration), results by SMS, the press, and radio interviews (Jawhara FM, Diwan FM, Mosaïque FM) [4] [5] [30] [54].
 - Facebook is the largest social network for adults, and so for parents [49].
 
 **Assumptions not supported by the sources we found** (to test in interviews):
@@ -359,7 +360,7 @@ What the tables show:
 | 10 | Pressure on 11-year-olds | About 11% of Sixième candidates who sat were admitted in 2026 [2] | No fear marketing, no rankings against other children; E15 quiet hours and exam-period rules; show progress, not odds |
 | 11 | Purchasing power | SMIG of 470–555 TND; 37% poverty in the Centre-Ouest; inflation of 5.6% [34] [35] [36] | Low prices, solidarity places, a free tier that is genuinely useful |
 | 12 | An established competitor | Taki Academy, known since 2013, claims more than 435,000 registered pupils [42] | Compete on diagnosis and practice, not on video content |
-| 13 | Unreliable figures | Outlets disagree on some figures; per-grade statistics are not published regularly | Re-check every figure before public use (T199) |
+| 13 | Unreliable figures | Outlets disagree on some figures; we found no recent official yearbook with figures per grade | Re-check every figure before public use (T199) |
 
 ### 5.5 Next research
 

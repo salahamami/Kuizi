@@ -159,7 +159,7 @@ Kuizi adopts the 15 standards as design rules. Its age ranges include 10–12 ("
 | 10 | Geolocation | Never collected (MR-D5) |
 | 11 | Parental controls | The child is told when controls are on (MR-F3) |
 | 12 | Profiling | Learning only; never for significant decisions (MR-P1) |
-| 13 | Nudge techniques | No streak pressure, guilt copy or "one more" loops (MR-S6, MR-S9) |
+| 13 | Nudge techniques | No streak pressure, guilt copy or "one more" loops (MR-S5, MR-S9) |
 | 14 | Connected toys and devices | Not applicable; home-screen widgets show no personal data on the lock screen (MR-N8) |
 | 15 | Online tools | Rights exercised in the app, with export and deletion (MR-F4) |
 

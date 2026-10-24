@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
-"""Re-plan sprints for the local-first delivery model (ADR 0006).
+"""Re-plan sprints (local-first ADR 0006, re-planned for 6e-9e by ADR 0011).
 
-Schedules every ticket into a sprint, keeping the original order as priority:
-- the Sprint 1 tickets, the pilot (T108, S12) and everything from S18 on stay where they are;
-- cloud tickets (additions.CLOUD_TICKETS) start in S8 at the earliest;
+Schedules every ticket into a sprint of the 24-sprint horizon, keeping the planned order as priority:
+- tickets done or in review (Sprints 1 and 2), the free pilot (T108, S10), the pilot exit review
+  (T272, S20) and the paid launch (T110, S24) stay where they are;
+- cloud tickets (additions.CLOUD_TICKETS) start in S6 at the earliest, so the cloud move (T240) is
+  ready one sprint before the pilot;
 - Bac phase 2 tickets (additions.BAC_PHASE2, ADR 0011) are left out: they have no sprint;
-- a ticket never comes before a ticket that blocks it (same sprint only where the plan already allowed it);
-- no sprint goes over its capacity (a ramp for S1-S5, then the 134-point ceiling).
+- a ticket never comes before a ticket that blocks it (same sprint only where the plan already allowed it,
+  and never in the sprint of the design approval that gates it: the design gate, ADR 0011);
+- a ticket moves at most MAX_PULL sprints earlier than planned, unless a pinned ticket needs it sooner;
+  tickets planned after the concours (from NO_PULL_FROM) are not pulled earlier;
+- no sprint goes over its capacity (additions.CAPACITY ramp for S1-S5, then additions.CEILING).
 
+The planned sprint of a ticket is its sprint in the data before this script runs: the v1 sprint, the
+sprint of a ticket in additions.TICKETS or REWRITES, or its additions.TARGET_SPRINTS entry.
 Writes the result into additions.REPLAN_SPRINTS. Run it, then build_backlog.py, then sync Jira.
 Rerun it when capacity changes (for example after the S1-S2 velocity reset).
 """
@@ -20,18 +27,22 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import additions as A  # noqa: E402
 
-A.REPLAN_SPRINTS = {}  # plan from the original sprints
+A.REPLAN_SPRINTS = {}  # plan from the planned sprints
 import build_backlog as B  # noqa: E402
 
-CAPACITY = {1: 13, 2: 40, 3: 65, 4: 80, 5: 95}
-CEILING = 134
-LAST_FLEXIBLE_SPRINT = 17
-PINNED = {"T237": 1, "T234": 1, "T238": 1, "T108": 12}
-CLOUD_FROM = 8
+HORIZON = A.HORIZON
+LAST_FLEXIBLE_SPRINT = HORIZON - 1
+# Done or in review: they keep their sprints (Sprint 1 and the Sprint 2 tickets worked ahead).
+DONE_OR_IN_REVIEW = {"T237": 1, "T238": 1, "T234": 1, "T040": 1,
+                     "T006": 2, "T012": 2, "T023": 2, "T032": 2, "T231": 2}
+PINNED = dict(DONE_OR_IN_REVIEW, **{A.PILOT_TICKET: A.PILOT_SPRINT, "T272": 20, A.LAUNCH_TICKET: A.LAUNCH_SPRINT})
+CLOUD_FROM = 6
 # The brain track goes first (the product owner learns and prototypes the brain on public data).
-PRIORITY = {"T040": 2, "T041": 3, "T042": 4, "T043": 4}
-# A ticket moves at most this many sprints earlier than planned (the brain track excepted).
+PRIORITY = {"T041": 3, "T042": 4, "T043": 4}
+# A ticket moves at most this many sprints earlier than planned (the brain track and deadlines excepted).
 MAX_PULL = int(sys.argv[1]) if len(sys.argv) > 1 else 1
+# Tickets planned from this sprint on (after the June 2027 concours) are placed after the pilot on purpose.
+NO_PULL_FROM = 19
 
 
 def main():
@@ -44,6 +55,10 @@ def main():
     pinned.update({t["id"]: t["sprint"] for t in tickets if t["sprint"] > LAST_FLEXIBLE_SPRINT})
     cloud = set(A.CLOUD_TICKETS)
 
+    def same_ok(b, tid):
+        """May a ticket share a sprint with its blocker b? Never with the design approval that gates it."""
+        return b not in A.DESIGN_APPROVALS and original[b] >= original[tid]
+
     # Latest sprint a ticket may take so that every pinned ticket after it keeps its sprint.
     deadline = {t["id"]: LAST_FLEXIBLE_SPRINT for t in tickets}
     deadline.update(pinned)
@@ -52,13 +67,12 @@ def main():
         changed = False
         for t in tickets:
             for b in t["blocked"]:
-                same_ok = original[b] >= original[t["id"]]
-                limit = deadline[t["id"]] - (0 if same_ok else 1)
+                limit = deadline[t["id"]] - (0 if same_ok(b, t["id"]) else 1)
                 if b not in pinned and limit < deadline[b]:
                     deadline[b] = limit
                     changed = True
 
-    load = {s: 0 for s in range(1, 21)}
+    load = {s: 0 for s in range(1, HORIZON + 1)}
     sprint = {}
     for tid, s in pinned.items():
         sprint[tid] = s
@@ -80,12 +94,15 @@ def main():
     while ready:
         tid = heapq.heappop(ready)[-1]
         t = by_id[tid]
-        earliest = CLOUD_FROM if tid in cloud else max(1, PRIORITY.get(tid, original[tid] - MAX_PULL))
+        pull = 0 if original[tid] >= NO_PULL_FROM else MAX_PULL
+        earliest = max(1, PRIORITY.get(tid, original[tid] - pull))
+        earliest = min(earliest, deadline[tid])  # pulled sooner when a pinned ticket needs it
+        if tid in cloud:
+            earliest = max(earliest, CLOUD_FROM)
         for b in t["blocked"]:
-            same_ok = original[b] >= original[tid]
-            earliest = max(earliest, sprint[b] + (0 if same_ok else 1))
+            earliest = max(earliest, sprint[b] + (0 if same_ok(b, tid) else 1))
         s = earliest
-        while s <= LAST_FLEXIBLE_SPRINT and load[s] + t["points"] > CAPACITY.get(s, CEILING):
+        while s <= LAST_FLEXIBLE_SPRINT and load[s] + t["points"] > A.CAPACITY.get(s, A.CEILING):
             s += 1
         if s > LAST_FLEXIBLE_SPRINT:
             s = max(earliest, LAST_FLEXIBLE_SPRINT)
@@ -103,11 +120,15 @@ def main():
     assert not missing, f"unscheduled (dependency cycle?): {missing}"
     for t in tickets:
         for b in t["blocked"]:
-            if sprint[b] > sprint[t["id"]]:
-                problems.append(f"{t['id']} (S{sprint[t['id']]}) before its blocker {b} (S{sprint[b]})")
+            if sprint[b] > sprint[t["id"]] or (b in A.DESIGN_APPROVALS and sprint[b] >= sprint[t["id"]]):
+                problems.append(f"{t['id']} (S{sprint[t['id']]}) not after its blocker {b} (S{sprint[b]})")
+    for s in range(1, HORIZON + 1):
+        unpinned = load[s] - sum(by_id[tid]["points"] for tid, p in DONE_OR_IN_REVIEW.items() if p == s)
+        if load[s] > A.CAPACITY.get(s, A.CEILING) and unpinned > 0:
+            problems.append(f"S{s} is over capacity ({load[s]} points)")
 
     moved = {tid: s for tid, s in sorted(sprint.items(), key=lambda x: int(x[0][1:])) if s != original[tid]}
-    print("points per sprint:", {s: load[s] for s in range(1, 21)})
+    print("points per sprint:", {s: load[s] for s in range(1, HORIZON + 1)})
     print(f"{len(moved)} tickets change sprint")
     for p in problems:
         print("PROBLEM:", p)

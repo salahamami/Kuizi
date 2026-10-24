@@ -1,8 +1,8 @@
 # Project status — start here
 
-**Last updated:** 2026-10-18, end of the second working session. Every session updates this page before it ends (`CLAUDE.md`).
+**Last updated:** 2026-10-24, backlog re-planned for 6e–9e (ADR 0011) on the branch `feat/replan-6-9`. Every session updates this page before it ends (`CLAUDE.md`).
 
-Kuizi is planned (241 tickets in 20 two-week sprints, mirrored in Jira `KK`), runs on the product owner's PC (local-first, ADR 0006), and is built by the product owner with one AI agent per role (ADR 0005). Sprint 1 is active and in review. The five Sprint 2 tickets were worked ahead and are in review too. **All the work is on the branch `feat/sprint-2`; `main` is still empty until the product owner merges it.**
+Kuizi is planned for pupils of 6e–9e and the Sixième and Neuvième concours ([ADR 0011](architecture/decisions/0011-start-with-6e-9e.md)): 275 tickets in 24 two-week sprints, with a free pilot in partner private schools from S10 (2027-02-22), the concours in S18 and the paid launch in S24 (September 2027); the Bac is phase 2. **Jira `KK` still shows the earlier 20-sprint Bac plan until the sync listed in `CHANGELOG.md` (2026-10-24, "Pending Jira sync") is applied.** Kuizi runs on the product owner's PC (local-first, ADR 0006), and is built by the product owner with one AI agent per role (ADR 0005). Sprint 1 is active and in review. The five Sprint 2 tickets were worked ahead and are in review too. **All the work is on the branch `feat/sprint-2`; `main` is still empty until the product owner merges it.**
 
 ## Sprint 1 — active, 2026-10-17 → 2026-10-30
 
@@ -36,8 +36,9 @@ The full list, by urgency and ticket, is in [`product-owner-decisions.md`](produ
 
 ## Next work
 
-- **Sprint 3 (2026-11-16 → 2026-11-27):** T013 parental consent (KK-33), T014 authorisation middleware (KK-34), T024 telemetry SDK (KK-44), T033 subject and track first-class (KK-53), T036 item data model (KK-56), T041 pyKT integration (KK-61, after ADR 0007), T076 Next.js app foundation (KK-96, split from 13 to 8 points), T241 shared UI package and Storybook (KK-261, new, 5 points), T214 backend service template (KK-234), T215 threat model and security scanning (KK-235), T235 content operations (KK-255). All their blockers are built.
-- Split every 13-point ticket before its sprint starts (CLAUDE.md). Next ones: T042 (Sprint 4, after ADR 0007), then T035, T037, T077 and T092 (Sprint 5). `SPLITS` in `tools/backlog/additions.py` holds the rewritten v1 ticket; T076/T241 is the example.
+- **Sprint 3 (2026-11-16 → 2026-11-27), after the ADR 0011 re-plan:** T014 authorisation middleware (KK-34), T036 item data model (KK-56), T041 pyKT integration (KK-61, after ADR 0007), T076 Next.js app foundation (KK-96), T241 shared UI package and Storybook (KK-261), T214 backend service template (KK-234), T235 content operations (KK-255), T111 maths 6e concept graph (KK-130, rewritten), and new T242 counsel's opinion on children's data, T243 age bands, T248 telemetry policy by band, T254 user research with pupils, parents and teachers. T033 moves into Sprint 2 (with new T252, the research protocol); T013 parental consent moves to Sprint 5 (after counsel's opinion and the consent screens), T024 and T215 to Sprint 4.
+- **Decisions the re-plan needs from the product owner** are listed in `CHANGELOG.md` (2026-10-24, "Questions for the product owner"): engaging counsel (T242), hiring a senior designer (T256) and a researcher (T254), the cloud start pulled from S8 to S6 for a pilot in S10, the rights to reuse past concours papers, and the load-test target.
+- Split every 13-point ticket before its sprint starts (CLAUDE.md). Next ones: T062 (Sprint 7), T052 (Sprint 8), T045 and T136 (Sprint 9), T102 (Sprint 10). `SPLITS` in `tools/backlog/additions.py` holds the rewritten v1 ticket; T076/T241 and T037/T263 are examples.
 - After Sprint 2: replace the 134-point ceiling with the measured velocity and rerun `tools/backlog/replan.py`.
 
 ## How a new session continues
@@ -64,7 +65,7 @@ The full list, by urgency and ticket, is in [`product-owner-decisions.md`](produ
 | Decisions waiting for the product owner | [`product-owner-decisions.md`](product-owner-decisions.md) |
 | History of every change | [`../CHANGELOG.md`](../CHANGELOG.md) |
 | Backlog and Jira sync | [`backlog/README.md`](backlog/README.md), [`backlog/APL_Full_Backlog.md`](backlog/APL_Full_Backlog.md) |
-| Decisions | [`architecture/decisions/`](architecture/decisions/) (0001–0010) |
+| Decisions | [`architecture/decisions/`](architecture/decisions/) (0001–0011) |
 | Run Kuizi on a PC; CI; identity | [`dev/local-setup.md`](dev/local-setup.md), [`dev/ci.md`](dev/ci.md), [`dev/identity.md`](dev/identity.md) |
 | Learner events | [`data/event-catalogue.md`](data/event-catalogue.md), [`../schemas/README.md`](../schemas/README.md) |
 | Concept graph | [`curriculum/kc-graph.md`](curriculum/kc-graph.md) |

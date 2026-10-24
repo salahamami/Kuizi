@@ -31,12 +31,13 @@ JIRA_KEYS = ROOT / "docs/backlog/jira_keys.csv"
 JIRA_PROJECT = "KK"
 JIRA_BROWSE = "https://kuizi.atlassian.net/browse/"
 SPRINT_START = "2026-10-19"  # S1 actually started on Saturday 2026-10-17
-PHASE_ORDER = ["Phase 0", "Phase 1", "Phase 2", "Phase 3", "Phase 4", "Phase 5", "Phase 6", "Phase 7"]
+# Persona labels from the summary of a user story ("As a pupil, ..."). Pupils keep the label
+# persona-student so the Jira labels stay stable (every learner is a pupil aged 11-15, ADR 0011).
+_WORDS = r"(?:[\w/'’-]+ ){0,3}"
 PERSONAS = [
-    (r"^As a (maths |sciences |sciences-techniques |éco/gestion |new |dyslexic |screen-reader |blind or low-vision |iPad )?student or parent", ["student", "parent"]),
-    (r"^As an? (maths |sciences |sciences-techniques |éco/gestion |new |dyslexic |anxious |iPad )?student", ["student"]),
+    (rf"^As an? {_WORDS}(student|pupil) or parent", ["student", "parent"]),
+    (rf"^As an? {_WORDS}(student|pupil)\b", ["student"]),
     (r"^As a screen-reader user", ["student"]),
-    (r"^As a blind", ["student"]),
     (r"^As a parent", ["parent"]),
     (r"^As a teacher-author", ["curriculum-author"]),
     (r"^As a teacher", ["teacher"]),
@@ -57,6 +58,16 @@ def personas_for(summary):
 def sprint_num(value):
     m = re.search(r"(\d+)$", value or "")
     return int(m.group(1)) if m else None
+
+
+def phase_of(sprint):
+    """Phase name of a sprint (additions.PHASES); sprint 0 is the Bac phase 2 holding area."""
+    if not sprint:
+        return A.BAC_PHASE
+    for name, first, last in A.PHASES:
+        if first <= sprint <= last:
+            return name
+    raise ValueError(f"sprint {sprint} is outside the horizon (S1-S{A.HORIZON})")
 
 
 def parse_sections(desc):
@@ -119,18 +130,12 @@ def build():
         by_id[tid]["blocked"] += [b for b in extra if b not in by_id[tid]["blocked"]]
 
     epic_by_id = {e["id"]: e for e in epics}
-    # In v1 epics a ticket's phase follows its sprint; new tickets in those epics do the same.
-    # v2 epics keep one phase for all their tickets.
-    sprint_phase = {s: Counter(t["fix_version"] for t in tickets if t["sprint"] == s).most_common(1)[0][0]
-                    for s in {t["sprint"] for t in tickets}}
-    v1_epics = {e["id"] for e in epics}
     for e in A.EPICS:
         e = dict(e, source="v2")
         epics.append(e)
         epic_by_id[e["id"]] = e
     for t in A.TICKETS:
-        phase = sprint_phase[t["sprint"]] if t["epic"] in v1_epics else epic_by_id[t["epic"]]["phase"]
-        t = dict(t, component=A.TEAM_COMPONENT[t["team"]], fix_version=phase,
+        t = dict(t, component=A.TEAM_COMPONENT[t["team"]], fix_version=phase_of(t["sprint"]),
                  changes=[], source="v2")
         tickets.append(t)
         by_id[t["id"]] = t
@@ -139,8 +144,13 @@ def build():
         epic_by_id[eid].update(fields)
     for tid, rewrite in A.REWRITES.items():
         by_id[tid].update({k: v for k, v in rewrite.items() if k != "change"})
+        if "team" in rewrite:
+            by_id[tid]["component"] = A.TEAM_COMPONENT[rewrite["team"]]
         if rewrite.get("change"):
             by_id[tid]["changes"].append(rewrite["change"])
+    # Age-band rules and other ADR 0011 criteria added to existing tickets (minors-11-15.md 5.2).
+    for tid, lines in A.ADR11_CHANGES.items():
+        by_id[tid]["changes"] = by_id[tid]["changes"] + [f"ADR 0011: {line}" for line in lines]
 
     # Local-first re-plan (ADR 0006): swapped dependencies, then the re-planned sprints.
     for tid, swaps in A.LOCAL_FIRST_SWAPS.items():
@@ -150,15 +160,30 @@ def build():
             olds = ", ".join(o for o, n in swaps.items() if n == new)
             line = f"Local-first (ADR 0006): starts from {new} instead of waiting for {olds}"
             t["changes"].append(line + ("; moves to AWS with T240" if new == "T237" else ""))
+    # ADR 0011 dependency changes: re-pointed from Bac phase 2 work, legal gates and the design gate.
+    for tid, dep in A.DEPS.items():
+        t = by_id[tid]
+        drop = set(dep.get("drop", []))
+        added = [b for b in dep.get("add", []) if b not in t["blocked"]]
+        t["blocked"] = [b for b in t["blocked"] if b not in drop] + added
+        if dep.get("why"):
+            t["changes"] = t["changes"] + [dep["why"]]
+        gates = [b for b in added if b in A.DESIGN_APPROVALS]
+        if gates:
+            what = ", ".join(f"{b} ({A.DESIGN_APPROVALS[b]})" for b in gates)
+            t["changes"] = t["changes"] + [f"Design gate (ADR 0011): starts only once the product owner has "
+                                           f"approved the design of its journey: {what}"]
+    # Planning targets of ADR 0011 (priority order for replan.py), then the re-planned sprints.
+    for tid, sprint in A.TARGET_SPRINTS.items():
+        by_id[tid]["sprint"] = sprint
     for tid, sprint in A.REPLAN_SPRINTS.items():
         by_id[tid]["sprint"] = sprint
-    for t in tickets:
-        if t["epic"] in v1_epics:
-            t["fix_version"] = sprint_phase[t["sprint"]]
-    # Bac phase 2: kept in the backlog, not scheduled in S1-S20 (sprint 0).
+    # Bac phase 2: kept in the backlog without a sprint (sprint 0).
     for tid in A.BAC_PHASE2:
         by_id[tid]["sprint"] = 0
-        by_id[tid]["fix_version"] = A.BAC_PHASE
+    # A ticket's phase follows its sprint (additions.PHASES).
+    for t in tickets:
+        t["fix_version"] = phase_of(t["sprint"])
 
     # Integrity checks.
     ids = [t["id"] for t in tickets]
@@ -172,6 +197,7 @@ def build():
         if t["sprint"]:
             late = [x for x in t["blocked"] if not by_id[x]["sprint"]]
             assert not late, f"{t['id']} (S{t['sprint']}) is blocked by Bac phase 2 tickets {late}"
+            assert t["sprint"] <= A.HORIZON, f"{t['id']} is planned after the horizon (S{t['sprint']})"
 
     blocks = defaultdict(list)
     for t in tickets:
@@ -189,6 +215,12 @@ def build():
         sprints = [t["sprint"] for t in mine if t["sprint"]]
         e["tickets"], e["points"] = len(mine), sum(t["points"] for t in mine)
         e["sprint_range"] = f"S{min(sprints)}–S{max(sprints)}" if sprints else ""
+        # An epic's phase is the phase that carries most of its points.
+        pts = Counter()
+        for t in mine:
+            pts[t["fix_version"]] += t["points"]
+        scheduled = Counter({k: v for k, v in pts.items() if k != A.BAC_PHASE})
+        e["phase"] = (scheduled or pts).most_common(1)[0][0] if pts else e["phase"]
     return epics, tickets, by_id
 
 
@@ -234,7 +266,32 @@ def epic_description(e, markdown=False):
 
 
 def sprint_name(t):
-    return f"APL Sprint {t['sprint']}" if t["sprint"] else "not scheduled (Bac phase 2, after go-live)"
+    return f"APL Sprint {t['sprint']}" if t["sprint"] else "not scheduled (Bac phase 2, after the paid launch)"
+
+
+def fill(text, by_id):
+    """Replace S{Tnnn} in a planning text with the sprint of ticket Tnnn."""
+    return re.sub(r"S\{(T\d+)\}", lambda m: f"S{by_id[m.group(1)]['sprint']}", text)
+
+
+def short(text, words=7):
+    parts = text.split()
+    return " ".join(parts[:words]) + ("…" if len(parts) > words else "")
+
+
+def critical_chain(tid, by_id):
+    """Walk back from a ticket through its latest-planned blocker (ties: the longer chain)."""
+    depth = {}
+
+    def chain_len(x):
+        if x not in depth:
+            depth[x] = 1 + max((chain_len(b) for b in by_id[x]["blocked"]), default=0)
+        return depth[x]
+
+    chain = [tid]
+    while by_id[chain[-1]]["blocked"]:
+        chain.append(max(by_id[chain[-1]]["blocked"], key=lambda b: (by_id[b]["sprint"], chain_len(b))))
+    return chain[::-1]
 
 
 def sprint_key(t):
@@ -277,7 +334,7 @@ def load_jira_keys():
 def write_json(epics, tickets, by_id, keys):
     data = {
         "project": {"key": "APL", "name": "Kuizi", "jira_project": JIRA_PROJECT, "sprint_length_days": 14,
-                    "first_sprint_start": SPRINT_START, "sprints": 20},
+                    "first_sprint_start": SPRINT_START, "sprints": A.HORIZON},
         "epics": [dict(id=e["id"], jira_key=keys.get(e["id"]), summary=e["name"], priority=e["priority"],
                        phase=e["phase"], component=e["component"], labels=e["labels"],
                        description=epic_description(e, True))
@@ -321,32 +378,54 @@ def write_markdown(epics, tickets, by_id, keys):
 
     out = []
     out.append("# Kuizi (APL) — Full Product Backlog v2\n")
+    pilot, launch = by_id[A.PILOT_TICKET], by_id[A.LAUNCH_TICKET]
     out.append(f"**Backlog code:** `APL` · **Jira project:** `{JIRA_PROJECT}` (keys in `jira_keys.csv`) · "
-               f"**Subjects:** Physics, Mathématiques, Sciences (SVT / Chimie), Sciences "
-               f"techniques, Économie & Gestion · **Horizon:** 20 two-week sprints starting {SPRINT_START} · "
+               f"**Audience:** pupils of 6e année and 7e–9e année de base (about 11–15), age bands A and B · "
+               f"**Subjects:** maths, éveil scientifique (6e), SVT (7e–9e), Arabic, French, English; the Bac follows "
+               f"in phase 2 · **Milestones:** free pilot from S{pilot['sprint']} ({sprint_dates(pilot['sprint'])[0]}), "
+               f"Neuvième 17–19 June and Sixième 21–23 June 2027 (S18), paid launch for 2027–28 in "
+               f"S{launch['sprint']} ({sprint_dates(launch['sprint'])[0]}) · "
+               f"**Horizon:** {A.HORIZON} two-week sprints starting {SPRINT_START} · "
                f"**Scope:** {len(epics)} epics · {len(tickets)} tickets · {total_pts} story points\n")
     out.append("> Generated by `tools/backlog/build_backlog.py` from the v1 backlog (`docs/backlog/source/`) and "
                "`tools/backlog/additions.py`. Do not edit by hand: change the data, rerun the script, then sync Jira "
                "(see `docs/backlog/README.md`).\n")
+
+    later = [t for t in tickets if not t["sprint"]]
+    new_ids = [t for t in tickets if int(t["id"][1:]) >= A.FIRST_ADR11_TICKET]
+    gated = [t for t in tickets if set(t["blocked"]) & set(A.DESIGN_APPROVALS)]
+    out.append("## What changed with ADR 0011 (6e–9e first, the Bac in phase 2)\n")
+    out.append("On 2026-10-24 the product owner decided to start with 6e and 7e–9e année de base and the two concours "
+               "instead of the Bac ([ADR 0011](../architecture/decisions/0011-start-with-6e-9e.md)). The plan "
+               "follows the three studies: `docs/curriculum/college-6-9-scope.md`, `docs/product/market-6-9.md` and "
+               "`docs/requirements/minors-11-15.md`.\n")
+    out.append(f"- **Horizon:** {A.HORIZON} sprints instead of 20: a free pilot with partner private schools from "
+               f"S{pilot['sprint']} to the June 2027 concours, its exit review after the results, and the paid launch "
+               f"for the 2027–28 school year in S{launch['sprint']} with 30-day hypercare.")
+    out.append(f"- **Re-scoped:** {len(A.REWRITES) + len(A.ADR11_SPLITS)} tickets rewritten for 6e–9e or split before "
+               f"sprint entry (a change line on each says why), {len(A.EPIC_REWRITES)} epics renamed or re-scoped; "
+               f"{len(A.ADR11_CHANGES)} tickets gain age-band or concours criteria (marked \"ADR 0011\").")
+    out.append(f"- **Bac phase 2:** {len(later)} tickets ({sum(t['points'] for t in later)} points) stay in the backlog "
+               f"without a sprint (label `phase-bac`); nothing scheduled depends on them.")
+    out.append(f"- **New:** {len(new_ids)} tickets ({sum(t['points'] for t in new_ids)} points), T{A.FIRST_ADR11_TICKET}"
+               f"–T{max(int(t['id'][1:]) for t in new_ids)}: the legal and age-band work of `minors-11-15.md` "
+               f"(NEW-1 to NEW-12), design first (epic E21), writing assessment, mock concours papers, English, the "
+               f"pilot exit review and the launch go-to-market plan.")
+    out.append(f"- **Design gate:** {len(gated)} tickets that build what pupils, parents or teachers see are blocked "
+               f"by the approved design of their journey ({', '.join(A.DESIGN_APPROVALS)}).\n")
+
     v2_epics = [e for e in epics if e["source"] == "v2"]
     out.append("## What changed from v1\n")
     out.append(f"v2 keeps all 132 v1 tickets and adds {len(v2_epics)} epics, "
-               f"{sum(e['tickets'] for e in v2_epics)} tickets and {sum(e['points'] for e in v2_epics)} points. "
+               f"{sum(e['tickets'] for e in v2_epics)} tickets and {sum(e['points'] for e in v2_epics)} points in them. "
                f"{len(A.CHANGES)} v1 tickets gain acceptance criteria (marked \"Addendum changes (v2)\").\n")
     out.append("| Epic | Why it was added | Tickets | Points |\n| --- | --- | --- | --- |")
-    why = {"E14": "Full accessibility for students with different needs (WCAG 2.2 AA, accommodations, fairness)",
-           "E15": "Focus sessions and notifications that respect quiet hours, class hours and exams",
-           "E16": "Native iOS and Android apps and App Store / Google Play rules",
-           "E17": "The learner screens of the design canvas and the Cyanotype design system in code",
-           "E18": "Mock Bac, annales library and the estimated Bac grade shown in the design",
-           "E19": "KPIs, marketing site, B2C checkout, store listings, evidence for public claims",
-           "E20": "Admin console, feature flags, moderation, help center, support desk, legal documents"}
     for e in v2_epics:
-        out.append(f"| {e['id']} {e['name']} | {why[e['id']]} | {e['tickets']} | {e['points']} |")
+        out.append(f"| {e['id']} {e['name']} | {A.EPIC_WHY[e['id']]} | {e['tickets']} | {e['points']} |")
     out.append("")
 
     out.append("## 1. Architecture this backlog builds\n")
-    out.append(v1["1. Architecture this backlog builds"] + "\n")
+    out.append(A.ARCHITECTURE + "\n")
     out.append("**v2 additions to the architecture.** Four services join the platform: the Learner Comfort Profile "
                "(E14), the Speech service (E14), the Notification Orchestrator (E15) and the accessible content "
                "pipeline (E14). Native learner apps (E16) consume the same APIs and widget package. See "
@@ -383,20 +462,34 @@ def write_markdown(epics, tickets, by_id, keys):
     out.append("")
 
     out.append("## 3. Roadmap by phase\n")
-    roadmap = v1["3. Roadmap by phase"].split("### Sprint calendar and load")[0].strip()
-    out.append(roadmap + "\n")
+    out.append("| Phase | Sprints | Dates | Focus |\n| --- | --- | --- | --- |")
+    for name, first, last in A.PHASES:
+        out.append(f"| {name} | S{first}–S{last} | {sprint_dates(first)[0]} → {sprint_dates(last)[1]} | "
+                   f"{A.PHASE_FOCUS[name]} |")
+    out.append(f"| {A.BAC_PHASE} | not scheduled | after the paid launch | {A.PHASE_FOCUS[A.BAC_PHASE]} |")
+    out.append("")
+    out.append("**Milestones**\n")
+    out += [f"- {fill(m, by_id)}" for m in A.MILESTONES]
+    out.append("")
     out.append("### Sprint calendar and load\n")
-    out.append("| Sprint | Dates | Tickets | Points | Epics active |\n| --- | --- | --- | --- | --- |")
-    for n in range(1, 21):
+    out.append("| Sprint | Dates | Tickets | Points | Capacity | Epics active |\n| --- | --- | --- | --- | --- | --- |")
+    for n in range(1, A.HORIZON + 1):
         mine = [t for t in tickets if t["sprint"] == n]
         start, end = sprint_dates(n)
         ep = ", ".join(sorted({t["epic"] for t in mine}, key=lambda x: int(x[1:])))
-        out.append(f"| S{n} | {start} – {end} | {len(mine)} | {sum(t['points'] for t in mine)} | {ep} |")
-    later = [t for t in tickets if not t["sprint"]]
+        out.append(f"| S{n} | {start} – {end} | {len(mine)} | {sum(t['points'] for t in mine)} | "
+                   f"{A.CAPACITY.get(n, A.CEILING)} | {ep} |")
     if later:
         ep = ", ".join(sorted({t["epic"] for t in later}, key=lambda x: int(x[1:])))
-        out.append(f"| Bac phase 2 | after go-live, not scheduled | {len(later)} | {sum(t['points'] for t in later)} | {ep} |")
+        out.append(f"| Bac phase 2 | after the paid launch, not scheduled | {len(later)} | "
+                   f"{sum(t['points'] for t in later)} | — | {ep} |")
     out.append("")
+    over = [n for n in range(1, A.HORIZON + 1)
+            if sum(t["points"] for t in tickets if t["sprint"] == n) > A.CAPACITY.get(n, A.CEILING)]
+    note = (f" {', '.join(f'S{n}' for n in over)} carries more than its planned capacity only because finished work "
+            "was pulled in (T040 into S1)." if over else "")
+    out.append("Capacity ramps up over S1–S5, then the 134-point ceiling applies until the S1–S2 velocity resets it. "
+               f"The Sprint 1 and Sprint 2 tickets are done or in review and keep their sprints.{note}\n")
 
     out.append("## 4. Epic summary\n")
     out.append("| ID | Epic | Phase | Priority | Tickets | Points | Sprints |\n| --- | --- | --- | --- | --- | --- | --- |")
@@ -406,10 +499,13 @@ def write_markdown(epics, tickets, by_id, keys):
     out.append("")
 
     out.append("## 5. Critical path\n")
-    out.append(v1["5. Critical path"] + "\n")
-    out.append("v2 adds no ticket to the critical path. Three v2 tickets gate it: T148 must land before the first "
-               "champion/challenger gate (T047, S9), and go-live (T110) now also needs T150 (accessibility gate), "
-               "T207 (legal documents) and T169 (store compliance).\n")
+    out.append("Each chain walks back from a milestone through the blocker planned latest, so it shows what "
+               "gates the milestone in the current plan. A slip anywhere on a chain moves the milestone.\n")
+    for label, tid in (("Free pilot", A.PILOT_TICKET), ("Paid launch", A.LAUNCH_TICKET)):
+        chain = critical_chain(tid, by_id)
+        out.append(f"**{label} ({tid}, S{by_id[tid]['sprint']}):** "
+                   + " → ".join(f"`{x}` {short(by_id[x]['summary'])} (S{by_id[x]['sprint']})" for x in chain) + "\n")
+    out.append(fill(A.CRITICAL_NOTES, by_id) + "\n")
 
     out.append("## 6. Backlog detail\n")
     out.append("Conventions: story points are Fibonacci (13 = split before sprint entry); *Blocked by* references "
@@ -425,7 +521,8 @@ def write_markdown(epics, tickets, by_id, keys):
                    "| --- | --- | --- | --- | --- | --- | --- | --- | --- |")
         for t in sorted(mine, key=sprint_key):
             out.append(f"| {t['id']} | {jira(t['id'])} | {t['type']} | {t['summary']} | {t['points']} | "
-                       f"{t['priority']} | {'S' + str(t['sprint']) if t['sprint'] else 'Bac phase 2'} | {t['team']} | {', '.join(t['blocked']) or '—'} |")
+                       f"{t['priority']} | {'S' + str(t['sprint']) if t['sprint'] else 'Bac phase 2'} | {t['team']} | "
+                       f"{', '.join(t['blocked']) or '—'} |")
         out.append("")
         for t in sorted(mine, key=sprint_key):
             out.append(f"#### {t['id']} · {t['summary']}\n")
